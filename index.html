@@ -3,156 +3,186 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Resource Hub</title>
+  <title>Relating to Grief</title>
 
   <style>
-   /* ===== Grief Sunrise Theme (based on your palette image) ===== */
-:root{
-  --bg: #0e0f1a;
+    /* ===== Candlelight Theme (memorial, warm + safe) ===== */
+    :root{
+      --bg: #140f0a;
+      --panel: rgba(31, 25, 19, .78);
+      --panel2: rgba(38, 30, 22, .85);
+      --text: #fff4e6;
+      --muted: rgba(255,244,230,.80);
+      --border: rgba(255,255,255,.12);
 
-  --text: #f6f2ff;
-  --muted: rgba(246,242,255,.80);
+      --accent: #ffcc88;   /* candle glow */
+      --accent2:#ff9f5a;   /* ember */
+      --tagbg: rgba(255,159,90,.14);
+      --tagborder: rgba(255,204,136,.22);
+    }
 
-  --panel: rgba(23, 20, 35, .72);     /* glassy card */
-  --panel2: rgba(27, 23, 42, .78);    /* inputs */
-  --border: rgba(255,255,255,.14);
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 650px at 18% 0%, rgba(255,204,136,.18), transparent 58%),
+        radial-gradient(900px 650px at 85% 8%, rgba(255,159,90,.14), transparent 60%),
+        linear-gradient(180deg, #24160d 0%, #140f0a 55%, #0f0b07 100%);
+      min-height: 100vh;
+    }
 
-  --accent: #FEA916;   /* sunrise gold */
-  --accent2:#DF8A39;   /* amber */
-  --accent3:#815F6B;   /* mauve */
-
-  --tagbg: rgba(223,138,57,.14);
-  --tagborder: rgba(254,169,22,.22);
-}
-
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
-
-  /* Background = your image translated into CSS */
-  background:
-    radial-gradient(900px 600px at 20% 0%, rgba(129,95,107,.35), transparent 60%),
-    radial-gradient(900px 600px at 80% 15%, rgba(254,169,22,.25), transparent 55%),
-    linear-gradient(180deg,
-      #423A50 0%,
-      #53455D 20%,
-      #815F6B 42%,
-      #B67967 62%,
-      #DF8A39 78%,
-      #FEA916 88%,
-      #B54F1C 100%
-    );
-  min-height: 100vh;
-}
-
-header{
-  padding: 28px 18px;
-  border-bottom: 1px solid rgba(255,255,255,.12);
-
-  /* Slightly “calmer” header band */
-  background:
-    radial-gradient(900px 500px at 15% 0%, rgba(129,95,107,.45), transparent 60%),
-    radial-gradient(900px 500px at 85% 10%, rgba(254,169,22,.30), transparent 60%),
-    linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
-  backdrop-filter: blur(6px);
-}
+    header{
+      padding: 34px 18px 22px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(255,204,136,.22), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,159,90,.18), transparent 60%),
+        linear-gradient(135deg, rgba(58,36,21,.92), rgba(20,15,10,.94));
+      backdrop-filter: blur(6px);
+    }
 
     .wrap{ max-width: 980px; margin: 0 auto; }
-    h1{ margin:0 0 6px; font-size: 28px; letter-spacing: .2px; }
-    p{ margin:0; color: var(--muted); }
+
+    h1{
+      margin:0 0 8px;
+      font-size: 34px;
+      letter-spacing: .2px;
+    }
+
+    .sub{
+      margin:0;
+      color: var(--muted);
+      max-width: 75ch;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap:12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .crumb a{
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      opacity:.95;
+    }
+    .crumb a:hover{ text-decoration: underline; }
+
+    .pill{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background: rgba(255,204,136,.10);
+      border:1px solid rgba(255,204,136,.18);
+      color: var(--accent);
+      opacity:.95;
+      white-space:nowrap;
+    }
 
     main{ padding: 18px; }
 
-    /* Featured image */
-    .featuredWrap{ margin-top: 20px; display:flex; justify-content:center; }
-    .featuredFigure{ margin:0; width: min(760px, 100%); }
-    .featuredImg{
-      width:100%;
-      height:auto;
-      display:block;
-      border: 4px solid #000;
-      border-radius: 14px;
-      background:#000;
-      box-shadow: 0 14px 35px rgba(0,0,0,.35);
-    }
-    .featuredCaption{
-      margin-top:10px;
-      font-size: 14px;
-      text-align:center;
-      color: var(--muted);
-    }
-
-    /* Controls */
-    .controls{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 14px 0 18px;
-    }
-
-    input, select{
-      background: var(--panel2);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,.14);
-      padding:10px 12px;
-      border-radius: 12px;
-      outline: none;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.10);
-    }
-    input::placeholder{ color: rgba(244,241,255,.55); }
-
-    /* Cards */
-    .grid{
-      display:grid;
-      gap:12px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
     .card{
       background: var(--panel);
-      border: 1px solid var(--border);
+      border:1px solid var(--border);
       border-radius: 16px;
-      padding: 14px;
-      box-shadow: 0 10px 28px rgba(0,0,0,.25);
-      transition: transform .08s ease, filter .08s ease;
+      padding: 16px;
+      box-shadow: 0 14px 35px rgba(0,0,0,.35);
+      backdrop-filter: blur(6px);
+      margin-top: 16px;
     }
-    .card:hover{
-  transform: translateY(-1px);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,.35),
-    0 0 0 1px rgba(254,169,22,.12),
-    0 0 24px rgba(254,169,22,.10);
 
+    h2{ margin: 0 0 10px; font-size: 20px; }
+
+    .note{
+      margin: 0 0 14px;
+      color: var(--muted);
     }
 
     .meta{
       display:flex;
+      flex-wrap: wrap;
       gap:8px;
-      flex-wrap:wrap;
-      margin-top:10px;
+      margin: 10px 0 14px;
     }
 
     .tag{
-      font-size:12px;
-      padding:4px 10px;
+      font-size: 12px;
+      padding: 4px 10px;
       border-radius: 999px;
       background: var(--tagbg);
-      border: 1px solid var(--tagborder);
-      color: rgba(244,241,255,.92);
-      opacity:.98;
+      border:1px solid var(--tagborder);
+      color: rgba(255,244,230,.92);
     }
 
-    a{
-      color: var(--accent);
-      text-decoration:none;
+    .actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap:10px;
+      margin: 10px 0 0;
     }
-    a:hover{ text-decoration: underline; }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: var(--panel2);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      cursor:pointer;
+      user-select:none;
+      transition: filter .08s ease, transform .08s ease, box-shadow .08s ease;
+    }
+    .btn:hover{
+      filter: brightness(1.06);
+      box-shadow: 0 0 0 1px rgba(255,204,136,.10), 0 0 22px rgba(255,204,136,.12);
+    }
+
+    /* Clickable story card */
+    .storyLink{
+      text-decoration:none;
+      color:inherit;
+      display:block;
+      margin-top: 14px;
+    }
+
+    .storyCard{
+      cursor:pointer;
+      transition: transform .08s ease, filter .08s ease;
+    }
+
+    .storyCard:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow:
+        0 18px 44px rgba(0,0,0,.42),
+        0 0 0 1px rgba(255,204,136,.12),
+        0 0 28px rgba(255,204,136,.10);
+    }
+
+    .titleRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom: 6px;
+    }
 
     footer{
-      padding: 24px 18px;
-      color: rgba(244,241,255,.68);
+      padding: 22px 18px 34px;
+      color: rgba(255,244,230,.70);
       border-top: 1px solid rgba(255,255,255,.10);
+      margin-top: 26px;
     }
 
     code{
@@ -167,150 +197,75 @@ header{
 <body>
   <header>
     <div class="wrap">
-      <h1>Resource Hub</h1>
-      <p>A place to share helpful links, toolkits, PDFs, and guides.</p>
+      <h1>Relating to Grief</h1>
+      <p class="sub">
+        Stories and resources designed to help children understand death and navigate grief in a gentle, supportive way.
+      </p>
 
-      <!-- Featured image (your repo shows this file is in the ROOT, not /images/) -->
-      <div class="featuredWrap">
-        <figure class="featuredFigure">
-          <img class="featuredImg" src="The_Weight_of_Grief.png" alt="The Weight of Grief visual">
-          <figcaption class="featuredCaption">Grief doesn’t disappear — life grows around it.</figcaption>
-        </figure>
+      <div class="topbar">
+        <div class="crumb">
+          <a href="../">← Back to Resource Hub</a>
+        </div>
+        <span class="pill">Candlelight Theme</span>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <div class="controls">
-      <input id="search" type="search" placeholder="Search resources..." />
-      <select id="topic"><option value="">All topics</option></select>
-      <select id="type"><option value="">All types</option></select>
-      <select id="audience"><option value="">All audiences</option></select>
-    </div>
 
-    <div id="count" style="color: var(--muted); margin-bottom:10px;"></div>
-    <section id="grid" class="grid"></section>
+    <section class="card">
+      <div class="titleRow" style="margin-bottom:10px;">
+        <h2 style="margin:0;">Story Resources</h2>
+        <span class="pill">Click the card to open the PDF</span>
+      </div>
+
+      <p class="note">
+        Grief can come in waves — especially around reminders, milestones, or changes. These resources focus on gentle language,
+        normalization of feelings, and space for questions.
+      </p>
+
+      <!-- CLICKABLE STORY CARD -->
+      <a class="storyLink" href="gus-grief-story.pdf" target="_blank" rel="noopener noreferrer">
+        <div class="card storyCard">
+
+          <div class="titleRow">
+            <h2 style="margin:0;">📖 Gus’s Grief Adventure</h2>
+            <span class="pill">Opens in new tab</span>
+          </div>
+
+          <p class="note">
+            A child-friendly therapeutic story about coping with death, big feelings (confusion, sadness, anger),
+            and how grief can change over time while love remains.
+          </p>
+
+          <div class="meta">
+            <span class="tag">Storybook (PDF)</span>
+            <span class="tag">Topic: Death & Grief</span>
+            <span class="tag">Audience: Children</span>
+          </div>
+
+          <div class="actions">
+            <span class="btn">Open Story</span>
+            <a class="btn" href="gus-grief-story.pdf" download>Download PDF</a>
+          </div>
+
+          <p class="note" style="margin-top:12px; margin-bottom:0;">
+            Tip: Read together, pause to name feelings, and invite kids to share memories or questions at their pace.
+          </p>
+        </div>
+      </a>
+
+      <p class="note" style="margin-top:14px;">
+        File check: this page expects <code>gus-grief-story.pdf</code> to be in the same folder as this <code>index.html</code>.
+      </p>
+    </section>
+
   </main>
 
   <footer>
     <div class="wrap">
-      Tip: To add or edit items, update the <code>resources</code> list in this file.
+      Add more stories by duplicating the card and changing the PDF filename + title.
     </div>
   </footer>
-
-  <script>
-    // Based on your repo screenshot:
-    // folder: coping-with-death/
-    // pdf:    coping-with-death/gus-grief-story.pdf
-    const GRIEF_FOLDER = "coping-with-death/";
-
-    const resources = [
-      {
-        title: "Relating to Grief",
-        url: GRIEF_FOLDER,
-        topic: ["Grief", "Death"],
-        type: "Collection",
-        audience: "Children",
-        note: "Stories and resources to help children understand death and navigate grief."
-      },
-
-      // Add these folders when you create them (use the exact folder name in the url)
-      {
-        title: "Ages and Stages",
-        url: "ages-and-stages/",
-        topic: ["Development"],
-        type: "Collection",
-        audience: "Everyone",
-        note: "Developmental resources organized by age and stage."
-      },
-      {
-        title: "Divorce & Separation",
-        url: "divorce/",
-        topic: ["Family Change"],
-        type: "Collection",
-        audience: "Caregivers",
-        note: "Supporting children and families through separation and changes in family structure."
-      },
-      {
-        title: "Major Life Changes",
-        url: "major-life-changes/",
-        topic: ["Transitions"],
-        type: "Collection",
-        audience: "Everyone",
-        note: "Moving, school changes, new caregivers, relocation, and other big transitions."
-      },
-      {
-        title: "Neurodiversity & Different Ways of Being",
-        url: "neurodiversity/",
-        topic: ["Neurodiversity", "Inclusion"],
-        type: "Collection",
-        audience: "Everyone",
-        note: "Resources addressing neurodiversity, living and anticipatory grief, developmental differences, and the evolving realities families navigate across the lifespan."
-      }
-    ];
-
-    const els = {
-      grid: document.getElementById("grid"),
-      search: document.getElementById("search"),
-      topic: document.getElementById("topic"),
-      type: document.getElementById("type"),
-      audience: document.getElementById("audience"),
-      count: document.getElementById("count")
-    };
-
-    function uniq(arr) { return [...new Set(arr)].sort(); }
-
-    function buildFilters() {
-      const topics = uniq(resources.flatMap(r => r.topic || []));
-      const types = uniq(resources.map(r => r.type).filter(Boolean));
-      const audiences = uniq(resources.map(r => r.audience).filter(Boolean));
-      topics.forEach(t => els.topic.append(new Option(t, t)));
-      types.forEach(t => els.type.append(new Option(t, t)));
-      audiences.forEach(a => els.audience.append(new Option(a, a)));
-    }
-
-    function matches(r) {
-      const q = els.search.value.trim().toLowerCase();
-      const topic = els.topic.value;
-      const type = els.type.value;
-      const audience = els.audience.value;
-
-      const text = (r.title + " " + (r.note || "") + " " + (r.topic || []).join(" ")).toLowerCase();
-      if (q && !text.includes(q)) return false;
-      if (topic && !(r.topic || []).includes(topic)) return false;
-      if (type && r.type !== type) return false;
-      if (audience && r.audience !== audience) return false;
-      return true;
-    }
-
-    function render() {
-      const filtered = resources.filter(matches);
-      els.count.textContent = `${filtered.length} resource(s) shown`;
-
-      els.grid.innerHTML = filtered.map(r => `
-        <article class="card">
-          <div style="font-weight:700; font-size:16px; line-height:1.25;">
-            <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
-          </div>
-          ${r.note ? `<div style="margin-top:8px; color: var(--muted);">${r.note}</div>` : ``}
-          <div class="meta">
-            ${r.type ? `<span class="tag">${r.type}</span>` : ``}
-            ${r.audience ? `<span class="tag">${r.audience}</span>` : ``}
-            ${(r.topic || []).map(t => `<span class="tag">${t}</span>`).join("")}
-          </div>
-        </article>
-      `).join("");
-    }
-
-    buildFilters();
-    ["input","change"].forEach(evt => {
-      els.search.addEventListener(evt, render);
-      els.topic.addEventListener(evt, render);
-      els.type.addEventListener(evt, render);
-      els.audience.addEventListener(evt, render);
-    });
-    render();
-  </script>
 </body>
 </html>
-
