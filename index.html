@@ -6,40 +6,139 @@
   <title>Resource Hub</title>
 
   <style>
-    body { font-family: system-ui, Arial; margin: 0; background:#0b1020; color:#e9ecff; }
-    header { padding: 28px 18px; background: linear-gradient(120deg,#1b2a6b,#0b1020); border-bottom: 1px solid rgba(255,255,255,.08); }
-    .wrap { max-width: 980px; margin: 0 auto; }
+    /* ===== Living Grief Theme (hopeful, warm + grounded) ===== */
+    :root{
+      --bg: #0e0f1a;          /* deep night */
+      --panel: #171a2b;       /* cards */
+      --panel2: #1f2338;      /* inputs/buttons */
+      --text: #f4f1ff;        /* main text */
+      --muted: rgba(244,241,255,.82);
+      --border: rgba(255,255,255,.12);
 
-    h1 { margin: 0 0 6px; font-size: 28px; }
-    p { margin: 0; opacity:.9; }
-    main { padding: 18px; }
+      --accent: #ffb86b;      /* warm hope */
+      --accent2:#caa6ff;      /* soft lavender */
+      --tagbg: rgba(202,166,255,.12);
+      --tagborder: rgba(202,166,255,.18);
+    }
+
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin:0;
+      background:
+        radial-gradient(900px 600px at 18% 0%, rgba(202,166,255,.18), transparent 55%),
+        radial-gradient(900px 600px at 85% 10%, rgba(255,184,107,.18), transparent 55%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    header{
+      padding: 28px 18px;
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(202,166,255,.30), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,184,107,.28), transparent 60%),
+        linear-gradient(135deg, #2a2f6a, #0e0f1a);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .wrap{ max-width: 980px; margin: 0 auto; }
+    h1{ margin:0 0 6px; font-size: 28px; letter-spacing: .2px; }
+    p{ margin:0; color: var(--muted); }
+
+    main{ padding: 18px; }
 
     /* Featured image */
-    .featuredWrap { margin-top: 20px; display:flex; justify-content:center; }
-    .featuredFigure { margin: 0; width: min(760px, 100%); }
-    .featuredImg {
-      width: 100%;
-      height: auto;
-      display: block;
+    .featuredWrap{ margin-top: 20px; display:flex; justify-content:center; }
+    .featuredFigure{ margin:0; width: min(760px, 100%); }
+    .featuredImg{
+      width:100%;
+      height:auto;
+      display:block;
       border: 4px solid #000;
-      border-radius: 12px;
+      border-radius: 14px;
       background:#000;
+      box-shadow: 0 14px 35px rgba(0,0,0,.35);
     }
-    .featuredCaption { margin-top: 10px; opacity:.85; font-size: 14px; text-align:center; }
+    .featuredCaption{
+      margin-top:10px;
+      font-size: 14px;
+      text-align:center;
+      color: var(--muted);
+    }
 
-    /* Controls + cards */
-    .controls { display:flex; gap:10px; flex-wrap:wrap; margin: 14px 0 18px; }
-    input, select { background:#131a33; color:#e9ecff; border:1px solid rgba(255,255,255,.14); padding:10px 12px; border-radius: 10px; }
+    /* Controls */
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 14px 0 18px;
+    }
 
-    .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .card { background:#121935; border:1px solid rgba(255,255,255,.10); border-radius: 14px; padding:14px; }
-    .meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .tag { font-size: 12px; padding: 4px 8px; border-radius: 999px; background:#1a2450; border:1px solid rgba(255,255,255,.10); opacity:.95; }
+    input, select{
+      background: var(--panel2);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.14);
+      padding:10px 12px;
+      border-radius: 12px;
+      outline: none;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.10);
+    }
+    input::placeholder{ color: rgba(244,241,255,.55); }
 
-    a { color:#9fd3ff; text-decoration:none; }
-    a:hover { text-decoration: underline; }
+    /* Cards */
+    .grid{
+      display:grid;
+      gap:12px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
 
-    footer { padding: 24px 18px; opacity:.7; border-top: 1px solid rgba(255,255,255,.08); }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+      transition: transform .08s ease, filter .08s ease;
+    }
+    .card:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .tag{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius: 999px;
+      background: var(--tagbg);
+      border: 1px solid var(--tagborder);
+      color: rgba(244,241,255,.92);
+      opacity:.98;
+    }
+
+    a{
+      color: var(--accent);
+      text-decoration:none;
+    }
+    a:hover{ text-decoration: underline; }
+
+    footer{
+      padding: 24px 18px;
+      color: rgba(244,241,255,.68);
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+
+    code{
+      background: rgba(0,0,0,.25);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.10);
+    }
   </style>
 </head>
 
@@ -49,7 +148,7 @@
       <h1>Resource Hub</h1>
       <p>A place to share helpful links, toolkits, PDFs, and guides.</p>
 
-      <!-- Featured visual (this file is in your repo ROOT) -->
+      <!-- Featured image (your repo shows this file is in the ROOT, not /images/) -->
       <div class="featuredWrap">
         <figure class="featuredFigure">
           <img class="featuredImg" src="The_Weight_of_Grief.png" alt="The Weight of Grief visual">
@@ -62,18 +161,12 @@
   <main class="wrap">
     <div class="controls">
       <input id="search" type="search" placeholder="Search resources..." />
-      <select id="topic">
-        <option value="">All topics</option>
-      </select>
-      <select id="type">
-        <option value="">All types</option>
-      </select>
-      <select id="audience">
-        <option value="">All audiences</option>
-      </select>
+      <select id="topic"><option value="">All topics</option></select>
+      <select id="type"><option value="">All types</option></select>
+      <select id="audience"><option value="">All audiences</option></select>
     </div>
 
-    <div id="count" style="opacity:.85; margin-bottom:10px;"></div>
+    <div id="count" style="color: var(--muted); margin-bottom:10px;"></div>
     <section id="grid" class="grid"></section>
   </main>
 
@@ -84,7 +177,9 @@
   </footer>
 
   <script>
-    // Your actual folder is: coping-with-death
+    // Based on your repo screenshot:
+    // folder: coping-with-death/
+    // pdf:    coping-with-death/gus-grief-story.pdf
     const GRIEF_FOLDER = "coping-with-death/";
 
     const resources = [
@@ -97,7 +192,7 @@
         note: "Stories and resources to help children understand death and navigate grief."
       },
 
-      // Keep these if/when you create these folders (rename URLs to match your actual folder names)
+      // Add these folders when you create them (use the exact folder name in the url)
       {
         title: "Ages and Stages",
         url: "ages-and-stages/",
@@ -128,7 +223,7 @@
         topic: ["Neurodiversity", "Inclusion"],
         type: "Collection",
         audience: "Everyone",
-        note: "Supporting families navigating neurodiversity, diverse abilities, and the layered grief, comparison, and life transitions that can accompany unexpected developmental journeys."
+        note: "Resources addressing neurodiversity, living and anticipatory grief, developmental differences, and the evolving realities families navigate across the lifespan."
       }
     ];
 
@@ -147,7 +242,6 @@
       const topics = uniq(resources.flatMap(r => r.topic || []));
       const types = uniq(resources.map(r => r.type).filter(Boolean));
       const audiences = uniq(resources.map(r => r.audience).filter(Boolean));
-
       topics.forEach(t => els.topic.append(new Option(t, t)));
       types.forEach(t => els.type.append(new Option(t, t)));
       audiences.forEach(a => els.audience.append(new Option(a, a)));
@@ -159,9 +253,7 @@
       const type = els.type.value;
       const audience = els.audience.value;
 
-      const topicText = (r.topic || []).join(" ");
-      const text = (r.title + " " + (r.note || "") + " " + topicText).toLowerCase();
-
+      const text = (r.title + " " + (r.note || "") + " " + (r.topic || []).join(" ")).toLowerCase();
       if (q && !text.includes(q)) return false;
       if (topic && !(r.topic || []).includes(topic)) return false;
       if (type && r.type !== type) return false;
@@ -178,7 +270,7 @@
           <div style="font-weight:700; font-size:16px; line-height:1.25;">
             <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
           </div>
-          ${r.note ? `<div style="margin-top:8px; opacity:.9;">${r.note}</div>` : ``}
+          ${r.note ? `<div style="margin-top:8px; color: var(--muted);">${r.note}</div>` : ``}
           <div class="meta">
             ${r.type ? `<span class="tag">${r.type}</span>` : ``}
             ${r.audience ? `<span class="tag">${r.audience}</span>` : ``}
@@ -195,10 +287,7 @@
       els.type.addEventListener(evt, render);
       els.audience.addEventListener(evt, render);
     });
-
     render();
   </script>
 </body>
 </html>
-
-
