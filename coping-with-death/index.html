@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Coping With Death</title>
-
   <style>
     :root{
       --bg:#0b1020;
@@ -15,7 +14,6 @@
       --border:rgba(255,255,255,.10);
       --link:#9fd3ff;
     }
-
     body{
       margin:0;
       background:var(--bg);
@@ -23,133 +21,80 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height:1.5;
     }
-
     header{
       padding: 34px 18px 22px;
       background: linear-gradient(120deg,#1b2a6b,#0b1020);
       border-bottom:1px solid rgba(255,255,255,.08);
     }
-
     .wrap{ max-width: 980px; margin: 0 auto; }
-
-    h1{ margin:0 0 8px; font-size: 34px; letter-spacing:.2px; }
+    h1{ margin:0 0 8px; font-size: 34px; }
     .sub{ margin:0; color:var(--muted); max-width: 70ch; }
-
     .topbar{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap:12px;
-      margin-top: 14px;
-      flex-wrap: wrap;
+      display:flex; justify-content: space-between; align-items:center;
+      gap:12px; margin-top:14px; flex-wrap:wrap;
     }
-
-    .crumb a{
-      color: var(--link);
-      text-decoration: none;
-      font-size: 14px;
-      opacity:.95;
-    }
-    .crumb a:hover{ text-decoration: underline; }
-
-    main{ padding: 18px; }
+    .crumb a{ color:var(--link); text-decoration:none; font-size:14px; }
+    .crumb a:hover{ text-decoration:underline; }
+    main{ padding:18px; }
     .card{
-      background: var(--panel);
+      background:var(--panel);
       border:1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-top: 16px;
+      border-radius:16px;
+      padding:16px;
+      margin-top:16px;
       box-shadow: 0 10px 30px rgba(0,0,0,.20);
     }
-
-    h2{ margin: 0 0 10px; font-size: 20px; }
-
-    .meta{
-      display:flex;
-      flex-wrap: wrap;
-      gap:8px;
-      margin: 10px 0 14px;
-    }
+    h2{ margin:0 0 10px; font-size:20px; }
+    .meta{ display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px; }
     .tag{
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: #1a2450;
-      border:1px solid var(--border);
-      opacity:.95;
+      font-size:12px; padding:4px 10px; border-radius:999px;
+      background:#1a2450; border:1px solid var(--border);
     }
-
-    .actions{
-      display:flex;
-      flex-wrap: wrap;
-      gap:10px;
-      margin: 8px 0 14px;
-    }
+    .note{ margin:0 0 14px; color:var(--muted); }
+    .actions{ display:flex; flex-wrap:wrap; gap:10px; margin:8px 0 14px; }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: var(--panel2);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:var(--panel2);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600; font-size:14px;
     }
-    .btn:hover{ filter: brightness(1.08); }
-
-    .note{
-      margin: 0 0 14px;
-      color: var(--muted);
-    }
-
-    /* Responsive PDF viewer box */
+    .btn:hover{ filter:brightness(1.08); }
     .viewer{
-      border-radius: 14px;
-      overflow:hidden;
-      border: 1px solid var(--border);
+      border-radius:14px; overflow:hidden;
+      border:1px solid var(--border);
       background: rgba(0,0,0,.25);
     }
     .viewer iframe{
-      width: 100%;
-      height: 78vh;
-      min-height: 560px;
-      border: 0;
+      width:100%;
+      height:78vh;
+      min-height:560px;
+      border:0;
       display:block;
     }
-
     footer{
-      padding: 22px 18px 34px;
+      padding:22px 18px 34px;
       opacity:.7;
       border-top:1px solid rgba(255,255,255,.08);
-      margin-top: 26px;
+      margin-top:26px;
     }
-    .small{ font-size: 13px; }
-
-    @media (max-width: 520px){
-      h1{ font-size: 28px; }
-      .viewer iframe{ min-height: 520px; height: 72vh; }
+    .small{ font-size:13px; }
+    @media (max-width:520px){
+      h1{ font-size:28px; }
+      .viewer iframe{ min-height:520px; height:72vh; }
     }
   </style>
 </head>
-
 <body>
   <header>
     <div class="wrap">
       <h1>Coping With Death</h1>
       <p class="sub">Stories and resources designed to help children understand death and navigate grief in a gentle, developmentally supportive way.</p>
-
       <div class="topbar">
-        <div class="crumb">
-          <a href="../">← Back to Resource Hub</a>
-        </div>
-        <div class="small" style="color: var(--muted);">
-          For kids • caregivers • practitioners
-        </div>
+        <div class="crumb"><a href="../">← Back to Resource Hub</a></div>
+        <div class="small" style="color: var(--muted);">For kids • caregivers • practitioners</div>
       </div>
     </div>
   </header>
@@ -184,9 +129,8 @@
   </main>
 
   <footer>
-    <div class="wrap small">
-      Want this page to list multiple stories? Add more “card” sections like the one above.
-    </div>
+    <div class="wrap small">Add more stories by duplicating the “card” section.</div>
   </footer>
 </body>
 </html>
+
