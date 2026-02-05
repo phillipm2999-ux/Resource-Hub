@@ -12,7 +12,6 @@
 
     h1 { margin: 0 0 6px; font-size: 28px; }
     p { margin: 0; opacity:.9; }
-
     main { padding: 18px; }
 
     /* Featured image */
@@ -50,10 +49,10 @@
       <h1>Resource Hub</h1>
       <p>A place to share helpful links, toolkits, PDFs, and guides.</p>
 
-      <!-- Featured visual (make sure this file exists at: images/The_Weight_of_Grief.png) -->
+      <!-- Featured visual (this file is in your repo ROOT) -->
       <div class="featuredWrap">
         <figure class="featuredFigure">
-          <img class="featuredImg" src="images/The_Weight_of_Grief.png" alt="The Weight of Grief visual">
+          <img class="featuredImg" src="The_Weight_of_Grief.png" alt="The Weight of Grief visual">
           <figcaption class="featuredCaption">Grief doesn’t disappear — life grows around it.</figcaption>
         </figure>
       </div>
@@ -85,24 +84,31 @@
   </footer>
 
   <script>
-    // IMPORTANT:
-    // Folder names with spaces must be written with %20 in URLs.
-    // These links assume your repo contains folders named EXACTLY:
-    // "Coping With Death", "Ages and Stages", "Major Life Changes"
-    // and folders named exactly "Divorce" and "Neurodiversity".
+    // Your actual folder is: coping-with-death
+    const GRIEF_FOLDER = "coping-with-death/";
 
     const resources = [
       {
         title: "Relating to Grief",
-        url: "Coping-With-Death/",
+        url: GRIEF_FOLDER,
         topic: ["Grief", "Death"],
         type: "Collection",
         audience: "Children",
         note: "Stories and resources to help children understand death and navigate grief."
       },
       {
+        title: "Gus’s Grief Adventure (PDF)",
+        url: GRIEF_FOLDER + "gus-grief-story.pdf",
+        topic: ["Grief", "Death"],
+        type: "Storybook",
+        audience: "Children",
+        note: "A child-friendly therapeutic storybook about grief after a death."
+      },
+
+      // Keep these if/when you create these folders (rename URLs to match your actual folder names)
+      {
         title: "Ages and Stages",
-        url: "Ages%20and%20Stages/",
+        url: "ages-and-stages/",
         topic: ["Development"],
         type: "Collection",
         audience: "Everyone",
@@ -110,7 +116,7 @@
       },
       {
         title: "Divorce & Separation",
-        url: "Divorce/",
+        url: "divorce/",
         topic: ["Family Change"],
         type: "Collection",
         audience: "Caregivers",
@@ -118,7 +124,7 @@
       },
       {
         title: "Major Life Changes",
-        url: "Major%20Life%20Changes/",
+        url: "major-life-changes/",
         topic: ["Transitions"],
         type: "Collection",
         audience: "Everyone",
@@ -126,22 +132,11 @@
       },
       {
         title: "Neurodiversity & Different Ways of Being",
-        url: "Neurodiversity/",
+        url: "neurodiversity/",
         topic: ["Neurodiversity", "Inclusion"],
         type: "Collection",
         audience: "Everyone",
         note: "Strength-based resources supporting neurodivergent children and inclusive practice."
-      },
-
-      // Optional direct link to your PDF inside the Coping With Death folder
-      // (this assumes the PDF is named exactly gus-grief-story.pdf)
-      {
-        title: "Gus’s Grief Adventure (PDF)",
-        url: "Coping%20With%20Death/gus-grief-story.pdf",
-        topic: ["Grief", "Death"],
-        type: "Storybook",
-        audience: "Children",
-        note: "A child-friendly therapeutic storybook about grief after a death."
       }
     ];
 
@@ -179,7 +174,6 @@
       if (topic && !(r.topic || []).includes(topic)) return false;
       if (type && r.type !== type) return false;
       if (audience && r.audience !== audience) return false;
-
       return true;
     }
 
@@ -214,4 +208,3 @@
   </script>
 </body>
 </html>
-
