@@ -6,39 +6,57 @@
   <title>Resource Hub</title>
 
   <style>
-    /* ===== Living Grief Theme (hopeful, warm + grounded) ===== */
-    :root{
-      --bg: #0e0f1a;          /* deep night */
-      --panel: #171a2b;       /* cards */
-      --panel2: #1f2338;      /* inputs/buttons */
-      --text: #f4f1ff;        /* main text */
-      --muted: rgba(244,241,255,.82);
-      --border: rgba(255,255,255,.12);
+   /* ===== Grief Sunrise Theme (based on your palette image) ===== */
+:root{
+  --bg: #0e0f1a;
 
-      --accent: #ffb86b;      /* warm hope */
-      --accent2:#caa6ff;      /* soft lavender */
-      --tagbg: rgba(202,166,255,.12);
-      --tagborder: rgba(202,166,255,.18);
-    }
+  --text: #f6f2ff;
+  --muted: rgba(246,242,255,.80);
 
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      margin:0;
-      background:
-        radial-gradient(900px 600px at 18% 0%, rgba(202,166,255,.18), transparent 55%),
-        radial-gradient(900px 600px at 85% 10%, rgba(255,184,107,.18), transparent 55%),
-        var(--bg);
-      color: var(--text);
-    }
+  --panel: rgba(23, 20, 35, .72);     /* glassy card */
+  --panel2: rgba(27, 23, 42, .78);    /* inputs */
+  --border: rgba(255,255,255,.14);
 
-    header{
-      padding: 28px 18px;
-      background:
-        radial-gradient(900px 500px at 15% 0%, rgba(202,166,255,.30), transparent 60%),
-        radial-gradient(900px 500px at 85% 10%, rgba(255,184,107,.28), transparent 60%),
-        linear-gradient(135deg, #2a2f6a, #0e0f1a);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
+  --accent: #FEA916;   /* sunrise gold */
+  --accent2:#DF8A39;   /* amber */
+  --accent3:#815F6B;   /* mauve */
+
+  --tagbg: rgba(223,138,57,.14);
+  --tagborder: rgba(254,169,22,.22);
+}
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+
+  /* Background = your image translated into CSS */
+  background:
+    radial-gradient(900px 600px at 20% 0%, rgba(129,95,107,.35), transparent 60%),
+    radial-gradient(900px 600px at 80% 15%, rgba(254,169,22,.25), transparent 55%),
+    linear-gradient(180deg,
+      #423A50 0%,
+      #53455D 20%,
+      #815F6B 42%,
+      #B67967 62%,
+      #DF8A39 78%,
+      #FEA916 88%,
+      #B54F1C 100%
+    );
+  min-height: 100vh;
+}
+
+header{
+  padding: 28px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+
+  /* Slightly “calmer” header band */
+  background:
+    radial-gradient(900px 500px at 15% 0%, rgba(129,95,107,.45), transparent 60%),
+    radial-gradient(900px 500px at 85% 10%, rgba(254,169,22,.30), transparent 60%),
+    linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
+  backdrop-filter: blur(6px);
+}
 
     .wrap{ max-width: 980px; margin: 0 auto; }
     h1{ margin:0 0 6px; font-size: 28px; letter-spacing: .2px; }
@@ -100,8 +118,12 @@
       transition: transform .08s ease, filter .08s ease;
     }
     .card:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.03);
+  transform: translateY(-1px);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.35),
+    0 0 0 1px rgba(254,169,22,.12),
+    0 0 24px rgba(254,169,22,.10);
+
     }
 
     .meta{
@@ -291,3 +313,4 @@
   </script>
 </body>
 </html>
+
