@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Coping With Death</title>
+  <title>Relating to Grief</title>
 
   <style>
     :root{
@@ -112,7 +112,7 @@
 
     .small{ font-size: 13px; color: var(--muted); }
 
-    /* clickable story card layout */
+    /* clickable story card */
     .storyLink{
       text-decoration:none;
       color:inherit;
@@ -120,10 +120,6 @@
     }
 
     .storyCard{
-      display:grid;
-      grid-template-columns: 160px 1fr;
-      gap:16px;
-      align-items:start;
       cursor:pointer;
       transition: transform .08s ease, filter .08s ease;
     }
@@ -131,29 +127,6 @@
     .storyCard:hover{
       transform: translateY(-1px);
       filter: brightness(1.03);
-    }
-
-    .thumb{
-      width:160px;
-      border-radius: 14px;
-      border:1px solid var(--border);
-      overflow:hidden;
-      background: rgba(0,0,0,.25);
-      box-shadow: 0 10px 25px rgba(0,0,0,.25);
-    }
-
-    .thumb img{
-      width:100%;
-      height:auto;
-      display:block;
-    }
-
-    .titleRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
     }
 
     .pill{
@@ -167,6 +140,15 @@
       white-space:nowrap;
     }
 
+    .titleRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:6px;
+    }
+
     footer{
       padding: 22px 18px 34px;
       opacity:.7;
@@ -174,9 +156,8 @@
       margin-top: 26px;
     }
 
-    @media (max-width: 700px){
-      .storyCard{ grid-template-columns: 1fr; }
-      .thumb{ width: 100%; max-width: 340px; }
+    @media (max-width: 520px){
+      h1{ font-size: 28px; }
     }
   </style>
 </head>
@@ -184,7 +165,7 @@
 <body>
   <header>
     <div class="wrap">
-      <h1>Coping With Death</h1>
+      <h1>Relating to Grief</h1>
       <p class="sub">
         Stories and resources designed to help children understand death and navigate grief in a gentle, developmentally supportive way.
       </p>
@@ -203,13 +184,13 @@
   <main class="wrap">
 
     <section class="card">
-      <div class="titleRow">
-        <h2 style="margin:0;">Featured Story</h2>
+      <div class="titleRow" style="margin-bottom:10px;">
+        <h2 style="margin:0;">Story Resources</h2>
         <span class="pill">Click the card to open the PDF</span>
       </div>
 
-      <p class="note" style="margin-top:10px;">
-        These story resources are meant to support kids with death-related grief using simple language, normalization of big feelings,
+      <p class="note">
+        These story resources are meant to support children with grief using simple language, normalization of big feelings,
         and reminders that love continues.
       </p>
 
@@ -217,45 +198,36 @@
       <a class="storyLink" href="gus-grief-story.pdf" target="_blank" rel="noopener noreferrer">
         <div class="card storyCard" style="margin-top:14px;">
 
-          <!-- THUMBNAIL COVER -->
-          <div class="thumb">
-            <img src="gus-grief-cover.png" alt="Gus’s Grief Adventure cover thumbnail">
+          <div class="titleRow">
+            <h2 style="margin:0;">📖 Gus’s Grief Adventure</h2>
+            <span class="pill">Opens in new tab</span>
           </div>
 
-          <!-- TEXT CONTENT -->
-          <div>
-            <div class="titleRow" style="margin-bottom:6px;">
-              <h2 style="margin:0;">📖 Gus’s Grief Adventure</h2>
-              <span class="pill">Opens in new tab</span>
-            </div>
+          <p class="note">
+            A child-friendly therapeutic story about coping with death, big feelings (confusion, sadness, anger),
+            and how grief can change over time while love remains.
+          </p>
 
-            <p class="note">
-              A child-friendly therapeutic story about coping with death, big feelings (confusion, sadness, anger),
-              and how grief can change over time while love remains.
-            </p>
-
-            <div class="meta">
-              <span class="tag">Storybook (PDF)</span>
-              <span class="tag">Topic: Death & Grief</span>
-              <span class="tag">Audience: Children</span>
-            </div>
-
-            <div class="actions">
-              <span class="btn">Open Story</span>
-              <a class="btn" href="gus-grief-story.pdf" download>Download PDF</a>
-            </div>
-
-            <p class="small" style="margin-top:12px;">
-              Tip: If you’re sharing this with caregivers, suggest reading together and pausing to name feelings.
-            </p>
+          <div class="meta">
+            <span class="tag">Storybook (PDF)</span>
+            <span class="tag">Topic: Death & Grief</span>
+            <span class="tag">Audience: Children</span>
           </div>
+
+          <div class="actions">
+            <span class="btn">Open Story</span>
+            <a class="btn" href="gus-grief-story.pdf" download>Download PDF</a>
+          </div>
+
+          <p class="small" style="margin-top:12px;">
+            Tip: Read together, pause to name feelings, and invite kids to share memories or questions at their pace.
+          </p>
 
         </div>
       </a>
 
       <p class="small" style="margin-top:14px;">
-        If the cover image doesn’t show, make sure the file is uploaded in this same folder and named exactly:
-        <code>gus-grief-cover.png</code>
+        Make sure the PDF file is uploaded in this same folder and named exactly: <code>gus-grief-story.pdf</code>
       </p>
     </section>
 
@@ -263,7 +235,7 @@
 
   <footer>
     <div class="wrap small">
-      Add more stories by duplicating the clickable card section and changing the PDF + cover filenames.
+      Add more stories by duplicating the card and changing the PDF filename + title.
     </div>
   </footer>
 </body>
