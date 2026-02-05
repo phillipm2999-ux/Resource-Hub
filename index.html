@@ -20,13 +20,37 @@
     a { color:#9fd3ff; text-decoration:none; }
     a:hover { text-decoration: underline; }
     footer { padding: 24px 18px; opacity:.7; border-top: 1px solid rgba(255,255,255,.08); }
+
+    /* Featured visual styles */
+    .featuredWrap { margin-top: 18px; display:flex; justify-content:center; }
+    .featuredFigure { margin: 0; width: min(760px, 100%); }
+    .featuredImg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 4px solid #000;
+      border-radius: 12px;
+      background: #000;
+    }
+    .featuredCaption { margin-top: 10px; opacity:.85; font-size: 14px; }
   </style>
 </head>
+
 <body>
   <header>
     <div class="wrap">
       <h1>Resource Hub</h1>
       <p>A place to share helpful links, toolkits, PDFs, and guides.</p>
+
+      <!-- FEATURED IMAGE (smaller + black border) -->
+      <div class="featuredWrap">
+        <figure class="featuredFigure">
+          <img class="featuredImg" src="images/The_Weight_of_Grief.png" alt="The Weight of Grief visual">
+          <figcaption class="featuredCaption">
+            Grief doesn’t disappear — life grows around it.
+          </figcaption>
+        </figure>
+      </div>
     </div>
   </header>
 
@@ -43,10 +67,7 @@
         <option value="">All audiences</option>
       </select>
     </div>
-<div style="text-align:center; margin:25px 0;">
-  <img src="The_Weight_of_Grief.png" alt="Grief visual">
-       
-</div>
+
     <div id="count" style="opacity:.85; margin-bottom:10px;"></div>
     <section id="grid" class="grid"></section>
   </main>
@@ -58,24 +79,49 @@
   </footer>
 
 <script>
-  // 1) Add your resources here
+  // Add resources here. Folder links point to "index.html" inside each folder.
   const resources = [
-   {
-  title: "Coping With Death (Kids)",
-  url: "coping-with-death/",
-  topic: ["Grief", "Death"],
-  type: "Collection",
-  audience: "Children",
-  note: "A kid-friendly section with stories and visuals for coping with death."
+    // Collections / folders
+    {
+      title: "Ages and Stages",
+      url: "Ages%20and%20Stages/",
+      topic: ["Development"],
+      type: "Collection",
+      audience: "Everyone",
+      note: "Resources organized by child development stages and what support can look like across ages."
     },
     {
-      title: "Trauma-informed care basics",
-      url: "https://example.com",
-      topic: ["Trauma", "Regulation"],
-      type: "Article",
-      audience: "Practitioners",
-      note: "Core principles + practical language."
-    }
+      title: "Relating to Grief (Death & Loss)",
+      url: "Coping%20With%20Death/",
+      topic: ["Grief", "Death"],
+      type: "Collection",
+      audience: "Children",
+      note: "Stories and resources to help children understand death and navigate grief."
+    },
+    {
+      title: "Divorce & Separation",
+      url: "Divorce/",
+      topic: ["Family Change"],
+      type: "Collection",
+      audience: "Caregivers",
+      note: "Resources to support children and families through separation, divorce, and changes in family structure."
+    },
+    {
+      title: "Major Life Changes",
+      url: "Major%20Life%20Changes/",
+      topic: ["Transitions"],
+      type: "Collection",
+      audience: "Everyone",
+      note: "Moving, school changes, new caregivers, relocation, and other big transitions."
+    },
+    {
+      title: "Neurodiversity & Different Ways of Being",
+      url: "Neurodiversity/",
+      topic: ["Neurodiversity", "Inclusion"],
+      type: "Collection",
+      audience: "Everyone",
+      note: "Strength-based resources supporting neurodivergent children and inclusive practice."
+    },
   ];
 
   const els = {
@@ -90,9 +136,9 @@
   function uniq(arr) { return [...new Set(arr)].sort(); }
 
   function buildFilters() {
-    const topics = uniq(resources.flatMap(r => r.topic));
-    const types = uniq(resources.map(r => r.type));
-    const audiences = uniq(resources.map(r => r.audience));
+    const topics = uniq(resources.flatMap(r => r.topic || []));
+    const types = uniq(resources.map(r => r.type).filter(Boolean));
+    const audiences = uniq(resources.map(r => r.audience).filter(Boolean));
 
     topics.forEach(t => els.topic.append(new Option(t, t)));
     types.forEach(t => els.type.append(new Option(t, t)));
@@ -105,17 +151,21 @@
     const type = els.type.value;
     const audience = els.audience.value;
 
-    const text = (r.title + " " + (r.note || "") + " " + r.topic.join(" ")).toLowerCase();
+    const topicText = (r.topic || []).join(" ");
+    const text = (r.title + " " + (r.note || "") + " " + topicText).toLowerCase();
+
     if (q && !text.includes(q)) return false;
-    if (topic && !r.topic.includes(topic)) return false;
+    if (topic && !(r.topic || []).includes(topic)) return false;
     if (type && r.type !== type) return false;
     if (audience && r.audience !== audience) return false;
+
     return true;
   }
 
   function render() {
     const filtered = resources.filter(matches);
     els.count.textContent = `${filtered.length} resource(s) shown`;
+
     els.grid.innerHTML = filtered.map(r => `
       <article class="card">
         <div style="font-weight:700; font-size:16px; line-height:1.25;">
@@ -123,9 +173,9 @@
         </div>
         ${r.note ? `<div style="margin-top:8px; opacity:.9;">${r.note}</div>` : ``}
         <div class="meta">
-          <span class="tag">${r.type}</span>
-          <span class="tag">${r.audience}</span>
-          ${r.topic.map(t => `<span class="tag">${t}</span>`).join("")}
+          ${r.type ? `<span class="tag">${r.type}</span>` : ``}
+          ${r.audience ? `<span class="tag">${r.audience}</span>` : ``}
+          ${(r.topic || []).map(t => `<span class="tag">${t}</span>`).join("")}
         </div>
       </article>
     `).join("");
