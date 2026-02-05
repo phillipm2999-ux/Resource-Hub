@@ -90,7 +90,7 @@
       display:flex;
       flex-wrap: wrap;
       gap:10px;
-      margin: 8px 0 14px;
+      margin: 10px 0 0;
     }
 
     .btn{
@@ -106,25 +106,66 @@
       font-weight: 600;
       font-size: 14px;
       cursor:pointer;
+      user-select:none;
     }
     .btn:hover{ filter: brightness(1.08); }
 
-    .viewer{
-      border-radius: 14px;
-      overflow:hidden;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,.25);
-    }
+    .small{ font-size: 13px; color: var(--muted); }
 
-    .viewer iframe{
-      width: 100%;
-      height: 78vh;
-      min-height: 560px;
-      border: 0;
+    /* clickable story card layout */
+    .storyLink{
+      text-decoration:none;
+      color:inherit;
       display:block;
     }
 
-    .small{ font-size: 13px; color: var(--muted); }
+    .storyCard{
+      display:grid;
+      grid-template-columns: 160px 1fr;
+      gap:16px;
+      align-items:start;
+      cursor:pointer;
+      transition: transform .08s ease, filter .08s ease;
+    }
+
+    .storyCard:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .thumb{
+      width:160px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      overflow:hidden;
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+
+    .thumb img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .titleRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .pill{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background: rgba(159,211,255,.12);
+      border:1px solid rgba(159,211,255,.18);
+      color: var(--link);
+      opacity:.95;
+      white-space:nowrap;
+    }
 
     footer{
       padding: 22px 18px 34px;
@@ -133,9 +174,9 @@
       margin-top: 26px;
     }
 
-    @media (max-width: 520px){
-      h1{ font-size: 28px; }
-      .viewer iframe{ min-height: 520px; height: 72vh; }
+    @media (max-width: 700px){
+      .storyCard{ grid-template-columns: 1fr; }
+      .thumb{ width: 100%; max-width: 340px; }
     }
   </style>
 </head>
@@ -160,56 +201,69 @@
   </header>
 
   <main class="wrap">
-    <section class="card">
-      <h2>Featured Story: Gus’s Grief Adventure</h2>
 
-      <div class="meta">
-        <span class="tag">Storybook (PDF)</span>
-        <span class="tag">Topic: Death & Grief</span>
-        <span class="tag">Audience: Children</span>
+    <section class="card">
+      <div class="titleRow">
+        <h2 style="margin:0;">Featured Story</h2>
+        <span class="pill">Click the card to open the PDF</span>
       </div>
 
-      <p class="note">
-        A child-friendly story about big feelings after a death, support from others, and how grief changes over time while love remains.
+      <p class="note" style="margin-top:10px;">
+        These story resources are meant to support kids with death-related grief using simple language, normalization of big feelings,
+        and reminders that love continues.
       </p>
 
-      <div class="actions">
-        <a class="btn" href="gus-grief-story.pdf" target="_blank" rel="noopener noreferrer">Open in new tab</a>
-        <a class="btn" href="gus-grief-story.pdf" download>Download PDF</a>
-      </div>
+      <!-- CLICKABLE CARD (opens PDF) -->
+      <a class="storyLink" href="gus-grief-story.pdf" target="_blank" rel="noopener noreferrer">
+        <div class="card storyCard" style="margin-top:14px;">
 
-      <a href="gus-grief-story.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+          <!-- THUMBNAIL COVER -->
+          <div class="thumb">
+            <img src="gus-grief-cover.png" alt="Gus’s Grief Adventure cover thumbnail">
+          </div>
 
-  <div class="card" style="cursor:pointer; margin-top:14px;">
+          <!-- TEXT CONTENT -->
+          <div>
+            <div class="titleRow" style="margin-bottom:6px;">
+              <h2 style="margin:0;">📖 Gus’s Grief Adventure</h2>
+              <span class="pill">Opens in new tab</span>
+            </div>
 
-    <h2 style="margin-top:0;">📖 Gus’s Grief Adventure</h2>
+            <p class="note">
+              A child-friendly therapeutic story about coping with death, big feelings (confusion, sadness, anger),
+              and how grief can change over time while love remains.
+            </p>
 
-    <p class="note">
-      A child-friendly therapeutic story about coping with death, big feelings,
-      and how love remains even after someone dies.
-    </p>
+            <div class="meta">
+              <span class="tag">Storybook (PDF)</span>
+              <span class="tag">Topic: Death & Grief</span>
+              <span class="tag">Audience: Children</span>
+            </div>
 
-    <div class="meta">
-      <span class="tag">Storybook (PDF)</span>
-      <span class="tag">Death & Grief</span>
-      <span class="tag">Children</span>
-    </div>
+            <div class="actions">
+              <span class="btn">Open Story</span>
+              <a class="btn" href="gus-grief-story.pdf" download>Download PDF</a>
+            </div>
 
-    <div class="actions">
-      <span class="btn">Open Story</span>
-      <span class="btn">Download</span>
-    </div>
+            <p class="small" style="margin-top:12px;">
+              Tip: If you’re sharing this with caregivers, suggest reading together and pausing to name feelings.
+            </p>
+          </div>
 
-  </div>
+        </div>
+      </a>
 
-</a>
-
+      <p class="small" style="margin-top:14px;">
+        If the cover image doesn’t show, make sure the file is uploaded in this same folder and named exactly:
+        <code>gus-grief-cover.png</code>
+      </p>
     </section>
+
   </main>
 
   <footer>
     <div class="wrap small">
-      Add more stories by duplicating the “card” section above and changing the filename + title.
+      Add more stories by duplicating the clickable card section and changing the PDF + cover filenames.
     </div>
   </footer>
 </body>
