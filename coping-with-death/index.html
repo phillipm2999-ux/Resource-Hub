@@ -4,19 +4,189 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Coping With Death</title>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121935;
+      --panel2:#131a33;
+      --text:#e9ecff;
+      --muted:rgba(233,236,255,.85);
+      --border:rgba(255,255,255,.10);
+      --link:#9fd3ff;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.5;
+    }
+
+    header{
+      padding: 34px 18px 22px;
+      background: linear-gradient(120deg,#1b2a6b,#0b1020);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .wrap{ max-width: 980px; margin: 0 auto; }
+
+    h1{ margin:0 0 8px; font-size: 34px; letter-spacing:.2px; }
+    .sub{ margin:0; color:var(--muted); max-width: 70ch; }
+
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap:12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .crumb a{
+      color: var(--link);
+      text-decoration: none;
+      font-size: 14px;
+      opacity:.95;
+    }
+    .crumb a:hover{ text-decoration: underline; }
+
+    main{ padding: 18px; }
+    .card{
+      background: var(--panel);
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.20);
+    }
+
+    h2{ margin: 0 0 10px; font-size: 20px; }
+
+    .meta{
+      display:flex;
+      flex-wrap: wrap;
+      gap:8px;
+      margin: 10px 0 14px;
+    }
+    .tag{
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #1a2450;
+      border:1px solid var(--border);
+      opacity:.95;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap:10px;
+      margin: 8px 0 14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: var(--panel2);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor:pointer;
+    }
+    .btn:hover{ filter: brightness(1.08); }
+
+    .note{
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    /* Responsive PDF viewer box */
+    .viewer{
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.25);
+    }
+    .viewer iframe{
+      width: 100%;
+      height: 78vh;
+      min-height: 560px;
+      border: 0;
+      display:block;
+    }
+
+    footer{
+      padding: 22px 18px 34px;
+      opacity:.7;
+      border-top:1px solid rgba(255,255,255,.08);
+      margin-top: 26px;
+    }
+    .small{ font-size: 13px; }
+
+    @media (max-width: 520px){
+      h1{ font-size: 28px; }
+      .viewer iframe{ min-height: 520px; height: 72vh; }
+    }
+  </style>
 </head>
-<body style="font-family: system-ui, Arial; padding: 32px; max-width: 900px; margin: 0 auto;">
-  <h1>Coping With Death</h1>
-  <p>Stories and resources designed to help children understand and navigate death.</p>
 
-  <h2>Featured Story</h2>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Coping With Death</h1>
+      <p class="sub">Stories and resources designed to help children understand death and navigate grief in a gentle, developmentally supportive way.</p>
 
-  <p>
-    <a href="Grief%20Story.pdf" target="_blank" rel="noopener noreferrer">
-      Read “Gus’s Grief Adventure”
-    </a>
-  </p>
+      <div class="topbar">
+        <div class="crumb">
+          <a href="../">← Back to Resource Hub</a>
+        </div>
+        <div class="small" style="color: var(--muted);">
+          For kids • caregivers • practitioners
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <iframe src="Grief%20Story.pdf" style="width:100%; height:800px; border:none;"></iframe>
+  <main class="wrap">
+    <section class="card">
+      <h2>Featured Story: “Gus’s Grief Adventure”</h2>
+
+      <div class="meta">
+        <span class="tag">Storybook (PDF)</span>
+        <span class="tag">Topic: Death & Grief</span>
+        <span class="tag">Audience: Children</span>
+      </div>
+
+      <p class="note">
+        A child-friendly story about big feelings after a death, support from others, and how grief changes over time while love remains.
+      </p>
+
+      <div class="actions">
+        <a class="btn" href="Grief%20Story.pdf" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+        <a class="btn" href="Grief%20Story.pdf" download>Download PDF</a>
+      </div>
+
+      <div class="viewer">
+        <iframe src="Grief%20Story.pdf" title="Gus’s Grief Adventure PDF"></iframe>
+      </div>
+
+      <p class="small" style="margin-top:12px; color: var(--muted);">
+        Tip: If the PDF doesn’t display on some phones, use “Open in new tab.”
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap small">
+      Want this page to list multiple stories? Add more “card” sections like the one above.
+    </div>
+  </footer>
 </body>
 </html>
