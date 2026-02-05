@@ -6,34 +6,60 @@
   <title>Relating to Grief</title>
 
   <style>
+    /* ===== Candlelight (Black tones + warm glow) ===== */
     :root{
-      --bg:#0b1020;
-      --panel:#121935;
-      --panel2:#131a33;
-      --text:#e9ecff;
-      --muted:rgba(233,236,255,.85);
-      --border:rgba(255,255,255,.10);
-      --link:#9fd3ff;
+      --bg: #070606;                 /* near-black */
+      --panel: rgba(16, 12, 10, .78);
+      --panel2: rgba(22, 16, 12, .86);
+      --text: #fff4e6;
+      --muted: rgba(255,244,230,.78);
+      --border: rgba(255,255,255,.10);
+
+      --accent: #ffcc88;             /* candle glow */
+      --accent2:#ff9f5a;             /* ember */
+      --tagbg: rgba(255,159,90,.14);
+      --tagborder: rgba(255,204,136,.22);
     }
 
     body{
       margin:0;
-      background:var(--bg);
-      color:var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height:1.5;
+      color: var(--text);
+
+      /* Black base + warm candle glows */
+      background:
+        radial-gradient(900px 600px at 18% 8%, rgba(255,204,136,.18), transparent 55%),
+        radial-gradient(900px 600px at 85% 12%, rgba(255,159,90,.12), transparent 60%),
+        radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.85), rgba(0,0,0,1) 55%),
+        linear-gradient(180deg, #0b0908 0%, #070606 60%, #050404 100%);
+      min-height: 100vh;
     }
 
     header{
       padding: 34px 18px 22px;
-      background: linear-gradient(120deg,#1b2a6b,#0b1020);
-      border-bottom:1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+
+      /* Dark header with a gentle glow at top-left */
+      background:
+        radial-gradient(900px 500px at 18% 0%, rgba(255,204,136,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,159,90,.10), transparent 60%),
+        linear-gradient(180deg, rgba(10,8,7,.92), rgba(7,6,6,.95));
+      backdrop-filter: blur(6px);
     }
 
     .wrap{ max-width: 980px; margin: 0 auto; }
 
-    h1{ margin:0 0 8px; font-size: 34px; letter-spacing:.2px; }
-    .sub{ margin:0; color:var(--muted); max-width: 70ch; }
+    h1{
+      margin:0 0 8px;
+      font-size: 34px;
+      letter-spacing: .2px;
+    }
+
+    .sub{
+      margin:0;
+      color: var(--muted);
+      max-width: 75ch;
+    }
 
     .topbar{
       display:flex;
@@ -45,12 +71,23 @@
     }
 
     .crumb a{
-      color: var(--link);
+      color: var(--accent);
       text-decoration: none;
       font-size: 14px;
       opacity:.95;
     }
     .crumb a:hover{ text-decoration: underline; }
+
+    .pill{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background: rgba(255,204,136,.10);
+      border:1px solid rgba(255,204,136,.18);
+      color: var(--accent);
+      opacity:.95;
+      white-space:nowrap;
+    }
 
     main{ padding: 18px; }
 
@@ -59,11 +96,17 @@
       border:1px solid var(--border);
       border-radius: 16px;
       padding: 16px;
+      box-shadow: 0 18px 48px rgba(0,0,0,.55);
+      backdrop-filter: blur(8px);
       margin-top: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.20);
     }
 
     h2{ margin: 0 0 10px; font-size: 20px; }
+
+    .note{
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
 
     .meta{
       display:flex;
@@ -76,14 +119,9 @@
       font-size: 12px;
       padding: 4px 10px;
       border-radius: 999px;
-      background:#1a2450;
-      border:1px solid var(--border);
-      opacity:.95;
-    }
-
-    .note{
-      margin: 0 0 14px;
-      color: var(--muted);
+      background: var(--tagbg);
+      border:1px solid var(--tagborder);
+      color: rgba(255,244,230,.92);
     }
 
     .actions{
@@ -99,45 +137,43 @@
       justify-content:center;
       padding: 10px 12px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.12);
       background: var(--panel2);
       color: var(--text);
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
       cursor:pointer;
       user-select:none;
+      transition: filter .08s ease, transform .08s ease, box-shadow .08s ease;
     }
-    .btn:hover{ filter: brightness(1.08); }
+    .btn:hover{
+      filter: brightness(1.06);
+      box-shadow:
+        0 0 0 1px rgba(255,204,136,.10),
+        0 0 26px rgba(255,204,136,.12);
+    }
 
-    .small{ font-size: 13px; color: var(--muted); }
-
-    /* clickable story card */
+    /* Clickable story card */
     .storyLink{
       text-decoration:none;
       color:inherit;
       display:block;
+      margin-top: 14px;
     }
 
     .storyCard{
       cursor:pointer;
-      transition: transform .08s ease, filter .08s ease;
+      transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
     }
 
     .storyCard:hover{
       transform: translateY(-1px);
       filter: brightness(1.03);
-    }
-
-    .pill{
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
-      background: rgba(159,211,255,.12);
-      border:1px solid rgba(159,211,255,.18);
-      color: var(--link);
-      opacity:.95;
-      white-space:nowrap;
+      box-shadow:
+        0 22px 60px rgba(0,0,0,.65),
+        0 0 0 1px rgba(255,204,136,.12),
+        0 0 34px rgba(255,204,136,.10);
     }
 
     .titleRow{
@@ -146,18 +182,22 @@
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
-      margin-bottom:6px;
+      margin-bottom: 6px;
     }
 
     footer{
       padding: 22px 18px 34px;
-      opacity:.7;
-      border-top:1px solid rgba(255,255,255,.08);
+      color: rgba(255,244,230,.65);
+      border-top: 1px solid rgba(255,255,255,.10);
       margin-top: 26px;
     }
 
-    @media (max-width: 520px){
-      h1{ font-size: 28px; }
+    code{
+      background: rgba(255,255,255,.06);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,244,230,.92);
     }
   </style>
 </head>
@@ -167,22 +207,19 @@
     <div class="wrap">
       <h1>Relating to Grief</h1>
       <p class="sub">
-        Stories and resources designed to help children understand death and navigate grief in a gentle, developmentally supportive way.
+        Stories and resources designed to help children understand death and navigate grief in a gentle, supportive way.
       </p>
 
       <div class="topbar">
         <div class="crumb">
           <a href="../">← Back to Resource Hub</a>
         </div>
-        <div class="small">
-          For kids • caregivers • practitioners
-        </div>
+        <span class="pill">Candlelight</span>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-
     <section class="card">
       <div class="titleRow" style="margin-bottom:10px;">
         <h2 style="margin:0;">Story Resources</h2>
@@ -190,14 +227,12 @@
       </div>
 
       <p class="note">
-        These story resources are meant to support children with grief using simple language, normalization of big feelings,
-        and reminders that love continues.
+        Grief can come in waves — especially around reminders, milestones, or changes. These resources focus on gentle language,
+        normalization of feelings, and space for questions.
       </p>
 
-      <!-- CLICKABLE CARD (opens PDF) -->
       <a class="storyLink" href="gus-grief-story.pdf" target="_blank" rel="noopener noreferrer">
-        <div class="card storyCard" style="margin-top:14px;">
-
+        <div class="card storyCard">
           <div class="titleRow">
             <h2 style="margin:0;">📖 Gus’s Grief Adventure</h2>
             <span class="pill">Opens in new tab</span>
@@ -219,22 +254,20 @@
             <a class="btn" href="gus-grief-story.pdf" download>Download PDF</a>
           </div>
 
-          <p class="small" style="margin-top:12px;">
+          <p class="note" style="margin-top:12px; margin-bottom:0;">
             Tip: Read together, pause to name feelings, and invite kids to share memories or questions at their pace.
           </p>
-
         </div>
       </a>
 
-      <p class="small" style="margin-top:14px;">
-        Make sure the PDF file is uploaded in this same folder and named exactly: <code>gus-grief-story.pdf</code>
+      <p class="note" style="margin-top:14px;">
+        File check: this page expects <code>gus-grief-story.pdf</code> to be in the same folder as this <code>index.html</code>.
       </p>
     </section>
-
   </main>
 
   <footer>
-    <div class="wrap small">
+    <div class="wrap">
       Add more stories by duplicating the card and changing the PDF filename + title.
     </div>
   </footer>
