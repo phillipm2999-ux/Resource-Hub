@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resource Hub</title>
+  <style>
+    body { font-family: system-ui, Arial; margin: 0; background:#0b1020; color:#e9ecff; }
+    header { padding: 28px 18px; background: linear-gradient(120deg,#1b2a6b,#0b1020); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    h1 { margin: 0 0 6px; font-size: 28px; }
+    p { margin: 0; opacity:.9; }
+    main { padding: 18px; }
+    .controls { display:flex; gap:10px; flex-wrap:wrap; margin: 14px 0 18px; }
+    input, select { background:#131a33; color:#e9ecff; border:1px solid rgba(255,255,255,.14); padding:10px 12px; border-radius: 10px; }
+    .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card { background:#121935; border:1px solid rgba(255,255,255,.10); border-radius: 14px; padding:14px; }
+    .meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .tag { font-size: 12px; padding: 4px 8px; border-radius: 999px; background:#1a2450; border:1px solid rgba(255,255,255,.10); opacity:.95; }
+    a { color:#9fd3ff; text-decoration:none; }
+    a:hover { text-decoration: underline; }
+    footer { padding: 24px 18px; opacity:.7; border-top: 1px solid rgba(255,255,255,.08); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Resource Hub</h1>
+      <p>A place to share helpful links, toolkits, PDFs, and guides.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search resources..." />
+      <select id="topic">
+        <option value="">All topics</option>
+      </select>
+      <select id="type">
+        <option value="">All types</option>
+      </select>
+      <select id="audience">
+        <option value="">All audiences</option>
+      </select>
+    </div>
+
+    <div id="count" style="opacity:.85; margin-bottom:10px;"></div>
+    <section id="grid" class="grid"></section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Tip: To add resources, edit the <code>resources</code> list in this file.
+    </div>
+  </footer>
+
+<script>
+  // 1) Add your resources here
+  const resources = [
+    {
+      title: "Grief: Life grows around it (handout)",
+      url: "https://example.com",
+      topic: ["Grief", "Loss"],
+      type: "Handout",
+      audience: "Caregivers",
+      note: "Simple framing: grief doesn't disappear; life grows around it."
+    },
+    {
+      title: "Trauma-informed care basics",
+      url: "https://example.com",
+      topic: ["Trauma", "Regulation"],
+      type: "Article",
+      audience: "Practitioners",
+      note: "Core principles + practical language."
+    }
+  ];
+
+  const els = {
+    grid: document.getElementById("grid"),
+    search: document.getElementById("search"),
+    topic: document.getElementById("topic"),
+    type: document.getElementById("type"),
+    audience: document.getElementById("audience"),
+    count: document.getElementById("count")
+  };
+
+  function uniq(arr) { return [...new Set(arr)].sort(); }
+
+  function buildFilters() {
+    const topics = uniq(resources.flatMap(r => r.topic));
+    const types = uniq(resources.map(r => r.type));
+    const audiences = uniq(resources.map(r => r.audience));
+
+    topics.forEach(t => els.topic.append(new Option(t, t)));
+    types.forEach(t => els.type.append(new Option(t, t)));
+    audiences.forEach(a => els.audience.append(new Option(a, a)));
+  }
+
+  function matches(r) {
+    const q = els.search.value.trim().toLowerCase();
+    const topic = els.topic.value;
+    const type = els.type.value;
+    const audience = els.audience.value;
+
+    const text = (r.title + " " + (r.note || "") + " " + r.topic.join(" ")).toLowerCase();
+    if (q && !text.includes(q)) return false;
+    if (topic && !r.topic.includes(topic)) return false;
+    if (type && r.type !== type) return false;
+    if (audience && r.audience !== audience) return false;
+    return true;
+  }
+
+  function render() {
+    const filtered = resources.filter(matches);
+    els.count.textContent = `${filtered.length} resource(s) shown`;
+    els.grid.innerHTML = filtered.map(r => `
+      <article class="card">
+        <div style="font-weight:700; font-size:16px; line-height:1.25;">
+          <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
+        </div>
+        ${r.note ? `<div style="margin-top:8px; opacity:.9;">${r.note}</div>` : ``}
+        <div class="meta">
+          <span class="tag">${r.type}</span>
+          <span class="tag">${r.audience}</span>
+          ${r.topic.map(t => `<span class="tag">${t}</span>`).join("")}
+        </div>
+      </article>
+    `).join("");
+  }
+
+  buildFilters();
+  ["input","change"].forEach(evt => {
+    els.search.addEventListener(evt, render);
+    els.topic.addEventListener(evt, render);
+    els.type.addEventListener(evt, render);
+    els.audience.addEventListener(evt, render);
+  });
+  render();
+</script>
+</body>
+</html>
