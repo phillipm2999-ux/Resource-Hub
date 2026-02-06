@@ -6,65 +6,61 @@
   <title>Resource Hub</title>
 
   <style>
-  /* ===== Grief Sunrise Theme (based on your palette image) ===== */
-:root{
-  --bg: #0e0f1a;
+    /* ===== Grief Sunrise Layout — Pink/Red Version ===== */
+    :root{
+      --bg: #0e0f1a;
 
-  --text: #f6f2ff;
-  --muted: rgba(246,242,255,.80);
+      --text: #f6f2ff;
+      --muted: rgba(246,242,255,.80);
 
-  --panel: rgba(23, 20, 35, .72);     /* glassy card */
-  --panel2: rgba(27, 23, 42, .78);    /* inputs */
-  --border: rgba(255,255,255,.14);
+      --panel: rgba(23, 20, 35, .72);
+      --panel2: rgba(27, 23, 42, .78);
+      --border: rgba(255,255,255,.14);
 
- /* Pink / Rose replacements */
---accent: #ff6f91;   /* rose pink */
---accent2:#ff4f6d;  /* ember red */
---accent3:#c75a7b;  /* grief rose */
+      /* Pink / grief tones */
+      --accent: #ff6f91;
+      --accent2:#ff4f6d;
+      --accent3:#c75a7b;
 
---tagbg: rgba(255,111,145,.14);
---tagborder: rgba(255,111,145,.22);
+      --tagbg: rgba(255,111,145,.14);
+      --tagborder: rgba(255,111,145,.22);
+    }
 
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
 
-  --tagbg: rgba(223,138,57,.14);
-  --tagborder: rgba(254,169,22,.22);
-}
+      background:
+        radial-gradient(900px 600px at 20% 0%, rgba(199,90,123,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 15%, rgba(255,111,145,.25), transparent 55%),
+        linear-gradient(180deg,
+          #423A50 0%,
+          #53455D 20%,
+          #815F6B 42%,
+          #B67967 62%,
+          #c75a7b 78%,
+          #ff6f91 88%,
+          #ff4f6d 100%
+        );
 
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
+      min-height: 100vh;
+    }
 
-  /* Background = your image translated into CSS */
-  background:
-    radial-gradient(900px 600px at 20% 0%, rgba(129,95,107,.35), transparent 60%),
-    radial-gradient(900px 600px at 80% 15%, rgba(254,169,22,.25), transparent 55%),
-    linear-gradient(180deg,
-      #423A50 0%,
-      #53455D 20%,
-      #815F6B 42%,
-      #B67967 62%,
-      #DF8A39 78%,
-      #FEA916 88%,
-      #B54F1C 100%
-    );
-  min-height: 100vh;
-}
+    header{
+      padding: 28px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
 
-header{
-  padding: 28px 18px;
-  border-bottom: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(199,90,123,.45), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,111,145,.30), transparent 60%),
+        linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
 
-  /* Slightly “calmer” header band */
-  background:
-    radial-gradient(900px 500px at 15% 0%, rgba(129,95,107,.45), transparent 60%),
-    radial-gradient(900px 500px at 85% 10%, rgba(254,169,22,.30), transparent 60%),
-    linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
-  backdrop-filter: blur(6px);
-}
+      backdrop-filter: blur(6px);
+    }
 
     .wrap{ max-width: 980px; margin: 0 auto; }
-    h1{ margin:0 0 6px; font-size: 28px; letter-spacing: .2px; }
+    h1{ margin:0 0 6px; font-size: 28px; }
     p{ margin:0; color: var(--muted); }
 
     main{ padding: 18px; }
@@ -102,10 +98,7 @@ header{
       border: 1px solid rgba(255,255,255,.14);
       padding:10px 12px;
       border-radius: 12px;
-      outline: none;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.10);
     }
-    input::placeholder{ color: rgba(244,241,255,.55); }
 
     /* Cards */
     .grid{
@@ -120,16 +113,17 @@ header{
       border-radius: 16px;
       padding: 14px;
       box-shadow: 0 10px 28px rgba(0,0,0,.25);
-      transition: transform .08s ease, filter .08s ease;
+      transition: .1s;
+      backdrop-filter: blur(6px);
     }
-    .card:hover{
-  transform: translateY(-1px);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,.35),
-    0 0 0 1px rgba(254,169,22,.12),
-    0 0 24px rgba(254,169,22,.10);
-}
 
+    .card:hover{
+      transform: translateY(-1px);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,.35),
+        0 0 0 1px rgba(255,111,145,.14),
+        0 0 28px rgba(255,111,145,.12);
+    }
 
     .meta{
       display:flex;
@@ -141,203 +135,128 @@ header{
     .tag{
       font-size:12px;
       padding:4px 10px;
-      border-radius: 999px;
+      border-radius:999px;
       background: var(--tagbg);
       border: 1px solid var(--tagborder);
-      color: rgba(244,241,255,.92);
-      opacity:.98;
     }
 
-    a{
-      color: var(--accent);
-      text-decoration:none;
-    }
+    a{ color: var(--accent); text-decoration:none; }
     a:hover{ text-decoration: underline; }
-<section class="card" style="margin-top:18px;">
-  <div style="font-weight:800; font-size:18px; margin-bottom:8px;">
-    Discussion & Suggestions
-  </div>
-  <div style="color: var(--muted); margin-bottom:12px;">
-    Share feedback, improvements, or resource ideas. (Sign in with GitHub to comment.)
-  </div>
-
-  <!-- Utterances embedded comments -->
-  <script src="https://utteranc.es/client.js"
-          repo="phillipm2999-ux/Resource-Hub"
-          issue-term="pathname"
-          label="discussion"
-          theme="github-dark"
-          crossorigin="anonymous"
-          async>
-  </script>
-</section>
 
     footer{
       padding: 24px 18px;
-      color: rgba(244,241,255,.68);
+      color: rgba(246,242,255,.68);
       border-top: 1px solid rgba(255,255,255,.10);
-    }
-
-    code{
-      background: rgba(0,0,0,.25);
-      padding: 2px 6px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.10);
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="wrap">
-      <h1>Resource Hub</h1>
-      <p>A place to share helpful links, toolkits, PDFs, and guides.</p>
+<header>
+  <div class="wrap">
+    <h1>Resource Hub</h1>
+    <p>A place to share helpful links, toolkits, PDFs, and guides.</p>
 
-      <!-- Featured image (your repo shows this file is in the ROOT, not /images/) -->
-      <div class="featuredWrap">
-        <figure class="featuredFigure">
-          <img class="featuredImg" src="The_Weight_of_Grief.png" alt="The Weight of Grief visual">
-          <figcaption class="featuredCaption">Grief doesn’t disappear — life grows around it.</figcaption>
-        </figure>
-      </div>
+    <div class="featuredWrap">
+      <figure class="featuredFigure">
+        <img class="featuredImg" src="The_Weight_of_Grief.png">
+        <figcaption class="featuredCaption">
+          Grief doesn’t disappear — life grows around it.
+        </figcaption>
+      </figure>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="wrap">
-    <div class="controls">
-      <input id="search" type="search" placeholder="Search resources..." />
-      <select id="topic"><option value="">All topics</option></select>
-      <select id="type"><option value="">All types</option></select>
-      <select id="audience"><option value="">All audiences</option></select>
+<main class="wrap">
+
+  <section id="grid" class="grid"></section>
+
+  <!-- Discussion Board -->
+  <section class="card" style="margin-top:18px;">
+    <div style="font-weight:800; font-size:18px; margin-bottom:8px;">
+      Discussion & Suggestions
+    </div>
+    <div style="color: var(--muted); margin-bottom:12px;">
+      Share feedback, improvements, or resources to add.
     </div>
 
-    <div id="count" style="color: var(--muted); margin-bottom:10px;"></div>
-    <section id="grid" class="grid"></section>
-  </main>
+    <script src="https://utteranc.es/client.js"
+            repo="phillip2999-ux/resource-hub"
+            issue-term="pathname"
+            label="discussion"
+            theme="github-dark"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </section>
 
-  <footer>
-    <div class="wrap">
-      If you have any suggestions, you can contact the site administrator at ___________.
-    </div>
-  </footer>
+</main>
 
-  <script>
-    // Based on your repo screenshot:
-    // folder: coping-with-death/
-    // pdf:    coping-with-death/gus-grief-story.pdf
-    const GRIEF_FOLDER = "coping-with-death/";
+<footer>
+  <div class="wrap">
+    Resource Hub • Community-informed & always growing
+  </div>
+</footer>
 
-    const resources = [
-      {
-        title: "Relating to Grief",
-        url: GRIEF_FOLDER,
-        topic: ["Grief", "Death"],
-        type: "Collection",
-        audience: "Children",
-        note: "Stories and resources to help children understand death and navigate grief."
-      },
+<script>
+const resources = [
+  {
+    title: "Relating to Grief",
+    url: "coping-with-death/",
+    topic: ["Grief","Death"],
+    type: "Collection",
+    audience: "Children",
+    note: "Stories and resources to help children understand death."
+  },
+  {
+    title: "Gus’s Grief Adventure (PDF)",
+    url: "coping-with-death/gus-grief-story.pdf",
+    topic: ["Grief"],
+    type: "Storybook",
+    audience: "Children"
+  },
+  {
+    title: "Ages and Stages",
+    url: "ages-and-stages/",
+    topic: ["Development"],
+    type: "Collection",
+    audience: "Everyone"
+  },
+  {
+    title: "Divorce & Separation",
+    url: "divorce/",
+    topic: ["Family Change"],
+    type: "Collection",
+    audience: "Caregivers"
+  },
+  {
+    title: "Major Life Changes",
+    url: "major-life-changes/",
+    topic: ["Transitions"],
+    type: "Collection",
+    audience: "Everyone"
+  },
+  {
+    title: "Neurodiversity & Different Ways of Being",
+    url: "neurodiversity/",
+    topic: ["Neurodiversity"],
+    type: "Collection",
+    audience: "Everyone"
+  }
+];
 
-      // Add these folders when you create them (use the exact folder name in the url)
-      {
-        title: "Ages and Stages",
-        url: "ages-and-stages/",
-        topic: ["Development"],
-        type: "Collection",
-        audience: "Everyone",
-        note: "Developmental resources organized by age and stage."
-      },
-      {
-        title: "Divorce & Separation",
-        url: "divorce/",
-        topic: ["Family Change"],
-        type: "Collection",
-        audience: "Caregivers",
-        note: "Supporting children and families through separation and changes in family structure."
-      },
-      {
-        title: "Major Life Changes",
-        url: "major-life-changes/",
-        topic: ["Transitions"],
-        type: "Collection",
-        audience: "Everyone",
-        note: "Moving, school changes, new caregivers, relocation, and other big transitions."
-      },
-      {
-        title: "Neurodiversity & Different Ways of Being",
-        url: "neurodiversity/",
-        topic: ["Neurodiversity", "Inclusion"],
-        type: "Collection",
-        audience: "Everyone",
-        note: "Resources addressing neurodiversity, living and anticipatory grief, developmental differences, and the evolving realities families navigate across the lifespan."
-      }
-       const els = {
-      grid: document.getElementById("grid"),
-      search: document.getElementById("search"),
-      topic: document.getElementById("topic"),
-      type: document.getElementById("type"),
-      audience: document.getElementById("audience"),
-      count: document.getElementById("count")
-    ];
+const grid=document.getElementById("grid");
 
-   
+grid.innerHTML=resources.map(r=>`
+<article class="card">
+  <div style="font-weight:700;">
+    <a href="${r.url}" target="_blank">${r.title}</a>
+  </div>
+  ${r.note?`<div style="margin-top:8px;color:var(--muted);">${r.note}</div>`:""}
+</article>
+`).join("");
+</script>
 
-    function uniq(arr) { return [...new Set(arr)].sort(); }
-
-    function buildFilters() {
-      const topics = uniq(resources.flatMap(r => r.topic || []));
-      const types = uniq(resources.map(r => r.type).filter(Boolean));
-      const audiences = uniq(resources.map(r => r.audience).filter(Boolean));
-      topics.forEach(t => els.topic.append(new Option(t, t)));
-      types.forEach(t => els.type.append(new Option(t, t)));
-      audiences.forEach(a => els.audience.append(new Option(a, a)));
-    }
-
-    function matches(r) {
-      const q = els.search.value.trim().toLowerCase();
-      const topic = els.topic.value;
-      const type = els.type.value;
-      const audience = els.audience.value;
-
-      const text = (r.title + " " + (r.note || "") + " " + (r.topic || []).join(" ")).toLowerCase();
-      if (q && !text.includes(q)) return false;
-      if (topic && !(r.topic || []).includes(topic)) return false;
-      if (type && r.type !== type) return false;
-      if (audience && r.audience !== audience) return false;
-      return true;
-    }
-
-    function render() {
-      const filtered = resources.filter(matches);
-      els.count.textContent = `${filtered.length} resource(s) shown`;
-
-      els.grid.innerHTML = filtered.map(r => `
-        <article class="card">
-          <div style="font-weight:700; font-size:16px; line-height:1.25;">
-            <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
-          </div>
-          ${r.note ? `<div style="margin-top:8px; color: var(--muted);">${r.note}</div>` : ``}
-          <div class="meta">
-            ${r.type ? `<span class="tag">${r.type}</span>` : ``}
-            ${r.audience ? `<span class="tag">${r.audience}</span>` : ``}
-            ${(r.topic || []).map(t => `<span class="tag">${t}</span>`).join("")}
-          </div>
-        </article>
-      `).join("");
-    }
-
-    buildFilters();
-    ["input","change"].forEach(evt => {
-      els.search.addEventListener(evt, render);
-      els.topic.addEventListener(evt, render);
-      els.type.addEventListener(evt, render);
-      els.audience.addEventListener(evt, render);
-    });
-    render();
-  </script>
 </body>
 </html>
-
-
-
-
-
