@@ -84,22 +84,6 @@
       color: var(--muted);
     }
 
-    /* Controls */
-    .controls{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 14px 0 18px;
-    }
-
-    input, select{
-      background: var(--panel2);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,.14);
-      padding:10px 12px;
-      border-radius: 12px;
-    }
-
     /* Cards */
     .grid{
       display:grid;
@@ -125,21 +109,6 @@
         0 0 28px rgba(255,111,145,.12);
     }
 
-    .meta{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:10px;
-    }
-
-    .tag{
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
-      background: var(--tagbg);
-      border: 1px solid var(--tagborder);
-    }
-
     a{ color: var(--accent); text-decoration:none; }
     a:hover{ text-decoration: underline; }
 
@@ -147,6 +116,126 @@
       padding: 24px 18px;
       color: rgba(246,242,255,.68);
       border-top: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* ===== NEW: Support section styles ===== */
+    .supportCard{
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .supportCard:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(800px 420px at 15% 15%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(800px 420px at 85% 25%, rgba(199,90,123,.16), transparent 60%),
+        linear-gradient(135deg, rgba(255,111,145,.08), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+
+    .supportInner{
+      position: relative;
+      display: grid;
+      gap: 14px;
+    }
+
+    .supportTitle{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .supportTitle h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:.2px;
+    }
+
+    .supportBadge{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background: rgba(255,111,145,.12);
+      border:1px solid rgba(255,111,145,.22);
+      color: rgba(246,242,255,.92);
+      white-space:nowrap;
+    }
+
+    .supportLead{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 82ch;
+    }
+
+    .supportGrid{
+      display:grid;
+      gap:12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .miniCard{
+      background: rgba(0,0,0,.14);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .miniCard h3{
+      margin:0 0 6px;
+      font-size: 14px;
+    }
+
+    .miniCard p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.45;
+      font-size: 14px;
+    }
+
+    .steps{
+      margin:10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 14px;
+    }
+
+    .steps li{ margin:6px 0; }
+
+    details.softDetails{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.10);
+    }
+
+    details.softDetails summary{
+      cursor: pointer;
+      color: rgba(246,242,255,.92);
+      font-weight: 700;
+      list-style: none;
+    }
+
+    details.softDetails summary::-webkit-details-marker{ display:none; }
+
+    details.softDetails p{
+      margin:10px 0 0;
+      color: var(--muted);
+      line-height:1.5;
+      font-size: 14px;
+    }
+
+    .supportNote{
+      margin:0;
+      color: rgba(246,242,255,.74);
+      font-size: 13px;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -159,7 +248,7 @@
 
     <div class="featuredWrap">
       <figure class="featuredFigure">
-        <img class="featuredImg" src="The_Weight_of_Grief.png">
+        <img class="featuredImg" src="The_Weight_of_Grief.png" alt="The Weight of Grief visual">
         <figcaption class="featuredCaption">
           Grief doesn’t disappear — life grows around it.
         </figcaption>
@@ -169,6 +258,73 @@
 </header>
 
 <main class="wrap">
+
+  <!-- ===== NEW: Support section (added above folders) ===== -->
+  <section class="card supportCard" style="margin-top:16px; margin-bottom:14px;">
+    <div class="supportInner">
+      <div class="supportTitle">
+        <h2>For parents carrying something heavy</h2>
+        <span class="supportBadge">gentle + practical</span>
+      </div>
+
+      <p class="supportLead">
+        If you’re here because life changed suddenly — a death, diagnosis, separation, a move, or a version of parenting you didn’t expect —
+        you’re not doing it wrong. Grief isn’t only about death. It can be about <em>what was</em>, <em>what might have been</em>, and <em>what you’re holding together right now</em>.
+        This hub is here to offer steady language, simple tools, and reminders that you’re not alone.
+      </p>
+
+      <div class="supportGrid">
+        <div class="miniCard">
+          <h3>Right now: 30-second reset</h3>
+          <p>Try this once — no pressure to “feel better.”</p>
+          <ol class="steps">
+            <li>Put one hand on your chest or belly.</li>
+            <li>Inhale for 4… exhale for 6 (twice).</li>
+            <li>Name 3 things you can see.</li>
+            <li>Tell yourself: “This is hard, and I’m here.”</li>
+          </ol>
+        </div>
+
+        <div class="miniCard">
+          <h3>When grief comes in waves</h3>
+          <p>
+            Hard days can return around milestones, seasons, school changes, birthdays, or “ordinary” moments.
+            That doesn’t mean you’re back at the start — it means love and memory still live close to the surface.
+          </p>
+        </div>
+
+        <div class="miniCard">
+          <h3>If you’re feeling behind</h3>
+          <p>
+            Parenting through grief often looks like “doing the basics” for a while. That counts.
+            Small acts are real care: water, food, a text to someone safe, a 10-minute walk, a quiet minute alone.
+          </p>
+        </div>
+
+        <div class="miniCard">
+          <h3>What kids often need most</h3>
+          <p>
+            Not perfect answers — just honesty, steadiness, and permission to feel.
+            “I don’t know” is okay. “I’m here” is powerful.
+          </p>
+        </div>
+      </div>
+
+      <details class="softDetails">
+        <summary>When it might help to reach out for extra support</summary>
+        <p>
+          If you’re feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
+          If you’re in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
+          For non-urgent support, consider talking with a trusted person, your family doctor, or a counsellor.
+        </p>
+      </details>
+
+      <p class="supportNote">
+        You can come back to this page when you have more capacity. No catching up required.
+      </p>
+    </div>
+  </section>
+  <!-- ===== END Support section ===== -->
 
   <section id="grid" class="grid"></section>
 
@@ -239,20 +395,17 @@ const resources = [
   }
 ];
 
-const grid=document.getElementById("grid");
+const grid = document.getElementById("grid");
 
-grid.innerHTML=resources.map(r=>`
+grid.innerHTML = resources.map(r => `
 <article class="card">
   <div style="font-weight:700;">
-    <a href="${r.url}" target="_blank">${r.title}</a>
+    <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
   </div>
-  ${r.note?`<div style="margin-top:8px;color:var(--muted);">${r.note}</div>`:""}
+  ${r.note ? `<div style="margin-top:8px;color:var(--muted);">${r.note}</div>` : ""}
 </article>
 `).join("");
 </script>
 
 </body>
 </html>
-
-
-
