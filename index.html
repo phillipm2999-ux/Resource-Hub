@@ -118,30 +118,27 @@
       border-top: 1px solid rgba(255,255,255,.10);
     }
 
-    /* ===== NEW: Support section styles ===== */
+    /* ===== Support section styles (expanded) ===== */
     .supportCard{
       padding: 18px;
       position: relative;
       overflow: hidden;
     }
-
     .supportCard:before{
       content:"";
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(800px 420px at 15% 15%, rgba(255,111,145,.18), transparent 60%),
-        radial-gradient(800px 420px at 85% 25%, rgba(199,90,123,.16), transparent 60%),
+        radial-gradient(900px 480px at 15% 15%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(900px 480px at 85% 25%, rgba(199,90,123,.16), transparent 60%),
         linear-gradient(135deg, rgba(255,111,145,.08), rgba(0,0,0,0));
       pointer-events:none;
     }
-
     .supportInner{
       position: relative;
       display: grid;
       gap: 14px;
     }
-
     .supportTitle{
       display:flex;
       align-items:flex-start;
@@ -149,13 +146,11 @@
       gap:12px;
       flex-wrap:wrap;
     }
-
     .supportTitle h2{
       margin:0;
       font-size: 20px;
       letter-spacing:.2px;
     }
-
     .supportBadge{
       font-size:12px;
       padding:4px 10px;
@@ -165,39 +160,33 @@
       color: rgba(246,242,255,.92);
       white-space:nowrap;
     }
-
     .supportLead{
       margin:0;
       color: var(--muted);
       line-height: 1.55;
-      max-width: 82ch;
+      max-width: 90ch;
     }
-
     .supportGrid{
       display:grid;
       gap:12px;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
-
     .miniCard{
       background: rgba(0,0,0,.14);
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 14px;
       padding: 12px;
     }
-
     .miniCard h3{
       margin:0 0 6px;
       font-size: 14px;
     }
-
     .miniCard p{
       margin:0;
       color: var(--muted);
       line-height:1.45;
       font-size: 14px;
     }
-
     .steps{
       margin:10px 0 0;
       padding-left: 18px;
@@ -205,8 +194,51 @@
       line-height:1.55;
       font-size: 14px;
     }
-
     .steps li{ margin:6px 0; }
+
+    /* Quick buttons */
+    .quickRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-start;
+      margin-top: 2px;
+    }
+    .chipBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+      color: rgba(246,242,255,.92);
+      text-decoration:none;
+      font-weight: 800;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
+    }
+    .chipBtn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 22px rgba(255,111,145,.10);
+    }
+    .chipBtn:active{ transform: translateY(0px); }
+
+    /* Callout box */
+    .callout{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
 
     details.softDetails{
       border: 1px solid rgba(255,255,255,.12);
@@ -214,28 +246,62 @@
       padding: 10px 12px;
       background: rgba(0,0,0,.10);
     }
-
     details.softDetails summary{
       cursor: pointer;
       color: rgba(246,242,255,.92);
-      font-weight: 700;
+      font-weight: 800;
       list-style: none;
     }
-
     details.softDetails summary::-webkit-details-marker{ display:none; }
-
     details.softDetails p{
       margin:10px 0 0;
       color: var(--muted);
       line-height:1.5;
       font-size: 14px;
     }
-
     .supportNote{
       margin:0;
       color: rgba(246,242,255,.74);
       font-size: 13px;
       line-height: 1.5;
+    }
+
+    /* Tiny modal */
+    .modalOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal{
+      max-width: 620px;
+      width: 100%;
+      background: rgba(23, 20, 35, .92);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 24px 70px rgba(0,0,0,.60);
+      backdrop-filter: blur(10px);
+    }
+    .modal h3{ margin:0 0 8px; font-size: 16px; }
+    .modal p{ margin:0; color: var(--muted); line-height:1.55; }
+    .modalActions{ display:flex; justify-content:flex-end; gap:10px; margin-top: 14px; flex-wrap:wrap; }
+    .modalClose{
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      color: rgba(246,242,255,.92);
+      cursor:pointer;
+      font-weight: 800;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .chipBtn, .card{ transition:none; }
     }
   </style>
 </head>
@@ -259,7 +325,7 @@
 
 <main class="wrap">
 
-  <!-- ===== NEW: Support section (added above folders) ===== -->
+  <!-- ===== Expanded Support Section ===== -->
   <section class="card supportCard" style="margin-top:16px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
@@ -268,10 +334,16 @@
       </div>
 
       <p class="supportLead">
-        If you’re here because life changed suddenly — a death, diagnosis, separation, a move, or a version of parenting you didn’t expect —
+        If you’re here because life changed suddenly — a death, diagnosis, separation, a move, financial stress, or a version of parenting you didn’t expect —
         you’re not doing it wrong. Grief isn’t only about death. It can be about <em>what was</em>, <em>what might have been</em>, and <em>what you’re holding together right now</em>.
-        This hub is here to offer steady language, simple tools, and reminders that you’re not alone.
+        This hub offers steady language, simple tools, and reminders that you’re not alone.
       </p>
+
+      <div class="quickRow" aria-label="Quick support buttons">
+        <button class="chipBtn" type="button" id="btnWords">🫶 Words for today</button>
+        <button class="chipBtn" type="button" id="btnTalkToKids">🧒 What to say to kids</button>
+        <button class="chipBtn" type="button" id="btnNextStep">🧭 One next step</button>
+      </div>
 
       <div class="supportGrid">
         <div class="miniCard">
@@ -310,12 +382,26 @@
         </div>
       </div>
 
+      <div class="callout">
+        <strong style="color: rgba(246,242,255,.92);">A gentle reminder:</strong>
+        some grief is “living grief” — the ongoing ache of uncertainty, changing needs, or a life that looks different than expected.
+        It still deserves care, support, and language that doesn’t shame you for struggling.
+      </div>
+
+      <details class="softDetails">
+        <summary>Common moments that can hit unexpectedly</summary>
+        <p>
+          Bedtime. School drop-offs. Holidays and birthdays. Firsts (first day without them, first report card after the diagnosis, first visit to a new home).
+          Seeing other families who seem “fine.” Even a smell, song, or photo. Waves don’t mean failure — they’re a normal return of love + meaning.
+        </p>
+      </details>
+
       <details class="softDetails">
         <summary>When it might help to reach out for extra support</summary>
         <p>
           If you’re feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
           If you’re in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
-          For non-urgent support, consider talking with a trusted person, your family doctor, or a counsellor.
+          For non-urgent support, consider talking with a trusted person, your family doctor, a counsellor, or a local community resource.
         </p>
       </details>
 
@@ -324,7 +410,7 @@
       </p>
     </div>
   </section>
-  <!-- ===== END Support section ===== -->
+  <!-- ===== End Support Section ===== -->
 
   <section id="grid" class="grid"></section>
 
@@ -354,6 +440,17 @@
     Resource Hub • Community-informed & always growing
   </div>
 </footer>
+
+<!-- Modal -->
+<div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <h3 id="modalTitle">Support</h3>
+    <p id="modalBody"></p>
+    <div class="modalActions">
+      <button class="modalClose" type="button" id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const resources = [
@@ -396,7 +493,6 @@ const resources = [
 ];
 
 const grid = document.getElementById("grid");
-
 grid.innerHTML = resources.map(r => `
 <article class="card">
   <div style="font-weight:700;">
@@ -405,6 +501,37 @@ grid.innerHTML = resources.map(r => `
   ${r.note ? `<div style="margin-top:8px;color:var(--muted);">${r.note}</div>` : ""}
 </article>
 `).join("");
+
+/* ===== Mini modal helper for the quick buttons ===== */
+const modalOverlay = document.getElementById("modalOverlay");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const modalClose = document.getElementById("modalClose");
+
+function openModal(title, body){
+  modalTitle.textContent = title;
+  modalBody.textContent = body;
+  modalOverlay.style.display = "flex";
+}
+function closeModal(){
+  modalOverlay.style.display = "none";
+}
+
+document.getElementById("btnWords").addEventListener("click", () => {
+  openModal("Words for today", "You’re allowed to have a hard day. You don’t have to do everything — just the next kind thing. Small steps count, even if they’re invisible.");
+});
+
+document.getElementById("btnTalkToKids").addEventListener("click", () => {
+  openModal("What to say to kids", "Try: “Something sad has happened, and it’s okay to have lots of feelings. You can ask me anything. If I don’t know, I’ll tell you the truth — and I’ll stay with you.”");
+});
+
+document.getElementById("btnNextStep").addEventListener("click", () => {
+  openModal("One next step", "Pick one: drink a glass of water, eat something simple, text one safe person, step outside for 2 minutes, or sit with your hand on your chest for 3 slow breaths. Then reassess.");
+});
+
+modalClose.addEventListener("click", closeModal);
+modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
+document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 </script>
 
 </body>
