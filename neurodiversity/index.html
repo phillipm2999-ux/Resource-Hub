@@ -727,7 +727,6 @@ document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(
 /* ===== Support Builder content ===== */
 const languageEl = document.getElementById("language");
 const momentEl = document.getElementById("moment");
-const heroTool = document.getElementById("heroTool");
 
 /* dynamic glow based on selections */
 const MOMENT_GLOWS = {
@@ -751,104 +750,41 @@ momentEl.addEventListener("change", applyGlow);
 languageEl.addEventListener("change", applyGlow);
 applyGlow();
 
-/* ===== NEW: category-specific language guidance + button labels ===== */
-const momentSelect = document.getElementById("moment");
-const btnWords = document.getElementById("btnWords");
-const btnValidate = document.getElementById("btnValidate");
-const btnNext = document.getElementById("btnNext");
-
-const MOMENT_LABELS = {
-  milestones: "Milestones",
-  comparison: "Comparison",
-  exhaustion: "Exhaustion",
-  future: "Future worries",
-  progression: "Progression",
-  money: "Money & barriers",
-  identity: "Identity shift"
+/* ===== NEW: Language profiles (this is what makes the actual sentences change) ===== */
+const LANGUAGE_PROFILES = {
+  ask: {
+    label: "Ask the family what language feels respectful to them — and follow their lead.",
+    cue: "“What words feel respectful to you (and your child) when we talk about this?”"
+  },
+  disability: {
+    label: "Use disability/disabled language and focus on access + barriers (not blame).",
+    cue: "“What barriers are getting in the way right now — and what accommodations would help?”"
+  },
+  diverse: {
+    label: "Use diverse abilities language, centering strengths and support (without denying hard feelings).",
+    cue: "“What helps your child’s strengths show up — and what support makes daily life easier?”"
+  },
+  neurodivergent: {
+    label: "Use neurodivergent/neurodiversity language and center nervous-system needs (sensory, regulation, connection).",
+    cue: "“What helps their nervous system feel safe and supported?”"
+  },
+  difference: {
+    label: "Use developmental differences language that stays clear, respectful, and practical.",
+    cue: "“What are the child’s needs right now — and what’s one realistic support we can add?”"
+  }
 };
 
-function updateButtonLabels(){
-  const key = momentSelect.value;
-  const prefix = MOMENT_LABELS[key] || "Support";
-  btnWords.textContent = `${prefix}: words that don’t harm`;
-  btnValidate.textContent = `${prefix}: validation + meaning`;
-  btnNext.textContent = `${prefix}: one next step`;
-}
-momentSelect.addEventListener("change", updateButtonLabels);
-updateButtonLabels();
-
 function languageLine(){
-  const lang = languageEl.value;
-  const moment = momentEl.value;
-
-  const LINES = {
-    milestones: {
-      ask: "Ask what language feels respectful for the family, then mirror it — milestones can bring “living grief,” and your words should feel safe.",
-      disability: "Use disability/disabled language and focus on access + barriers (not blame): “What barriers are getting in the way right now?”",
-      diverse: "Use diverse abilities language and name strengths + adaptations: “What’s working, and what support would make this easier?”",
-      neurodivergent: "Use neurodivergent/neurodiversity language and center nervous-system needs: “What helps their system feel safe and supported?”",
-      difference: "Use developmental differences language with gentle clarity: “What differences are showing up, and what support fits best right now?”"
-    },
-
-    comparison: {
-      ask: "Ask their preferred language and avoid “fixing” words — comparison is tender; reflect dignity and reduce shame.",
-      disability: "Use disability language and name barriers/ableism without making it personal: “Systems can make this harder than it should be.”",
-      diverse: "Use diverse abilities language that protects worth: “Different needs don’t mean less value.”",
-      neurodivergent: "Use neurodiversity language to reduce stigma: “Different brains develop differently — support should match the person.”",
-      difference: "Use developmental differences language to keep it grounded: “Different pace, different needs — still deserving of respect.”"
-    },
-
-    exhaustion: {
-      ask: "Ask their preferred language, then name the load: “This is heavy work — you shouldn’t be carrying it alone.”",
-      disability: "Use disability language and emphasize respite/support: “Caregiving needs backup — services are part of the plan.”",
-      diverse: "Use diverse abilities language and validate invisible labour: “You’ve been doing a lot of unseen work.”",
-      neurodivergent: "Use neurodiversity language and talk capacity: “When the nervous system is maxed out, rest is a need.”",
-      difference: "Use developmental differences language and highlight practical supports: “Let’s reduce demands and increase support.”"
-    },
-
-    future: {
-      ask: "Ask what language fits best, then bring worry back to one next step — not the whole staircase.",
-      disability: "Use disability language and talk planning + services: “We can plan supports without assuming worst-case.”",
-      diverse: "Use diverse abilities language that keeps hope realistic: “Different path doesn’t mean no future.”",
-      neurodivergent: "Use neurodiversity language and center fit/accommodations: “Support should evolve with the person.”",
-      difference: "Use developmental differences language and keep it concrete: “What’s one plan for the next 3 months?”"
-    },
-
-    progression: {
-      ask: "Ask their preferred language and go extra gentle — loss of skills can be real grief, and words should honor that.",
-      disability: "Use disability language and validate grief without alarm: “This is a real loss — supports can adjust with it.”",
-      diverse: "Use diverse abilities language and hold both truths: “Love and grief can exist together.”",
-      neurodivergent: "Use neurodiversity language and keep it humane: “Needs may change — we keep listening and adapting.”",
-      difference: "Use developmental differences language and reduce blame: “This change isn’t anyone’s fault.”"
-    },
-
-    money: {
-      ask: "Ask preferred language and name the barrier plainly — money stress is real and impacts wellbeing.",
-      disability: "Use disability language and highlight access: “Supports should be easier to reach — not harder.”",
-      diverse: "Use diverse abilities language and validate the strain: “You’re doing a lot with limited resources.”",
-      neurodivergent: "Use neurodiversity language and focus on accommodations: “Support should match needs, not budgets.”",
-      difference: "Use developmental differences language and stay practical: “Let’s do one resource step at a time.”"
-    },
-
-    identity: {
-      ask: "Ask preferred language and honor the role shift — parent + advocate + caregiver is a real identity change.",
-      disability: "Use disability language and name the system load: “Navigating services is real work.”",
-      diverse: "Use diverse abilities language and protect the personhood: “You’re still you inside this new role.”",
-      neurodivergent: "Use neurodiversity language and normalize complexity: “This can be beautiful and hard at the same time.”",
-      difference: "Use developmental differences language and reduce guilt: “Missing your old life doesn’t cancel your love.”"
-    }
-  };
-
-  const GENERAL = {
-    ask: "Ask the family what language feels respectful — then mirror it.",
-    disability: "We’ll use disability/disabled language, centering dignity and access/support needs.",
-    diverse: "We’ll use diverse abilities language, centering strengths and respectful support.",
-    neurodivergent: "We’ll use neurodivergent/neurodiversity language, centering identity, strengths, and accommodations.",
-    difference: "We’ll use developmental differences language, keeping it clear, gentle, and respectful."
-  };
-
-  if(!LINES[moment]) return GENERAL[lang] || GENERAL.ask;
-  return (LINES[moment][lang] || LINES[moment].ask);
+  const v = languageEl.value;
+  return (LANGUAGE_PROFILES[v] && LANGUAGE_PROFILES[v].label)
+    ? LANGUAGE_PROFILES[v].label
+    : LANGUAGE_PROFILES.ask.label;
+}
+function languageCue(){
+  const v = languageEl.value;
+  return (LANGUAGE_PROFILES[v] && LANGUAGE_PROFILES[v].cue)
+    ? LANGUAGE_PROFILES[v].cue
+    : LANGUAGE_PROFILES.ask.cue;
 }
 
 function requireMoment(){
@@ -862,162 +798,509 @@ function requireMoment(){
   return true;
 }
 
+/* ===== NEW: Moments now include language-specific sentences ===== */
+/* If you ever want to tweak wording later: edit only the arrays inside wordsByLang / nextByLang. */
 const MOMENTS = {
   milestones: {
-    words: [
-      "“It makes sense to feel a wave of grief when milestones show up.”",
-      "“Nothing about this means you’re failing — it means you care.”",
-      "“We can hold two truths: love, and sadness about what’s hard.”"
-    ],
-    validate: `
+    validateCore: `
       <p>
         When milestones show up, grief can return — not because you’re “not coping,” but because life keeps asking you to notice the gap
         between <em>what you imagined</em> and <em>what is</em>. That’s a very human pain.
       </p>
     `,
-    next: [
-      "Choose one small support to add this week (one routine, one accommodation, one helper).",
-      "Write one sentence you can repeat when the grief spikes (“This is a wave. It will pass.”).",
-      "Ask: “What would make this 10% easier?” — then do only that."
-    ]
+    wordsByLang: {
+      ask: [
+        "“It makes sense if milestones bring up a wave of grief.”",
+        "“You’re allowed to feel proud and sad at the same time.”",
+        "“This isn’t failure — it’s care meeting a hard reality.”"
+      ],
+      disability: [
+        "“Your child is disabled — and the barriers are real. That’s not your fault.”",
+        "“It makes sense to grieve when access isn’t there (or comes too late).”",
+        "“Let’s name the barrier and match it with an accommodation.”"
+      ],
+      diverse: [
+        "“Your child has diverse abilities — and their pace is still valid.”",
+        "“Milestones can sting; it doesn’t erase the growth you’ve already made.”",
+        "“Let’s focus on supports that help their strengths show up.”"
+      ],
+      neurodivergent: [
+        "“Your child is neurodivergent — different wiring, not a lesser version.”",
+        "“Milestones can bring grief; your nervous system is reacting to a big ‘compare’ moment.”",
+        "“What helps their system feel safe enough to learn and connect?”"
+      ],
+      difference: [
+        "“Developmental differences can mean a different timeline — and that can still be painful.”",
+        "“It’s okay to grieve the ‘expected’ path while supporting the real one.”",
+        "“Let’s choose one practical support for this stage.”"
+      ]
+    },
+    nextByLang: {
+      ask: [
+        "Choose one small support to add this week (one routine, one accommodation, one helper).",
+        "Write one sentence you can repeat when the grief spikes (“This is a wave. It will pass.”).",
+        "Ask: “What would make this 10% easier?” — then do only that."
+      ],
+      disability: [
+        "Name one barrier (school, waitlist, equipment) and one accommodation to request in writing.",
+        "Start a simple “access notes” page: what helps + what harms + what you’re requesting.",
+        "Ask: “Who has the power to change this barrier?” and make one targeted ask."
+      ],
+      diverse: [
+        "Pick one strength to lean on this week (interests, routine, connection) and build around it.",
+        "Choose one “win you can repeat” (a small success you can recreate daily).",
+        "Ask: “What support makes strengths easier to access?” and add one."
+      ],
+      neurodivergent: [
+        "Identify one nervous-system need (sensory, predictability, movement) and meet it once today.",
+        "Adjust one demand: fewer words, more time, visual cue, or a break before meltdown territory.",
+        "Ask: “What helps their regulation?” and make that the priority (before skills)."
+      ],
+      difference: [
+        "Pick one skill or routine to support (not everything at once) and practice it gently for a week.",
+        "Write one clear ‘what helps’ note you can share with school/services.",
+        "Ask: “What’s the smallest next step that’s realistic?” and do that."
+      ]
+    }
   },
+
   comparison: {
-    words: [
-      "“Comparison can steal joy — especially when life feels unfair.”",
-      "“You don’t need to perform ‘fine’ to deserve support.”",
-      "“Your family’s path is real, and it matters.”"
-    ],
-    validate: `
+    validateCore: `
       <p>
         Comparison hits hard because it highlights what’s missing — time, ease, support, rest, predictability.
         It’s okay to name that. It doesn’t make you ungrateful; it makes you honest.
       </p>
     `,
-    next: [
-      "Mute one account / step back from one space that triggers comparison.",
-      "Name one thing you did today that protected your child or your household.",
-      "Reach out to one person who “gets it” (even a short text)."
-    ]
+    wordsByLang: {
+      ask: [
+        "“Comparison can hurt — you’re not wrong for feeling it.”",
+        "“You don’t have to perform ‘fine’ to deserve support.”",
+        "“Your family’s path is real, and it matters.”"
+      ],
+      disability: [
+        "“A lot of this is about access — not effort.”",
+        "“It’s okay to be angry at the barriers, not at yourselves.”",
+        "“Your child’s dignity isn’t measured by ‘typical’ milestones.”"
+      ],
+      diverse: [
+        "“Different abilities mean different paths — that doesn’t reduce your child’s worth.”",
+        "“You can hold gratitude and grief together.”",
+        "“Your family’s strengths still count, even on hard days.”"
+      ],
+      neurodivergent: [
+        "“Neurodivergent brains often get judged by neurotypical expectations — that’s the mismatch.”",
+        "“It makes sense if comparison spikes stress in your body.”",
+        "“Let’s move from ‘What’s wrong?’ to ‘What supports fit this nervous system?’”"
+      ],
+      difference: [
+        "“Developmental differences can make comparisons feel constant — that’s exhausting.”",
+        "“You’re allowed to step back from what hurts.”",
+        "“Support is about fit, not about catching up.”"
+      ]
+    },
+    nextByLang: {
+      ask: [
+        "Mute one account / step back from one space that triggers comparison.",
+        "Name one thing you did today that protected your child or your household.",
+        "Reach out to one person who “gets it” (even a short text)."
+      ],
+      disability: [
+        "Replace one comparison thought with an access question: “What would remove a barrier here?”",
+        "Ask school/services for one accommodation that reduces daily friction.",
+        "Write down one rights-based sentence you can use: “We’re requesting access, not special treatment.”"
+      ],
+      diverse: [
+        "Name one strength you saw today (adaptation, kindness, creativity) and write it down.",
+        "Build one ‘strength moment’ into tomorrow (interest-based activity, safe routine).",
+        "Pick one support person to celebrate small wins with you (text counts)."
+      ],
+      neurodivergent: [
+        "Do a quick nervous-system reset (water, movement, quiet, sensory support) before scrolling/compare loops.",
+        "Choose one expectation to drop for 24 hours (and call it a regulation win).",
+        "Ask: “What environment helps them thrive?” and adjust one thing (lighting, noise, transitions)."
+      ],
+      difference: [
+        "Reduce exposure to comparison triggers for a week (socials, chats, certain events).",
+        "Write one practical ‘this works for us’ plan you can fall back on.",
+        "Pick one goal that is about wellbeing (sleep, connection), not performance."
+      ]
+    }
   },
+
   exhaustion: {
-    words: [
-      "“It’s hard to thrive when you’re carrying too much alone.”",
-      "“Needing help doesn’t mean you’re weak — it means the load is heavy.”",
-      "“You deserve support that matches the reality.”"
-    ],
-    validate: `
+    validateCore: `
       <p>
         Burnout often comes from doing what should be shared work (services, advocacy, appointments, behaviour support, finances)
         without enough backup. The answer isn’t “try harder” — it’s more support.
       </p>
     `,
-    next: [
-      "Pick one task to stop doing for 7 days (even temporarily).",
-      "Ask one professional: “What supports can we add?”",
-      "Build one ‘micro-rest’ into the day (2 minutes counts)."
-    ]
+    wordsByLang: {
+      ask: [
+        "“It’s hard to thrive when you’re carrying too much alone.”",
+        "“Needing help doesn’t mean you’re weak — it means the load is heavy.”",
+        "“You deserve support that matches the reality.”"
+      ],
+      disability: [
+        "“Caregiver fatigue is a systems issue — not a personal weakness.”",
+        "“You shouldn’t have to fight this hard for access.”",
+        "“Let’s talk about accommodations for the family, not just the child.”"
+      ],
+      diverse: [
+        "“You’re doing constant invisible work — that counts.”",
+        "“Support should fit your family’s real day-to-day.”",
+        "“You can’t pour from an empty cup, and that’s not a moral failing.”"
+      ],
+      neurodivergent: [
+        "“When everyone’s nervous system is maxed out, everything feels harder.”",
+        "“Exhaustion is a signal: demands > capacity.”",
+        "“Let’s lower demands and increase regulation supports.”"
+      ],
+      difference: [
+        "“This is a lot of coordination and stress — it makes sense you’re tired.”",
+        "“It’s okay to simplify for a while.”",
+        "“You deserve practical supports, not pressure.”"
+      ]
+    },
+    nextByLang: {
+      ask: [
+        "Pick one task to stop doing for 7 days (even temporarily).",
+        "Ask one professional: “What supports can we add?”",
+        "Build one ‘micro-rest’ into the day (2 minutes counts)."
+      ],
+      disability: [
+        "Write down your top 2 access needs and request one concrete accommodation this week.",
+        "Ask for respite/supports as a right/need, not a favour.",
+        "Document what burnout looks like for your household (to justify services/support)."
+      ],
+      diverse: [
+        "Choose one ‘good enough’ routine and let other tasks be optional for 48 hours.",
+        "Ask someone to take one piece (a call, a form, a pickup).",
+        "Create one tiny “care for the caregiver” ritual (tea, shower, 10 min quiet)."
+      ],
+      neurodivergent: [
+        "Reduce one demand today (shorter outing, fewer words, fewer transitions).",
+        "Add one regulation support (movement break, quiet corner, sensory tool).",
+        "Name capacity honestly: “We have 60% today.” Plan for that."
+      ],
+      difference: [
+        "Pick one area to simplify (meals, bedtime, errands) for one week.",
+        "Make a short list: “What helps / what makes it worse” for professionals.",
+        "Schedule one small recovery block (even 15–20 minutes)."
+      ]
+    }
   },
+
   future: {
-    words: [
-      "“Future worry is a form of love — your brain is trying to protect.”",
-      "“You don’t have to solve the whole future today.”",
-      "“We can take the next right step, not the whole staircase.”"
-    ],
-    validate: `
+    validateCore: `
       <p>
         Future worry can be consuming — services, adulthood, safety, independence, who will care later.
         Naming it matters. Then we bring it back to what’s actionable <em>this month</em>.
       </p>
     `,
-    next: [
-      "List 3 future worries, circle 1 that has a step you can do in 20 minutes.",
-      "Gather one document: supports, diagnoses, school plans, funding info (one folder).",
-      "Ask: “Who can share this load?” and make one ask."
-    ]
+    wordsByLang: {
+      ask: [
+        "“Future worry is a form of love — your brain is trying to protect.”",
+        "“You don’t have to solve the whole future today.”",
+        "“We can take the next right step, not the whole staircase.”"
+      ],
+      disability: [
+        "“Planning matters because systems can be slow — that’s a real stressor.”",
+        "“Your worry makes sense when services have gaps.”",
+        "“Let’s turn fear into one access plan.”"
+      ],
+      diverse: [
+        "“It’s okay to worry and still celebrate who your child is today.”",
+        "“The future doesn’t have to look one way to be meaningful.”",
+        "“We can build supports that protect wellbeing over time.”"
+      ],
+      neurodivergent: [
+        "“Uncertainty can spike the nervous system — your body is reacting, not just your thoughts.”",
+        "“Let’s focus on supports that help regulation and independence in small steps.”",
+        "“Neurodivergent futures can be good futures — with the right fit.”"
+      ],
+      difference: [
+        "“Different development paths make long-term planning feel heavy — that’s understandable.”",
+        "“We can plan in chunks: this month, this term, this year.”",
+        "“Support is about preparation, not prediction.”"
+      ]
+    },
+    nextByLang: {
+      ask: [
+        "List 3 future worries, circle 1 that has a step you can do in 20 minutes.",
+        "Gather one document: supports, diagnoses, school plans, funding info (one folder).",
+        "Ask: “Who can share this load?” and make one ask."
+      ],
+      disability: [
+        "Start one folder: assessments, letters, plans, and service contacts (future-proofing).",
+        "Make one call/email about waitlists or funding timelines (one step only).",
+        "Ask: “What’s the next access milestone?” (e.g., transitions, eligibility, planning)."
+      ],
+      diverse: [
+        "Pick one future value to guide you (safety, belonging, joy, learning) and plan one step.",
+        "Write a short ‘strengths snapshot’ you can share with new professionals.",
+        "Identify one community space where your child can belong (low-pressure)."
+      ],
+      neurodivergent: [
+        "Choose one skill that increases autonomy via regulation (transitions, sensory planning, self-advocacy).",
+        "Create one predictable routine that lowers uncertainty.",
+        "Ask: “What supports reduce shutdown/meltdown risk?” and make that the plan."
+      ],
+      difference: [
+        "Write down 1–2 realistic goals for the next 3 months (not forever).",
+        "Ask school/services what the next transition point is and what supports apply.",
+        "Make one “if/then” plan: “If we hit overwhelm, then we…”"
+      ]
+    }
   },
+
   progression: {
-    words: [
-      "“Losing skills can be a real grief — and it deserves gentle care.”",
-      "“You are allowed to mourn what’s changing.”",
-      "“Love stays, even as things shift.”"
-    ],
-    validate: `
+    validateCore: `
       <p>
         With progression, grief can be ongoing — the “before,” the uncertainty, the anticipatory fear.
         This isn’t dramatic. It’s a real response to real loss.
       </p>
     `,
-    next: [
-      "Create a ‘today’ ritual (one small joy that is repeatable).",
-      "Make space for memory (photos, notes, a story) without forcing positivity.",
-      "Ask for respite or community support — you shouldn’t have to carry this alone."
-    ]
+    wordsByLang: {
+      ask: [
+        "“Losing skills can be a real grief — and it deserves gentle care.”",
+        "“You are allowed to mourn what’s changing.”",
+        "“Love stays, even as things shift.”"
+      ],
+      disability: [
+        "“If disability is changing, it’s okay to grieve and to ask for increased supports.”",
+        "“This is not you ‘not coping’ — it’s more need showing up.”",
+        "“Let’s match services to what’s happening now.”"
+      ],
+      diverse: [
+        "“Even when abilities change, your child’s personhood stays whole.”",
+        "“It’s okay to grieve the losses and still notice the strengths.”",
+        "“Care can be both practical and tender.”"
+      ],
+      neurodivergent: [
+        "“If skills are changing, your nervous system may be living in constant alert.”",
+        "“Regulation needs may shift — and that’s not anyone’s fault.”",
+        "“Let’s protect safety and connection first.”"
+      ],
+      difference: [
+        "“When development changes, it can feel like the ground is moving.”",
+        "“You’re allowed to be sad and still be a steady caregiver.”",
+        "“We can adjust supports to this stage.”"
+      ]
+    },
+    nextByLang: {
+      ask: [
+        "Create a ‘today’ ritual (one small joy that is repeatable).",
+        "Make space for memory (photos, notes, a story) without forcing positivity.",
+        "Ask for respite or community support — you shouldn’t have to carry this alone."
+      ],
+      disability: [
+        "Request a review/update of supports based on changing needs (document examples).",
+        "Identify one safety accommodation to implement this week.",
+        "Ask one professional: “What changes should we plan for in the next 3 months?”"
+      ],
+      diverse: [
+        "Pick one daily joy that’s accessible (music, touch, routine, outdoors).",
+        "Name one strength that remains (connection, humour, comfort cues) and use it.",
+        "Ask for one helper to reduce your load (even once)."
+      ],
+      neurodivergent: [
+        "Lower demands and increase regulation supports during change (fewer transitions, more predictability).",
+        "Identify one sensory comfort strategy to use consistently.",
+        "Choose one connection ritual that signals safety (same words, same timing)."
+      ],
+      difference: [
+        "Write one simple “current needs” list (sleep, mobility, communication, supports).",
+        "Implement one protective routine (meds, check-ins, rest breaks, safety plan).",
+        "Schedule one follow-up with a provider to adjust the plan."
+      ]
+    }
   },
+
   money: {
-    words: [
-      "“Financial stress is real — and it affects mental health.”",
-      "“You deserve systems that don’t make support harder to access.”",
-      "“This isn’t a personal failure; it’s a load issue.”"
-    ],
-    validate: `
+    validateCore: `
       <p>
         Money barriers can deepen grief and isolation — travel, equipment, therapies, time off work.
         It’s okay to name the injustice of it, and still take the next practical step.
       </p>
     `,
-    next: [
-      "Write down the top 2 cost pressures (one page).",
-      "Identify one local resource/benefit to apply for (one application at a time).",
-      "Ask a helper to sit with you while you do the paperwork."
-    ]
+    wordsByLang: {
+      ask: [
+        "“Financial stress is real — and it affects mental health.”",
+        "“You deserve systems that don’t make support harder to access.”",
+        "“This isn’t a personal failure; it’s a load issue.”"
+      ],
+      disability: [
+        "“Disability costs are real — and the system doesn’t always cover what it should.”",
+        "“You’re not asking for extras; you’re asking for access.”",
+        "“It’s okay to name the unfairness out loud.”"
+      ],
+      diverse: [
+        "“Support shouldn’t depend on how much money a family has.”",
+        "“You can be grateful and still overwhelmed by costs.”",
+        "“We can take one step at a time with paperwork and supports.”"
+      ],
+      neurodivergent: [
+        "“Financial stress can dysregulate everyone — it’s not ‘in your head.’”",
+        "“When demands are high, capacity shrinks.”",
+        "“Let’s simplify to protect wellbeing while you navigate supports.”"
+      ],
+      difference: [
+        "“Costs and service barriers can be exhausting and isolating.”",
+        "“You’re allowed to need help with the admin.”",
+        "“We can break this into small steps.”"
+      ]
+    },
+    nextByLang: {
+      ask: [
+        "Write down the top 2 cost pressures (one page).",
+        "Identify one local resource/benefit to apply for (one application at a time).",
+        "Ask a helper to sit with you while you do the paperwork."
+      ],
+      disability: [
+        "List the top 2 disability-related costs + what would reduce them (funding, equipment, coverage).",
+        "Gather 1–2 supporting documents for funding requests (letters/assessments).",
+        "Make one application/call and stop (no marathon paperwork nights)."
+      ],
+      diverse: [
+        "Pick one financial stressor and one “good enough” workaround for this week.",
+        "Ask a trusted person to help you organize forms (stack + checklist).",
+        "Identify one community support that reduces costs (loan programs, subsidies, groups)."
+      ],
+      neurodivergent: [
+        "Do a 10-minute plan: write the next tiny step only (call/email/form section).",
+        "Reduce one demand today to protect capacity while you handle admin.",
+        "Choose one regulation support for yourself before paperwork (movement, water, music)."
+      ],
+      difference: [
+        "Make a simple checklist: what’s needed, who to contact, and one deadline.",
+        "Ask for help with one task (phone calls, printing, scanning).",
+        "Set a timer (15–20 min) and do one chunk only."
+      ]
+    }
   },
+
   identity: {
-    words: [
-      "“It’s hard when parenting becomes caregiving + advocacy + case management.”",
-      "“You can miss the ‘old you’ and still love your child fiercely.”",
-      "“You’re allowed to grieve the role change.”"
-    ],
-    validate: `
+    validateCore: `
       <p>
         The shift from “parent” to “parent + carer” can bring grief, guilt, and isolation — especially when others don’t understand.
         You’re allowed to want your own life back in pieces, too.
       </p>
     `,
-    next: [
-      "Name one identity you miss (friend, student, partner, artist).",
-      "Schedule 20 minutes this week for that identity — protected time.",
-      "Tell someone safe: “I’m carrying a lot. I need support.”"
-    ]
+    wordsByLang: {
+      ask: [
+        "“It’s hard when parenting becomes caregiving + advocacy + case management.”",
+        "“You can miss the ‘old you’ and still love your child fiercely.”",
+        "“You’re allowed to grieve the role change.”"
+      ],
+      disability: [
+        "“Disability often forces families into constant advocacy — that’s labour.”",
+        "“You’re allowed to be tired of systems.”",
+        "“Support should include the caregiver’s wellbeing, not just the child’s needs.”"
+      ],
+      diverse: [
+        "“You’ve become a coordinator, protector, and supporter — that’s a lot.”",
+        "“You don’t lose yourself because you love your child.”",
+        "“Your needs matter in this story.”"
+      ],
+      neurodivergent: [
+        "“Constant mismatch with expectations can wear down your nervous system.”",
+        "“You’re not failing — you’re carrying too many demands.”",
+        "“Let’s protect connection and reduce shame.”"
+      ],
+      difference: [
+        "“Role shifts can be isolating — especially when others don’t get it.”",
+        "“It’s okay to name what you miss.”",
+        "“We can build tiny pieces of you back in.”"
+      ]
+    },
+    nextByLang: {
+      ask: [
+        "Name one identity you miss (friend, student, partner, artist).",
+        "Schedule 20 minutes this week for that identity — protected time.",
+        "Tell someone safe: “I’m carrying a lot. I need support.”"
+      ],
+      disability: [
+        "Choose one advocacy task to pause and one to prioritize (protect your energy).",
+        "Ask one helper to take a systems task (call, email, appointment scheduling).",
+        "Write one boundary sentence: “We need accommodations, and we need rest.”"
+      ],
+      diverse: [
+        "Pick one ‘you’ activity that fits reality (10–20 min) and schedule it.",
+        "Name one thing you’re doing well (even small) and let it count.",
+        "Ask: “What support would help me be a parent, not only a manager?”"
+      ],
+      neurodivergent: [
+        "Lower one demand and replace with one connection moment (short, predictable).",
+        "Do one regulation support for YOU today (movement, quiet, sensory reset).",
+        "Name your capacity: “I have ___% today” and plan around that."
+      ],
+      difference: [
+        "Write a two-line “who I am” reminder (beyond caregiving) and read it daily for a week.",
+        "Plan one small social contact that feels safe (text counts).",
+        "Make one practical request to a support person (specific + time-limited)."
+      ]
+    }
   }
 };
 
+function getMomentPack(momentKey, langKey){
+  const m = MOMENTS[momentKey];
+  const lang = langKey || "ask";
+
+  const words = (m.wordsByLang && m.wordsByLang[lang])
+    ? m.wordsByLang[lang]
+    : (m.wordsByLang && m.wordsByLang.ask ? m.wordsByLang.ask : []);
+
+  const next = (m.nextByLang && m.nextByLang[lang])
+    ? m.nextByLang[lang]
+    : (m.nextByLang && m.nextByLang.ask ? m.nextByLang.ask : []);
+
+  // Validation gets a small “language framing” line so it feels different too
+  const validate = `
+    <p><strong>Language framing:</strong> ${languageLine()}</p>
+    <p style="margin-top:8px;"><em>Anchor question:</em> ${languageCue()}</p>
+    ${m.validateCore}
+    <p style="margin-top:10px;"><strong style="color: rgba(238,243,255,.92);">Remember:</strong> feelings aren’t a problem to solve — they’re information.</p>
+  `;
+
+  return { words, next, validate };
+}
+
+/* ===== Button handlers ===== */
 document.getElementById("btnWords").addEventListener("click", () => {
   if(!requireMoment()) return;
-  const m = MOMENTS[momentEl.value];
+  const key = momentEl.value;
+  const lang = languageEl.value;
+  const pack = getMomentPack(key, lang);
+
   openModal("Words that don’t harm", `
     <p><strong>Language note:</strong> ${languageLine()}</p>
+    <p style="margin-top:8px;"><em>Anchor question:</em> ${languageCue()}</p>
     <p style="margin-top:10px;">Try one sentence at a time:</p>
-    <ul>${m.words.map(x=>`<li>${x}</li>`).join("")}</ul>
+    <ul>${pack.words.map(x=>`<li>${x}</li>`).join("")}</ul>
   `);
 });
 
 document.getElementById("btnValidate").addEventListener("click", () => {
   if(!requireMoment()) return;
-  const m = MOMENTS[momentEl.value];
-  openModal("Validation + meaning", `
-    <p><strong>Language note:</strong> ${languageLine()}</p>
-    ${m.validate}
-    <p style="margin-top:10px;"><strong style="color: rgba(238,243,255,.92);">Remember:</strong> feelings aren’t a problem to solve — they’re information.</p>
-  `);
+  const key = momentEl.value;
+  const lang = languageEl.value;
+  const pack = getMomentPack(key, lang);
+
+  openModal("Validation + meaning", pack.validate);
 });
 
 document.getElementById("btnNext").addEventListener("click", () => {
   if(!requireMoment()) return;
-  const m = MOMENTS[momentEl.value];
+  const key = momentEl.value;
+  const lang = languageEl.value;
+  const pack = getMomentPack(key, lang);
+
   openModal("One next step", `
     <p><strong>Language note:</strong> ${languageLine()}</p>
+    <p style="margin-top:8px;"><em>Anchor question:</em> ${languageCue()}</p>
     <p style="margin-top:10px;">Pick just one:</p>
-    <ol>${m.next.map(x=>`<li>${x}</li>`).join("")}</ol>
+    <ol>${pack.next.map(x=>`<li>${x}</li>`).join("")}</ol>
   `);
 });
 </script>
