@@ -1,1 +1,1017 @@
-Add Ages and Stages page
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ages and Stages</title>
+
+  <style>
+    /* ===== Ages & Stages — Grief Sunrise (Pink/Red) ===== */
+    :root{
+      --text:#f6f2ff;
+      --muted: rgba(246,242,255,.80);
+      --faint: rgba(246,242,255,.62);
+
+      --panel: rgba(23, 20, 35, .72);
+      --panel2: rgba(27, 23, 42, .78);
+      --border: rgba(255,255,255,.14);
+
+      --accent: #ff6f91;
+      --accent2:#ff4f6d;
+      --accent3:#c75a7b;
+
+      --tagbg: rgba(255,111,145,.14);
+      --tagborder: rgba(255,111,145,.22);
+
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+
+      background:
+        radial-gradient(900px 600px at 20% 0%, rgba(199,90,123,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 15%, rgba(255,111,145,.25), transparent 55%),
+        linear-gradient(180deg,
+          #423A50 0%,
+          #53455D 20%,
+          #815F6B 42%,
+          #B67967 62%,
+          #c75a7b 78%,
+          #ff6f91 88%,
+          #ff4f6d 100%
+        );
+    }
+
+    header{
+      padding: 30px 18px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(199,90,123,.45), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,111,145,.30), transparent 60%),
+        linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
+      backdrop-filter: blur(6px);
+    }
+
+    .wrap{ max-width: 1000px; margin: 0 auto; }
+    h1{ margin:0 0 8px; font-size: 34px; letter-spacing:.2px; line-height:1.1; }
+    p{ margin:0; color: var(--muted); line-height: 1.55; }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    a{ color: var(--accent); text-decoration:none; }
+    a:hover{ text-decoration: underline; }
+
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,111,145,.10);
+      border:1px solid rgba(255,111,145,.18);
+      color: rgba(246,242,255,.92);
+      white-space:nowrap;
+    }
+
+    main{ padding: 18px; }
+
+    .grid2{
+      display:grid;
+      gap:14px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .grid2{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .sectionTitle{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:baseline;
+      margin-bottom: 10px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .sectionTitle .hint{
+      color: var(--faint);
+      font-size: 13px;
+    }
+
+    /* ===== Cool part: "Age Compass" ===== */
+    .compass{
+      position: relative;
+      overflow:hidden;
+    }
+    .compass:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 260px at 15% 10%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(520px 260px at 85% 0%, rgba(199,90,123,.12), transparent 60%),
+        linear-gradient(135deg, rgba(255,111,145,.06), rgba(0,0,0,0));
+      pointer-events:none;
+      opacity:.9;
+    }
+    .compassInner{ position:relative; display:grid; gap:12px; }
+
+    .row{
+      display:grid;
+      gap:12px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 680px){
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    label{
+      display:block;
+      font-size: 13px;
+      color: rgba(246,242,255,.86);
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    select, input[type="search"]{
+      width:100%;
+      background: var(--panel2);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline:none;
+    }
+    input[type="search"]::placeholder{ color: rgba(246,242,255,.55); }
+
+    .micro{
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .callout{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .tag{
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      background: var(--tagbg);
+      border: 1px solid var(--tagborder);
+      color: rgba(246,242,255,.92);
+    }
+
+    /* ===== Resource cards ===== */
+    .resources{
+      display:grid;
+      gap:12px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 12px;
+    }
+    .resourceCard{
+      transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
+    }
+    .resourceCard:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow:
+        0 22px 60px rgba(0,0,0,.60),
+        0 0 0 1px rgba(255,111,145,.16),
+        0 0 30px rgba(255,111,145,.12);
+    }
+    .resourceTitle{
+      font-weight:900;
+      font-size: 16px;
+      margin:0;
+      line-height:1.25;
+    }
+    .resourceNote{
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 14px;
+    }
+    .resourceLink{
+      color: var(--accent);
+      font-weight: 900;
+      text-decoration:none;
+    }
+
+    details.soft{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.10);
+    }
+    details.soft summary{
+      cursor:pointer;
+      font-weight: 900;
+      color: rgba(246,242,255,.95);
+      list-style:none;
+    }
+    details.soft summary::-webkit-details-marker{ display:none; }
+    details.soft .inside{
+      margin-top: 10px;
+      color: var(--muted);
+      line-height:1.65;
+      font-size: 14px;
+    }
+    details.soft ul{
+      margin:10px 0 0;
+      padding-left: 18px;
+    }
+    details.soft li{ margin:6px 0; }
+
+    .btnRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+      color: rgba(246,242,255,.92);
+      font-weight: 900;
+      text-decoration:none;
+      cursor:pointer;
+      transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
+      user-select:none;
+      font-size: 13px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 24px rgba(255,111,145,.10);
+    }
+    .btn:active{ transform: translateY(0px); }
+
+    /* ===== Modal (for the “cool part”) ===== */
+    .modalOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal{
+      max-width: 760px;
+      width: 100%;
+      background: rgba(23, 20, 35, .94);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 26px 90px rgba(0,0,0,.70);
+      backdrop-filter: blur(10px);
+    }
+    .modalHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .modal h3{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .modal p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+    }
+    .modal ul, .modal ol{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+    }
+    .modal li{ margin:6px 0; }
+
+    .modalActions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top: 14px;
+      flex-wrap:wrap;
+    }
+    .modalClose{
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      color: rgba(246,242,255,.92);
+      cursor:pointer;
+      font-weight: 900;
+    }
+
+    footer{
+      padding: 22px 18px 34px;
+      color: rgba(246,242,255,.68);
+      border-top: 1px solid rgba(255,255,255,.10);
+      margin-top: 26px;
+    }
+
+    code{
+      background: rgba(0,0,0,.20);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(246,242,255,.92);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .btn, .resourceCard{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <h1>Ages and Stages</h1>
+    <p>
+      Developmental resources organized by age and stage — what children may understand, what they might feel,
+      and ways caregivers can respond with steadiness and care.
+    </p>
+
+    <div class="topbar">
+      <div><a href="../">← Back to Resource Hub</a></div>
+      <span class="pill">Development-informed • Practical • Gentle</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid2">
+
+    <!-- LEFT: The cool "Age Compass" -->
+    <section class="card compass">
+      <div class="compassInner">
+        <div class="sectionTitle">
+          <h2>Age Compass</h2>
+          <div class="hint">Pick an age/stage — get quick guidance</div>
+        </div>
+
+        <p class="micro">
+          Kids don’t grieve “on a timeline.” Understanding changes with development, experience, and the supports around them.
+          This tool gives a quick starting point for language and expectations.
+        </p>
+
+        <div class="row">
+          <div>
+            <label for="stage">Age / Stage</label>
+            <select id="stage">
+              <option value="0">Choose a stage…</option>
+              <option value="early">Early childhood (0–5)</option>
+              <option value="middle">School-age (6–12)</option>
+              <option value="teen">Teens (13–18)</option>
+              <option value="youngadult">Emerging adults (18–25)</option>
+              <option value="caregiver">Caregivers (all ages)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="topic">Focus</label>
+            <select id="topic">
+              <option value="0">Choose a focus…</option>
+              <option value="death">Death & grief</option>
+              <option value="change">Family change (divorce / separation)</option>
+              <option value="life">Major life transitions</option>
+              <option value="neuro">Neurodiversity & different ways of being</option>
+              <option value="emotion">Big feelings & regulation</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btnRow">
+          <button class="btn" type="button" id="btnGuidance">Show guidance</button>
+          <button class="btn" type="button" id="btnWords">Words you can use</button>
+          <button class="btn" type="button" id="btnDont">What to avoid</button>
+        </div>
+
+        <div class="callout">
+          <strong style="color: rgba(246,242,255,.92);">Reminder:</strong>
+          Sometimes, while carrying the heavy things, we don’t see how far we’ve come.
+        </div>
+
+        <details class="soft">
+          <summary>How to use this page with your group’s resources</summary>
+          <div class="inside">
+            <p style="margin:0;">
+              Later, your classmates can add links in the resource list below.
+              The Age Compass is meant to be a quick, practical companion — it won’t replace professional care,
+              but it can make the next conversation feel less overwhelming.
+            </p>
+            <ul>
+              <li>Start with one stage + one focus.</li>
+              <li>Choose a single sentence you can actually say out loud.</li>
+              <li>Return later — learning happens in loops, not lines.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- RIGHT: Resource list (you’ll fill later) -->
+    <section class="card">
+      <div class="sectionTitle">
+        <h2>Resources (coming soon)</h2>
+        <div class="hint">Your group will add these</div>
+      </div>
+
+      <p class="micro">
+        Add links, toolkits, PDFs, activities, and readings here. If you’d like, you can tag each resource by
+        age group, topic, and audience.
+      </p>
+
+      <label for="search" style="margin-top:12px;">Search resources</label>
+      <input id="search" type="search" placeholder="Search (ex: toddlers, attachment, school, anxiety, bedtime)…" />
+
+      <div id="resourceGrid" class="resources"></div>
+
+      <p class="micro" style="margin-top:12px;">
+        To add resources later: edit the <code>resources</code> list inside this file.
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Ages and Stages • Resource Hub</div>
+</footer>
+
+<!-- Modal -->
+<div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modalHead">
+      <h3 id="modalTitle">Guidance</h3>
+      <button class="modalClose" type="button" id="closeTop">Close</button>
+    </div>
+    <div id="modalBody"></div>
+    <div class="modalActions">
+      <button class="modalClose" type="button" id="closeBottom">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== Resources (your classmates will add these later) ===== */
+const resources = [
+  // Example placeholder — delete these when you start adding real links.
+  {
+    title: "Placeholder: Add your first resource here",
+    url: "https://example.com",
+    tags: ["Example", "School-age (6–12)", "Big feelings"],
+    note: "Replace this with your group’s resources (link + 1–2 line description)."
+  }
+];
+
+/* Render resources */
+const resourceGrid = document.getElementById("resourceGrid");
+const search = document.getElementById("search");
+
+function renderResources(){
+  const q = search.value.trim().toLowerCase();
+  const filtered = resources.filter(r=>{
+    const text = (r.title + " " + (r.note||"") + " " + (r.tags||[]).join(" ")).toLowerCase();
+    return !q || text.includes(q);
+  });
+
+  resourceGrid.innerHTML = filtered.map(r => `
+    <article class="card resourceCard">
+      <p class="resourceTitle">
+        <a class="resourceLink" href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
+      </p>
+      ${r.note ? `<p class="resourceNote">${r.note}</p>` : ``}
+      <div class="meta">
+        ${(r.tags||[]).map(t => `<span class="tag">${t}</span>`).join("")}
+      </div>
+    </article>
+  `).join("");
+}
+search.addEventListener("input", renderResources);
+renderResources();
+
+/* ===== Cool part: Age Compass guidance ===== */
+const stageEl = document.getElementById("stage");
+const topicEl = document.getElementById("topic");
+
+/* Modal helpers */
+const modalOverlay = document.getElementById("modalOverlay");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const closeTop = document.getElementById("closeTop");
+const closeBottom = document.getElementById("closeBottom");
+
+function openModal(title, html){
+  modalTitle.textContent = title;
+  modalBody.innerHTML = html;
+  modalOverlay.style.display = "flex";
+}
+function closeModal(){ modalOverlay.style.display = "none"; }
+
+closeTop.addEventListener("click", closeModal);
+closeBottom.addEventListener("click", closeModal);
+modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
+document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+function labelStage(v){
+  return ({
+    early:"Early childhood (0–5)",
+    middle:"School-age (6–12)",
+    teen:"Teens (13–18)",
+    youngadult:"Emerging adults (18–25)",
+    caregiver:"Caregivers (all ages)"
+  })[v] || "Choose a stage";
+}
+function labelTopic(v){
+  return ({
+    death:"Death & grief",
+    change:"Family change (divorce / separation)",
+    life:"Major life transitions",
+    neuro:"Neurodiversity & different ways of being",
+    emotion:"Big feelings & regulation"
+  })[v] || "Choose a focus";
+}
+
+/* Guidance library (hand-built, simple + accurate-ish) */
+const GUIDANCE = {
+  early: {
+    death: {
+      do: [
+        "Use simple, concrete words (dead/died). Avoid euphemisms like “went to sleep.”",
+        "Expect repeating questions — it’s how they process.",
+        "Offer reassurance about who will care for them and what stays the same."
+      ],
+      words: [
+        "“Their body stopped working and they can’t come back.”",
+        "“You didn’t cause this. Nothing you thought or did made it happen.”",
+        "“We can feel sad and still be safe together.”"
+      ],
+      avoid: [
+        "“They went to sleep.” (can create sleep fear)",
+        "“Be strong.” (can shut down feelings)",
+        "Overloading with detail"
+      ]
+    },
+    change: {
+      do: [
+        "Give predictable routines and clear transitions.",
+        "Use one-sentence explanations and repeat them the same way.",
+        "Remind them: it’s not their fault."
+      ],
+      words: [
+        "“Grown-ups are making changes. You are loved and cared for.”",
+        "“You can love both homes/both parents.”"
+      ],
+      avoid: [
+        "Asking them to pick sides",
+        "Adult conflict details"
+      ]
+    },
+    life: {
+      do: [
+        "Name what will happen today and tomorrow (short time horizon).",
+        "Use visuals (calendar, picture schedule).",
+        "Offer choices they can manage (two options)."
+      ],
+      words: [
+        "“First we do __, then __.”",
+        "“It’s okay to miss the old way and still try the new way.”"
+      ],
+      avoid: [
+        "Long explanations",
+        "“You’re fine.”"
+      ]
+    },
+    neuro: {
+      do: [
+        "Focus on strengths and needs without shame.",
+        "Explain differences as “different ways of being.”",
+        "Support sensory needs proactively."
+      ],
+      words: [
+        "“Your brain works in its own way. We’ll figure out what helps.”",
+        "“Needing support doesn’t mean you’re broken.”"
+      ],
+      avoid: [
+        "Comparisons to other kids",
+        "Forcing eye contact or “calm body” without supports"
+      ]
+    },
+    emotion: {
+      do: [
+        "Co-regulate first (your calm helps their calm).",
+        "Name the feeling simply; offer a body-based tool.",
+        "Repair after the storm (connection matters)."
+      ],
+      words: [
+        "“Your feeling is big. I’m right here.”",
+        "“Let’s do two slow breaths together.”"
+      ],
+      avoid: [
+        "Lectures during meltdown",
+        "Threats as regulation"
+      ]
+    }
+  },
+
+  middle: {
+    death: {
+      do: [
+        "They understand more permanence; they may worry about who’s next.",
+        "Invite questions; answer honestly with what you know.",
+        "Expect grief to show as irritability, stomach aches, or school changes."
+      ],
+      words: [
+        "“You can ask me anything — even the scary questions.”",
+        "“It’s normal for grief to come back in waves.”"
+      ],
+      avoid: [
+        "“Don’t cry.”",
+        "Promising things you can’t guarantee"
+      ]
+    },
+    change: {
+      do: [
+        "Validate mixed feelings (relief, anger, sadness).",
+        "Keep them out of messenger roles.",
+        "Support peer connection + school stability."
+      ],
+      words: [
+        "“You don’t have to choose a side.”",
+        "“Adult problems are not your job to solve.”"
+      ],
+      avoid: [
+        "Using them as emotional support",
+        "Bad-mouthing the other parent"
+      ]
+    },
+    life: {
+      do: [
+        "Give them a role that’s meaningful but not heavy.",
+        "Offer “control points” (choose bedding, choose route, choose packing order).",
+        "Normalize grief for old routines/friends."
+      ],
+      words: [
+        "“Missing the old place makes sense.”",
+        "“We can keep some rituals the same.”"
+      ],
+      avoid: [
+        "Minimizing loss",
+        "Rushing adjustment"
+      ]
+    },
+    neuro: {
+      do: [
+        "Name strengths; plan supports for executive function and social load.",
+        "Expect shutdowns after masking (after school).",
+        "Build self-advocacy language."
+      ],
+      words: [
+        "“What helps your brain feel steady at school?”",
+        "“Needing breaks is a skill, not a problem.”"
+      ],
+      avoid: [
+        "“Try harder.”",
+        "Comparisons to siblings/peers"
+      ]
+    },
+    emotion: {
+      do: [
+        "Teach “name it to tame it”: label feelings + body clues.",
+        "Use short tools: breathing, cold water, movement.",
+        "Debrief later, not in the moment."
+      ],
+      words: [
+        "“What is your body telling you?”",
+        "“Let’s pick one tool for right now.”"
+      ],
+      avoid: [
+        "Shaming reactions",
+        "Interrogating in the middle of distress"
+      ]
+    }
+  },
+
+  teen: {
+    death: {
+      do: [
+        "They may protect you by acting ‘fine’ or pulling away.",
+        "Offer choices: talk, text, walk, music — connection without pressure.",
+        "Support grief + identity changes; watch for risky coping."
+      ],
+      words: [
+        "“You don’t have to talk, but you don’t have to be alone.”",
+        "“I can sit with you, even in silence.”"
+      ],
+      avoid: [
+        "Forcing disclosure",
+        "Over-monitoring without relationship"
+      ]
+    },
+    change: {
+      do: [
+        "Acknowledge anger and fairness concerns without defensiveness.",
+        "Let them have privacy and autonomy where possible.",
+        "Offer practical supports (rides, plans, safe adults)."
+      ],
+      words: [
+        "“This shouldn’t be your burden.”",
+        "“What would make this week 5% easier?”"
+      ],
+      avoid: [
+        "Making them the confidant",
+        "Weaponizing ‘respect’"
+      ]
+    },
+    life: {
+      do: [
+        "Expect grief for belonging (friends, routines, identity).",
+        "Invite them to shape the transition (decorate, plan, choose rituals).",
+        "Keep one anchor steady (team, hobby, job, friend)."
+      ],
+      words: [
+        "“You’re allowed to miss it and still move forward.”",
+        "“Let’s keep one thing consistent.”"
+      ],
+      avoid: [
+        "“It’s not a big deal.”",
+        "Threats as motivation"
+      ]
+    },
+    neuro: {
+      do: [
+        "Support self-understanding (not labels as limits).",
+        "Plan for sensory/social burnout and executive function load.",
+        "Build advocacy: accommodations, scripts, boundaries."
+      ],
+      words: [
+        "“What drains you? What restores you?”",
+        "“Supports are not special treatment — they’re access.”"
+      ],
+      avoid: [
+        "Assuming ‘attitude’ when it’s overload",
+        "Punishing coping differences"
+      ]
+    },
+    emotion: {
+      do: [
+        "Validate first; problem-solve second.",
+        "Offer tools that respect dignity: movement, music, shower, notes app.",
+        "Name the cycle: stress → body → reaction → repair."
+      ],
+      words: [
+        "“I believe you.”",
+        "“Do you want comfort or solutions right now?”"
+      ],
+      avoid: [
+        "Debating feelings",
+        "Public correction during distress"
+      ]
+    }
+  },
+
+  youngadult: {
+    death: {
+      do: [
+        "Grief may collide with adult roles (work, school, caregiving).",
+        "Normalize waves; encourage flexible supports and check-ins.",
+        "Offer help with practical tasks."
+      ],
+      words: [
+        "“You don’t have to carry this alone.”",
+        "“What would support look like this week?”"
+      ],
+      avoid: [
+        "Assuming ‘they’re fine’ because they’re older",
+        "Minimizing functional struggles"
+      ]
+    },
+    change: {
+      do: [
+        "Acknowledge loyalty binds and identity shifts.",
+        "Encourage boundaries that protect mental health.",
+        "Support finances/housing planning if needed."
+      ],
+      words: [
+        "“You’re allowed to set boundaries and still love people.”"
+      ],
+      avoid: [
+        "Pressuring reconciliation",
+        "Invalidating mixed feelings"
+      ]
+    },
+    life: {
+      do: [
+        "Help them name the loss inside the change (community, stability, plans).",
+        "Support routines and social connection.",
+        "Encourage professional supports if stuck/overwhelmed."
+      ],
+      words: [
+        "“It makes sense this is harder than it looks.”"
+      ],
+      avoid: [
+        "“Just be grateful.”"
+      ]
+    },
+    neuro: {
+      do: [
+        "Support accommodations in work/school.",
+        "Normalize burnout recovery and sensory needs.",
+        "Build self-advocacy scripts."
+      ],
+      words: [
+        "“What helps you access the day?”"
+      ],
+      avoid: [
+        "Shaming support needs"
+      ]
+    },
+    emotion: {
+      do: [
+        "Focus on sustainable coping and self-compassion.",
+        "Encourage repair conversations, not perfection.",
+        "Build a plan for hard days."
+      ],
+      words: [
+        "“One next step is enough.”"
+      ],
+      avoid: [
+        "All-or-nothing thinking"
+      ]
+    }
+  },
+
+  caregiver: {
+    death: {
+      do: [
+        "Kids read your nervous system more than your words.",
+        "Use honest, simple language; repeat it consistently.",
+        "Expect re-grieving at new developmental stages."
+      ],
+      words: [
+        "“I don’t have all the answers, but I’ll stay with you.”"
+      ],
+      avoid: [
+        "Over-explaining",
+        "Avoiding the topic completely"
+      ]
+    },
+    change: {
+      do: [
+        "Keep adult conflict adult-sized.",
+        "Create stable routines and predictable transitions.",
+        "Support child’s relationship needs safely."
+      ],
+      words: [
+        "“This is not your fault.”"
+      ],
+      avoid: [
+        "Triangulation"
+      ]
+    },
+    life: {
+      do: [
+        "Name the loss inside the change.",
+        "Create anchors: one ritual, one safe person, one steady routine.",
+        "Expect adjustment to be non-linear."
+      ],
+      words: [
+        "“We can miss the old and still build the new.”"
+      ],
+      avoid: [
+        "Rushing ‘closure’"
+      ]
+    },
+    neuro: {
+      do: [
+        "Support needs without shame; celebrate strengths.",
+        "Normalize living/anticipatory grief without blaming anyone.",
+        "Build a team: school, health care, community supports."
+      ],
+      words: [
+        "“Your child isn’t a problem to solve — they’re a person to understand.”"
+      ],
+      avoid: [
+        "Comparison traps"
+      ]
+    },
+    emotion: {
+      do: [
+        "Co-regulation first; teaching second.",
+        "Repair matters more than perfect reactions.",
+        "Measure progress in tiny wins."
+      ],
+      words: [
+        "“This is hard, and we can do the next step.”"
+      ],
+      avoid: [
+        "Shaming yourself/your child"
+      ]
+    }
+  }
+};
+
+function getPack(){
+  const stage = stageEl.value;
+  const topic = topicEl.value;
+  if(!GUIDANCE[stage] || !GUIDANCE[stage][topic]) return null;
+  return GUIDANCE[stage][topic];
+}
+
+function requireSelection(){
+  if(stageEl.value === "0" || topicEl.value === "0"){
+    openModal("Pick a stage + focus", `
+      <p>Please choose an <strong>Age / Stage</strong> and a <strong>Focus</strong> first.</p>
+      <p style="margin-top:8px;">This tool is meant to give you a quick “starting script” and expectations you can actually use.</p>
+    `);
+    return false;
+  }
+  return true;
+}
+
+document.getElementById("btnGuidance").addEventListener("click", () => {
+  if(!requireSelection()) return;
+  const pack = getPack();
+  openModal(`${labelStage(stageEl.value)} • ${labelTopic(topicEl.value)}`, `
+    <p><strong>Helpful approaches</strong></p>
+    <ul>${pack.do.map(x=>`<li>${x}</li>`).join("")}</ul>
+  `);
+});
+
+document.getElementById("btnWords").addEventListener("click", () => {
+  if(!requireSelection()) return;
+  const pack = getPack();
+  openModal("Words you can use", `
+    <p>Try a sentence that feels possible to say out loud:</p>
+    <ul>${pack.words.map(x=>`<li>${x}</li>`).join("")}</ul>
+  `);
+});
+
+document.getElementById("btnDont").addEventListener("click", () => {
+  if(!requireSelection()) return;
+  const pack = getPack();
+  openModal("What to avoid (and why)", `
+    <p>These can accidentally increase fear, shame, or confusion:</p>
+    <ul>${pack.avoid.map(x=>`<li>${x}</li>`).join("")}</ul>
+  `);
+});
+</script>
+</body>
+</html>
