@@ -45,17 +45,35 @@
 
     .wrap{ max-width: 1040px; margin: 0 auto; padding: 0 18px; }
 
+    /* IMPORTANT FIX:
+       Header is no longer sticky. Only the small nav strip is sticky.
+       This prevents the main page from sliding underneath the hero blocks.
+    */
     header{
-      padding: 28px 0 18px;
+      padding: 14px 0 18px;
       border-bottom: 1px solid rgba(255,255,255,.10);
       background:
         radial-gradient(900px 500px at 16% 0%, rgba(82,214,201,.18), transparent 60%),
         radial-gradient(900px 500px at 86% 8%, rgba(47,180,255,.14), transparent 60%),
         linear-gradient(180deg, rgba(7,22,26,.86), rgba(7,22,26,.60));
       backdrop-filter: blur(8px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sticky ONLY the top row (back + pills) */
+    .stickyNav{
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 50;
+      padding: 12px 0;
+      margin-bottom: 10px;
+      background:
+        radial-gradient(900px 500px at 16% 0%, rgba(82,214,201,.14), transparent 60%),
+        radial-gradient(900px 500px at 86% 8%, rgba(47,180,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(7,22,26,.92), rgba(7,22,26,.55));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
     .topRow{
@@ -426,7 +444,9 @@
 </head>
 
 <body>
-<header>
+
+<!-- Sticky nav ONLY -->
+<div class="stickyNav">
   <div class="wrap">
     <div class="topRow">
       <div class="crumb"><a href="../">← Back to Resource Hub</a></div>
@@ -436,7 +456,11 @@
         <span class="pill">kids + teens + caregivers</span>
       </div>
     </div>
+  </div>
+</div>
 
+<header>
+  <div class="wrap">
     <h1>Divorce & Separation</h1>
     <p class="sub">
       This page is for families living through separation, divorce, and the changes that follow.
@@ -588,7 +612,6 @@
     </section>
   </div>
 
-  <!-- Optional discussion (same tool you used on main) -->
   <section class="card" style="margin-top:16px;">
     <h2 style="margin-bottom:8px;">Discussion & Suggestions</h2>
     <p style="color:var(--muted); margin:0 0 12px;">
@@ -612,7 +635,6 @@
   </div>
 </footer>
 
-<!-- Modal -->
 <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div class="modalHead">
@@ -627,7 +649,6 @@
 </div>
 
 <script>
-  /* ===== Resource placeholders you can edit later ===== */
   const DIVORCE_RESOURCES = [
     { title: "Placeholder: Kid-friendly storybook", desc: "Add a PDF or external link here.", url: "#" },
     { title: "Placeholder: Co-parenting communication tool", desc: "Add your classmates’ handout/toolkit link here.", url: "#" },
@@ -647,7 +668,6 @@
     </div>
   `).join("");
 
-  /* ===== Tabs ===== */
   const tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
   const panels = Array.from(document.querySelectorAll("[data-panel]"));
 
@@ -655,11 +675,9 @@
     tabButtons.forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === key)));
     panels.forEach(p => p.setAttribute("data-open", String(p.dataset.panel === key)));
   }
-
   tabButtons.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
 
-  /* ===== Modal content ===== */
-  const MODALS = {
+  const MODALS = { /* unchanged from your version */ 
     script_kids: {
       title: "What to say to kids (simple + steady)",
       html: `
