@@ -6,269 +6,372 @@
   <title>Major Life Changes</title>
 
   <style>
-    /* ===== Major Life Changes — Grief Sunrise (Pink/Red) ===== */
+    /* ===== Major Life Changes — Aurora Calm (distinct palette) =====
+       Not grief pink/red. Not divorce teal. Not neuro (your separate scheme).
+       Vibe: grounded midnight + aurora greens + lavender.
+    */
     :root{
-      --text:#f6f2ff;
-      --muted: rgba(246,242,255,.80);
-      --faint: rgba(246,242,255,.62);
+      --bg0:#060814;
+      --bg1:#071427;
+      --bg2:#071b2f;
 
-      --panel: rgba(23, 20, 35, .72);
-      --panel2: rgba(27, 23, 42, .78);
-      --border: rgba(255,255,255,.14);
+      --text:#f2f6ff;
+      --muted: rgba(242,246,255,.78);
+      --faint: rgba(242,246,255,.58);
 
-      --accent: #ff6f91;
-      --accent2:#ff4f6d;
-      --accent3:#c75a7b;
+      --panel: rgba(10, 16, 32, .72);
+      --panel2: rgba(12, 20, 40, .82);
+      --border: rgba(255,255,255,.12);
 
-      --tagbg: rgba(255,111,145,.14);
-      --tagborder: rgba(255,111,145,.22);
+      --accent:#7cf6c7;     /* aurora green */
+      --accent2:#7aa7ff;    /* cool blue */
+      --accent3:#b792ff;    /* lavender */
+      --warm:#ffd08a;       /* soft warm */
 
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
       --radius: 18px;
     }
 
     *{ box-sizing:border-box; }
-
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      min-height: 100vh;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      min-height:100vh;
       background:
-        radial-gradient(900px 600px at 20% 0%, rgba(199,90,123,.35), transparent 60%),
-        radial-gradient(900px 600px at 80% 15%, rgba(255,111,145,.25), transparent 55%),
-        linear-gradient(180deg,
-          #423A50 0%,
-          #53455D 20%,
-          #815F6B 42%,
-          #B67967 62%,
-          #c75a7b 78%,
-          #ff6f91 88%,
-          #ff4f6d 100%
-        );
+        radial-gradient(900px 600px at 18% 0%, rgba(124,246,199,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 12%, rgba(122,167,255,.16), transparent 62%),
+        radial-gradient(900px 650px at 60% 0%, rgba(183,146,255,.12), transparent 64%),
+        radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.85), rgba(0,0,0,1) 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 55%, var(--bg2));
     }
+
+    .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 18px; }
 
     header{
-      padding: 30px 18px 18px;
-      border-bottom: 1px solid rgba(255,255,255,.12);
+      padding: 26px 0 18px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(900px 500px at 15% 0%, rgba(199,90,123,.45), transparent 60%),
-        radial-gradient(900px 500px at 85% 10%, rgba(255,111,145,.30), transparent 60%),
-        linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
-      backdrop-filter: blur(6px);
+        radial-gradient(1100px 520px at 18% 0%, rgba(124,246,199,.14), transparent 60%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(122,167,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(6,8,20,.86), rgba(6,8,20,.55));
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    .wrap{ max-width: 1000px; margin: 0 auto; }
-    h1{ margin:0 0 8px; font-size: 34px; letter-spacing:.2px; line-height:1.1; }
-    p{ margin:0; color: var(--muted); line-height: 1.55; }
-
-    .topbar{
-      display:flex; justify-content:space-between; align-items:center;
-      gap:12px; flex-wrap:wrap; margin-top: 12px;
+    .topRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
     }
 
-    a{ color: var(--accent); text-decoration:none; }
-    a:hover{ text-decoration: underline; }
+    .crumb a{
+      color: var(--accent);
+      text-decoration:none;
+      font-weight: 900;
+      opacity:.95;
+      font-size: 14px;
+    }
+    .crumb a:hover{ text-decoration: underline; }
 
+    .pillRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+    }
     .pill{
       font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,111,145,.10);
-      border:1px solid rgba(255,111,145,.18);
-      color: rgba(246,242,255,.92);
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: rgba(242,246,255,.92);
+      font-weight: 900;
+      letter-spacing: .2px;
       white-space:nowrap;
     }
+    .pill strong{ color: var(--warm); }
 
-    main{ padding: 18px; }
-
-    .grid2{
-      display:grid;
-      gap:14px;
-      grid-template-columns: 1.2fr .8fr;
-      align-items:start;
+    h1{
+      margin: 10px 0 0;
+      font-size: 30px;
+      letter-spacing:.2px;
     }
-    @media (max-width: 900px){ .grid2{ grid-template-columns: 1fr; } }
+    .sub{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 95ch;
+    }
 
-    .card{
-      background: var(--panel);
-      border: 1px solid var(--border);
+    /* Hero band */
+    .heroBand{
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
+      background: linear-gradient(135deg, rgba(124,246,199,.10), rgba(122,167,255,.09), rgba(183,146,255,.07));
+      box-shadow: 0 16px 60px rgba(0,0,0,.45);
+      overflow:hidden;
+      position:relative;
     }
-
-    .sectionTitle{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:baseline;
-      margin-bottom: 10px;
-    }
-    .sectionTitle h2{ margin:0; font-size: 18px; letter-spacing:.2px; }
-    .sectionTitle .hint{ color: var(--faint); font-size: 13px; }
-
-    /* ===== Cool part: "Change Map" ===== */
-    .map{ position: relative; overflow:hidden; }
-    .map:before{
+    .heroBand:before{
       content:"";
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(520px 260px at 15% 10%, rgba(255,111,145,.18), transparent 60%),
-        radial-gradient(520px 260px at 85% 0%, rgba(199,90,123,.12), transparent 60%),
-        linear-gradient(135deg, rgba(255,111,145,.06), rgba(0,0,0,0));
+        radial-gradient(1400px 500px at 15% 0%, rgba(124,246,199,.20), transparent 58%),
+        radial-gradient(1400px 500px at 85% 10%, rgba(122,167,255,.16), transparent 60%),
+        radial-gradient(900px 520px at 55% 120%, rgba(183,146,255,.16), transparent 60%);
       pointer-events:none;
-      opacity:.95;
     }
-    .mapInner{ position:relative; display:grid; gap:12px; }
-
-    .row{
+    .heroInner{
+      position:relative;
+      padding: 16px;
       display:grid;
-      gap:12px;
-      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
-    @media (max-width: 680px){ .row{ grid-template-columns: 1fr; } }
-
-    label{
-      display:block;
-      font-size: 13px;
-      color: rgba(246,242,255,.86);
-      margin-bottom: 6px;
-      font-weight: 900;
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .heroGrid{ grid-template-columns: 1fr; }
     }
 
-    select, input[type="search"]{
-      width:100%;
-      background: var(--panel2);
-      border: 1px solid rgba(255,255,255,.14);
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 12px;
-      outline:none;
+    /* Cards */
+    main{ padding: 18px 0 34px; }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
-    input[type="search"]::placeholder{ color: rgba(246,242,255,.55); }
-
-    .micro{
-      font-size: 13px;
+    .card h2{
+      margin:0 0 10px;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .card p{
+      margin:0;
       color: var(--muted);
       line-height: 1.6;
-      margin: 0;
     }
 
-    .callout{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(0,0,0,.12);
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    details.soft{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: rgba(0,0,0,.10);
-    }
-    details.soft summary{
-      cursor:pointer;
-      font-weight: 900;
-      color: rgba(246,242,255,.95);
-      list-style:none;
-    }
-    details.soft summary::-webkit-details-marker{ display:none; }
-    details.soft .inside{
-      margin-top: 10px;
-      color: var(--muted);
-      line-height:1.65;
-      font-size: 14px;
-    }
-    details.soft ul{ margin:10px 0 0; padding-left: 18px; }
-    details.soft li{ margin:6px 0; }
-
-    .btnRow{
+    /* Quick tools row */
+    .quickTools{
       display:flex;
-      gap:10px;
       flex-wrap:wrap;
-      margin-top: 10px;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-start;
     }
-    .btn{
+    .chipBtn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 10px 12px;
-      border-radius: 12px;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.12);
-      color: rgba(246,242,255,.92);
-      font-weight: 900;
+      background: rgba(0,0,0,.18);
+      color: rgba(242,246,255,.92);
       text-decoration:none;
-      cursor:pointer;
-      transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
-      user-select:none;
+      font-weight: 900;
       font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
     }
-    .btn:hover{
+    .chipBtn:hover{
       transform: translateY(-1px);
-      filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 24px rgba(255,111,145,.10);
+      filter: brightness(1.06);
+      box-shadow: 0 0 0 1px rgba(124,246,199,.18), 0 0 26px rgba(122,167,255,.12);
     }
-    .btn:active{ transform: translateY(0px); }
+    .chipBtn:active{ transform: translateY(0px); }
 
-    /* ===== Resource cards ===== */
-    .resources{
-      display:grid;
-      gap:12px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    .callout{
       margin-top: 12px;
-    }
-    .resourceCard{
-      transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
-    }
-    .resourceCard:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.03);
-      box-shadow:
-        0 22px 60px rgba(0,0,0,.60),
-        0 0 0 1px rgba(255,111,145,.16),
-        0 0 30px rgba(255,111,145,.12);
-    }
-    .resourceTitle{
-      font-weight:900;
-      font-size: 16px;
-      margin:0;
-      line-height:1.25;
-    }
-    .resourceNote{
-      margin: 8px 0 0;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.16);
       color: var(--muted);
-      line-height:1.55;
+      line-height: 1.6;
       font-size: 14px;
     }
-    .resourceLink{
-      color: var(--accent);
-      font-weight: 900;
-      text-decoration:none;
+    .callout strong{ color: rgba(242,246,255,.92); }
+
+    /* Over-the-top: "Change Map" */
+    .mapWrap{
+      display:grid;
+      gap: 10px;
+      margin-top: 12px;
     }
-    .meta{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
-    .tag{
-      font-size:12px;
-      padding:5px 10px;
-      border-radius:999px;
-      background: var(--tagbg);
-      border: 1px solid var(--tagborder);
-      color: rgba(246,242,255,.92);
+    .mapHeader{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .mapHeader .hint{
+      color: var(--faint);
+      font-size: 13px;
+      line-height:1.4;
+      margin:0;
+      max-width: 70ch;
+    }
+    .mapGrid{
+      display:grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .node{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.16);
+      cursor:pointer;
+      transition: transform .08s ease, box-shadow .08s ease, filter .08s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .node:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 240px at 20% 0%, rgba(124,246,199,.14), transparent 60%),
+        radial-gradient(700px 240px at 85% 10%, rgba(122,167,255,.10), transparent 60%),
+        radial-gradient(700px 240px at 55% 120%, rgba(183,146,255,.12), transparent 62%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .node:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 0 1px rgba(124,246,199,.18), 0 0 26px rgba(183,146,255,.12);
+    }
+    .node h3{
+      position:relative;
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.2px;
+    }
+    .node p{
+      position:relative;
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
     }
 
-    /* ===== Modal ===== */
+    /* Tabs */
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .tabBtn{
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: rgba(242,246,255,.92);
+      font-weight: 900;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .tabBtn[aria-selected="true"]{
+      border-color: rgba(124,246,199,.42);
+      box-shadow: 0 0 0 1px rgba(124,246,199,.18), 0 0 26px rgba(122,167,255,.14);
+    }
+    .tabPanel{
+      margin-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 12px;
+      display:none;
+    }
+    .tabPanel[data-open="true"]{ display:block; }
+
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.6;
+    }
+    .list li{ margin: 6px 0; }
+
+    /* "One Next Step" generator */
+    .nextStep{
+      display:grid;
+      gap:10px;
+      margin-top: 12px;
+      justify-items:start;
+    }
+    .stepBox{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.16);
+      color: rgba(242,246,255,.92);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    /* Resource placeholders */
+    .resourceList{
+      display:grid;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .resourceItem{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding: 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+    }
+    .resourceItem .left{ min-width: 240px; }
+    .resourceItem .title{
+      font-weight: 900;
+      color: rgba(242,246,255,.92);
+      margin:0 0 4px;
+    }
+    .resourceItem .desc{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.45;
+    }
+    .resourceItem a{
+      color: var(--accent);
+      text-decoration:none;
+      font-weight: 900;
+      white-space:nowrap;
+    }
+    .resourceItem a:hover{ text-decoration: underline; }
+
+    /* Modal */
     .modalOverlay{
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.62);
+      background: rgba(0,0,0,.64);
       display: none;
       align-items: center;
       justify-content: center;
@@ -276,14 +379,14 @@
       z-index: 9999;
     }
     .modal{
-      max-width: 820px;
       width: 100%;
-      background: rgba(23, 20, 35, .94);
+      max-width: 820px;
+      background: rgba(10, 16, 32, .92);
       border: 1px solid rgba(255,255,255,.14);
       border-radius: 18px;
       padding: 16px;
-      box-shadow: 0 26px 90px rgba(0,0,0,.70);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 26px 90px rgba(0,0,0,.72);
+      backdrop-filter: blur(14px);
     }
     .modalHead{
       display:flex;
@@ -293,44 +396,44 @@
       flex-wrap:wrap;
       margin-bottom: 10px;
     }
-    .modal h3{ margin:0; font-size: 18px; letter-spacing:.2px; }
-    .modal p{ margin:0; color: var(--muted); line-height:1.7; font-size: 14px; }
-    .modal ul, .modal ol{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height:1.7;
-      font-size: 14px;
+    .modal h3{ margin:0; font-size: 18px; }
+    .modal .content{ color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .modal .content p{ margin: 0 0 10px; }
+    .modal .content ul, .modal .content ol{ margin: 8px 0 0; padding-left: 18px; }
+    .modal .content li{ margin: 6px 0; }
+
+    .modalActions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top: 14px;
+      flex-wrap:wrap;
     }
-    .modal li{ margin:6px 0; }
-    .modalActions{ display:flex; justify-content:flex-end; gap:10px; margin-top: 14px; flex-wrap:wrap; }
-    .modalClose{
+    .closeBtn{
       padding: 9px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.22);
-      color: rgba(246,242,255,.92);
+      color: rgba(242,246,255,.92);
       cursor:pointer;
       font-weight: 900;
     }
 
-    footer{
-      padding: 22px 18px 34px;
-      color: rgba(246,242,255,.68);
-      border-top: 1px solid rgba(255,255,255,.10);
-      margin-top: 26px;
+    .twoCol{
+      display:grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 16px;
     }
 
-    code{
-      background: rgba(0,0,0,.20);
-      padding: 2px 6px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(246,242,255,.92);
+    footer{
+      padding: 20px 0 34px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: rgba(242,246,255,.62);
     }
 
     @media (prefers-reduced-motion: reduce){
-      .btn, .resourceCard{ transition:none; }
+      .chipBtn, .node{ transition:none; }
     }
   </style>
 </head>
@@ -338,113 +441,208 @@
 <body>
 <header>
   <div class="wrap">
+    <div class="topRow">
+      <div class="crumb"><a href="../">← Back to Resource Hub</a></div>
+      <div class="pillRow">
+        <span class="pill">change is common</span>
+        <span class="pill"><strong>predictability helps</strong></span>
+        <span class="pill">parents + caregivers + kids + youth</span>
+      </div>
+    </div>
+
     <h1>Major Life Changes</h1>
-    <p>
-      Moving, changing schools, new caregivers, foster care transitions, immigration, financial stress,
-      or “everything feels different now” — this page is for steady language and practical supports.
+    <p class="sub">
+      Moving, changing schools, new caregivers, foster/kin placements, immigration, health changes, job loss, housing changes —
+      these can feel like grief even when nobody died. This page is a gentle toolkit for families navigating “a new normal.”
     </p>
 
-    <div class="topbar">
-      <div><a href="../">← Back to Resource Hub</a></div>
-      <span class="pill">Small steps • Predictability • Repair</span>
+    <div class="heroBand">
+      <div class="heroInner">
+        <div class="heroGrid">
+          <div>
+            <div class="quickTools" aria-label="Quick tools">
+              <button class="chipBtn" type="button" data-modal="words_today">Words for today</button>
+              <button class="chipBtn" type="button" data-modal="what_to_say">What to say (kids + teens)</button>
+              <button class="chipBtn" type="button" data-modal="first_week">First week plan</button>
+              <button class="chipBtn" type="button" data-modal="when_regression">When behavior changes</button>
+              <button class="chipBtn" type="button" data-modal="school_script">School / teacher note</button>
+            </div>
+
+            <div class="callout">
+              <strong>Anchor idea:</strong> Big change can make the world feel unsafe. The fastest way to help is not a perfect explanation —
+              it’s <em>small predictability</em> repeated over time.
+            </div>
+
+            <!-- Over-the-top: Change Map -->
+            <div class="mapWrap">
+              <div class="mapHeader">
+                <h2 style="margin:0;">Pick what kind of change you’re in</h2>
+                <p class="hint">Tap one. You’ll get a focused guide + scripts you can use right away.</p>
+              </div>
+
+              <div class="mapGrid">
+                <div class="node" data-modal="m_move">
+                  <h3>🏠 Moving / housing change</h3>
+                  <p>Goodbyes, new routines, sleep worries.</p>
+                </div>
+                <div class="node" data-modal="m_school">
+                  <h3>🎒 New school / class change</h3>
+                  <p>Friend loss, anxiety, “I don’t fit.”</p>
+                </div>
+                <div class="node" data-modal="m_caregiver">
+                  <h3>🤝 New caregiver / placement</h3>
+                  <p>Attachment stress, testing, trust.</p>
+                </div>
+                <div class="node" data-modal="m_health">
+                  <h3>🩺 Health / diagnosis change</h3>
+                  <p>Uncertainty, appointments, identity shifts.</p>
+                </div>
+                <div class="node" data-modal="m_family">
+                  <h3>👪 Family structure change</h3>
+                  <p>New step-family, separation, new baby.</p>
+                </div>
+                <div class="node" data-modal="m_money">
+                  <h3>💸 Money stress / job loss</h3>
+                  <p>Worry, shame, “are we okay?”</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card" style="margin:0; background: rgba(0,0,0,.16); box-shadow:none;">
+            <h2 style="margin-bottom:8px;">One Next Step (generator)</h2>
+            <p style="color:var(--muted); margin:0;">
+              If you don’t know where to start, click once. You’ll get a gentle next step for parents/caregivers or youth.
+            </p>
+
+            <div class="nextStep">
+              <button class="chipBtn" type="button" id="btnNextParent">Give me a caregiver next step</button>
+              <button class="chipBtn" type="button" id="btnNextYouth">Give me a youth next step</button>
+              <div class="stepBox" id="stepBox">Click a button above.</div>
+            </div>
+
+            <div class="tabs" role="tablist" aria-label="Major Life Changes tabs" style="margin-top:14px;">
+              <button class="tabBtn" type="button" role="tab" aria-selected="true" data-tab="basics">Basics</button>
+              <button class="tabBtn" type="button" role="tab" aria-selected="false" data-tab="age">By age</button>
+              <button class="tabBtn" type="button" role="tab" aria-selected="false" data-tab="routines">Routines</button>
+              <button class="tabBtn" type="button" role="tab" aria-selected="false" data-tab="resources">Resources</button>
+            </div>
+
+            <div class="tabPanel" data-open="true" data-panel="basics">
+              <p style="color:var(--muted); margin:0;">
+                Change often brings “hidden grief” — missing the old life, even if the new one is necessary.
+                You’re not behind; you’re adapting.
+              </p>
+              <ul class="list">
+                <li><strong>Name the change.</strong> Keep it simple and honest.</li>
+                <li><strong>Give the plan.</strong> “Here’s what we know today.”</li>
+                <li><strong>Expect waves.</strong> Mood and behavior shift under stress.</li>
+                <li><strong>Repeat safety.</strong> “You’re safe. I’m here. We’ll figure it out.”</li>
+              </ul>
+            </div>
+
+            <div class="tabPanel" data-open="false" data-panel="age">
+              <ul class="list">
+                <li><strong>Little kids:</strong> repetition + visuals (calendar, pictures, routines).</li>
+                <li><strong>School-age:</strong> fairness + belonging + questions.</li>
+                <li><strong>Teens:</strong> autonomy + privacy + real talk without adult burden.</li>
+              </ul>
+              <div class="callout" style="margin-top:10px;">
+                <strong>Tip:</strong> Kids can handle hard truth better than confusing silence.
+              </div>
+            </div>
+
+            <div class="tabPanel" data-open="false" data-panel="routines">
+              <p style="color:var(--muted); margin:0;">
+                One small routine that repeats becomes a “handrail” for the nervous system.
+              </p>
+              <ul class="list">
+                <li>Same bedtime phrase every night.</li>
+                <li>Snack + water after transitions.</li>
+                <li>Two-minute check-in (“Rose / Thorn / Bud”).</li>
+                <li>Visual schedule (even a simple sticky note).</li>
+              </ul>
+            </div>
+
+            <div class="tabPanel" data-open="false" data-panel="resources">
+              <p style="color:var(--muted); margin:0;">
+                Add your classmates’ links/PDFs later. For now, placeholders are ready.
+              </p>
+              <div class="resourceList" id="resourceList"></div>
+              <div class="callout">
+                <strong>How to add:</strong> In this file find <code>CHANGE_RESOURCES</code> and add items.
+                Link to PDFs in this folder or external sites.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </header>
 
 <main class="wrap">
-  <div class="grid2">
-
-    <!-- LEFT: Change Map -->
-    <section class="card map">
-      <div class="mapInner">
-        <div class="sectionTitle">
-          <h2>Change Map</h2>
-          <div class="hint">Choose a change — get supports + words</div>
-        </div>
-
-        <p class="micro">
-          Big changes can look like behaviour. This tool helps you respond with <strong>predictability</strong>,
-          <strong>connection</strong>, and <strong>one next step</strong> — instead of pressure.
-        </p>
-
-        <div class="row">
-          <div>
-            <label for="age">Age / stage</label>
-            <select id="age">
-              <option value="0">Choose…</option>
-              <option value="little">Little kids (0–6)</option>
-              <option value="school">School-age (7–12)</option>
-              <option value="teen">Teens (13–18)</option>
-              <option value="all">Any age / family-wide</option>
-            </select>
-          </div>
-          <div>
-            <label for="change">Type of change</label>
-            <select id="change">
-              <option value="0">Choose…</option>
-              <option value="move">Moving / new home</option>
-              <option value="school">New school / classroom change</option>
-              <option value="caregiver">New caregiver / visitation change</option>
-              <option value="foster">Foster care / placement transition</option>
-              <option value="immigration">Immigration / community change</option>
-              <option value="money">Financial stress / housing insecurity</option>
-              <option value="health">Illness / hospitalization in family</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="btnRow">
-          <button class="btn" type="button" id="btnPlan">A simple plan (3 steps)</button>
-          <button class="btn" type="button" id="btnWords">Words you can use</button>
-          <button class="btn" type="button" id="btnSigns">What you might see</button>
-        </div>
-
-        <div class="callout">
-          <strong style="color: rgba(246,242,255,.92);">A helpful lens:</strong>
-          When the world changes, kids often ask (with words or behaviour): “Am I safe? Who’s with me? What happens next?”
-        </div>
-
-        <details class="soft">
-          <summary>A steady “predictability kit”</summary>
-          <div class="inside">
-            <ul>
-              <li><strong>Visual plan:</strong> “Today / Tomorrow / Next week” (simple).</li>
-              <li><strong>Transition object:</strong> a small item that goes with them (photo, note, keychain).</li>
-              <li><strong>One ritual:</strong> the same bedtime line, goodbye phrase, or check-in.</li>
-              <li><strong>Repair phrase:</strong> “That was a lot. We can try again.”</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- RIGHT: Resources list -->
+  <div class="twoCol">
     <section class="card">
-      <div class="sectionTitle">
-        <h2>Resources (coming soon)</h2>
-        <div class="hint">Add your group’s links here</div>
+      <h2>For parents & caregivers</h2>
+      <p>
+        When everything changes, kids watch your nervous system. You don’t need to be calm all the time —
+        you just need to <strong>repair</strong> and keep returning to steadiness.
+      </p>
+      <ul class="list">
+        <li><strong>Language:</strong> “Here’s what we know today.”</li>
+        <li><strong>Permission:</strong> “All feelings are allowed.”</li>
+        <li><strong>Boundaries:</strong> “Adult worries stay with adults.”</li>
+        <li><strong>Repair:</strong> “I’m sorry — that stress wasn’t yours to carry.”</li>
+      </ul>
+      <div class="callout">
+        <strong>Reminder:</strong> Sometimes, while carrying the heavy things, we don’t see how far we have come.
       </div>
-
-      <p class="micro">
-        Add moving checklists, school transition supports, foster care toolkits, newcomer resources,
-        housing supports, and caregiver guides.
-      </p>
-
-      <label for="search" style="margin-top:12px;">Search resources</label>
-      <input id="search" type="search" placeholder="Search (ex: moving, new school, foster care transitions)…" />
-
-      <div id="resourceGrid" class="resources"></div>
-
-      <p class="micro" style="margin-top:12px;">
-        To add resources later: edit the <code>resources</code> list inside this file.
-      </p>
     </section>
 
+    <section class="card">
+      <h2>For children & youth</h2>
+      <p>
+        Big change can make your body feel weird: stomach aches, anger, zoning out, sleep changes, not caring… or caring too much.
+        That’s stress — not you being “bad.”
+      </p>
+      <ul class="list">
+        <li>You’re allowed to miss the old life.</li>
+        <li>You don’t have to be “okay” to be loved.</li>
+        <li>It helps to ask for one thing (a ride, a check-in, a quiet minute).</li>
+        <li>If you don’t want to talk, writing/music/movement counts too.</li>
+      </ul>
+      <div class="callout">
+        <strong>If you feel unsafe:</strong> Tell a trusted adult. In Canada you can call/text <strong>988</strong> or call <strong>911</strong> in an emergency.
+      </div>
+    </section>
   </div>
+
+  <!-- Optional discussion, same as your main setup -->
+  <section class="card" style="margin-top:16px;">
+    <h2 style="margin-bottom:8px;">Discussion & Suggestions</h2>
+    <p style="color:var(--muted); margin:0 0 12px;">
+      Have a resource to add, a correction, or an idea that would help families? Leave it here.
+    </p>
+
+    <script src="https://utteranc.es/client.js"
+            repo="phillip2999-ux/resource-hub"
+            issue-term="pathname"
+            label="discussion"
+            theme="github-dark"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </section>
 </main>
 
 <footer>
-  <div class="wrap">Major Life Changes • Resource Hub</div>
+  <div class="wrap">
+    Major Life Changes • predictability • repair • belonging
+  </div>
 </footer>
 
 <!-- Modal -->
@@ -452,292 +650,244 @@
   <div class="modal">
     <div class="modalHead">
       <h3 id="modalTitle">Support</h3>
-      <button class="modalClose" type="button" id="closeTop">Close</button>
+      <button class="closeBtn" type="button" id="closeTop">Close</button>
     </div>
-    <div id="modalBody"></div>
+    <div class="content" id="modalContent"></div>
     <div class="modalActions">
-      <button class="modalClose" type="button" id="closeBottom">Close</button>
+      <button class="closeBtn" type="button" id="closeBottom">Close</button>
     </div>
   </div>
 </div>
 
 <script>
-/* ===== Resources (placeholder; your classmates add later) ===== */
-const resources = [
-  {
-    title: "Placeholder: Add your first resource here",
-    url: "https://example.com",
-    tags: ["Example", "Moving", "Transitions"],
-    note: "Replace this with your group’s resources (link + 1–2 line description)."
+  /* ===== Placeholders for your classmates to fill later ===== */
+  const CHANGE_RESOURCES = [
+    { title: "Placeholder: Moving / transition checklist", desc: "Add a PDF or external link here.", url: "#" },
+    { title: "Placeholder: School transition support", desc: "Add handouts or teacher letter templates.", url: "#" },
+    { title: "Placeholder: Youth coping tools", desc: "Add a worksheet, video, or toolkit.", url: "#" }
+  ];
+
+  const list = document.getElementById("resourceList");
+  list.innerHTML = CHANGE_RESOURCES.map(r => `
+    <div class="resourceItem">
+      <div class="left">
+        <div class="title">${r.title}</div>
+        <p class="desc">${r.desc}</p>
+      </div>
+      <div>
+        <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.url === "#" ? "Add link later" : "Open ↗"}</a>
+      </div>
+    </div>
+  `).join("");
+
+  /* ===== Tabs ===== */
+  const tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
+  const panels = Array.from(document.querySelectorAll("[data-panel]"));
+
+  function openTab(key){
+    tabButtons.forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === key)));
+    panels.forEach(p => p.setAttribute("data-open", String(p.dataset.panel === key)));
   }
-];
+  tabButtons.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
 
-const resourceGrid = document.getElementById("resourceGrid");
-const search = document.getElementById("search");
-
-function renderResources(){
-  const q = search.value.trim().toLowerCase();
-  const filtered = resources.filter(r=>{
-    const text = (r.title + " " + (r.note||"") + " " + (r.tags||[]).join(" ")).toLowerCase();
-    return !q || text.includes(q);
+  /* ===== One Next Step generator (over-the-top helpful) ===== */
+  const caregiverSteps = [
+    "Pick one predictable thing for today: the same snack, the same bedtime phrase, or the same 2-minute check-in.",
+    "Say one steady line: “Here’s what we know today. You’re safe, and I’m here.” Repeat it all week.",
+    "Make a tiny plan: write the next 2 steps on paper. (Brains calm down when a plan exists.)",
+    "Do a 60-second nervous system reset: hand on chest, inhale 4, exhale 6 (twice), name 3 things you see.",
+    "Choose repair over perfection: “I was stressed and I snapped — I’m sorry. That wasn’t yours to carry.”"
+  ];
+  const youthSteps = [
+    "Do the 5-4-3-2-1 reset: 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste.",
+    "Pick one: drink water, eat something small, step outside for 2 minutes, or send “can you check in?” to someone safe.",
+    "Write one sentence in notes: “What I miss is…” or “What I’m scared of is…”. You don’t need more than one.",
+    "Move your body for 60 seconds (walk, stretch, shake out hands). Stress lives in muscles.",
+    "Ask for one specific thing: “Can you sit with me?” “Can we make a plan?” “Can I have a quiet minute?”"
+  ];
+  const stepBox = document.getElementById("stepBox");
+  document.getElementById("btnNextParent").addEventListener("click", () => {
+    stepBox.textContent = caregiverSteps[Math.floor(Math.random()*caregiverSteps.length)];
+  });
+  document.getElementById("btnNextYouth").addEventListener("click", () => {
+    stepBox.textContent = youthSteps[Math.floor(Math.random()*youthSteps.length)];
   });
 
-  resourceGrid.innerHTML = filtered.map(r => `
-    <article class="card resourceCard">
-      <p class="resourceTitle">
-        <a class="resourceLink" href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
-      </p>
-      ${r.note ? `<p class="resourceNote">${r.note}</p>` : ``}
-      <div class="meta">
-        ${(r.tags||[]).map(t => `<span class="tag">${t}</span>`).join("")}
-      </div>
-    </article>
-  `).join("");
-}
-search.addEventListener("input", renderResources);
-renderResources();
+  /* ===== Modal content (scripts + focused guides) ===== */
+  const MODALS = {
+    words_today: {
+      title: "Words for today",
+      html: `
+        <p><strong>Sometimes, while carrying the heavy things, we don’t see how far we have come.</strong></p>
+        <p>Change is hard because it asks your body to re-learn safety. Small steadiness counts.</p>
+        <ul>
+          <li>You don’t have to do everything — just the next kind thing.</li>
+          <li>Waves are normal. Progress is not a straight line.</li>
+          <li>Repair is powerful. Returning is powerful.</li>
+        </ul>
+      `
+    },
+    what_to_say: {
+      title: "What to say (kids + teens)",
+      html: `
+        <p><strong>Kids:</strong> “A big change is happening. You’re safe. You didn’t cause it. We will take care of you.”</p>
+        <p><strong>Teens:</strong> “This affects you, and you deserve honesty in a safe way. You don’t have to carry adult worries.”</p>
+        <ul>
+          <li>“Here’s what we know today.”</li>
+          <li>“It’s okay to have lots of feelings — or none right now.”</li>
+          <li>“You can ask questions. If I don’t know, I’ll tell you.”</li>
+        </ul>
+      `
+    },
+    first_week: {
+      title: "First week plan (simple + effective)",
+      html: `
+        <p>When change hits, the first week is about <strong>stability</strong>, not optimization.</p>
+        <ol>
+          <li><strong>One routine:</strong> keep the same bedtime phrase + a predictable morning step.</li>
+          <li><strong>One map:</strong> a visible calendar or sticky note schedule.</li>
+          <li><strong>One check-in:</strong> “Rose/Thorn/Bud” (good/hard/hope) — 2 minutes.</li>
+          <li><strong>One comfort:</strong> bridge object (photo, stuffie, keychain) if needed.</li>
+          <li><strong>One repair script:</strong> “I’m sorry — that stress wasn’t yours to carry.”</li>
+        </ol>
+      `
+    },
+    when_regression: {
+      title: "When behavior changes (regression, clinginess, anger)",
+      html: `
+        <p>Stress often shows up as behavior. It’s communication.</p>
+        <ul>
+          <li><strong>Connect first:</strong> “I see you’re having a hard time.”</li>
+          <li><strong>Name the feeling:</strong> “This might be worry/sadness.”</li>
+          <li><strong>Offer one choice:</strong> “Do you want quiet time or a walk?”</li>
+          <li><strong>Then structure:</strong> “And we still need to…”</li>
+        </ul>
+        <p><strong>Remember:</strong> A hard day doesn’t erase the progress you’ve made.</p>
+      `
+    },
+    school_script: {
+      title: "School / teacher note (copy/paste)",
+      html: `
+        <p><strong>Subject:</strong> Heads up — family transition</p>
+        <p>Hi [Teacher/Counsellor],</p>
+        <p>
+          I’m reaching out to share that our family is going through a significant change right now.
+          You may notice shifts in [Child/Youth]’s mood, focus, or behavior as they adjust.
+          If possible, please offer gentle check-ins, predictable expectations, and a bit of flexibility while they settle.
+        </p>
+        <p>
+          Thank you for supporting them with steadiness and care.
+          If you notice anything concerning, please let me know.
+        </p>
+        <p>— [Name]</p>
+      `
+    },
 
-/* ===== Modal helpers ===== */
-const modalOverlay = document.getElementById("modalOverlay");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
-const closeTop = document.getElementById("closeTop");
-const closeBottom = document.getElementById("closeBottom");
+    /* Change Map focused modals */
+    m_move: {
+      title: "Moving / housing change: focused guide",
+      html: `
+        <p><strong>What helps most:</strong> preview + predictability + one comfort item.</p>
+        <ul>
+          <li>Walk through the new space together (even by photos/video if needed).</li>
+          <li>Keep one routine identical (bedtime phrase, playlist, story).</li>
+          <li>Let kids “choose” something small (where a toy goes, a poster, a nightlight).</li>
+          <li>Expect sleep bumps and extra clinginess for a while.</li>
+        </ul>
+        <p><strong>Script:</strong> “We’re moving homes. You’re safe. We’ll learn this place together.”</p>
+      `
+    },
+    m_school: {
+      title: "New school / class change: focused guide",
+      html: `
+        <p><strong>What helps most:</strong> belonging + one familiar anchor + a plan for worry.</p>
+        <ul>
+          <li>Practice the route, locker, or entry routine before the first day if possible.</li>
+          <li>Create a ‘worry plan’: “If you feel overwhelmed, you can [counsellor/teacher/bathroom break].”</li>
+          <li>Pick one “safe person” at school (teacher, EA, counsellor).</li>
+          <li>After school: snack + water + quiet time before questions.</li>
+        </ul>
+        <p><strong>Script:</strong> “New places feel weird at first. That’s normal. We’ll find your people.”</p>
+      `
+    },
+    m_caregiver: {
+      title: "New caregiver / placement: focused guide",
+      html: `
+        <p><strong>What helps most:</strong> calm consistency + lots of small repair moments.</p>
+        <ul>
+          <li>Assume testing is fear: “Will you still stay if I’m hard to love?”</li>
+          <li>Keep promises small and keep them reliably.</li>
+          <li>Offer choices that don’t overwhelm (“two options” rule).</li>
+          <li>Predict transitions (“In 10 minutes we’ll…”).</li>
+        </ul>
+        <p><strong>Script:</strong> “You’re safe here. I’m not going anywhere right now.”</p>
+      `
+    },
+    m_health: {
+      title: "Health / diagnosis change: focused guide",
+      html: `
+        <p><strong>What helps most:</strong> clear information in small pieces + control where possible.</p>
+        <ul>
+          <li>Use “today language”: “Today we know…” (avoid overwhelming future predictions).</li>
+          <li>Offer one area of control (choose snack, choose music, choose order of tasks).</li>
+          <li>Normalize mixed emotions — even relief can exist with grief.</li>
+          <li>Plan recovery time after appointments.</li>
+        </ul>
+        <p><strong>Script:</strong> “This is a big thing. We’ll take it one step at a time.”</p>
+      `
+    },
+    m_family: {
+      title: "Family structure change: focused guide",
+      html: `
+        <p><strong>What helps most:</strong> reassure belonging + protect kids from adult conflict.</p>
+        <ul>
+          <li>Say the quiet part out loud: “You still belong here.”</li>
+          <li>Give time — blended families take longer than people expect.</li>
+          <li>Let kids keep loyalty to their original relationships.</li>
+          <li>Keep boundaries: adults handle adult feelings.</li>
+        </ul>
+        <p><strong>Script:</strong> “You don’t have to choose. Love isn’t a competition.”</p>
+      `
+    },
+    m_money: {
+      title: "Money stress / job loss: focused guide",
+      html: `
+        <p><strong>What helps most:</strong> honest reassurance + a plan kids can understand.</p>
+        <ul>
+          <li>Keep details age-appropriate (no adult panic, no numbers dumping).</li>
+          <li>Anchor safety: “We have a plan. You will be taken care of.”</li>
+          <li>Maintain one affordable routine (library night, park walk, movie at home).</li>
+          <li>Watch for shame — kids often assume they caused stress.</li>
+        </ul>
+        <p><strong>Script:</strong> “Money is an adult problem. Your job is being a kid.”</p>
+      `
+    }
+  };
 
-function openModal(title, html){
-  modalTitle.textContent = title;
-  modalBody.innerHTML = html;
-  modalOverlay.style.display = "flex";
-}
-function closeModal(){ modalOverlay.style.display = "none"; }
+  const overlay = document.getElementById("modalOverlay");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalContent = document.getElementById("modalContent");
+  const closeTop = document.getElementById("closeTop");
+  const closeBottom = document.getElementById("closeBottom");
 
-closeTop.addEventListener("click", closeModal);
-closeBottom.addEventListener("click", closeModal);
-modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
-document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
-
-/* ===== Change Map content ===== */
-const ageEl = document.getElementById("age");
-const changeEl = document.getElementById("change");
-
-function requireSelection(){
-  if(ageEl.value === "0" || changeEl.value === "0"){
-    openModal("Pick an age + change", `
-      <p>Please choose an <strong>Age / stage</strong> and a <strong>Type of change</strong>.</p>
-      <p style="margin-top:8px;">This tool is for calm, practical next steps — not perfection.</p>
-    `);
-    return false;
+  function openModal(key){
+    const m = MODALS[key];
+    if(!m) return;
+    modalTitle.textContent = m.title;
+    modalContent.innerHTML = m.html;
+    overlay.style.display = "flex";
   }
-  return true;
-}
+  function closeModal(){ overlay.style.display = "none"; }
 
-const CHANGE_LABELS = {
-  move: "Moving / new home",
-  school: "New school / classroom change",
-  caregiver: "New caregiver / visitation change",
-  foster: "Foster care / placement transition",
-  immigration: "Immigration / community change",
-  money: "Financial stress / housing insecurity",
-  health: "Illness / hospitalization in family"
-};
+  document.querySelectorAll("[data-modal]").forEach(el => {
+    el.addEventListener("click", () => openModal(el.dataset.modal));
+  });
 
-const PACK = {
-  little: {
-    move: {
-      plan: ["Preview the change with pictures + a simple story.", "Choose one ‘same thing’ to keep daily (bedtime line / song).", "Create a ‘comfort kit’ to carry: stuffie, blanket, photo."],
-      words: ["“We’re moving to a new home.”", "“Your job is to be a kid. My job is to keep you safe.”", "“Some things stay the same: me, love, bedtime.”"],
-      signs: ["More clingy behaviour", "Sleep changes", "More meltdowns at transitions"]
-    },
-    school: {
-      plan: ["Visit the school or look at photos/videos of it.", "Practice the first day routine (shoes, backpack, goodbye ritual).", "Choose a ‘check-in plan’ after school (snack + 10 minutes together)."],
-      words: ["“New things can feel big at first.”", "“We can feel nervous and still do it.”", "“I’ll be here at pickup.”"],
-      signs: ["Stomachaches", "Resistance at drop-off", "Regressions (bedwetting, baby talk)"]
-    },
-    caregiver: {
-      plan: ["Use a simple visual schedule (“today / tomorrow”).", "Name the adults and what stays consistent.", "Give them one job that helps (choose outfit / pack comfort item)."],
-      words: ["“You will be cared for.”", "“Adults are in charge of plans.”", "“You can miss people and still be okay.”"],
-      signs: ["Separation anxiety", "Tantrums at handoffs", "Big feelings at bedtime"]
-    },
-    foster: {
-      plan: ["Keep explanations short and repeat them the same way.", "Anchor the day with predictable routines (meals/sleep).", "Help them keep memory objects safe (photo, note, small keepsake)."],
-      words: ["“A lot is changing, and you’re not in trouble.”", "“Your feelings make sense.”", "“We’ll take one day at a time.”"],
-      signs: ["Hypervigilance", "Shutdown/numbing", "Testing limits to check safety"]
-    },
-    immigration: {
-      plan: ["Name what’s new AND what’s staying.", "Create a comfort routine at home.", "Find one familiar connection (music, food, language)."],
-      words: ["“It’s okay to miss our old place.”", "“We can learn this together.”", "“You belong with us.”"],
-      signs: ["Quietness", "Increased fear", "More need for closeness"]
-    },
-    money: {
-      plan: ["Keep adult worries adult-sized (no details).", "Protect basic rhythms (sleep, meals) as best you can.", "Offer choices inside limits (snack choice, bedtime story)."],
-      words: ["“Grown-ups are handling grown-up problems.”", "“We will make sure you’re cared for.”", "“You can tell me if you’re worried.”"],
-      signs: ["Worry questions", "Hoarding food/toys", "Increased irritability"]
-    },
-    health: {
-      plan: ["Use simple truth (“Dad is in the hospital to get help”).", "Keep routines steady; add extra reassurance.", "Give a ‘connection plan’ (photo, voice note, drawing)."],
-      words: ["“It’s okay to feel scared.”", "“Doctors are helping.”", "“You can ask me anything.”"],
-      signs: ["Nightmares", "Clinginess", "Big emotions at small triggers"]
-    }
-  },
-
-  school: {
-    move: {
-      plan: ["Make a countdown + calendar.", "Let them help pack a ‘first night box’.", "Plan the goodbye and the first hello (rituals)."],
-      words: ["“It makes sense to feel mixed.”", "“We’ll keep your important routines.”", "“What would make it 10% easier?”"],
-      signs: ["Anger/defiance", "Sadness at random times", "More conflict with siblings"]
-    },
-    school: {
-      plan: ["Map their day (where do I go? who do I ask?).", "Practice 1–2 coping tools (breathing, grounding).", "Plan a safe adult at school."],
-      words: ["“New schools take time.”", "“You don’t have to be brave all day.”", "“Let’s find one safe person there.”"],
-      signs: ["Somatic complaints", "Avoidance", "Mood swings after school"]
-    },
-    caregiver: {
-      plan: ["Clarify schedule + who is responsible for what.", "Give them a ‘message plan’ (how to ask for help).", "Use a transition object (keychain/photo)."],
-      words: ["“You don’t have to manage adults.”", "“Tell me what helps at handoffs.”", "“You’re allowed to miss people.”"],
-      signs: ["Worry/rumination", "Acting younger", "Anger at transitions"]
-    },
-    foster: {
-      plan: ["Predictable routines + clear expectations.", "Offer choices within boundaries.", "Repair quickly after conflict (“try again”)."],
-      words: ["“You’re safe here.”", "“You’re not in trouble for having feelings.”", "“We’ll go one step at a time.”"],
-      signs: ["Testing limits", "Shame/withdrawal", "Sensitivity to criticism"]
-    },
-    immigration: {
-      plan: ["Name losses + gains without forcing positivity.", "Keep home as a ‘soft landing’.", "Find community connection (club, neighbour, support)."],
-      words: ["“Missing home is normal.”", "“You can belong here and still miss there.”", "“We’ll build new routines.”"],
-      signs: ["Grief waves", "Social anxiety", "Identity questions"]
-    },
-    money: {
-      plan: ["Keep reassurance steady and factual.", "Name what’s stable (school, bedtime, connection).", "Build small choices + predictability."],
-      words: ["“Adults are working on it.”", "“You are not responsible.”", "“Tell me when worries show up.”"],
-      signs: ["Fear of losing things", "Guilt", "Over-responsibility"]
-    },
-    health: {
-      plan: ["Explain what they’ll see (visits, calls).", "Build a ‘worry container’ (write worries; check in once/day).", "Keep routines as anchors."],
-      words: ["“It’s okay to be scared and still have fun.”", "“Feelings can change by the hour.”", "“We’ll keep you updated.”"],
-      signs: ["Hypervigilance", "Irritability", "Difficulty concentrating"]
-    }
-  },
-
-  teen: {
-    move: {
-      plan: ["Protect friendships and routines where possible.", "Give them input on logistics.", "Discuss what they need to stay grounded (sleep, workouts, privacy)."],
-      words: ["“This might land as relief, anger, or grief.”", "“Tell me what you need protected.”", "“We can make a plan together.”"],
-      signs: ["Shutdown", "Anger", "Risk-taking or withdrawal"]
-    },
-    school: {
-      plan: ["Identify one safe adult + one safe peer.", "Plan coping for high-stress moments (lunch, transitions).", "Normalize it taking time."],
-      words: ["“You don’t have to perform okay.”", "“We can problem-solve one piece at a time.”", "“It’s normal to feel out of place at first.”"],
-      signs: ["Avoidance", "Sleep changes", "Mood changes"]
-    },
-    caregiver: {
-      plan: ["Clarify expectations and boundaries.", "Invite autonomy without overloading responsibility.", "Keep communication clear and respectful."],
-      words: ["“You’re not the emotional caretaker.”", "“You can have boundaries.”", "“We’ll keep plans predictable.”"],
-      signs: ["Resentment", "Over-independence", "Anxiety/irritability"]
-    },
-    foster: {
-      plan: ["Dignity + choice within safety.", "Predictable routines + consistent consequences.", "Repair after conflict and avoid shame."],
-      words: ["“You get to have a voice here.”", "“We’ll be clear and consistent.”", "“You’re not alone in this.”"],
-      signs: ["Testing trust", "Numbing", "Fear of attachment"]
-    },
-    immigration: {
-      plan: ["Name identity stress as real.", "Support peer/community connection.", "Keep home as a no-performance zone."],
-      words: ["“You can miss and still grow.”", "“You don’t have to translate your whole life.”", "“We can find your people.”"],
-      signs: ["Isolation", "Identity grief", "Anger at unfairness"]
-    },
-    money: {
-      plan: ["Be honest without dumping adult stress.", "Invite practical input if appropriate.", "Keep support consistent."],
-      words: ["“We’re handling it.”", "“It’s okay to feel worried.”", "“Your job is still to be a teen.”"],
-      signs: ["Overworking", "Guilt", "Anxiety spikes"]
-    },
-    health: {
-      plan: ["Be honest; avoid false reassurance.", "Offer ways to stay connected (texts, notes).", "Normalize mixed feelings."],
-      words: ["“You can feel scared and also want normal life.”", "“We’ll tell you what we know.”", "“You don’t have to carry this alone.”"],
-      signs: ["Hypervigilance", "Numbing", "Anger + sadness swings"]
-    }
-  },
-
-  all: {
-    move: {
-      plan: ["Keep routines as anchors.", "Give simple timeline updates.", "Build a goodbye/hello ritual."],
-      words: ["“This is a big change, and we’ll do it together.”", "“We can feel mixed feelings.”", "“We will take it one step at a time.”"],
-      signs: ["Grief waves", "Irritability", "More need for control"]
-    },
-    school: {
-      plan: ["Predictable morning routine.", "A safe adult identified.", "A daily check-in at home."],
-      words: ["“New things take time.”", "“You can ask for help.”", "“I’ll be here after.”"],
-      signs: ["Avoidance", "Somatic complaints", "After-school meltdowns"]
-    },
-    caregiver: {
-      plan: ["Clear schedules.", "Transition ritual.", "Boundary: adults manage adult conflict."],
-      words: ["“You will be cared for.”", "“Adults are handling plans.”", "“Your feelings are welcome.”"],
-      signs: ["Separation anxiety", "Anger", "Sleep changes"]
-    },
-    foster: {
-      plan: ["Safety + routine first.", "Choices within boundaries.", "Repair language after hard moments."],
-      words: ["“You’re not in trouble for having feelings.”", "“We’ll go slow.”", "“You matter here.”"],
-      signs: ["Testing limits", "Numbing", "Fear of attachment"]
-    },
-    immigration: {
-      plan: ["Name losses honestly.", "Build community connection.", "Keep home as a soft landing."],
-      words: ["“Missing is normal.”", "“We can belong and still miss.”", "“We’ll build new routines.”"],
-      signs: ["Isolation", "Grief waves", "Identity stress"]
-    },
-    money: {
-      plan: ["Reassure without details.", "Protect basic rhythms.", "Offer choices where possible."],
-      words: ["“Adults are working on it.”", "“You’re not responsible.”", "“Tell me when worries show up.”"],
-      signs: ["Worry questions", "Hoarding", "Over-responsibility"]
-    },
-    health: {
-      plan: ["Truth + reassurance.", "Connection plan.", "Predictable updates."],
-      words: ["“It’s okay to feel scared.”", "“We’ll tell you what we know.”", "“You can ask any time.”"],
-      signs: ["Nightmares", "Hypervigilance", "Concentration issues"]
-    }
-  }
-};
-
-function requireSelection(){
-  if(ageEl.value === "0" || changeEl.value === "0"){
-    openModal("Pick an age + change", `
-      <p>Please choose an <strong>Age / stage</strong> and a <strong>Type of change</strong>.</p>
-      <p style="margin-top:8px;">We’ll generate a simple plan + words that reduce overwhelm.</p>
-    `);
-    return false;
-  }
-  return true;
-}
-
-const ageEl = document.getElementById("age");
-const changeEl = document.getElementById("change");
-
-document.getElementById("btnPlan").addEventListener("click", () => {
-  if(!requireSelection()) return;
-  const pack = PACK[ageEl.value][changeEl.value];
-  openModal("A simple plan (3 steps)", `
-    <p><strong>${CHANGE_LABELS[changeEl.value] || "Plan"}</strong></p>
-    <ol>${pack.plan.map(x=>`<li>${x}</li>`).join("")}</ol>
-    <p style="margin-top:10px;">
-      <strong style="color: rgba(246,242,255,.92);">Tip:</strong> choose “10% easier,” not “perfect.”
-    </p>
-  `);
-});
-
-document.getElementById("btnWords").addEventListener("click", () => {
-  if(!requireSelection()) return;
-  const pack = PACK[ageEl.value][changeEl.value];
-  openModal("Words you can use", `
-    <p>Try one sentence at a time:</p>
-    <ul>${pack.words.map(x=>`<li>${x}</li>`).join("")}</ul>
-  `);
-});
-
-document.getElementById("btnSigns").addEventListener("click", () => {
-  if(!requireSelection()) return;
-  const pack = PACK[ageEl.value][changeEl.value];
-  openModal("What you might see (normal responses to change)", `
-    <p>These can be signs of stress and adjustment — not “badness”:</p>
-    <ul>${pack.signs.map(x=>`<li>${x}</li>`).join("")}</ul>
-  `);
-});
+  closeTop.addEventListener("click", closeModal);
+  closeBottom.addEventListener("click", closeModal);
+  overlay.addEventListener("click", (e) => { if(e.target === overlay) closeModal(); });
+  document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 </script>
+
 </body>
 </html>
