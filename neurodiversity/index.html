@@ -1,1 +1,728 @@
-add neurodiversity & different ways of being page
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Neurodiversity & Different Ways of Being</title>
+
+  <style>
+    /* ===== Neurodiversity — Grief Sunrise (Pink/Red) ===== */
+    :root{
+      --text:#f6f2ff;
+      --muted: rgba(246,242,255,.80);
+      --faint: rgba(246,242,255,.62);
+
+      --panel: rgba(23, 20, 35, .72);
+      --panel2: rgba(27, 23, 42, .78);
+      --border: rgba(255,255,255,.14);
+
+      --accent: #ff6f91;
+      --accent2:#ff4f6d;
+      --accent3:#c75a7b;
+
+      --tagbg: rgba(255,111,145,.14);
+      --tagborder: rgba(255,111,145,.22);
+
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(900px 600px at 20% 0%, rgba(199,90,123,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 15%, rgba(255,111,145,.25), transparent 55%),
+        linear-gradient(180deg,
+          #423A50 0%,
+          #53455D 20%,
+          #815F6B 42%,
+          #B67967 62%,
+          #c75a7b 78%,
+          #ff6f91 88%,
+          #ff4f6d 100%
+        );
+    }
+
+    header{
+      padding: 30px 18px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(199,90,123,.45), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,111,145,.30), transparent 60%),
+        linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
+      backdrop-filter: blur(6px);
+    }
+
+    .wrap{ max-width: 1040px; margin: 0 auto; }
+    h1{ margin:0 0 8px; font-size: 34px; letter-spacing:.2px; line-height:1.1; }
+    p{ margin:0; color: var(--muted); line-height: 1.6; }
+
+    a{ color: var(--accent); text-decoration:none; }
+    a:hover{ text-decoration: underline; }
+
+    .topbar{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:12px; flex-wrap:wrap; margin-top: 12px;
+    }
+
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,111,145,.10);
+      border:1px solid rgba(255,111,145,.18);
+      color: rgba(246,242,255,.92);
+      white-space:nowrap;
+    }
+
+    main{ padding: 18px; }
+
+    .grid2{
+      display:grid;
+      gap:14px;
+      grid-template-columns: 1.05fr .95fr;
+      align-items:start;
+    }
+    @media (max-width: 920px){ .grid2{ grid-template-columns: 1fr; } }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .sectionTitle{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:baseline;
+      margin-bottom: 10px;
+    }
+    .sectionTitle h2{ margin:0; font-size: 18px; letter-spacing:.2px; }
+    .sectionTitle .hint{ color: var(--faint); font-size: 13px; }
+
+    .micro{
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ===== Cool part: "Language + Support Builder" ===== */
+    .heroTool{
+      position: relative;
+      overflow:hidden;
+    }
+    .heroTool:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 260px at 15% 10%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(520px 260px at 85% 0%, rgba(199,90,123,.12), transparent 60%),
+        linear-gradient(135deg, rgba(255,111,145,.06), rgba(0,0,0,0));
+      pointer-events:none;
+      opacity:.95;
+    }
+    .toolInner{ position:relative; display:grid; gap:12px; }
+
+    label{
+      display:block;
+      font-size: 13px;
+      color: rgba(246,242,255,.86);
+      margin-bottom: 6px;
+      font-weight: 900;
+    }
+    select, input[type="search"]{
+      width:100%;
+      background: var(--panel2);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline:none;
+    }
+    input[type="search"]::placeholder{ color: rgba(246,242,255,.55); }
+
+    .row{
+      display:grid;
+      gap:12px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 680px){ .row{ grid-template-columns: 1fr; } }
+
+    .btnRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 4px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+      color: rgba(246,242,255,.92);
+      font-weight: 900;
+      text-decoration:none;
+      cursor:pointer;
+      transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
+      user-select:none;
+      font-size: 13px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 24px rgba(255,111,145,.10);
+    }
+    .btn:active{ transform: translateY(0px); }
+
+    .callout{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .quoteBox{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.10);
+      color: rgba(246,242,255,.92);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+    .quoteBox strong{ color: rgba(246,242,255,.98); }
+
+    details.soft{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.10);
+      margin-top: 10px;
+    }
+    details.soft summary{
+      cursor:pointer;
+      font-weight: 900;
+      color: rgba(246,242,255,.95);
+      list-style:none;
+    }
+    details.soft summary::-webkit-details-marker{ display:none; }
+    details.soft .inside{
+      margin-top: 10px;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+    }
+    details.soft ul{ margin:10px 0 0; padding-left: 18px; }
+    details.soft li{ margin:6px 0; }
+
+    /* ===== Resources list ===== */
+    .resources{
+      display:grid;
+      gap:12px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 12px;
+    }
+    .resourceCard{
+      transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
+    }
+    .resourceCard:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow:
+        0 22px 60px rgba(0,0,0,.60),
+        0 0 0 1px rgba(255,111,145,.16),
+        0 0 30px rgba(255,111,145,.12);
+    }
+    .resourceTitle{
+      font-weight:900;
+      font-size: 16px;
+      margin:0;
+      line-height:1.25;
+    }
+    .resourceNote{
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 14px;
+    }
+    .resourceLink{
+      color: var(--accent);
+      font-weight: 900;
+      text-decoration:none;
+    }
+    .meta{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .tag{
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      background: var(--tagbg);
+      border: 1px solid var(--tagborder);
+      color: rgba(246,242,255,.92);
+    }
+
+    /* ===== Modal ===== */
+    .modalOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal{
+      max-width: 880px;
+      width: 100%;
+      background: rgba(23, 20, 35, .94);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 26px 90px rgba(0,0,0,.70);
+      backdrop-filter: blur(10px);
+    }
+    .modalHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .modal h3{ margin:0; font-size: 18px; letter-spacing:.2px; }
+    .modal p{ margin:0; color: var(--muted); line-height:1.75; font-size: 14px; }
+    .modal ul, .modal ol{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.75;
+      font-size: 14px;
+    }
+    .modal li{ margin:6px 0; }
+    .modalActions{ display:flex; justify-content:flex-end; gap:10px; margin-top: 14px; flex-wrap:wrap; }
+    .modalClose{
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      color: rgba(246,242,255,.92);
+      cursor:pointer;
+      font-weight: 900;
+    }
+
+    footer{
+      padding: 22px 18px 34px;
+      color: rgba(246,242,255,.68);
+      border-top: 1px solid rgba(255,255,255,.10);
+      margin-top: 26px;
+    }
+
+    code{
+      background: rgba(0,0,0,.20);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(246,242,255,.92);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .btn, .resourceCard{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <h1>Neurodiversity & Different Ways of Being</h1>
+    <p>
+      A strength-based space for diverse abilities, disability, and neurodivergence — including the “living” and anticipatory grief that can show up when life doesn’t go as expected.
+    </p>
+
+    <div class="topbar">
+      <div><a href="../">← Back to Resource Hub</a></div>
+      <span class="pill">Strengths • Dignity • Support without shame</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid2">
+
+    <!-- LEFT: Meaningful tool -->
+    <section class="card heroTool">
+      <div class="toolInner">
+        <div class="sectionTitle">
+          <h2>Support Builder</h2>
+          <div class="hint">gentle language + one next step</div>
+        </div>
+
+        <!-- Your “one line summary” (compressed from your notes) -->
+        <div class="quoteBox" id="oneLine">
+          <strong>One-line summary:</strong> Diverse abilities and neurodivergence can bring “living” and anticipatory grief — especially around milestones, comparison, changing needs, and the gap between what we imagined and what is.
+        </div>
+
+        <p class="micro">
+          This tool is meant to help you (and your team) choose words that respect dignity, reduce shame, and leave room for complicated feelings.
+        </p>
+
+        <div class="row">
+          <div>
+            <label for="language">Preferred language (as chosen by the family)</label>
+            <select id="language">
+              <option value="ask" selected>Ask the family what they prefer</option>
+              <option value="disability">Disability / disabled</option>
+              <option value="diverse">Diverse abilities</option>
+              <option value="neurodivergent">Neurodivergent / neurodiversity</option>
+              <option value="difference">Developmental differences</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="moment">What’s the moment right now?</label>
+            <select id="moment">
+              <option value="0">Choose…</option>
+              <option value="milestones">Not meeting milestones</option>
+              <option value="comparison">Comparison / “everyone else’s life”</option>
+              <option value="exhaustion">Caregiver exhaustion / no support</option>
+              <option value="future">Future worries (“what will happen later?”)</option>
+              <option value="progression">Loss of skills / progressive condition</option>
+              <option value="money">Financial stress / service barriers</option>
+              <option value="identity">Parent vs caregiver identity shift</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btnRow">
+          <button class="btn" type="button" id="btnWords">Words that don’t harm</button>
+          <button class="btn" type="button" id="btnValidate">Validation + meaning</button>
+          <button class="btn" type="button" id="btnNext">One next step</button>
+        </div>
+
+        <div class="callout">
+          <strong style="color: rgba(246,242,255,.92);">Reminder:</strong>
+          sometimes while carrying the heavy things we don’t see how far we have come.
+        </div>
+
+        <details class="soft">
+          <summary>What “living grief” can look like</summary>
+          <div class="inside">
+            <ul>
+              <li>Grief that returns at milestones, school changes, or new comparisons.</li>
+              <li>Missing the imagined future — while deeply loving the child you have.</li>
+              <li>Waves of fear, guilt, anger, or sadness that don’t follow a timeline.</li>
+              <li>Exhaustion from systems, services, and advocacy.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="soft">
+          <summary>When it might help to reach out for extra support</summary>
+          <div class="inside">
+            If you’re feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
+            If you’re in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- RIGHT: Resources -->
+    <section class="card">
+      <div class="sectionTitle">
+        <h2>Resources (add your group’s work here)</h2>
+        <div class="hint">links • PDFs • community supports</div>
+      </div>
+
+      <p class="micro">
+        Add your classmates’ resources: terminology guides, chronic sorrow / anticipatory grief supports, BC services, and local Nanaimo links.
+      </p>
+
+      <label for="search" style="margin-top:12px;">Search resources</label>
+      <input id="search" type="search" placeholder="Search (ex: chronic sorrow, milestones, CLBC, FASD, ASD)…" />
+
+      <div id="resourceGrid" class="resources"></div>
+
+      <p class="micro" style="margin-top:12px;">
+        To add resources later: edit the <code>resources</code> list inside this file.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Neurodiversity & Different Ways of Being • Resource Hub</div>
+</footer>
+
+<!-- Modal -->
+<div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modalHead">
+      <h3 id="modalTitle">Support</h3>
+      <button class="modalClose" type="button" id="closeTop">Close</button>
+    </div>
+    <div id="modalBody"></div>
+    <div class="modalActions">
+      <button class="modalClose" type="button" id="closeBottom">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== Resource list (placeholders; your classmates add later) ===== */
+const resources = [
+  {
+    title: "Placeholder: Add your first neurodiversity resource",
+    url: "https://example.com",
+    tags: ["Example", "Living Grief", "Supports"],
+    note: "Replace this with your group’s resource links and short descriptions."
+  }
+];
+
+const resourceGrid = document.getElementById("resourceGrid");
+const search = document.getElementById("search");
+
+function renderResources(){
+  const q = search.value.trim().toLowerCase();
+  const filtered = resources.filter(r=>{
+    const text = (r.title + " " + (r.note||"") + " " + (r.tags||[]).join(" ")).toLowerCase();
+    return !q || text.includes(q);
+  });
+
+  resourceGrid.innerHTML = filtered.map(r => `
+    <article class="card resourceCard">
+      <p class="resourceTitle">
+        <a class="resourceLink" href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
+      </p>
+      ${r.note ? `<p class="resourceNote">${r.note}</p>` : ``}
+      <div class="meta">
+        ${(r.tags||[]).map(t => `<span class="tag">${t}</span>`).join("")}
+      </div>
+    </article>
+  `).join("");
+}
+search.addEventListener("input", renderResources);
+renderResources();
+
+/* ===== Modal helpers ===== */
+const modalOverlay = document.getElementById("modalOverlay");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const closeTop = document.getElementById("closeTop");
+const closeBottom = document.getElementById("closeBottom");
+
+function openModal(title, html){
+  modalTitle.textContent = title;
+  modalBody.innerHTML = html;
+  modalOverlay.style.display = "flex";
+}
+function closeModal(){ modalOverlay.style.display = "none"; }
+
+closeTop.addEventListener("click", closeModal);
+closeBottom.addEventListener("click", closeModal);
+modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
+document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+/* ===== Support Builder content ===== */
+const languageEl = document.getElementById("language");
+const momentEl = document.getElementById("moment");
+
+function languageLine(){
+  const v = languageEl.value;
+  if(v === "ask") return "Ask the family what language feels respectful to them — and follow their lead.";
+  if(v === "disability") return "We’ll use disability/disabled language, with a strengths-based tone and dignity.";
+  if(v === "diverse") return "We’ll use diverse abilities language, centering respect and the family’s preferences.";
+  if(v === "neurodivergent") return "We’ll use neurodivergent/neurodiversity language, centering strengths and identity.";
+  return "We’ll use developmental differences language, keeping it clear and respectful.";
+}
+
+function requireMoment(){
+  if(momentEl.value === "0"){
+    openModal("Pick a moment", `
+      <p>Please choose what kind of moment you’re responding to.</p>
+      <p style="margin-top:8px;">Then this tool will generate supportive words + a next step.</p>
+    `);
+    return false;
+  }
+  return true;
+}
+
+const MOMENTS = {
+  milestones: {
+    words: [
+      "“It makes sense to feel a wave of grief when milestones show up.”",
+      "“Nothing about this means you’re failing — it means you care.”",
+      "“We can hold two truths: love, and sadness about what’s hard.”"
+    ],
+    validate: `
+      <p>
+        When milestones show up, grief can return — not because you’re “not coping,” but because life keeps asking you to notice the gap
+        between <em>what you imagined</em> and <em>what is</em>. That’s a very human pain.
+      </p>
+    `,
+    next: [
+      "Choose one small support to add this week (one routine, one accommodation, one helper).",
+      "Write one sentence you can repeat when the grief spikes (“This is a wave. It will pass.”).",
+      "Ask: “What would make this 10% easier?” — then do only that."
+    ]
+  },
+  comparison: {
+    words: [
+      "“Comparison can steal joy — especially when life feels unfair.”",
+      "“You don’t need to perform ‘fine’ to deserve support.”",
+      "“Your family’s path is real, and it matters.”"
+    ],
+    validate: `
+      <p>
+        Comparison hits hard because it highlights what’s missing — time, ease, support, rest, predictability.
+        It’s okay to name that. It doesn’t make you ungrateful; it makes you honest.
+      </p>
+    `,
+    next: [
+      "Mute one account / step back from one space that triggers comparison.",
+      "Name one thing you did today that protected your child or your household.",
+      "Reach out to one person who “gets it” (even a short text)."
+    ]
+  },
+  exhaustion: {
+    words: [
+      "“It’s hard to thrive when you’re carrying too much alone.”",
+      "“Needing help doesn’t mean you’re weak — it means the load is heavy.”",
+      "“You deserve support that matches the reality.”"
+    ],
+    validate: `
+      <p>
+        Burnout often comes from doing what should be shared work (services, advocacy, appointments, behaviour support, finances)
+        without enough backup. The answer isn’t “try harder” — it’s more support.
+      </p>
+    `,
+    next: [
+      "Pick one task to stop doing for 7 days (even temporarily).",
+      "Ask one professional: “What supports can we add?”",
+      "Build one ‘micro-rest’ into the day (2 minutes counts)."
+    ]
+  },
+  future: {
+    words: [
+      "“Future worry is a form of love — your brain is trying to protect.”",
+      "“You don’t have to solve the whole future today.”",
+      "“We can take the next right step, not the whole staircase.”"
+    ],
+    validate: `
+      <p>
+        Future worry can be consuming — services, adulthood, safety, independence, who will care later.
+        Naming it matters. Then we bring it back to what’s actionable <em>this month</em>.
+      </p>
+    `,
+    next: [
+      "List 3 future worries, circle 1 that has a step you can do in 20 minutes.",
+      "Gather one document: supports, diagnoses, school plans, funding info (one folder).",
+      "Ask: “Who can share this load?” and make one ask."
+    ]
+  },
+  progression: {
+    words: [
+      "“Losing skills can be a real grief — and it deserves gentle care.”",
+      "“You are allowed to mourn what’s changing.”",
+      "“Love stays, even as things shift.”"
+    ],
+    validate: `
+      <p>
+        With progression, grief can be ongoing — the “before,” the uncertainty, the anticipatory fear.
+        This isn’t dramatic. It’s a real response to real loss.
+      </p>
+    `,
+    next: [
+      "Create a ‘today’ ritual (one small joy that is repeatable).",
+      "Make space for memory (photos, notes, a story) without forcing positivity.",
+      "Ask for respite or community support — you shouldn’t have to carry this alone."
+    ]
+  },
+  money: {
+    words: [
+      "“Financial stress is real — and it affects mental health.”",
+      "“You deserve systems that don’t make support harder to access.”",
+      "“This isn’t a personal failure; it’s a load issue.”"
+    ],
+    validate: `
+      <p>
+        Money barriers can deepen grief and isolation — travel, equipment, therapies, time off work.
+        It’s okay to name the injustice of it, and still take the next practical step.
+      </p>
+    `,
+    next: [
+      "Write down the top 2 cost pressures (one page).",
+      "Identify one local resource/benefit to apply for (one application at a time).",
+      "Ask a helper to sit with you while you do the paperwork."
+    ]
+  },
+  identity: {
+    words: [
+      "“It’s hard when parenting becomes caregiving + advocacy + case management.”",
+      "“You can miss the ‘old you’ and still love your child fiercely.”",
+      "“You’re allowed to grieve the role change.”"
+    ],
+    validate: `
+      <p>
+        The shift from “parent” to “parent + carer” can bring grief, guilt, and isolation — especially when others don’t understand.
+        You’re allowed to want your own life back in pieces, too.
+      </p>
+    `,
+    next: [
+      "Name one identity you miss (friend, student, partner, artist).",
+      "Schedule 20 minutes this week for that identity — protected time.",
+      "Tell someone safe: “I’m carrying a lot. I need support.”"
+    ]
+  }
+};
+
+document.getElementById("btnWords").addEventListener("click", () => {
+  if(!requireMoment()) return;
+  const m = MOMENTS[momentEl.value];
+  openModal("Words that don’t harm", `
+    <p><strong>Language note:</strong> ${languageLine()}</p>
+    <p style="margin-top:10px;">Try one sentence at a time:</p>
+    <ul>${m.words.map(x=>`<li>${x}</li>`).join("")}</ul>
+  `);
+});
+
+document.getElementById("btnValidate").addEventListener("click", () => {
+  if(!requireMoment()) return;
+  const m = MOMENTS[momentEl.value];
+  openModal("Validation + meaning", `
+    <p><strong>Language note:</strong> ${languageLine()}</p>
+    ${m.validate}
+    <p style="margin-top:10px;"><strong style="color: rgba(246,242,255,.92);">Remember:</strong> feelings aren’t a problem to solve — they’re information.</p>
+  `);
+});
+
+document.getElementById("btnNext").addEventListener("click", () => {
+  if(!requireMoment()) return;
+  const m = MOMENTS[momentEl.value];
+  openModal("One next step", `
+    <p><strong>Language note:</strong> ${languageLine()}</p>
+    <p style="margin-top:10px;">Pick just one:</p>
+    <ol>${m.next.map(x=>`<li>${x}</li>`).join("")}</ol>
+  `);
+});
+</script>
+</body>
+</html>
