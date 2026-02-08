@@ -6,27 +6,28 @@
   <title>Ages & Stages</title>
 
   <style>
-    /* ===== Ages & Stages — Honeyed Sage (distinct palette) =====
-       Not grief pink/red, not neuro, not major-life aurora.
-       Vibe: calm sage + honey + soft cream on deep charcoal.
+    /* ===== Ages & Stages — Honeyed Sage (cleaned + crisp) =====
+       Fixes: sticky-overlap issue + muddy colors.
+       Vibe: deep charcoal + clean sage + warm honey (no blush/clay).
     */
     :root{
-      --bg0:#0a0d0c;
-      --bg1:#0d1512;
-      --bg2:#111c16;
+      --bg0:#070909;
+      --bg1:#0b120f;
+      --bg2:#0e1813;
 
       --text:#f6f6f1;
       --muted: rgba(246,246,241,.78);
       --faint: rgba(246,246,241,.58);
 
-      --panel: rgba(16, 22, 18, .74);
-      --panel2: rgba(18, 28, 22, .86);
+      /* Panels more neutral (less green) so it doesn’t look swampy */
+      --panel: rgba(12, 14, 13, .74);
+      --panel2: rgba(14, 18, 16, .88);
       --border: rgba(255,255,255,.12);
 
-      --sage:#9fe6c3;      /* fresh but soft */
-      --sage2:#4fd3b0;     /* stronger */
+      --sage:#a7f2d1;      /* clean sage */
+      --sage2:#46d6b2;     /* strong sage */
       --honey:#ffd27d;     /* warm highlight */
-      --clay:#f3b2a7;      /* gentle blush accent */
+      --honey2:#ffb85c;    /* deeper honey for accents */
 
       --shadow: 0 22px 70px rgba(0,0,0,.55);
       --radius: 18px;
@@ -38,27 +39,45 @@
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       min-height:100vh;
+
+      /* Cleaner background: less mixed tones, more intentional */
       background:
-        radial-gradient(900px 600px at 18% 0%, rgba(159,230,195,.18), transparent 60%),
-        radial-gradient(900px 600px at 86% 8%, rgba(255,210,125,.14), transparent 62%),
-        radial-gradient(900px 600px at 52% -10%, rgba(79,211,176,.10), transparent 62%),
-        radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.85), rgba(0,0,0,1) 55%),
+        radial-gradient(900px 600px at 16% 0%, rgba(70,214,178,.16), transparent 60%),
+        radial-gradient(900px 600px at 86% 8%, rgba(255,210,125,.12), transparent 62%),
+        radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.86), rgba(0,0,0,1) 58%),
         linear-gradient(180deg, var(--bg0), var(--bg1) 58%, var(--bg2));
     }
 
     .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 18px; }
 
+    /* IMPORTANT FIX:
+       Header is NOT sticky anymore. Only a small top strip is sticky.
+       This stops your main content from sliding underneath the hero blocks.
+    */
     header{
-      padding: 26px 0 18px;
+      padding: 10px 0 18px;
       border-bottom: 1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(1100px 520px at 18% 0%, rgba(159,230,195,.14), transparent 60%),
-        radial-gradient(1100px 520px at 85% 10%, rgba(255,210,125,.12), transparent 60%),
-        linear-gradient(180deg, rgba(10,13,12,.88), rgba(10,13,12,.55));
+        radial-gradient(1100px 520px at 18% 0%, rgba(70,214,178,.12), transparent 60%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(255,210,125,.10), transparent 60%),
+        linear-gradient(180deg, rgba(7,9,9,.88), rgba(7,9,9,.55));
       backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sticky ONLY the topRow (Back + pills) */
+    .stickyNav{
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 50;
+      padding: 12px 0;
+      background:
+        radial-gradient(1100px 520px at 18% 0%, rgba(70,214,178,.10), transparent 60%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(255,210,125,.08), transparent 60%),
+        linear-gradient(180deg, rgba(7,9,9,.92), rgba(7,9,9,.58));
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
     .topRow{
@@ -90,7 +109,7 @@
       padding: 6px 12px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.20);
       color: rgba(246,246,241,.92);
       font-weight: 900;
       letter-spacing: .2px;
@@ -137,7 +156,7 @@
       margin-top: 14px;
       border: 1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(159,230,195,.10), rgba(255,210,125,.08), rgba(243,178,167,.06));
+      background: linear-gradient(135deg, rgba(70,214,178,.10), rgba(255,210,125,.07));
       box-shadow: 0 16px 60px rgba(0,0,0,.45);
       overflow:hidden;
       position:relative;
@@ -147,9 +166,9 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(1400px 500px at 12% 0%, rgba(159,230,195,.22), transparent 58%),
-        radial-gradient(1400px 500px at 88% 8%, rgba(255,210,125,.16), transparent 60%),
-        radial-gradient(900px 520px at 52% 120%, rgba(79,211,176,.14), transparent 60%);
+        radial-gradient(1400px 520px at 12% 0%, rgba(70,214,178,.20), transparent 58%),
+        radial-gradient(1400px 520px at 88% 8%, rgba(255,210,125,.14), transparent 60%),
+        radial-gradient(900px 520px at 52% 120%, rgba(255,184,92,.10), transparent 60%);
       pointer-events:none;
     }
     .heroInner{
@@ -183,7 +202,7 @@
       padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.20);
       color: rgba(246,246,241,.92);
       text-decoration:none;
       font-weight: 900;
@@ -195,7 +214,7 @@
     .chipBtn:hover{
       transform: translateY(-1px);
       filter: brightness(1.06);
-      box-shadow: 0 0 0 1px rgba(79,211,176,.18), 0 0 26px rgba(255,210,125,.10);
+      box-shadow: 0 0 0 1px rgba(70,214,178,.18), 0 0 26px rgba(255,210,125,.10);
     }
     .chipBtn:active{ transform: translateY(0px); }
 
@@ -214,7 +233,7 @@
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 16px;
       padding: 12px;
-      background: rgba(0,0,0,.16);
+      background: rgba(0,0,0,.18);
       cursor:pointer;
       transition: transform .08s ease, box-shadow .08s ease, filter .08s ease;
       position:relative;
@@ -225,16 +244,15 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(700px 240px at 15% 0%, rgba(159,230,195,.14), transparent 60%),
-        radial-gradient(700px 240px at 90% 10%, rgba(255,210,125,.12), transparent 60%),
-        radial-gradient(700px 240px at 55% 120%, rgba(243,178,167,.10), transparent 62%);
+        radial-gradient(700px 240px at 15% 0%, rgba(70,214,178,.14), transparent 60%),
+        radial-gradient(700px 240px at 90% 10%, rgba(255,210,125,.10), transparent 60%);
       opacity:.9;
       pointer-events:none;
     }
     .ageCard:hover{
       transform: translateY(-1px);
       filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(79,211,176,.18), 0 0 26px rgba(159,230,195,.10);
+      box-shadow: 0 0 0 1px rgba(70,214,178,.18), 0 0 26px rgba(70,214,178,.10);
     }
     .ageCard h3{
       position:relative;
@@ -270,8 +288,15 @@
       padding:10px 12px;
       border-radius: 14px;
       outline:none;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
       min-width: 210px;
+    }
+    select:focus, input:focus{
+      border-color: rgba(255,210,125,.40);
+      box-shadow:
+        0 0 0 1px rgba(255,210,125,.20),
+        0 0 24px rgba(70,214,178,.10),
+        inset 0 0 0 1px rgba(0,0,0,.12);
     }
     input::placeholder{ color: rgba(246,246,241,.55); }
 
@@ -280,7 +305,7 @@
       border:1px solid rgba(255,255,255,.12);
       border-radius: 16px;
       padding: 12px;
-      background: rgba(0,0,0,.16);
+      background: rgba(0,0,0,.18);
       color: rgba(246,246,241,.92);
       line-height: 1.6;
       font-size: 14px;
@@ -291,7 +316,9 @@
       content:"";
       position:absolute;
       inset:-2px;
-      background: radial-gradient(900px 260px at 20% 0%, rgba(255,210,125,.10), transparent 62%);
+      background:
+        radial-gradient(900px 260px at 20% 0%, rgba(255,210,125,.10), transparent 62%),
+        radial-gradient(900px 260px at 90% 110%, rgba(70,214,178,.08), transparent 62%);
       pointer-events:none;
     }
     .scriptBox .inner{ position:relative; }
@@ -300,10 +327,14 @@
       padding: 9px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
+      background: rgba(0,0,0,.24);
       color: rgba(246,246,241,.92);
       cursor:pointer;
       font-weight: 900;
+    }
+    .copyBtn:hover{
+      filter: brightness(1.06);
+      box-shadow: 0 0 0 1px rgba(255,210,125,.18), 0 0 24px rgba(70,214,178,.10);
     }
 
     /* Two columns */
@@ -328,7 +359,7 @@
       padding: 12px;
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.16);
+      background: rgba(0,0,0,.18);
     }
     .resourceItem .left{ min-width: 240px; }
     .resourceItem .title{
@@ -356,7 +387,7 @@
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 16px;
       padding: 12px;
-      background: rgba(0,0,0,.16);
+      background: rgba(0,0,0,.18);
       color: var(--muted);
       line-height: 1.6;
       font-size: 14px;
@@ -377,7 +408,7 @@
     .modal{
       width: 100%;
       max-width: 860px;
-      background: rgba(16, 22, 18, .92);
+      background: rgba(12, 14, 13, .92);
       border: 1px solid rgba(255,255,255,.14);
       border-radius: 18px;
       padding: 16px;
@@ -427,7 +458,9 @@
 </head>
 
 <body>
-<header>
+
+<!-- Sticky ONLY this strip -->
+<div class="stickyNav">
   <div class="wrap">
     <div class="topRow">
       <div class="crumb"><a href="../">← Back to Resource Hub</a></div>
@@ -437,7 +470,11 @@
         <span class="pill">caregivers + kids + youth</span>
       </div>
     </div>
+  </div>
+</div>
 
+<header>
+  <div class="wrap">
     <h1>Ages & Stages</h1>
     <p class="sub">
       Children and youth understand big topics differently depending on their developmental stage.
@@ -483,7 +520,7 @@
             </div>
           </div>
 
-          <div class="card" style="margin:0; background: rgba(0,0,0,.16); box-shadow:none;">
+          <div class="card" style="margin:0; background: rgba(0,0,0,.18); box-shadow:none;">
             <h2 style="margin-bottom:8px;">Script Builder (copy/paste)</h2>
             <p style="color:var(--muted); margin:0;">
               Choose an age and a topic. Then copy the script. Later you can swap in your classmates’ resources.
