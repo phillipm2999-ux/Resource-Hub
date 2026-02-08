@@ -266,6 +266,47 @@
       line-height: 1.5;
     }
 
+    /* ===== Youth section styles ===== */
+    .youthCard:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 480px at 12% 18%, rgba(255,79,109,.18), transparent 60%),
+        radial-gradient(900px 480px at 88% 28%, rgba(199,90,123,.14), transparent 60%),
+        linear-gradient(135deg, rgba(255,79,109,.07), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+    .youthBadge{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background: rgba(255,79,109,.12);
+      border:1px solid rgba(255,79,109,.22);
+      color: rgba(246,242,255,.92);
+      white-space:nowrap;
+    }
+    .youthLead{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 90ch;
+    }
+    .youthList{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .youthList li{ margin:6px 0; }
+    .youthNote{
+      margin:0;
+      color: rgba(246,242,255,.74);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
     /* Tiny modal */
     .modalOverlay{
       position: fixed;
@@ -412,6 +453,79 @@
   </section>
   <!-- ===== End Support Section ===== -->
 
+  <!-- ===== Youth Support Section ===== -->
+  <section class="card supportCard youthCard" style="margin-top:14px; margin-bottom:14px;">
+    <div class="supportInner">
+      <div class="supportTitle">
+        <h2>For youth going through grief</h2>
+        <span class="youthBadge">real talk + gentle tools</span>
+      </div>
+
+      <p class="youthLead">
+        If you're a kid or teen reading this: grief can feel confusing, heavy, or like it shows up out of nowhere.
+        You might feel sad, angry, numb, guilty, or totally “fine” and then not fine later. That’s normal.
+        You don’t have to have the “right” emotions — you just deserve support.
+      </p>
+
+      <div class="supportGrid">
+        <div class="miniCard">
+          <h3>When it hits suddenly</h3>
+          <p>
+            Try a quick reset: name <strong>5 things you see</strong>, <strong>4 things you can touch</strong>,
+            <strong>3 things you hear</strong>, <strong>2 things you smell</strong>, <strong>1 thing you taste</strong>.
+            It helps your brain come back to the present.
+          </p>
+        </div>
+
+        <div class="miniCard">
+          <h3>Big feelings are allowed</h3>
+          <p>
+            Anger doesn’t mean you’re bad. Tears don’t mean you’re weak. Feeling nothing doesn’t mean you didn’t care.
+            Your brain is doing its best to protect you.
+          </p>
+        </div>
+
+        <div class="miniCard">
+          <h3>If you don’t want to talk</h3>
+          <p>
+            That’s okay. Some people process by moving: walking, gaming, music, sports, art, cleaning, being with pets.
+            You can still be grieving even if you’re not talking about it.
+          </p>
+        </div>
+
+        <div class="miniCard">
+          <h3>One small thing you can do today</h3>
+          <p>
+            Pick one: drink water, eat something small, text a safe person “can you check in?”, write one sentence in your notes,
+            or step outside for 2 minutes. Small steps matter.
+          </p>
+        </div>
+      </div>
+
+      <details class="softDetails">
+        <summary>Words you can use when you don’t know what to say</summary>
+        <p>
+          “I’m having a hard time.” • “I don’t want advice, I just want someone around.” • “Can we talk about something else but stay together?”
+          • “I’m not okay today.” • “I don’t know what I feel.”
+        </p>
+      </details>
+
+      <details class="softDetails">
+        <summary>If you feel unsafe or overwhelmed</summary>
+        <p>
+          If you’re in danger or thinking about hurting yourself, tell an adult you trust right away.
+          In Canada, you can call or text <strong>988</strong> any time, or call <strong>911</strong> in an emergency.
+          You deserve help — even if you’re not sure how to explain it.
+        </p>
+      </details>
+
+      <p class="youthNote">
+        You’re not “too much.” Grief is a normal response to a hard thing. You don’t have to carry it alone.
+      </p>
+    </div>
+  </section>
+  <!-- ===== End Youth Support Section ===== -->
+
   <section id="grid" class="grid"></section>
 
   <!-- Discussion Board -->
@@ -536,5 +650,3 @@ document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(
 
 </body>
 </html>
-
-
