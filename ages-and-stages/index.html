@@ -6,28 +6,32 @@
   <title>Ages & Stages</title>
 
   <style>
-    /* ===== Ages & Stages — Honeyed Sage (cleaned + crisp) =====
-       Fixes: sticky-overlap issue + muddy colors.
-       Vibe: deep charcoal + clean sage + warm honey (no blush/clay).
+    /* ===== Ages & Stages — Ember Red (clean + crisp) =====
+       Keeps your stickyNav fix + layout exactly.
+       Palette: deep charcoal + ember red + warm honey (no sage).
     */
     :root{
       --bg0:#070909;
-      --bg1:#0b120f;
-      --bg2:#0e1813;
+      --bg1:#100b0b;
+      --bg2:#170c0c;
 
       --text:#f6f6f1;
       --muted: rgba(246,246,241,.78);
       --faint: rgba(246,246,241,.58);
 
-      /* Panels more neutral (less green) so it doesn’t look swampy */
-      --panel: rgba(12, 14, 13, .74);
-      --panel2: rgba(14, 18, 16, .88);
+      /* Panels neutral + slightly warm (less green) */
+      --panel: rgba(12, 10, 10, .74);
+      --panel2: rgba(16, 12, 12, .88);
       --border: rgba(255,255,255,.12);
 
-      --sage:#a7f2d1;      /* clean sage */
-      --sage2:#46d6b2;     /* strong sage */
-      --honey:#ffd27d;     /* warm highlight */
-      --honey2:#ffb85c;    /* deeper honey for accents */
+      /* NEW: ember red identity (not grief-pink) */
+      --ember:#ff4b4b;
+      --ember2:#ff2d2d;
+      --crimson:#b31237;
+
+      /* Warm highlight stays */
+      --honey:#ffd27d;
+      --honey2:#ffb85c;
 
       --shadow: 0 22px 70px rgba(0,0,0,.55);
       --radius: 18px;
@@ -40,26 +44,22 @@
       color:var(--text);
       min-height:100vh;
 
-      /* Cleaner background: less mixed tones, more intentional */
+      /* Ember background */
       background:
-        radial-gradient(900px 600px at 16% 0%, rgba(70,214,178,.16), transparent 60%),
-        radial-gradient(900px 600px at 86% 8%, rgba(255,210,125,.12), transparent 62%),
+        radial-gradient(900px 600px at 16% 0%, rgba(255,75,75,.14), transparent 60%),
+        radial-gradient(900px 600px at 86% 8%, rgba(179,18,55,.14), transparent 62%),
         radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.86), rgba(0,0,0,1) 58%),
         linear-gradient(180deg, var(--bg0), var(--bg1) 58%, var(--bg2));
     }
 
     .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 18px; }
 
-    /* IMPORTANT FIX:
-       Header is NOT sticky anymore. Only a small top strip is sticky.
-       This stops your main content from sliding underneath the hero blocks.
-    */
     header{
       padding: 10px 0 18px;
       border-bottom: 1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(1100px 520px at 18% 0%, rgba(70,214,178,.12), transparent 60%),
-        radial-gradient(1100px 520px at 85% 10%, rgba(255,210,125,.10), transparent 60%),
+        radial-gradient(1100px 520px at 18% 0%, rgba(255,75,75,.10), transparent 60%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(179,18,55,.10), transparent 60%),
         linear-gradient(180deg, rgba(7,9,9,.88), rgba(7,9,9,.55));
       backdrop-filter: blur(10px);
       position: relative;
@@ -73,8 +73,8 @@
       z-index: 50;
       padding: 12px 0;
       background:
-        radial-gradient(1100px 520px at 18% 0%, rgba(70,214,178,.10), transparent 60%),
-        radial-gradient(1100px 520px at 85% 10%, rgba(255,210,125,.08), transparent 60%),
+        radial-gradient(1100px 520px at 18% 0%, rgba(255,75,75,.08), transparent 60%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(179,18,55,.08), transparent 60%),
         linear-gradient(180deg, rgba(7,9,9,.92), rgba(7,9,9,.58));
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,.08);
@@ -89,7 +89,7 @@
     }
 
     .crumb a{
-      color: var(--sage2);
+      color: var(--ember);
       text-decoration:none;
       font-weight: 900;
       opacity:.95;
@@ -156,7 +156,7 @@
       margin-top: 14px;
       border: 1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(70,214,178,.10), rgba(255,210,125,.07));
+      background: linear-gradient(135deg, rgba(255,75,75,.10), rgba(255,210,125,.07));
       box-shadow: 0 16px 60px rgba(0,0,0,.45);
       overflow:hidden;
       position:relative;
@@ -166,8 +166,8 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(1400px 520px at 12% 0%, rgba(70,214,178,.20), transparent 58%),
-        radial-gradient(1400px 520px at 88% 8%, rgba(255,210,125,.14), transparent 60%),
+        radial-gradient(1400px 520px at 12% 0%, rgba(255,75,75,.18), transparent 58%),
+        radial-gradient(1400px 520px at 88% 8%, rgba(179,18,55,.12), transparent 60%),
         radial-gradient(900px 520px at 52% 120%, rgba(255,184,92,.10), transparent 60%);
       pointer-events:none;
     }
@@ -214,7 +214,7 @@
     .chipBtn:hover{
       transform: translateY(-1px);
       filter: brightness(1.06);
-      box-shadow: 0 0 0 1px rgba(70,214,178,.18), 0 0 26px rgba(255,210,125,.10);
+      box-shadow: 0 0 0 1px rgba(255,75,75,.18), 0 0 26px rgba(179,18,55,.14);
     }
     .chipBtn:active{ transform: translateY(0px); }
 
@@ -244,15 +244,15 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(700px 240px at 15% 0%, rgba(70,214,178,.14), transparent 60%),
-        radial-gradient(700px 240px at 90% 10%, rgba(255,210,125,.10), transparent 60%);
+        radial-gradient(700px 240px at 15% 0%, rgba(255,75,75,.14), transparent 60%),
+        radial-gradient(700px 240px at 90% 10%, rgba(179,18,55,.10), transparent 60%);
       opacity:.9;
       pointer-events:none;
     }
     .ageCard:hover{
       transform: translateY(-1px);
       filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(70,214,178,.18), 0 0 26px rgba(70,214,178,.10);
+      box-shadow: 0 0 0 1px rgba(255,75,75,.18), 0 0 26px rgba(255,45,45,.12);
     }
     .ageCard h3{
       position:relative;
@@ -292,10 +292,10 @@
       min-width: 210px;
     }
     select:focus, input:focus{
-      border-color: rgba(255,210,125,.40);
+      border-color: rgba(255,75,75,.42);
       box-shadow:
-        0 0 0 1px rgba(255,210,125,.20),
-        0 0 24px rgba(70,214,178,.10),
+        0 0 0 1px rgba(255,75,75,.18),
+        0 0 24px rgba(179,18,55,.14),
         inset 0 0 0 1px rgba(0,0,0,.12);
     }
     input::placeholder{ color: rgba(246,246,241,.55); }
@@ -317,8 +317,8 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(900px 260px at 20% 0%, rgba(255,210,125,.10), transparent 62%),
-        radial-gradient(900px 260px at 90% 110%, rgba(70,214,178,.08), transparent 62%);
+        radial-gradient(900px 260px at 20% 0%, rgba(255,75,75,.10), transparent 62%),
+        radial-gradient(900px 260px at 90% 110%, rgba(255,184,92,.08), transparent 62%);
       pointer-events:none;
     }
     .scriptBox .inner{ position:relative; }
@@ -334,7 +334,7 @@
     }
     .copyBtn:hover{
       filter: brightness(1.06);
-      box-shadow: 0 0 0 1px rgba(255,210,125,.18), 0 0 24px rgba(70,214,178,.10);
+      box-shadow: 0 0 0 1px rgba(255,75,75,.18), 0 0 24px rgba(179,18,55,.14);
     }
 
     /* Two columns */
@@ -374,7 +374,7 @@
       line-height:1.45;
     }
     .resourceItem a{
-      color: var(--sage2);
+      color: var(--ember);
       text-decoration:none;
       font-weight: 900;
       white-space:nowrap;
@@ -408,7 +408,7 @@
     .modal{
       width: 100%;
       max-width: 860px;
-      background: rgba(12, 14, 13, .92);
+      background: rgba(12, 10, 10, .92);
       border: 1px solid rgba(255,255,255,.14);
       border-radius: 18px;
       padding: 16px;
