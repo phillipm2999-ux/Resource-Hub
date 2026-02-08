@@ -6,27 +6,27 @@
   <title>Major Life Changes</title>
 
   <style>
-    /* ===== Major Life Changes — Aurora Calm (distinct palette) =====
-       Not grief pink/red. Not divorce teal. Not neuro (your separate scheme).
-       Vibe: grounded midnight + aurora greens + lavender.
+    /* ===== Major Life Changes — Purple/Orange “Afterglow” (distinct) =====
+       Fixes: header layering (no more content sliding behind hero blocks)
+       New palette: purple + orange, no green/blue aurora vibe
     */
     :root{
-      --bg0:#060814;
-      --bg1:#071427;
-      --bg2:#071b2f;
+      --bg0:#070611;
+      --bg1:#120a1f;
+      --bg2:#1a0f2b;
 
-      --text:#f2f6ff;
-      --muted: rgba(242,246,255,.78);
-      --faint: rgba(242,246,255,.58);
+      --text:#f7f3ff;
+      --muted: rgba(247,243,255,.78);
+      --faint: rgba(247,243,255,.58);
 
-      --panel: rgba(10, 16, 32, .72);
-      --panel2: rgba(12, 20, 40, .82);
+      --panel: rgba(18, 12, 30, .72);
+      --panel2: rgba(22, 14, 36, .84);
       --border: rgba(255,255,255,.12);
 
-      --accent:#7cf6c7;     /* aurora green */
-      --accent2:#7aa7ff;    /* cool blue */
-      --accent3:#b792ff;    /* lavender */
-      --warm:#ffd08a;       /* soft warm */
+      --purple:#b892ff;
+      --purple2:#7f5bff;
+      --orange:#ffb36b;
+      --orange2:#ff7a45;
 
       --shadow: 0 22px 70px rgba(0,0,0,.55);
       --radius: 18px;
@@ -38,27 +38,46 @@
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       min-height:100vh;
+
       background:
-        radial-gradient(900px 600px at 18% 0%, rgba(124,246,199,.18), transparent 60%),
-        radial-gradient(900px 600px at 85% 12%, rgba(122,167,255,.16), transparent 62%),
-        radial-gradient(900px 650px at 60% 0%, rgba(183,146,255,.12), transparent 64%),
+        radial-gradient(900px 600px at 16% 0%, rgba(184,146,255,.20), transparent 60%),
+        radial-gradient(900px 600px at 86% 10%, rgba(255,179,107,.18), transparent 62%),
+        radial-gradient(900px 650px at 55% -5%, rgba(255,122,69,.10), transparent 64%),
         radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.85), rgba(0,0,0,1) 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1) 55%, var(--bg2));
     }
 
     .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 18px; }
 
+    /* IMPORTANT FIX:
+       Header is NO LONGER sticky. Only the small nav strip is sticky.
+       This prevents main content from sliding underneath the hero blocks.
+    */
     header{
-      padding: 26px 0 18px;
+      padding: 14px 0 18px;
       border-bottom: 1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(1100px 520px at 18% 0%, rgba(124,246,199,.14), transparent 60%),
-        radial-gradient(1100px 520px at 85% 10%, rgba(122,167,255,.12), transparent 60%),
-        linear-gradient(180deg, rgba(6,8,20,.86), rgba(6,8,20,.55));
+        radial-gradient(1100px 520px at 18% 0%, rgba(184,146,255,.16), transparent 60%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(255,179,107,.14), transparent 60%),
+        linear-gradient(180deg, rgba(7,6,17,.92), rgba(7,6,17,.65));
       backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sticky ONLY the top nav row */
+    .stickyNav{
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 50;
+      padding: 12px 0;
+      margin-bottom: 8px;
+      background:
+        radial-gradient(1100px 520px at 18% 0%, rgba(184,146,255,.12), transparent 60%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(255,179,107,.10), transparent 60%),
+        linear-gradient(180deg, rgba(7,6,17,.92), rgba(7,6,17,.55));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
     .topRow{
@@ -70,7 +89,7 @@
     }
 
     .crumb a{
-      color: var(--accent);
+      color: var(--orange);
       text-decoration:none;
       font-weight: 900;
       opacity:.95;
@@ -91,12 +110,12 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
-      color: rgba(242,246,255,.92);
+      color: rgba(247,243,255,.92);
       font-weight: 900;
       letter-spacing: .2px;
       white-space:nowrap;
     }
-    .pill strong{ color: var(--warm); }
+    .pill strong{ color: var(--orange); }
 
     h1{
       margin: 10px 0 0;
@@ -115,7 +134,7 @@
       margin-top: 14px;
       border: 1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(124,246,199,.10), rgba(122,167,255,.09), rgba(183,146,255,.07));
+      background: linear-gradient(135deg, rgba(184,146,255,.12), rgba(127,91,255,.08), rgba(255,179,107,.10), rgba(255,122,69,.06));
       box-shadow: 0 16px 60px rgba(0,0,0,.45);
       overflow:hidden;
       position:relative;
@@ -125,9 +144,9 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(1400px 500px at 15% 0%, rgba(124,246,199,.20), transparent 58%),
-        radial-gradient(1400px 500px at 85% 10%, rgba(122,167,255,.16), transparent 60%),
-        radial-gradient(900px 520px at 55% 120%, rgba(183,146,255,.16), transparent 60%);
+        radial-gradient(1400px 520px at 14% 0%, rgba(184,146,255,.22), transparent 58%),
+        radial-gradient(1400px 520px at 88% 10%, rgba(255,179,107,.18), transparent 60%),
+        radial-gradient(900px 520px at 55% 120%, rgba(127,91,255,.16), transparent 60%);
       pointer-events:none;
     }
     .heroInner{
@@ -183,7 +202,7 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
-      color: rgba(242,246,255,.92);
+      color: rgba(247,243,255,.92);
       text-decoration:none;
       font-weight: 900;
       font-size: 13px;
@@ -194,7 +213,7 @@
     .chipBtn:hover{
       transform: translateY(-1px);
       filter: brightness(1.06);
-      box-shadow: 0 0 0 1px rgba(124,246,199,.18), 0 0 26px rgba(122,167,255,.12);
+      box-shadow: 0 0 0 1px rgba(255,179,107,.18), 0 0 26px rgba(184,146,255,.12);
     }
     .chipBtn:active{ transform: translateY(0px); }
 
@@ -208,9 +227,9 @@
       line-height: 1.6;
       font-size: 14px;
     }
-    .callout strong{ color: rgba(242,246,255,.92); }
+    .callout strong{ color: rgba(247,243,255,.92); }
 
-    /* Over-the-top: "Change Map" */
+    /* Change Map */
     .mapWrap{
       display:grid;
       gap: 10px;
@@ -250,16 +269,16 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(700px 240px at 20% 0%, rgba(124,246,199,.14), transparent 60%),
-        radial-gradient(700px 240px at 85% 10%, rgba(122,167,255,.10), transparent 60%),
-        radial-gradient(700px 240px at 55% 120%, rgba(183,146,255,.12), transparent 62%);
-      opacity:.85;
+        radial-gradient(700px 240px at 18% 0%, rgba(184,146,255,.16), transparent 60%),
+        radial-gradient(700px 240px at 90% 10%, rgba(255,179,107,.14), transparent 60%),
+        radial-gradient(700px 240px at 55% 120%, rgba(127,91,255,.12), transparent 62%);
+      opacity:.90;
       pointer-events:none;
     }
     .node:hover{
       transform: translateY(-1px);
       filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(124,246,199,.18), 0 0 26px rgba(183,146,255,.12);
+      box-shadow: 0 0 0 1px rgba(255,179,107,.18), 0 0 26px rgba(184,146,255,.14);
     }
     .node h3{
       position:relative;
@@ -287,15 +306,15 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
-      color: rgba(242,246,255,.92);
+      color: rgba(247,243,255,.92);
       font-weight: 900;
       font-size: 13px;
       cursor:pointer;
       user-select:none;
     }
     .tabBtn[aria-selected="true"]{
-      border-color: rgba(124,246,199,.42);
-      box-shadow: 0 0 0 1px rgba(124,246,199,.18), 0 0 26px rgba(122,167,255,.14);
+      border-color: rgba(255,179,107,.42);
+      box-shadow: 0 0 0 1px rgba(255,179,107,.18), 0 0 26px rgba(184,146,255,.16);
     }
     .tabPanel{
       margin-top: 12px;
@@ -313,7 +332,7 @@
     }
     .list li{ margin: 6px 0; }
 
-    /* "One Next Step" generator */
+    /* Next step generator */
     .nextStep{
       display:grid;
       gap:10px;
@@ -326,7 +345,7 @@
       border-radius: 16px;
       padding: 12px;
       background: rgba(0,0,0,.16);
-      color: rgba(242,246,255,.92);
+      color: rgba(247,243,255,.92);
       line-height: 1.55;
       font-size: 14px;
     }
@@ -350,7 +369,7 @@
     .resourceItem .left{ min-width: 240px; }
     .resourceItem .title{
       font-weight: 900;
-      color: rgba(242,246,255,.92);
+      color: rgba(247,243,255,.92);
       margin:0 0 4px;
     }
     .resourceItem .desc{
@@ -360,7 +379,7 @@
       line-height:1.45;
     }
     .resourceItem a{
-      color: var(--accent);
+      color: var(--orange);
       text-decoration:none;
       font-weight: 900;
       white-space:nowrap;
@@ -381,7 +400,7 @@
     .modal{
       width: 100%;
       max-width: 820px;
-      background: rgba(10, 16, 32, .92);
+      background: rgba(18, 12, 30, .92);
       border: 1px solid rgba(255,255,255,.14);
       border-radius: 18px;
       padding: 16px;
@@ -414,7 +433,7 @@
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.22);
-      color: rgba(242,246,255,.92);
+      color: rgba(247,243,255,.92);
       cursor:pointer;
       font-weight: 900;
     }
@@ -429,7 +448,7 @@
     footer{
       padding: 20px 0 34px;
       border-top: 1px solid rgba(255,255,255,.10);
-      color: rgba(242,246,255,.62);
+      color: rgba(247,243,255,.62);
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -440,16 +459,22 @@
 
 <body>
 <header>
-  <div class="wrap">
-    <div class="topRow">
-      <div class="crumb"><a href="../">← Back to Resource Hub</a></div>
-      <div class="pillRow">
-        <span class="pill">change is common</span>
-        <span class="pill"><strong>predictability helps</strong></span>
-        <span class="pill">parents + caregivers + kids + youth</span>
+
+  <!-- Sticky nav strip ONLY -->
+  <div class="stickyNav">
+    <div class="wrap">
+      <div class="topRow">
+        <div class="crumb"><a href="../">← Back to Resource Hub</a></div>
+        <div class="pillRow">
+          <span class="pill">change is common</span>
+          <span class="pill"><strong>predictability helps</strong></span>
+          <span class="pill">parents + caregivers + kids + youth</span>
+        </div>
       </div>
     </div>
+  </div>
 
+  <div class="wrap">
     <h1>Major Life Changes</h1>
     <p class="sub">
       Moving, changing schools, new caregivers, foster/kin placements, immigration, health changes, job loss, housing changes;
@@ -473,7 +498,6 @@
               it’s <em>small predictability</em> repeated over time.
             </div>
 
-            <!-- Over-the-top: Change Map -->
             <div class="mapWrap">
               <div class="mapHeader">
                 <h2 style="margin:0;">Pick what kind of change you’re in</h2>
@@ -621,7 +645,6 @@
     </section>
   </div>
 
-  <!-- Optional discussion, same as your main setup -->
   <section class="card" style="margin-top:16px;">
     <h2 style="margin-bottom:8px;">Discussion & Suggestions</h2>
     <p style="color:var(--muted); margin:0 0 12px;">
@@ -668,17 +691,19 @@
   ];
 
   const list = document.getElementById("resourceList");
-  list.innerHTML = CHANGE_RESOURCES.map(r => `
-    <div class="resourceItem">
-      <div class="left">
-        <div class="title">${r.title}</div>
-        <p class="desc">${r.desc}</p>
+  if(list){
+    list.innerHTML = CHANGE_RESOURCES.map(r => `
+      <div class="resourceItem">
+        <div class="left">
+          <div class="title">${r.title}</div>
+          <p class="desc">${r.desc}</p>
+        </div>
+        <div>
+          <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.url === "#" ? "Add link later" : "Open ↗"}</a>
+        </div>
       </div>
-      <div>
-        <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.url === "#" ? "Add link later" : "Open ↗"}</a>
-      </div>
-    </div>
-  `).join("");
+    `).join("");
+  }
 
   /* ===== Tabs ===== */
   const tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
@@ -690,30 +715,37 @@
   }
   tabButtons.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
 
-  /* ===== One Next Step generator (over-the-top helpful) ===== */
+  /* ===== One Next Step generator ===== */
   const caregiverSteps = [
     "Pick one predictable thing for today: the same snack, the same bedtime phrase, or the same 2-minute check-in.",
     "Say one steady line: “Here’s what we know today. You’re safe, and I’m here.” Repeat it all week.",
     "Make a tiny plan: write the next 2 steps on paper. (Brains calm down when a plan exists.)",
-    "Do a 60-second nervous system reset: hand on chest, inhale 4, exhale 6 (twice), name 3 things you see.",
+    "Do a 60-second reset: hand on chest, inhale 4, exhale 6 (twice), name 3 things you see.",
     "Choose repair over perfection: “I was stressed and I snapped, I’m sorry. That wasn’t yours to carry.”"
   ];
   const youthSteps = [
     "Do the 5-4-3-2-1 reset: 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste.",
-    "Pick one: drink water, eat something small, step outside for 2 minutes, or send “can you check in?” to someone safe.",
-    "Write one sentence in notes: “What I miss is…” or “What I’m scared of is…”. You don’t need more than one.",
+    "Pick one: drink water, eat something small, step outside for 2 minutes, or text “can you check in?” to someone safe.",
+    "Write one sentence in notes: “What I miss is…” or “What I’m scared of is…”. One sentence counts.",
     "Move your body for 60 seconds (walk, stretch, shake out hands). Stress lives in muscles.",
     "Ask for one specific thing: “Can you sit with me?” “Can we make a plan?” “Can I have a quiet minute?”"
   ];
   const stepBox = document.getElementById("stepBox");
-  document.getElementById("btnNextParent").addEventListener("click", () => {
-    stepBox.textContent = caregiverSteps[Math.floor(Math.random()*caregiverSteps.length)];
-  });
-  document.getElementById("btnNextYouth").addEventListener("click", () => {
-    stepBox.textContent = youthSteps[Math.floor(Math.random()*youthSteps.length)];
-  });
+  const btnNextParent = document.getElementById("btnNextParent");
+  const btnNextYouth = document.getElementById("btnNextYouth");
 
-  /* ===== Modal content (scripts + focused guides) ===== */
+  if(btnNextParent && stepBox){
+    btnNextParent.addEventListener("click", () => {
+      stepBox.textContent = caregiverSteps[Math.floor(Math.random()*caregiverSteps.length)];
+    });
+  }
+  if(btnNextYouth && stepBox){
+    btnNextYouth.addEventListener("click", () => {
+      stepBox.textContent = youthSteps[Math.floor(Math.random()*youthSteps.length)];
+    });
+  }
+
+  /* ===== Modal content ===== */
   const MODALS = {
     words_today: {
       title: "Words for today",
@@ -783,7 +815,6 @@
       `
     },
 
-    /* Change Map focused modals */
     m_move: {
       title: "Moving / housing change: focused guide",
       html: `
@@ -802,7 +833,7 @@
       html: `
         <p><strong>What helps most:</strong> belonging + one familiar anchor + a plan for worry.</p>
         <ul>
-          <li>Practice the route, locker, or entry routine before the first day if possible.</li>
+          <li>Practice the route/entry routine before the first day if possible.</li>
           <li>Create a ‘worry plan’: “If you feel overwhelmed, you can [counsellor/teacher/bathroom break].”</li>
           <li>Pick one “safe person” at school (teacher, EA, counsellor).</li>
           <li>After school: snack + water + quiet time before questions.</li>
@@ -828,8 +859,8 @@
       html: `
         <p><strong>What helps most:</strong> clear information in small pieces + control where possible.</p>
         <ul>
-          <li>Use “today language”: “Today we know…” (avoid overwhelming future predictions).</li>
-          <li>Offer one area of control (choose snack, choose music, choose order of tasks).</li>
+          <li>Use “today language”: “Today we know…”</li>
+          <li>Offer one area of control (choose snack/music/order of tasks).</li>
           <li>Normalize mixed emotions — even relief can exist with grief.</li>
           <li>Plan recovery time after appointments.</li>
         </ul>
@@ -857,7 +888,7 @@
           <li>Keep details age-appropriate (no adult panic, no numbers dumping).</li>
           <li>Anchor safety: “We have a plan. You will be taken care of.”</li>
           <li>Maintain one affordable routine (library night, park walk, movie at home).</li>
-          <li>Watch for shame, kids often assume they caused stress.</li>
+          <li>Watch for shame — kids often assume they caused stress.</li>
         </ul>
         <p><strong>Script:</strong> “Money is an adult problem. Your job is being a kid.”</p>
       `
@@ -883,8 +914,8 @@
     el.addEventListener("click", () => openModal(el.dataset.modal));
   });
 
-  closeTop.addEventListener("click", closeModal);
-  closeBottom.addEventListener("click", closeModal);
+  if(closeTop) closeTop.addEventListener("click", closeModal);
+  if(closeBottom) closeBottom.addEventListener("click", closeModal);
   overlay.addEventListener("click", (e) => { if(e.target === overlay) closeModal(); });
   document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 </script>
