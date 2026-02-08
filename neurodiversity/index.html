@@ -751,13 +751,104 @@ momentEl.addEventListener("change", applyGlow);
 languageEl.addEventListener("change", applyGlow);
 applyGlow();
 
+/* ===== NEW: category-specific language guidance + button labels ===== */
+const momentSelect = document.getElementById("moment");
+const btnWords = document.getElementById("btnWords");
+const btnValidate = document.getElementById("btnValidate");
+const btnNext = document.getElementById("btnNext");
+
+const MOMENT_LABELS = {
+  milestones: "Milestones",
+  comparison: "Comparison",
+  exhaustion: "Exhaustion",
+  future: "Future worries",
+  progression: "Progression",
+  money: "Money & barriers",
+  identity: "Identity shift"
+};
+
+function updateButtonLabels(){
+  const key = momentSelect.value;
+  const prefix = MOMENT_LABELS[key] || "Support";
+  btnWords.textContent = `${prefix}: words that don’t harm`;
+  btnValidate.textContent = `${prefix}: validation + meaning`;
+  btnNext.textContent = `${prefix}: one next step`;
+}
+momentSelect.addEventListener("change", updateButtonLabels);
+updateButtonLabels();
+
 function languageLine(){
-  const v = languageEl.value;
-  if(v === "ask") return "Ask the family what language feels respectful to them — and follow their lead.";
-  if(v === "disability") return "We’ll use disability/disabled language, with a strengths-based tone and dignity.";
-  if(v === "diverse") return "We’ll use diverse abilities language, centering respect and the family’s preferences.";
-  if(v === "neurodivergent") return "We’ll use neurodivergent/neurodiversity language, centering strengths and identity.";
-  return "We’ll use developmental differences language, keeping it clear and respectful.";
+  const lang = languageEl.value;
+  const moment = momentEl.value;
+
+  const LINES = {
+    milestones: {
+      ask: "Ask what language feels respectful for the family, then mirror it — milestones can bring “living grief,” and your words should feel safe.",
+      disability: "Use disability/disabled language and focus on access + barriers (not blame): “What barriers are getting in the way right now?”",
+      diverse: "Use diverse abilities language and name strengths + adaptations: “What’s working, and what support would make this easier?”",
+      neurodivergent: "Use neurodivergent/neurodiversity language and center nervous-system needs: “What helps their system feel safe and supported?”",
+      difference: "Use developmental differences language with gentle clarity: “What differences are showing up, and what support fits best right now?”"
+    },
+
+    comparison: {
+      ask: "Ask their preferred language and avoid “fixing” words — comparison is tender; reflect dignity and reduce shame.",
+      disability: "Use disability language and name barriers/ableism without making it personal: “Systems can make this harder than it should be.”",
+      diverse: "Use diverse abilities language that protects worth: “Different needs don’t mean less value.”",
+      neurodivergent: "Use neurodiversity language to reduce stigma: “Different brains develop differently — support should match the person.”",
+      difference: "Use developmental differences language to keep it grounded: “Different pace, different needs — still deserving of respect.”"
+    },
+
+    exhaustion: {
+      ask: "Ask their preferred language, then name the load: “This is heavy work — you shouldn’t be carrying it alone.”",
+      disability: "Use disability language and emphasize respite/support: “Caregiving needs backup — services are part of the plan.”",
+      diverse: "Use diverse abilities language and validate invisible labour: “You’ve been doing a lot of unseen work.”",
+      neurodivergent: "Use neurodiversity language and talk capacity: “When the nervous system is maxed out, rest is a need.”",
+      difference: "Use developmental differences language and highlight practical supports: “Let’s reduce demands and increase support.”"
+    },
+
+    future: {
+      ask: "Ask what language fits best, then bring worry back to one next step — not the whole staircase.",
+      disability: "Use disability language and talk planning + services: “We can plan supports without assuming worst-case.”",
+      diverse: "Use diverse abilities language that keeps hope realistic: “Different path doesn’t mean no future.”",
+      neurodivergent: "Use neurodiversity language and center fit/accommodations: “Support should evolve with the person.”",
+      difference: "Use developmental differences language and keep it concrete: “What’s one plan for the next 3 months?”"
+    },
+
+    progression: {
+      ask: "Ask their preferred language and go extra gentle — loss of skills can be real grief, and words should honor that.",
+      disability: "Use disability language and validate grief without alarm: “This is a real loss — supports can adjust with it.”",
+      diverse: "Use diverse abilities language and hold both truths: “Love and grief can exist together.”",
+      neurodivergent: "Use neurodiversity language and keep it humane: “Needs may change — we keep listening and adapting.”",
+      difference: "Use developmental differences language and reduce blame: “This change isn’t anyone’s fault.”"
+    },
+
+    money: {
+      ask: "Ask preferred language and name the barrier plainly — money stress is real and impacts wellbeing.",
+      disability: "Use disability language and highlight access: “Supports should be easier to reach — not harder.”",
+      diverse: "Use diverse abilities language and validate the strain: “You’re doing a lot with limited resources.”",
+      neurodivergent: "Use neurodiversity language and focus on accommodations: “Support should match needs, not budgets.”",
+      difference: "Use developmental differences language and stay practical: “Let’s do one resource step at a time.”"
+    },
+
+    identity: {
+      ask: "Ask preferred language and honor the role shift — parent + advocate + caregiver is a real identity change.",
+      disability: "Use disability language and name the system load: “Navigating services is real work.”",
+      diverse: "Use diverse abilities language and protect the personhood: “You’re still you inside this new role.”",
+      neurodivergent: "Use neurodiversity language and normalize complexity: “This can be beautiful and hard at the same time.”",
+      difference: "Use developmental differences language and reduce guilt: “Missing your old life doesn’t cancel your love.”"
+    }
+  };
+
+  const GENERAL = {
+    ask: "Ask the family what language feels respectful — then mirror it.",
+    disability: "We’ll use disability/disabled language, centering dignity and access/support needs.",
+    diverse: "We’ll use diverse abilities language, centering strengths and respectful support.",
+    neurodivergent: "We’ll use neurodivergent/neurodiversity language, centering identity, strengths, and accommodations.",
+    difference: "We’ll use developmental differences language, keeping it clear, gentle, and respectful."
+  };
+
+  if(!LINES[moment]) return GENERAL[lang] || GENERAL.ask;
+  return (LINES[moment][lang] || LINES[moment].ask);
 }
 
 function requireMoment(){
