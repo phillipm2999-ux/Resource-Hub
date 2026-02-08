@@ -690,7 +690,7 @@ function releaseText(){
 document.getElementById("btnNewWords").addEventListener("click", newMessage);
 document.getElementById("btnRelease").addEventListener("click", releaseText);
 
-/* ===== NEW: Breathing Timer (30s / 60s / 2 min) =====
+/* ===== NEW: Breathing Timer (30s / 60s / 2 min / 5min) =====
    Visual orb keeps pulsing; we add phase text + countdown + start/stop. */
 const phaseEl = document.getElementById("breathPhaseText");
 const statusEl = document.getElementById("breathStatusText");
@@ -809,7 +809,7 @@ const MODALS = {
         <summary>Common moments that can hit unexpectedly</summary>
         <p>
           Bedtime. School drop-offs. Holidays and birthdays. Firsts (first day without them, first report card after the diagnosis, first visit to a new home).
-          Seeing other families who seem “fine.” Even a smell, song, or photo. Waves don’t mean failure — they’re a normal return of love + meaning.
+          Seeing other families who seem “fine.” Even a smell, song, or photo. Waves don’t mean failure, they signify feelings of love and meaning.
         </p>
       </details>
     `
@@ -932,6 +932,7 @@ document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(
 
 </body>
 </html>
+
 
 
 
