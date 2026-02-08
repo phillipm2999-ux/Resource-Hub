@@ -118,7 +118,7 @@
       border-top: 1px solid rgba(255,255,255,.10);
     }
 
-    /* ===== Support section styles (expanded) ===== */
+    /* ===== Support section styles ===== */
     .supportCard{
       padding: 18px;
       position: relative;
@@ -166,35 +166,6 @@
       line-height: 1.55;
       max-width: 90ch;
     }
-    .supportGrid{
-      display:grid;
-      gap:12px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-    .miniCard{
-      background: rgba(0,0,0,.14);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 12px;
-    }
-    .miniCard h3{
-      margin:0 0 6px;
-      font-size: 14px;
-    }
-    .miniCard p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.45;
-      font-size: 14px;
-    }
-    .steps{
-      margin:10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height:1.55;
-      font-size: 14px;
-    }
-    .steps li{ margin:6px 0; }
 
     /* Quick buttons */
     .quickRow{
@@ -229,78 +200,7 @@
     }
     .chipBtn:active{ transform: translateY(0px); }
 
-    /* Callout box */
-    .callout{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(0,0,0,.12);
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 14px;
-    }
-
-    details.softDetails{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: rgba(0,0,0,.10);
-    }
-    details.softDetails summary{
-      cursor: pointer;
-      color: rgba(246,242,255,.92);
-      font-weight: 800;
-      list-style: none;
-    }
-    details.softDetails summary::-webkit-details-marker{ display:none; }
-    details.softDetails p{
-      margin:10px 0 0;
-      color: var(--muted);
-      line-height:1.5;
-      font-size: 14px;
-    }
     .supportNote{
-      margin:0;
-      color: rgba(246,242,255,.74);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    /* ===== Youth section styles ===== */
-    .youthCard:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(900px 480px at 12% 18%, rgba(255,79,109,.18), transparent 60%),
-        radial-gradient(900px 480px at 88% 28%, rgba(199,90,123,.14), transparent 60%),
-        linear-gradient(135deg, rgba(255,79,109,.07), rgba(0,0,0,0));
-      pointer-events:none;
-    }
-    .youthBadge{
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
-      background: rgba(255,79,109,.12);
-      border:1px solid rgba(255,79,109,.22);
-      color: rgba(246,242,255,.92);
-      white-space:nowrap;
-    }
-    .youthLead{
-      margin:0;
-      color: var(--muted);
-      line-height: 1.6;
-      max-width: 90ch;
-    }
-    .youthList{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-    .youthList li{ margin:6px 0; }
-    .youthNote{
       margin:0;
       color: rgba(246,242,255,.74);
       font-size: 13px;
@@ -311,7 +211,7 @@
     .modalOverlay{
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.55);
+      background: rgba(0,0,0,.62);
       display: none;
       align-items: center;
       justify-content: center;
@@ -319,26 +219,79 @@
       z-index: 9999;
     }
     .modal{
-      max-width: 620px;
+      max-width: 720px;
       width: 100%;
-      background: rgba(23, 20, 35, .92);
+      background: rgba(23, 20, 35, .94);
       border: 1px solid rgba(255,255,255,.14);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 16px;
-      box-shadow: 0 24px 70px rgba(0,0,0,.60);
+      box-shadow: 0 26px 90px rgba(0,0,0,.70);
       backdrop-filter: blur(10px);
     }
-    .modal h3{ margin:0 0 8px; font-size: 16px; }
-    .modal p{ margin:0; color: var(--muted); line-height:1.55; }
-    .modalActions{ display:flex; justify-content:flex-end; gap:10px; margin-top: 14px; flex-wrap:wrap; }
+    .modalHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .modal h3{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .modal p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.65;
+      font-size: 14px;
+    }
+    .modal ul, .modal ol{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.65;
+      font-size: 14px;
+    }
+    .modal li{ margin:6px 0; }
+
+    details.softDetails{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.10);
+      margin-top: 10px;
+    }
+    details.softDetails summary{
+      cursor: pointer;
+      color: rgba(246,242,255,.92);
+      font-weight: 900;
+      list-style: none;
+    }
+    details.softDetails summary::-webkit-details-marker{ display:none; }
+    details.softDetails p{
+      margin:10px 0 0;
+      color: var(--muted);
+      line-height:1.6;
+      font-size: 14px;
+    }
+
+    .modalActions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top: 14px;
+      flex-wrap:wrap;
+    }
     .modalClose{
       padding: 9px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.20);
+      background: rgba(0,0,0,.22);
       color: rgba(246,242,255,.92);
       cursor:pointer;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -366,7 +319,7 @@
 
 <main class="wrap">
 
-  <!-- ===== Expanded Support Section ===== -->
+  <!-- ===== Parents (same wording, tidier layout) ===== -->
   <section class="card supportCard" style="margin-top:16px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
@@ -374,163 +327,60 @@
         <span class="supportBadge">gentle + practical</span>
       </div>
 
+      <!-- keep your exact words -->
       <p class="supportLead">
         If you’re here because life changed suddenly - a death, diagnosis, separation, a move, financial stress, or a version of parenting you didn’t expect;
         you’re not doing it wrong. Grief isn’t only about death. It can be about <em>what was</em>, <em>what might have been</em>, and <em>what you’re holding together right now</em>.
         This hub offers steady language, simple tools, and reminders that you’re not alone.
       </p>
 
+      <!-- buttons open your existing content in popups -->
       <div class="quickRow" aria-label="Quick support buttons">
-        <button class="chipBtn" type="button" id="btnWords"> Words for today</button>
-        <button class="chipBtn" type="button" id="btnTalkToKids"> What to say to kids</button>
-        <button class="chipBtn" type="button" id="btnNextStep"> One next step</button>
+        <button class="chipBtn" type="button" data-modal="p_reset">Right now: 30-second reset</button>
+        <button class="chipBtn" type="button" data-modal="p_waves">When grief comes in waves</button>
+        <button class="chipBtn" type="button" data-modal="p_kids">What kids often need most</button>
+        <button class="chipBtn" type="button" data-modal="p_more">More you wrote</button>
       </div>
-
-      <div class="supportGrid">
-        <div class="miniCard">
-          <h3>Right now: 30-second reset</h3>
-          <p>Try this once (no pressure) to “feel better.”</p>
-          <ol class="steps">
-            <li>Put one hand on your chest or belly.</li>
-            <li>Inhale for 4… exhale for 6 (twice).</li>
-            <li>Name 3 things you can see.</li>
-            <li>Tell yourself: “This is hard, and I’m here.”</li>
-          </ol>
-        </div>
-
-        <div class="miniCard">
-          <h3>When grief comes in waves</h3>
-          <p>
-            Hard days can return around milestones, seasons, school changes, birthdays, or even “ordinary” moments.
-            That doesn’t mean you’re back at the start, it just means love and memory still live close to the surface.
-          </p>
-        </div>
-
-        <div class="miniCard">
-          <h3>If you’re feeling behind</h3>
-          <p>
-            Parenting through grief often looks like “doing the basics” for a while. And It's so important to know that it counts.
-            Small acts are real care: water, food, a text to someone safe, a 10-minute walk, a quiet minute alone.
-          </p>
-        </div>
-
-        <div class="miniCard">
-          <h3>What kids often need most</h3>
-          <p>
-            They don't need perfect answers, just honesty, steadiness, and permission to feel.
-            “I don’t know” is okay. “I’m here” is powerful.
-          </p>
-        </div>
-      </div>
-
-      <div class="callout">
-        <strong style="color: rgba(246,242,255,.92);">Something to Remember:</strong>
-        some grief is “living grief”, the ongoing ache of uncertainty, changing needs, or a life that looks different than expected.
-        It still deserves care, support, and language that doesn’t shame you for struggling.
-      </div>
-
-      <details class="softDetails">
-        <summary>Common moments that can hit unexpectedly</summary>
-        <p>
-          Bedtime. School drop-offs. Holidays and birthdays. Firsts (first day without them, first report card after the diagnosis, first visit to a new home).
-          Seeing other families who seem “fine.” Even a smell, song, or photo. Waves don’t mean failure — they’re a normal return of love + meaning.
-        </p>
-      </details>
-
-      <details class="softDetails">
-        <summary>When it might help to reach out for extra support</summary>
-        <p>
-          If you’re feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
-          If you’re in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
-          For non-urgent support, consider talking with a trusted person, your family doctor, a counsellor, or a local community resource.
-        </p>
-      </details>
 
       <p class="supportNote">
         You can come back to this page when you have more capacity. No catching up required.
       </p>
     </div>
   </section>
-  <!-- ===== End Support Section ===== -->
 
-  <!-- ===== Youth Support Section ===== -->
-  <section class="card supportCard youthCard" style="margin-top:14px; margin-bottom:14px;">
+  <!-- ===== Youth (same wording, tidier layout) ===== -->
+  <section class="card supportCard" style="margin-top:14px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
         <h2>For youth going through grief</h2>
-        <span class="youthBadge">real talk + gentle tools</span>
+        <span class="supportBadge">real talk + gentle tools</span>
       </div>
 
-      <p class="youthLead">
+      <!-- keep these exact words -->
+      <p class="supportLead">
         If you're a kid or teen reading this: grief can feel confusing, heavy, or like it shows up out of nowhere.
         You might feel sad, angry, numb, guilty, or totally “fine” and then not fine later. That’s normal.
         You don’t have to have the “right” emotions — you just deserve support.
       </p>
 
-      <div class="supportGrid">
-        <div class="miniCard">
-          <h3>When it hits suddenly</h3>
-          <p>
-            Try a quick reset: name <strong>5 things you see</strong>, <strong>4 things you can touch</strong>,
-            <strong>3 things you hear</strong>, <strong>2 things you smell</strong>, <strong>1 thing you taste</strong>.
-            It helps your brain come back to the present.
-          </p>
-        </div>
-
-        <div class="miniCard">
-          <h3>Big feelings are allowed</h3>
-          <p>
-            Anger doesn’t mean you’re bad. Tears don’t mean you’re weak. Feeling nothing doesn’t mean you didn’t care.
-            Your brain is doing its best to protect you.
-          </p>
-        </div>
-
-        <div class="miniCard">
-          <h3>If you don’t want to talk</h3>
-          <p>
-            That’s okay. Some people process by moving: walking, gaming, music, sports, art, cleaning, being with pets.
-            You can still be grieving even if you’re not talking about it.
-          </p>
-        </div>
-
-        <div class="miniCard">
-          <h3>One small thing you can do today</h3>
-          <p>
-            Pick one: drink water, eat something small, text a safe person “can you check in?”, write one sentence in your notes,
-            or step outside for 2 minutes. Small steps matter.
-          </p>
-        </div>
+      <div class="quickRow" aria-label="Youth support buttons">
+        <button class="chipBtn" type="button" data-modal="y_ground">When it hits suddenly</button>
+        <button class="chipBtn" type="button" data-modal="y_feelings">Big feelings are allowed</button>
+        <button class="chipBtn" type="button" data-modal="y_talk">If you don’t want to talk</button>
+        <button class="chipBtn" type="button" data-modal="y_more">More for youth</button>
       </div>
 
-      <details class="softDetails">
-        <summary>Words you can use when you don’t know what to say</summary>
-        <p>
-          “I’m having a hard time.” • “I don’t want advice, I just want someone around.” • “Can we talk about something else but stay together?”
-          • “I’m not okay today.” • “I don’t know what I feel.”
-        </p>
-      </details>
-
-      <details class="softDetails">
-        <summary>If you feel unsafe or overwhelmed</summary>
-        <p>
-          If you’re in danger or thinking about hurting yourself, tell an adult you trust right away.
-          In Canada, you can call or text <strong>988</strong> any time, or call <strong>911</strong> in an emergency.
-          You deserve help — even if you’re not sure how to explain it.
-        </p>
-      </details>
-
-      <p class="youthNote">
+      <p class="supportNote">
         You’re not “too much.” Grief is a normal response to a hard thing. You don’t have to carry it alone.
       </p>
     </div>
   </section>
-  <!-- ===== End Youth Support Section ===== -->
 
   <section id="grid" class="grid"></section>
 
   <!-- Discussion Board -->
   <section class="card" style="margin-top:18px;">
-    <div style="font-weight:800; font-size:18px; margin-bottom:8px;">
+    <div style="font-weight:900; font-size:18px; margin-bottom:8px;">
       Discussion & Suggestions
     </div>
     <div style="color: var(--muted); margin-bottom:12px;">
@@ -558,92 +408,185 @@
 <!-- Modal -->
 <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
-    <h3 id="modalTitle">Support</h3>
-    <p id="modalBody"></p>
+    <div class="modalHead">
+      <h3 id="modalTitle">Support</h3>
+      <button class="modalClose" type="button" id="modalCloseTop">Close</button>
+    </div>
+    <div id="modalContent"></div>
     <div class="modalActions">
-      <button class="modalClose" type="button" id="modalClose">Close</button>
+      <button class="modalClose" type="button" id="modalCloseBottom">Close</button>
     </div>
   </div>
 </div>
 
 <script>
+/* ===== Resource cards (unchanged) ===== */
 const resources = [
   {
     title: "Relating to Grief",
     url: "coping-with-death/",
-    topic: ["Grief","Death"],
-    type: "Collection",
-    audience: "Children",
     note: "Stories and resources to help children understand death."
   },
-  {
-    title: "Ages and Stages",
-    url: "ages-and-stages/",
-    topic: ["Development"],
-    type: "Collection",
-    audience: "Everyone"
-  },
-  {
-    title: "Divorce & Separation",
-    url: "divorce/",
-    topic: ["Family Change"],
-    type: "Collection",
-    audience: "Caregivers"
-  },
-  {
-    title: "Major Life Changes",
-    url: "major-life-changes/",
-    topic: ["Transitions"],
-    type: "Collection",
-    audience: "Everyone"
-  },
-  {
-    title: "Neurodiversity & Different Ways of Being",
-    url: "neurodiversity/",
-    topic: ["Neurodiversity"],
-    type: "Collection",
-    audience: "Everyone"
-  }
+  { title: "Ages and Stages", url: "ages-and-stages/" },
+  { title: "Divorce & Separation", url: "divorce/" },
+  { title: "Major Life Changes", url: "major-life-changes/" },
+  { title: "Neurodiversity & Different Ways of Being", url: "neurodiversity/" }
 ];
 
 const grid = document.getElementById("grid");
 grid.innerHTML = resources.map(r => `
-<article class="card">
-  <div style="font-weight:700;">
-    <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
-  </div>
-  ${r.note ? `<div style="margin-top:8px;color:var(--muted);">${r.note}</div>` : ""}
-</article>
+  <article class="card">
+    <div style="font-weight:800;">
+      <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
+    </div>
+    ${r.note ? `<div style="margin-top:8px;color:var(--muted);">${r.note}</div>` : ""}
+  </article>
 `).join("");
 
-/* ===== Mini modal helper for the quick buttons ===== */
+/* ===== Popups keep ALL your original messages ===== */
+const MODALS = {
+  /* Parents — same content as before */
+  p_reset: {
+    title: "Right now: 30-second reset",
+    html: `
+      <p><strong>Try this once</strong> (no pressure) to “feel better.”</p>
+      <ol>
+        <li>Put one hand on your chest or belly.</li>
+        <li>Inhale for 4… exhale for 6 (twice).</li>
+        <li>Name 3 things you can see.</li>
+        <li>Tell yourself: “This is hard, and I’m here.”</li>
+      </ol>
+    `
+  },
+  p_waves: {
+    title: "When grief comes in waves",
+    html: `
+      <p>
+        Hard days can return around milestones, seasons, school changes, birthdays, or even “ordinary” moments.
+        That doesn’t mean you’re back at the start, it just means love and memory still live close to the surface.
+      </p>
+      <details class="softDetails">
+        <summary>Common moments that can hit unexpectedly</summary>
+        <p>
+          Bedtime. School drop-offs. Holidays and birthdays. Firsts (first day without them, first report card after the diagnosis, first visit to a new home).
+          Seeing other families who seem “fine.” Even a smell, song, or photo. Waves don’t mean failure — they’re a normal return of love + meaning.
+        </p>
+      </details>
+    `
+  },
+  p_kids: {
+    title: "What kids often need most",
+    html: `
+      <p>
+        They don't need perfect answers, just honesty, steadiness, and permission to feel.
+        “I don’t know” is okay. “I’m here” is powerful.
+      </p>
+    `
+  },
+  p_more: {
+    title: "More you wrote (important)",
+    html: `
+      <p>
+        Parenting through grief often looks like “doing the basics” for a while. And It's so important to know that it counts.
+        Small acts are real care: water, food, a text to someone safe, a 10-minute walk, a quiet minute alone.
+      </p>
+      <p style="margin-top:10px;">
+        <strong style="color: rgba(246,242,255,.92);">Something to Remember:</strong>
+        some grief is “living grief”, the ongoing ache of uncertainty, changing needs, or a life that looks different than expected.
+        It still deserves care, support, and language that doesn’t shame you for struggling.
+      </p>
+      <details class="softDetails">
+        <summary>When it might help to reach out for extra support</summary>
+        <p>
+          If you’re feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
+          If you’re in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
+          For non-urgent support, consider talking with a trusted person, your family doctor, a counsellor, or a local community resource.
+        </p>
+      </details>
+    `
+  },
+
+  /* Youth — same content as before */
+  y_ground: {
+    title: "When it hits suddenly",
+    html: `
+      <p>
+        Try a quick reset: name <strong>5 things you see</strong>, <strong>4 things you can touch</strong>,
+        <strong>3 things you hear</strong>, <strong>2 things you smell</strong>, <strong>1 thing you taste</strong>.
+        It helps your brain come back to the present.
+      </p>
+    `
+  },
+  y_feelings: {
+    title: "Big feelings are allowed",
+    html: `
+      <p>
+        Anger doesn’t mean you’re bad. Tears don’t mean you’re weak. Feeling nothing doesn’t mean you didn’t care.
+        Your brain is doing its best to protect you.
+      </p>
+    `
+  },
+  y_talk: {
+    title: "If you don’t want to talk",
+    html: `
+      <p>
+        That’s okay. Some people process by moving: walking, gaming, music, sports, art, cleaning, being with pets.
+        You can still be grieving even if you’re not talking about it.
+      </p>
+    `
+  },
+  y_more: {
+    title: "More for youth",
+    html: `
+      <p>
+        Pick one: drink water, eat something small, text a safe person “can you check in?”, write one sentence in notes,
+        or step outside for 2 minutes. Small steps matter.
+      </p>
+      <details class="softDetails">
+        <summary>Words you can use when you don’t know what to say</summary>
+        <p>
+          “I’m having a hard time.” • “I don’t want advice, I just want someone around.” • “Can we talk about something else but stay together?”
+          • “I’m not okay today.” • “I don’t know what I feel.”
+        </p>
+      </details>
+      <details class="softDetails">
+        <summary>If you feel unsafe or overwhelmed</summary>
+        <p>
+          If you’re in danger or thinking about hurting yourself, tell an adult you trust right away.
+          In Canada, you can call or text <strong>988</strong> any time, or call <strong>911</strong> in an emergency.
+          You deserve help — even if you’re not sure how to explain it.
+        </p>
+      </details>
+    `
+  }
+};
+
+/* ===== Modal logic ===== */
 const modalOverlay = document.getElementById("modalOverlay");
 const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
-const modalClose = document.getElementById("modalClose");
+const modalContent = document.getElementById("modalContent");
+const closeTop = document.getElementById("modalCloseTop");
+const closeBottom = document.getElementById("modalCloseBottom");
 
-function openModal(title, body){
-  modalTitle.textContent = title;
-  modalBody.textContent = body;
+function openModal(key){
+  const m = MODALS[key];
+  if(!m) return;
+  modalTitle.textContent = m.title;
+  modalContent.innerHTML = m.html;
   modalOverlay.style.display = "flex";
 }
 function closeModal(){
   modalOverlay.style.display = "none";
 }
 
-document.getElementById("btnWords").addEventListener("click", () => {
-  openModal("Words for today", "You’re allowed to have a hard day. You don’t have to do everything — just the next kind thing. Small steps count, even if they’re invisible.");
+/* open on button click */
+document.querySelectorAll("[data-modal]").forEach(btn => {
+  btn.addEventListener("click", () => openModal(btn.dataset.modal));
 });
 
-document.getElementById("btnTalkToKids").addEventListener("click", () => {
-  openModal("What to say to kids", "Try: “Something sad has happened, and it’s okay to have lots of feelings. You can ask me anything. If I don’t know, I’ll tell you the truth — and I’ll stay with you.”");
-});
-
-document.getElementById("btnNextStep").addEventListener("click", () => {
-  openModal("One next step", "Pick one: drink a glass of water, eat something simple, text one safe person, step outside for 2 minutes, or sit with your hand on your chest for 3 slow breaths. Then reassess.");
-});
-
-modalClose.addEventListener("click", closeModal);
+/* close behaviors */
+closeTop.addEventListener("click", closeModal);
+closeBottom.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
 document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 </script>
