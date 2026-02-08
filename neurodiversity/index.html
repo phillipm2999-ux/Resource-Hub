@@ -6,25 +6,33 @@
   <title>Neurodiversity & Different Ways of Being</title>
 
   <style>
-    /* ===== Neurodiversity — Grief Sunrise (Pink/Red) ===== */
+    /* ===== Neurodiversity — Aurora Spectrum Theme (distinct from main + grief pages) ===== */
     :root{
-      --text:#f6f2ff;
-      --muted: rgba(246,242,255,.80);
-      --faint: rgba(246,242,255,.62);
+      --text:#eef3ff;
+      --muted: rgba(238,243,255,.82);
+      --faint: rgba(238,243,255,.62);
 
-      --panel: rgba(23, 20, 35, .72);
-      --panel2: rgba(27, 23, 42, .78);
+      --panel: rgba(18, 22, 40, .72);
+      --panel2: rgba(24, 28, 52, .82);
       --border: rgba(255,255,255,.14);
 
-      --accent: #ff6f91;
-      --accent2:#ff4f6d;
-      --accent3:#c75a7b;
+      /* Spectrum accents */
+      --accent: #6ee7ff;     /* aqua */
+      --accent2:#9b8cff;     /* soft violet */
+      --accent3:#5cf2c5;     /* mint */
 
-      --tagbg: rgba(255,111,145,.14);
-      --tagborder: rgba(255,111,145,.22);
+      --tagbg: rgba(110,231,255,.14);
+      --tagborder: rgba(110,231,255,.24);
 
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --shadow: 0 18px 55px rgba(0,0,0,.50);
       --radius: 18px;
+
+      /* dynamic glow for the Support Builder */
+      --toolGlowA: rgba(110,231,255,.20);
+      --toolGlowB: rgba(155,140,255,.16);
+      --toolGlowC: rgba(92,242,197,.14);
+
+      --focusRing: rgba(110,231,255,.25);
     }
 
     *{ box-sizing:border-box; }
@@ -34,31 +42,58 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
       min-height: 100vh;
+
       background:
-        radial-gradient(900px 600px at 20% 0%, rgba(199,90,123,.35), transparent 60%),
-        radial-gradient(900px 600px at 80% 15%, rgba(255,111,145,.25), transparent 55%),
+        radial-gradient(900px 600px at 15% 5%, rgba(155,140,255,.25), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(92,242,197,.20), transparent 60%),
+        radial-gradient(900px 600px at 50% 120%, rgba(110,231,255,.18), transparent 65%),
         linear-gradient(180deg,
-          #423A50 0%,
-          #53455D 20%,
-          #815F6B 42%,
-          #B67967 62%,
-          #c75a7b 78%,
-          #ff6f91 88%,
-          #ff4f6d 100%
+          #1b1f3a 0%,
+          #151833 30%,
+          #10122a 60%,
+          #0b0d1e 100%
         );
+      overflow-x:hidden;
+    }
+
+    /* subtle aurora shimmer layer (very slow) */
+    body::before{
+      content:"";
+      position: fixed;
+      inset:-20%;
+      pointer-events:none;
+      opacity:.55;
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(110,231,255,.16), transparent 62%),
+        radial-gradient(900px 520px at 70% 18%, rgba(155,140,255,.14), transparent 62%),
+        radial-gradient(900px 520px at 45% 60%, rgba(92,242,197,.12), transparent 62%);
+      filter: blur(18px);
+      transform: translate3d(0,0,0);
+      animation: auroraDrift 18s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes auroraDrift{
+      0%   { transform: translate(-2%, -1%) scale(1.02); }
+      50%  { transform: translate(2%,  1%) scale(1.05); }
+      100% { transform: translate(-1%, 2%) scale(1.03); }
     }
 
     header{
+      position: relative;
+      z-index: 1;
       padding: 30px 18px 18px;
       border-bottom: 1px solid rgba(255,255,255,.12);
+
       background:
-        radial-gradient(900px 500px at 15% 0%, rgba(199,90,123,.45), transparent 60%),
-        radial-gradient(900px 500px at 85% 10%, rgba(255,111,145,.30), transparent 60%),
-        linear-gradient(135deg, rgba(66,58,80,.88), rgba(14,15,26,.92));
+        radial-gradient(900px 500px at 15% 0%, rgba(155,140,255,.35), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(110,231,255,.30), transparent 60%),
+        linear-gradient(135deg, rgba(21,24,51,.92), rgba(10,12,30,.95));
       backdrop-filter: blur(6px);
     }
 
-    .wrap{ max-width: 1040px; margin: 0 auto; }
+    .wrap{ max-width: 1040px; margin: 0 auto; position:relative; z-index:1; }
+
     h1{ margin:0 0 8px; font-size: 34px; letter-spacing:.2px; line-height:1.1; }
     p{ margin:0; color: var(--muted); line-height: 1.6; }
 
@@ -74,13 +109,13 @@
       font-size:12px;
       padding:6px 10px;
       border-radius:999px;
-      background: rgba(255,111,145,.10);
-      border:1px solid rgba(255,111,145,.18);
-      color: rgba(246,242,255,.92);
+      background: rgba(110,231,255,.10);
+      border:1px solid rgba(110,231,255,.18);
+      color: rgba(238,243,255,.92);
       white-space:nowrap;
     }
 
-    main{ padding: 18px; }
+    main{ padding: 18px; position:relative; z-index:1; }
 
     .grid2{
       display:grid;
@@ -96,7 +131,7 @@
       border-radius: var(--radius);
       padding: 16px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
     }
 
     .sectionTitle{
@@ -117,28 +152,32 @@
       margin: 0;
     }
 
-    /* ===== Cool part: "Language + Support Builder" ===== */
+    /* ===== Cool part: Support Builder with dynamic glow ===== */
     .heroTool{
       position: relative;
       overflow:hidden;
+      isolation:isolate;
     }
     .heroTool:before{
       content:"";
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(520px 260px at 15% 10%, rgba(255,111,145,.18), transparent 60%),
-        radial-gradient(520px 260px at 85% 0%, rgba(199,90,123,.12), transparent 60%),
-        linear-gradient(135deg, rgba(255,111,145,.06), rgba(0,0,0,0));
+        radial-gradient(540px 280px at 15% 10%, var(--toolGlowA), transparent 60%),
+        radial-gradient(540px 280px at 85% 0%,  var(--toolGlowB), transparent 60%),
+        radial-gradient(540px 280px at 55% 85%, var(--toolGlowC), transparent 60%),
+        linear-gradient(135deg, rgba(110,231,255,.06), rgba(0,0,0,0));
       pointer-events:none;
       opacity:.95;
+      filter: blur(.2px);
+      z-index:0;
     }
-    .toolInner{ position:relative; display:grid; gap:12px; }
+    .toolInner{ position:relative; display:grid; gap:12px; z-index:1; }
 
     label{
       display:block;
       font-size: 13px;
-      color: rgba(246,242,255,.86);
+      color: rgba(238,243,255,.88);
       margin-bottom: 6px;
       font-weight: 900;
     }
@@ -151,7 +190,11 @@
       border-radius: 12px;
       outline:none;
     }
-    input[type="search"]::placeholder{ color: rgba(246,242,255,.55); }
+    select:focus, input[type="search"]:focus{
+      box-shadow: 0 0 0 3px var(--focusRing);
+      border-color: rgba(110,231,255,.35);
+    }
+    input[type="search"]::placeholder{ color: rgba(238,243,255,.55); }
 
     .row{
       display:grid;
@@ -174,8 +217,8 @@
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.12);
-      color: rgba(246,242,255,.92);
-      font-weight: 900;
+      color: rgba(238,243,255,.94);
+      font-weight: 950;
       text-decoration:none;
       cursor:pointer;
       transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
@@ -185,7 +228,7 @@
     .btn:hover{
       transform: translateY(-1px);
       filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 24px rgba(255,111,145,.10);
+      box-shadow: 0 0 0 1px rgba(110,231,255,.18), 0 0 24px rgba(110,231,255,.10);
     }
     .btn:active{ transform: translateY(0px); }
 
@@ -204,11 +247,11 @@
       border-radius: 14px;
       padding: 12px;
       background: rgba(0,0,0,.10);
-      color: rgba(246,242,255,.92);
+      color: rgba(238,243,255,.92);
       line-height: 1.65;
       font-size: 14px;
     }
-    .quoteBox strong{ color: rgba(246,242,255,.98); }
+    .quoteBox strong{ color: rgba(238,243,255,.98); }
 
     details.soft{
       border: 1px solid rgba(255,255,255,.12);
@@ -219,8 +262,8 @@
     }
     details.soft summary{
       cursor:pointer;
-      font-weight: 900;
-      color: rgba(246,242,255,.95);
+      font-weight: 950;
+      color: rgba(238,243,255,.95);
       list-style:none;
     }
     details.soft summary::-webkit-details-marker{ display:none; }
@@ -232,6 +275,89 @@
     }
     details.soft ul{ margin:10px 0 0; padding-left: 18px; }
     details.soft li{ margin:6px 0; }
+
+    /* ===== “Truly meaningful” extra: Strengths cloud ===== */
+    .cloudWrap{
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.10);
+      position: relative;
+      overflow:hidden;
+      min-height: 130px;
+    }
+    .cloudWrap:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(420px 240px at 18% 12%, rgba(110,231,255,.14), transparent 65%),
+        radial-gradient(420px 240px at 86% 8%, rgba(155,140,255,.12), transparent 65%),
+        radial-gradient(420px 240px at 60% 120%, rgba(92,242,197,.10), transparent 65%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .cloud{
+      position: relative;
+      height: 106px;
+    }
+    .word{
+      position:absolute;
+      font-weight: 950;
+      letter-spacing:.1px;
+      opacity:.92;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      animation: floaty 10s ease-in-out infinite;
+      user-select:none;
+      white-space:nowrap;
+      color: rgba(238,243,255,.92);
+    }
+    .word.a{ color: rgba(110,231,255,.92); }
+    .word.b{ color: rgba(155,140,255,.92); }
+    .word.c{ color: rgba(92,242,197,.92); }
+
+    @keyframes floaty{
+      0%   { transform: translateY(0px); opacity:.84; }
+      50%  { transform: translateY(-8px); opacity:1; }
+      100% { transform: translateY(0px); opacity:.86; }
+    }
+
+    /* ===== Two-Eyed Seeing / Strengths-based lens panel ===== */
+    .lensGrid{
+      display:grid;
+      gap:12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 12px;
+    }
+    .miniCard{
+      background: rgba(0,0,0,.12);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .miniCard h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.2px;
+      color: rgba(238,243,255,.95);
+    }
+    .miniCard p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 14px;
+    }
+    .lensLine{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.18);
+      color: rgba(238,243,255,.90);
+      background: rgba(0,0,0,.08);
+      line-height:1.65;
+      font-size: 14px;
+    }
 
     /* ===== Resources list ===== */
     .resources{
@@ -248,11 +374,11 @@
       filter: brightness(1.03);
       box-shadow:
         0 22px 60px rgba(0,0,0,.60),
-        0 0 0 1px rgba(255,111,145,.16),
-        0 0 30px rgba(255,111,145,.12);
+        0 0 0 1px rgba(110,231,255,.16),
+        0 0 30px rgba(110,231,255,.12);
     }
     .resourceTitle{
-      font-weight:900;
+      font-weight:950;
       font-size: 16px;
       margin:0;
       line-height:1.25;
@@ -265,7 +391,7 @@
     }
     .resourceLink{
       color: var(--accent);
-      font-weight: 900;
+      font-weight: 950;
       text-decoration:none;
     }
     .meta{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
@@ -275,7 +401,7 @@
       border-radius:999px;
       background: var(--tagbg);
       border: 1px solid var(--tagborder);
-      color: rgba(246,242,255,.92);
+      color: rgba(238,243,255,.92);
     }
 
     /* ===== Modal ===== */
@@ -292,11 +418,11 @@
     .modal{
       max-width: 880px;
       width: 100%;
-      background: rgba(23, 20, 35, .94);
+      background: rgba(18, 22, 40, .96);
       border: 1px solid rgba(255,255,255,.14);
       border-radius: 18px;
       padding: 16px;
-      box-shadow: 0 26px 90px rgba(0,0,0,.70);
+      box-shadow: 0 26px 90px rgba(0,0,0,.72);
       backdrop-filter: blur(10px);
     }
     .modalHead{
@@ -323,16 +449,18 @@
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.22);
-      color: rgba(246,242,255,.92);
+      color: rgba(238,243,255,.92);
       cursor:pointer;
-      font-weight: 900;
+      font-weight: 950;
     }
 
     footer{
       padding: 22px 18px 34px;
-      color: rgba(246,242,255,.68);
+      color: rgba(238,243,255,.68);
       border-top: 1px solid rgba(255,255,255,.10);
       margin-top: 26px;
+      position:relative;
+      z-index:1;
     }
 
     code{
@@ -340,11 +468,12 @@
       padding: 2px 6px;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,.10);
-      color: rgba(246,242,255,.92);
+      color: rgba(238,243,255,.92);
     }
 
     @media (prefers-reduced-motion: reduce){
-      .btn, .resourceCard{ transition:none; }
+      body::before{ animation:none; }
+      .btn, .resourceCard, .word{ transition:none; animation:none; }
     }
   </style>
 </head>
@@ -359,7 +488,7 @@
 
     <div class="topbar">
       <div><a href="../">← Back to Resource Hub</a></div>
-      <span class="pill">Strengths • Dignity • Support without shame</span>
+      <span class="pill">Different ways of being • Equal dignity • Support without shame</span>
     </div>
   </div>
 </header>
@@ -368,16 +497,16 @@
   <div class="grid2">
 
     <!-- LEFT: Meaningful tool -->
-    <section class="card heroTool">
+    <section class="card heroTool" id="heroTool">
       <div class="toolInner">
         <div class="sectionTitle">
           <h2>Support Builder</h2>
           <div class="hint">gentle language + one next step</div>
         </div>
 
-        <!-- Your “one line summary” (compressed from your notes) -->
         <div class="quoteBox" id="oneLine">
-          <strong>One-line summary:</strong> Diverse abilities and neurodivergence can bring “living” and anticipatory grief — especially around milestones, comparison, changing needs, and the gap between what we imagined and what is.
+          <strong>One-line summary:</strong>
+          Diverse abilities and neurodivergence can bring “living” and anticipatory grief — especially around milestones, comparison, changing needs, and the gap between what we imagined and what is.
         </div>
 
         <p class="micro">
@@ -418,8 +547,33 @@
         </div>
 
         <div class="callout">
-          <strong style="color: rgba(246,242,255,.92);">Reminder:</strong>
+          <strong style="color: rgba(238,243,255,.92);">Reminder:</strong>
           sometimes while carrying the heavy things we don’t see how far we have come.
+        </div>
+
+        <!-- Strengths cloud (meaningful + “wow” but still professional) -->
+        <div class="cloudWrap" aria-label="Strengths cloud">
+          <div class="sectionTitle" style="margin-bottom:8px;">
+            <h2 style="font-size:16px;margin:0;">Strengths that still count on hard days</h2>
+            <div class="hint">quiet wins • real care</div>
+          </div>
+          <p class="micro" style="margin-bottom:10px;">
+            These are strengths families practice constantly — even when no one sees it.
+          </p>
+
+          <div class="cloud">
+            <span class="word a" style="left:2%; top:18%; font-size:18px; animation-duration:11s;">Advocacy</span>
+            <span class="word b" style="left:22%; top:8%; font-size:16px; animation-duration:10s;">Patience</span>
+            <span class="word c" style="left:40%; top:22%; font-size:17px; animation-duration:12s;">Creativity</span>
+            <span class="word a" style="left:60%; top:6%; font-size:15px; animation-duration:9s;">Repair</span>
+            <span class="word b" style="left:74%; top:28%; font-size:18px; animation-duration:13s;">Resilience</span>
+
+            <span class="word c" style="left:8%; top:58%; font-size:14px; animation-duration:9.5s;">Co-regulation</span>
+            <span class="word a" style="left:30%; top:62%; font-size:18px; animation-duration:12.5s;">Love</span>
+            <span class="word b" style="left:46%; top:50%; font-size:14px; animation-duration:10.5s;">Consistency</span>
+            <span class="word c" style="left:62%; top:58%; font-size:16px; animation-duration:11.5s;">Courage</span>
+            <span class="word a" style="left:78%; top:52%; font-size:14px; animation-duration:9.8s;">Hope</span>
+          </div>
         </div>
 
         <details class="soft">
@@ -444,18 +598,47 @@
       </div>
     </section>
 
-    <!-- RIGHT: Resources -->
+    <!-- RIGHT: Lens + Resources -->
     <section class="card">
       <div class="sectionTitle">
+        <h2>Ways of seeing</h2>
+        <div class="hint">strengths • context • dignity</div>
+      </div>
+
+      <p class="micro">
+        A quick way to stay out of “fixing” mode and into support, meaning, and practical care.
+      </p>
+
+      <div class="lensGrid">
+        <div class="miniCard">
+          <h3>Strengths-based lens</h3>
+          <p>Start with what’s working: adaptations, interests, connection, safe routines, and protective factors.</p>
+        </div>
+        <div class="miniCard">
+          <h3>Ecological / CYC lens</h3>
+          <p>What’s happening around the child? School, services, stress, sleep, sensory needs, relationships, culture, community.</p>
+        </div>
+        <div class="miniCard">
+          <h3>Two-Eyed Seeing (if relevant)</h3>
+          <p>Hold multiple ways of knowing together: clinical knowledge + lived experience + cultural wisdom + community context.</p>
+        </div>
+        <div class="miniCard">
+          <h3>Language that reduces harm</h3>
+          <p>Ask what terms fit best for the family — and mirror their preferred language with respect.</p>
+        </div>
+      </div>
+
+      <div class="lensLine">
+        <strong>Try this sentence:</strong>
+        “Before we talk about change, what’s one thing about your child that you want me to understand and respect?”
+      </div>
+
+      <div class="sectionTitle" style="margin-top:16px;">
         <h2>Resources (add your group’s work here)</h2>
         <div class="hint">links • PDFs • community supports</div>
       </div>
 
-      <p class="micro">
-        Add your classmates’ resources: terminology guides, chronic sorrow / anticipatory grief supports, BC services, and local Nanaimo links.
-      </p>
-
-      <label for="search" style="margin-top:12px;">Search resources</label>
+      <label for="search" style="margin-top:6px;">Search resources</label>
       <input id="search" type="search" placeholder="Search (ex: chronic sorrow, milestones, CLBC, FASD, ASD)…" />
 
       <div id="resourceGrid" class="resources"></div>
@@ -544,6 +727,29 @@ document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(
 /* ===== Support Builder content ===== */
 const languageEl = document.getElementById("language");
 const momentEl = document.getElementById("moment");
+const heroTool = document.getElementById("heroTool");
+
+/* dynamic glow based on selections */
+const MOMENT_GLOWS = {
+  milestones:  { a:"rgba(110,231,255,.22)", b:"rgba(155,140,255,.16)", c:"rgba(92,242,197,.12)" },
+  comparison:  { a:"rgba(155,140,255,.22)", b:"rgba(110,231,255,.14)", c:"rgba(92,242,197,.12)" },
+  exhaustion:  { a:"rgba(92,242,197,.22)", b:"rgba(110,231,255,.14)", c:"rgba(155,140,255,.12)" },
+  future:      { a:"rgba(110,231,255,.20)", b:"rgba(155,140,255,.20)", c:"rgba(92,242,197,.10)" },
+  progression: { a:"rgba(155,140,255,.20)", b:"rgba(92,242,197,.16)", c:"rgba(110,231,255,.12)" },
+  money:       { a:"rgba(110,231,255,.18)", b:"rgba(92,242,197,.18)", c:"rgba(155,140,255,.12)" },
+  identity:    { a:"rgba(92,242,197,.18)", b:"rgba(155,140,255,.18)", c:"rgba(110,231,255,.12)" }
+};
+
+function applyGlow(){
+  const key = momentEl.value;
+  const g = MOMENT_GLOWS[key] || { a:"rgba(110,231,255,.20)", b:"rgba(155,140,255,.16)", c:"rgba(92,242,197,.14)" };
+  document.documentElement.style.setProperty("--toolGlowA", g.a);
+  document.documentElement.style.setProperty("--toolGlowB", g.b);
+  document.documentElement.style.setProperty("--toolGlowC", g.c);
+}
+momentEl.addEventListener("change", applyGlow);
+languageEl.addEventListener("change", applyGlow);
+applyGlow();
 
 function languageLine(){
   const v = languageEl.value;
@@ -710,7 +916,7 @@ document.getElementById("btnValidate").addEventListener("click", () => {
   openModal("Validation + meaning", `
     <p><strong>Language note:</strong> ${languageLine()}</p>
     ${m.validate}
-    <p style="margin-top:10px;"><strong style="color: rgba(246,242,255,.92);">Remember:</strong> feelings aren’t a problem to solve — they’re information.</p>
+    <p style="margin-top:10px;"><strong style="color: rgba(238,243,255,.92);">Remember:</strong> feelings aren’t a problem to solve — they’re information.</p>
   `);
 });
 
