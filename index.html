@@ -26,6 +26,8 @@
       --tagborder: rgba(255,111,145,.22);
     }
 
+    *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -89,6 +91,7 @@
       display:grid;
       gap:12px;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 14px;
     }
 
     .card{
@@ -150,6 +153,7 @@
       margin:0;
       font-size: 20px;
       letter-spacing:.2px;
+      color: var(--text);
     }
     .supportBadge{
       font-size:12px;
@@ -205,6 +209,63 @@
       color: rgba(246,242,255,.74);
       font-size: 13px;
       line-height: 1.5;
+    }
+
+    /* ===== Resource finder ===== */
+    .finder{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .finderLeft{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      flex: 1 1 520px;
+    }
+    .finder input{
+      flex: 1 1 320px;
+      min-width: 240px;
+      background: var(--panel2);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.14);
+      padding: 10px 12px;
+      border-radius: 999px;
+      outline:none;
+    }
+    .finder input::placeholder{ color: rgba(246,242,255,.60); }
+
+    .tagRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .tag{
+      font-size:12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--tagbg);
+      border: 1px solid var(--tagborder);
+      color: rgba(246,242,255,.92);
+      cursor:pointer;
+      user-select:none;
+      font-weight: 900;
+    }
+    .tag[aria-pressed="true"]{
+      border-color: rgba(255,111,145,.45);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 18px rgba(255,111,145,.16);
+    }
+    .finderRight{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
     }
 
     /* Tiny modal */
@@ -326,6 +387,7 @@
       margin:0;
       font-size: 22px;
       letter-spacing:.2px;
+      color: var(--text);
     }
 
     .lgLead{
@@ -365,7 +427,7 @@
       color: rgba(246,242,255,.65);
     }
 
-    /* NEW: timer row */
+    /* timer row */
     .breathTimerRow{
       display:flex;
       gap:10px;
@@ -470,6 +532,113 @@
       color: rgba(246,242,255,.55);
       line-height: 1.5;
     }
+
+    /* ===== NEW: Floating helpers (flare) ===== */
+    .fabStack{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      display: grid;
+      gap: 10px;
+      z-index: 9998;
+    }
+    .fab{
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.22);
+      color: rgba(246,242,255,.92);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 26px rgba(0,0,0,.25);
+      transition: transform .08s ease, filter .08s ease, box-shadow .08s ease, opacity .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .fab:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 22px rgba(255,111,145,.10), 0 12px 30px rgba(0,0,0,.28);
+    }
+    .fab.show{
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .fab small{
+      font-weight: 800;
+      color: rgba(246,242,255,.72);
+    }
+
+    /* Calm-screen overlay */
+    .calmOverlay{
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 9999;
+      background: #0b0d12;
+      color: #e9e7f3;
+    }
+    .calmInner{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 22px 18px 28px;
+      display: grid;
+      gap: 14px;
+    }
+    .calmTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .calmTitle{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+      color: rgba(233,231,243,.92);
+    }
+    .calmBtn{
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(233,231,243,.92);
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .calmGrid{
+      display:grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .calmCard{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .calmCard h3{
+      margin:0 0 8px;
+      font-size: 15px;
+      color: rgba(233,231,243,.92);
+    }
+    .calmCard p{
+      margin:0;
+      color: rgba(233,231,243,.72);
+      line-height: 1.6;
+    }
+    .calmHint{
+      margin: 6px 0 0;
+      color: rgba(233,231,243,.60);
+      font-size: 12px;
+      line-height: 1.5;
+    }
   </style>
 </head>
 
@@ -492,7 +661,7 @@
 
 <main class="wrap">
 
-  <!-- ===== Living Grief Space (NEW) ===== -->
+  <!-- ===== Living Grief Space ===== -->
   <section class="livingGrief">
     <div class="lgInner">
       <h2 class="lgTitle">A quiet space to land</h2>
@@ -505,7 +674,6 @@
         <div class="breathOrb" aria-hidden="true"></div>
         <p class="breathText" id="breathPhaseText">Breathe in… breathe out…</p>
 
-        <!-- NEW: duration selector + start/stop -->
         <div class="breathTimerRow" aria-label="Breathing timer controls">
           <button class="breathPill" type="button" data-breath-min="0.5" aria-pressed="false">30s</button>
           <button class="breathPill" type="button" data-breath-min="1" aria-pressed="false">60s</button>
@@ -534,9 +702,8 @@
       </p>
     </div>
   </section>
-  <!-- ===== End Living Grief Space ===== -->
 
-  <!-- ===== Parents (same wording, tidier layout) ===== -->
+  <!-- ===== Parents ===== -->
   <section class="card supportCard" style="margin-top:16px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
@@ -563,7 +730,7 @@
     </div>
   </section>
 
-  <!-- ===== Youth (same wording, tidier layout) ===== -->
+  <!-- ===== Youth ===== -->
   <section class="card supportCard" style="margin-top:14px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
@@ -573,8 +740,8 @@
 
       <p class="supportLead">
         If you're a kid or teen reading this: grief can feel confusing, heavy, or like it shows up out of nowhere.
-        You might feel sad, angry, numb, guilty, or totally “fine” and then not fine later. That’s normal.
-        You don’t have to have the “right” emotions, you just deserve support.
+        You might feel sad, angry, numb, guilty, or totally "fine" and then not fine later. That’s normal.
+        You don’t have to have the "right" emotions, you just deserve support.
       </p>
 
       <div class="quickRow" aria-label="Youth support buttons">
@@ -585,12 +752,38 @@
       </div>
 
       <p class="supportNote">
-        You’re not “too much.” Grief is a normal response to a hard thing. You don’t have to carry it alone.
+        You’re not "too much." Grief is a normal response to a hard thing. You don’t have to carry it alone.
       </p>
     </div>
   </section>
 
-  <section id="grid" class="grid"></section>
+  <!-- ===== Resource finder ===== -->
+  <section class="card" style="margin-top:14px;">
+    <div style="font-weight:900; font-size:18px; margin-bottom:6px;">Find a page fast</div>
+    <div style="color:var(--muted); line-height:1.55;">
+      If you’re overwhelmed, you don’t have to choose perfectly. Search, filter, or press “Start here.”
+    </div>
+
+    <div class="finder" aria-label="Resource finder">
+      <div class="finderLeft">
+        <input id="searchInput" type="text" placeholder="Search: grief, divorce, neurodiversity, school, change..." aria-label="Search resources" />
+        <div class="tagRow" aria-label="Quick filters">
+          <button class="tag" type="button" data-filter="kids" aria-pressed="false">kids</button>
+          <button class="tag" type="button" data-filter="caregivers" aria-pressed="false">caregivers</button>
+          <button class="tag" type="button" data-filter="change" aria-pressed="false">change</button>
+          <button class="tag" type="button" data-filter="neuro" aria-pressed="false">neuro</button>
+        </div>
+      </div>
+
+      <div class="finderRight">
+        <button class="chipBtn" type="button" id="btnStartHere">Start here</button>
+        <button class="chipBtn" type="button" id="btnClearFilters">Clear</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards injected here -->
+  <section id="grid" class="grid" aria-label="Resource cards"></section>
 
   <!-- Discussion Board -->
   <section class="card" style="margin-top:18px;">
@@ -633,58 +826,108 @@
   </div>
 </div>
 
+<!-- Floating helpers -->
+<div class="fabStack" aria-label="Quick helpers">
+  <button class="fab" id="btnTop" type="button" aria-label="Back to top">↑ <span>Top</span></button>
+  <button class="fab show" id="btnCalm" type="button" aria-label="Calm screen / quick exit">☁️ <span>Calm screen</span> <small>quick exit</small></button>
+</div>
+
+<!-- Calm screen overlay -->
+<section class="calmOverlay" id="calmOverlay" aria-label="Calm screen">
+  <div class="calmInner">
+    <div class="calmTop">
+      <h2 class="calmTitle">Weather + neutral notes</h2>
+      <button class="calmBtn" id="btnReturn" type="button">Return</button>
+    </div>
+
+    <div class="calmGrid">
+      <div class="calmCard">
+        <h3>Today’s weather</h3>
+        <p id="calmWeather">Partly cloudy. High 8°C / Low 2°C.</p>
+        <p class="calmHint">Neutral screen for privacy and a quick breath.</p>
+      </div>
+
+      <div class="calmCard">
+        <h3>One small plan</h3>
+        <p>Water • snack • one text to a safe person • 10 minutes outside.</p>
+        <p class="calmHint">No fixing required. Just the next tiny step.</p>
+      </div>
+
+      <div class="calmCard">
+        <h3>Notes</h3>
+        <p>Everything here is temporary. Close when you’re ready.</p>
+        <p class="calmHint">Press Esc or “Return” to go back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script>
-/* ===== Resource cards (unchanged) ===== */
+/* ===== Resource cards ===== */
 const resources = [
   {
     title: "Relating to Grief",
     url: "coping-with-death/",
-    note: "Stories and resources to help children understand death."
+    note: "Stories and resources to help children understand death.",
+    tags: ["kids","caregivers","grief"]
   },
-  { 
-    title: "Ages and Stages", 
-    url: "ages-and-stages/", 
-    note: "Scripts + cues for what kids understand at different ages."
+  {
+    title: "Ages and Stages",
+    url: "ages-and-stages/",
+    note: "Scripts + cues for what kids understand at different ages.",
+    tags: ["kids","caregivers"]
   },
   {
     title: "Divorce and Separation",
     url: "divorce/",
-    note: "Help kids feel safe, loved, and not responsible." 
+    note: "Help kids feel safe, loved, and not responsible.",
+    tags: ["kids","caregivers","change"]
   },
   {
     title: "Major Life Changes",
     url: "major-life-changes/",
-    note: "Make change feel less scary with predictability and words that fit.” 
+    note: "Make change feel less scary with predictability and words that fit.",
+    tags: ["kids","caregivers","change"]
   },
   {
     title: "Neurodiversity and Different Ways of Being",
     url: "neurodiversity/",
-    note: "Support without ‘fixing’ — nervous system-friendly care.” 
+    note: "Support without 'fixing' — nervous system-friendly care.",
+    tags: ["kids","caregivers","neuro"]
   }
 ];
 
 const grid = document.getElementById("grid");
-grid.innerHTML = resources.map(r => `
-  <article class="card">
-    <div style="font-weight:800;">
-      <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>
-    </div>
-    ${r.note ? `<div style="margin-top:8px;color:var(--muted);">${r.note}</div>` : ""}
-  </article>
-`).join("");
 
-/* ===== Living Grief Space logic (NEW) ===== */
+function renderCards(list){
+  grid.innerHTML = list.map(r => `
+    <article class="card">
+      <div style="font-weight:800;">
+        <a href="${r.url}">${r.title}</a>
+      </div>
+      ${r.note ? `<div style="margin-top:8px;color:var(--muted); line-height:1.55;">${r.note}</div>` : ""}
+      ${r.tags && r.tags.length ? `
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+          ${r.tags.map(t => `<span style="font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.12);border:1px solid rgba(255,255,255,.12);color:rgba(246,242,255,.88);font-weight:900;">${t}</span>`).join("")}
+        </div>
+      ` : ""}
+    </article>
+  `).join("");
+}
+renderCards(resources);
+
+/* ===== Living Grief Space logic ===== */
 const MESSAGES = [
-  "You’re allowed to be both strong and struggling at the same time.",
-  "Grief isn’t a sign you’re broken — it’s a sign you loved.",
-  "You don’t have to carry today the way you carried yesterday.",
-  "It’s okay if healing looks like surviving right now.",
-  "You’re doing better than your mind tells you.",
+  "You're allowed to be both strong and struggling at the same time.",
+  "Grief isn't a sign you're broken — it's a sign you loved.",
+  "You don't have to carry today the way you carried yesterday.",
+  "It's okay if healing looks like surviving right now.",
+  "You're doing better than your mind tells you.",
   "Some days the bravest thing is just staying.",
-  "Love doesn’t end — it changes shape.",
-  "You’re allowed to rest from being strong.",
-  "If you’re tired, that makes sense. This is heavy.",
-  "You don’t need perfect words. Presence counts."
+  "Love doesn't end — it changes shape.",
+  "You're allowed to rest from being strong.",
+  "If you're tired, that makes sense. This is heavy.",
+  "You don't need perfect words. Presence counts."
 ];
 
 function newMessage(){
@@ -706,8 +949,7 @@ function releaseText(){
 document.getElementById("btnNewWords").addEventListener("click", newMessage);
 document.getElementById("btnRelease").addEventListener("click", releaseText);
 
-/* ===== NEW: Breathing Timer (30s / 60s / 2 min / 5min) =====
-   Visual orb keeps pulsing; we add phase text + countdown + start/stop. */
+/* ===== Breathing Timer ===== */
 const phaseEl = document.getElementById("breathPhaseText");
 const statusEl = document.getElementById("breathStatusText");
 const countdownEl = document.getElementById("breathCountdownText");
@@ -715,13 +957,12 @@ const startBtn = document.getElementById("breathStart");
 const stopBtn = document.getElementById("breathStop");
 const durationBtns = Array.from(document.querySelectorAll("[data-breath-min]"));
 
-let selectedSeconds = 60;     // default if nothing selected
+let selectedSeconds = 60;
 let running = false;
 let timerId = null;
 let endAt = 0;
 let phaseId = null;
 
-// 4s inhale, 6s exhale (matches your parent reset)
 const INHALE_MS = 4000;
 const EXHALE_MS = 6000;
 
@@ -749,21 +990,17 @@ function startBreathing(){
   statusEl.textContent = "Breathing…";
   countdownEl.textContent = `Time left: ${formatRemaining(endAt - Date.now())}`;
 
-  // phase loop
   function runPhase(){
     if(!running) return;
     phaseEl.textContent = "Breathe in…";
     phaseId = setTimeout(() => {
       if(!running) return;
       phaseEl.textContent = "Breathe out…";
-      phaseId = setTimeout(() => {
-        runPhase();
-      }, EXHALE_MS);
+      phaseId = setTimeout(() => runPhase(), EXHALE_MS);
     }, INHALE_MS);
   }
   runPhase();
 
-  // countdown loop
   timerId = setInterval(() => {
     const remaining = endAt - Date.now();
     if(remaining <= 0){
@@ -796,21 +1033,67 @@ durationBtns.forEach(btn => {
 
 startBtn.addEventListener("click", startBreathing);
 stopBtn.addEventListener("click", () => stopBreathing(false));
-
-// set a default selected pill (60s)
 setSelectedDuration(60);
 
-/* ===== Popups keep ALL your original messages ===== */
+/* ===== Resource finder logic ===== */
+const searchInput = document.getElementById("searchInput");
+const filterBtns = Array.from(document.querySelectorAll(".tag[data-filter]"));
+const btnStartHere = document.getElementById("btnStartHere");
+const btnClearFilters = document.getElementById("btnClearFilters");
+
+let activeFilter = null;
+
+function applyFilters(){
+  const q = (searchInput.value || "").toLowerCase().trim();
+
+  const filtered = resources.filter(r => {
+    const hay = `${r.title} ${r.note || ""} ${(r.tags||[]).join(" ")}`.toLowerCase();
+    const matchesText = !q || hay.includes(q);
+    const matchesTag = !activeFilter || (r.tags || []).includes(activeFilter);
+    return matchesText && matchesTag;
+  });
+
+  renderCards(filtered);
+}
+
+filterBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const key = btn.dataset.filter;
+    activeFilter = (activeFilter === key) ? null : key;
+    filterBtns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === activeFilter)));
+    applyFilters();
+  });
+});
+
+searchInput.addEventListener("input", applyFilters);
+
+btnClearFilters.addEventListener("click", () => {
+  activeFilter = null;
+  searchInput.value = "";
+  filterBtns.forEach(b => b.setAttribute("aria-pressed","false"));
+  renderCards(resources);
+});
+
+btnStartHere.addEventListener("click", () => {
+  const pool = (activeFilter || (searchInput.value||"").trim())
+    ? resources.filter(r => (activeFilter ? (r.tags||[]).includes(activeFilter) : true))
+    : resources;
+
+  const pick = pool[Math.floor(Math.random() * pool.length)] || resources[0];
+  window.location.href = pick.url;
+});
+
+/* ===== Modals (FULL + CLOSED — this was the missing/broken part) ===== */
 const MODALS = {
   p_reset: {
     title: "Right now: 30-second reset",
     html: `
-      <p><strong>Try this once</strong> (no pressure) to “feel better.”</p>
+      <p><strong>Try this once</strong> (no pressure) to "feel better."</p>
       <ol>
         <li>Put one hand on your chest or belly.</li>
         <li>Inhale for 4… exhale for 6 (twice).</li>
         <li>Name 3 things you can see.</li>
-        <li>Tell yourself: “This is hard, and I’m here.”</li>
+        <li>Tell yourself: "This is hard, and I'm here."</li>
       </ol>
     `
   },
@@ -818,14 +1101,15 @@ const MODALS = {
     title: "When grief comes in waves",
     html: `
       <p>
-        Hard days can return around milestones, seasons, school changes, birthdays, or even “ordinary” moments.
-        That doesn’t mean you’re back at the start, it just means love and memory still live close to the surface.
+        Hard days can return around milestones, seasons, school changes, birthdays, or even "ordinary" moments.
+        That doesn't mean you're back at the start — it means love and memory still live close to the surface.
       </p>
       <details class="softDetails">
         <summary>Common moments that can hit unexpectedly</summary>
         <p>
           Bedtime. School drop-offs. Holidays and birthdays. Firsts (first day without them, first report card after the diagnosis, first visit to a new home).
-          Seeing other families who seem “fine.” Even a smell, song, or photo. Waves don’t mean failure, they signify feelings of love and meaning.
+          Seeing other families who seem "fine." Even a smell, song, or photo.
+          Waves don’t mean failure — they’re a sign something mattered.
         </p>
       </details>
     `
@@ -834,28 +1118,28 @@ const MODALS = {
     title: "What kids often need most",
     html: `
       <p>
-        They don't need perfect answers, just honesty, steadiness, and permission to feel.
-        “I don’t know” is okay. “I’m here” is powerful.
+        They don’t need perfect answers — they need honesty, steadiness, and permission to feel.
+        "I don’t know" is okay. "I’m here" is powerful.
       </p>
     `
   },
   p_more: {
-    title: "More you wrote (important)",
+    title: "More for caregivers",
     html: `
       <p>
-        Parenting through grief often looks like “doing the basics” for a while. And It's so important to know that it counts.
+        Parenting through grief often looks like “doing the basics” for a while — and it counts.
         Small acts are real care: water, food, a text to someone safe, a 10-minute walk, a quiet minute alone.
       </p>
       <p style="margin-top:10px;">
-        <strong style="color: rgba(246,242,255,.92);">Something to Remember:</strong>
-        some grief is “living grief”, the ongoing ache of uncertainty, changing needs, or a life that looks different than expected.
-        It still deserves care, support, and language that doesn’t shame you for struggling.
+        <strong style="color: rgba(246,242,255,.92);">Something to remember:</strong>
+        some grief is "living grief" — ongoing uncertainty, changing needs, or a life that looks different than expected.
+        It still deserves care and language that doesn’t shame you for struggling.
       </p>
       <details class="softDetails">
         <summary>When it might help to reach out for extra support</summary>
         <p>
-          If you’re feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
-          If you’re in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
+          If you're feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
+          If you're in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
           For non-urgent support, consider talking with a trusted person, your family doctor, a counsellor, or a local community resource.
         </p>
       </details>
@@ -894,20 +1178,20 @@ const MODALS = {
     title: "More for youth",
     html: `
       <p>
-        Pick one: drink water, eat something small, text a safe person “can you check in?”, write one sentence in notes,
+        Pick one: drink water, eat something small, text a safe person "can you check in?", write one sentence in notes,
         or step outside for 2 minutes. Small steps matter.
       </p>
       <details class="softDetails">
         <summary>Words you can use when you don’t know what to say</summary>
         <p>
-          “I’m having a hard time.” • “I don’t want advice, I just want someone around.” • “Can we talk about something else but stay together?”
-          • “I’m not okay today.” • “I don’t know what I feel.”
+          "I'm having a hard time." • "I don’t want advice, I just want someone around." • "Can we talk about something else but stay together?"
+          • "I’m not okay today." • "I don’t know what I feel."
         </p>
       </details>
       <details class="softDetails">
         <summary>If you feel unsafe or overwhelmed</summary>
         <p>
-          If you’re in danger or thinking about hurting yourself, tell an adult you trust right away.
+          If you're in danger or thinking about hurting yourself, tell an adult you trust right away.
           In Canada, you can call or text <strong>988</strong> any time, or call <strong>911</strong> in an emergency.
           You deserve help — even if you’re not sure how to explain it.
         </p>
@@ -934,29 +1218,56 @@ function closeModal(){
   modalOverlay.style.display = "none";
 }
 
-/* open on button click */
 document.querySelectorAll("[data-modal]").forEach(btn => {
   btn.addEventListener("click", () => openModal(btn.dataset.modal));
 });
 
-/* close behaviors */
 closeTop.addEventListener("click", closeModal);
 closeBottom.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
-document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape"){
+    // If calm screen is open, close it; otherwise close modals
+    const calm = document.getElementById("calmOverlay");
+    if(calm && calm.style.display === "block"){
+      calm.style.display = "none";
+    } else {
+      closeModal();
+    }
+  }
+});
+
+/* ===== Floating helpers logic ===== */
+const btnTop = document.getElementById("btnTop");
+const btnCalm = document.getElementById("btnCalm");
+const calmOverlay = document.getElementById("calmOverlay");
+const btnReturn = document.getElementById("btnReturn");
+
+function updateTopButton(){
+  if(window.scrollY > 400){
+    btnTop.classList.add("show");
+  }else{
+    btnTop.classList.remove("show");
+  }
+}
+window.addEventListener("scroll", updateTopButton);
+updateTopButton();
+
+btnTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+btnCalm.addEventListener("click", () => {
+  calmOverlay.style.display = "block";
+});
+
+btnReturn.addEventListener("click", () => {
+  calmOverlay.style.display = "none";
+});
+
+calmOverlay.addEventListener("click", (e) => {
+  // allow click outside content to close
+  if(e.target === calmOverlay) calmOverlay.style.display = "none";
+});
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
