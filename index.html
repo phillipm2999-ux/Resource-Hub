@@ -297,6 +297,179 @@
     @media (prefers-reduced-motion: reduce){
       .chipBtn, .card{ transition:none; }
     }
+
+    /* ===== Living Grief Space ===== */
+    .livingGrief{
+      margin: 22px 0 10px;
+      padding: 34px 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+
+      background:
+        radial-gradient(800px 500px at 50% -10%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(900px 600px at 10% 120%, rgba(199,90,123,.14), transparent 60%),
+        linear-gradient(180deg, rgba(10,9,16,.92), rgba(14,15,26,.96));
+
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+    }
+
+    .lgInner{
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      display: grid;
+      gap: 18px;
+    }
+
+    .lgTitle{
+      margin:0;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+
+    .lgLead{
+      margin:0;
+      color: var(--muted);
+      line-height:1.65;
+    }
+
+    /* Breathing orb */
+    .breathWrap{
+      display:grid;
+      gap:10px;
+      justify-items:center;
+      margin-top:6px;
+    }
+
+    .breathOrb{
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffd0db, #ff4f6d);
+      box-shadow:
+        0 0 40px rgba(255,111,145,.45),
+        inset 0 0 20px rgba(255,255,255,.25);
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe{
+      0%{ transform: scale(0.85); opacity:.78; }
+      50%{ transform: scale(1.10); opacity:1; }
+      100%{ transform: scale(0.85); opacity:.78; }
+    }
+
+    .breathText{
+      margin:0;
+      font-size: 13px;
+      color: rgba(246,242,255,.65);
+    }
+
+    /* NEW: timer row */
+    .breathTimerRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+      margin-top: 4px;
+    }
+    .breathPill{
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      color: rgba(246,242,255,.92);
+      cursor:pointer;
+      font-weight: 900;
+      transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
+      user-select:none;
+    }
+    .breathPill:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 18px rgba(255,111,145,.22);
+    }
+    .breathPill[aria-pressed="true"]{
+      border-color: rgba(255,111,145,.40);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 26px rgba(255,111,145,.18);
+    }
+    .breathStatus{
+      margin:0;
+      font-size: 13px;
+      color: rgba(246,242,255,.78);
+      min-height: 18px;
+    }
+    .breathCountdown{
+      margin:0;
+      font-size: 12px;
+      color: rgba(246,242,255,.62);
+      min-height: 16px;
+    }
+
+    /* Daily message */
+    .dailyBox{
+      display:grid;
+      gap:10px;
+      justify-items:center;
+      margin-top:6px;
+    }
+
+    .dailyBox p{
+      margin:0;
+      font-style: italic;
+      color: rgba(246,242,255,.92);
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    /* Write & release */
+    .releaseBox{
+      display:grid;
+      gap:10px;
+      margin-top:4px;
+    }
+
+    .releaseBox textarea{
+      width:100%;
+      min-height:96px;
+      resize:none;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      font-family: inherit;
+      outline: none;
+    }
+    .releaseBox textarea::placeholder{
+      color: rgba(246,242,255,.55);
+    }
+
+    /* Buttons */
+    .lgBtn{
+      padding:8px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      font-weight: 900;
+      cursor:pointer;
+      transition:.15s;
+    }
+    .lgBtn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 0 18px rgba(255,111,145,.35);
+    }
+    .lgBtn:active{ transform: translateY(0px); }
+
+    .lgFoot{
+      margin:0;
+      font-size: 12px;
+      color: rgba(246,242,255,.55);
+      line-height: 1.5;
+    }
   </style>
 </head>
 
@@ -319,6 +492,49 @@
 
 <main class="wrap">
 
+  <!-- ===== Living Grief Space (NEW) ===== -->
+  <section class="livingGrief">
+    <div class="lgInner">
+      <h2 class="lgTitle">A quiet space to land</h2>
+      <p class="lgLead">
+        If you arrived here carrying something heavy — pause for a moment.
+        This space isn’t for fixing grief. It’s for sitting beside it.
+      </p>
+
+      <div class="breathWrap" aria-label="Breathing tool">
+        <div class="breathOrb" aria-hidden="true"></div>
+        <p class="breathText" id="breathPhaseText">Breathe in… breathe out…</p>
+
+        <!-- NEW: duration selector + start/stop -->
+        <div class="breathTimerRow" aria-label="Breathing timer controls">
+          <button class="breathPill" type="button" data-breath-min="0.5" aria-pressed="false">30s</button>
+          <button class="breathPill" type="button" data-breath-min="1" aria-pressed="false">60s</button>
+          <button class="breathPill" type="button" data-breath-min="2" aria-pressed="false">2 min</button>
+          <button class="breathPill" type="button" id="breathStart" aria-pressed="false">Start</button>
+          <button class="breathPill" type="button" id="breathStop" aria-pressed="false">Stop</button>
+        </div>
+
+        <p class="breathStatus" id="breathStatusText"></p>
+        <p class="breathCountdown" id="breathCountdownText"></p>
+      </div>
+
+      <div class="dailyBox" aria-label="Daily words">
+        <p id="dailyMessage">You’re allowed to be both strong and struggling at the same time.</p>
+        <button class="lgBtn" type="button" id="btnNewWords">New words</button>
+      </div>
+
+      <div class="releaseBox" aria-label="Write and release">
+        <textarea id="releaseText" placeholder="If something feels heavy… you can place the words here. No one will see them."></textarea>
+        <button class="lgBtn" type="button" id="btnRelease">Release</button>
+      </div>
+
+      <p class="lgFoot">
+        Nothing written here is stored. Some grief just needs somewhere gentle to exist for a moment.
+      </p>
+    </div>
+  </section>
+  <!-- ===== End Living Grief Space ===== -->
+
   <!-- ===== Parents (same wording, tidier layout) ===== -->
   <section class="card supportCard" style="margin-top:16px; margin-bottom:14px;">
     <div class="supportInner">
@@ -327,14 +543,12 @@
         <span class="supportBadge">gentle + practical</span>
       </div>
 
-      <!-- keep your exact words -->
       <p class="supportLead">
         If you’re here because life changed suddenly - a death, diagnosis, separation, a move, financial stress, or a version of parenting you didn’t expect;
         you’re not doing it wrong. Grief isn’t only about death. It can be about <em>what was</em>, <em>what might have been</em>, and <em>what you’re holding together right now</em>.
         This hub offers steady language, simple tools, and reminders that you’re not alone.
       </p>
 
-      <!-- buttons open your existing content in popups -->
       <div class="quickRow" aria-label="Quick support buttons">
         <button class="chipBtn" type="button" data-modal="p_reset">Right now: 30-second reset</button>
         <button class="chipBtn" type="button" data-modal="p_waves">When grief comes in waves</button>
@@ -356,7 +570,6 @@
         <span class="supportBadge">real talk + gentle tools</span>
       </div>
 
-      <!-- keep these exact words -->
       <p class="supportLead">
         If you're a kid or teen reading this: grief can feel confusing, heavy, or like it shows up out of nowhere.
         You might feel sad, angry, numb, guilty, or totally “fine” and then not fine later. That’s normal.
@@ -443,9 +656,135 @@ grid.innerHTML = resources.map(r => `
   </article>
 `).join("");
 
+/* ===== Living Grief Space logic (NEW) ===== */
+const MESSAGES = [
+  "You’re allowed to be both strong and struggling at the same time.",
+  "Grief isn’t a sign you’re broken — it’s a sign you loved.",
+  "You don’t have to carry today the way you carried yesterday.",
+  "It’s okay if healing looks like surviving right now.",
+  "You’re doing better than your mind tells you.",
+  "Some days the bravest thing is just staying.",
+  "Love doesn’t end — it changes shape.",
+  "You’re allowed to rest from being strong.",
+  "If you’re tired, that makes sense. This is heavy.",
+  "You don’t need perfect words. Presence counts."
+];
+
+function newMessage(){
+  const msg = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+  document.getElementById("dailyMessage").textContent = msg;
+}
+
+function releaseText(){
+  const box = document.getElementById("releaseText");
+  if(!box.value.trim()) return;
+  box.style.transition = "opacity 1.5s ease";
+  box.style.opacity = "0";
+  setTimeout(()=>{
+    box.value = "";
+    box.style.opacity = "1";
+  }, 1600);
+}
+
+document.getElementById("btnNewWords").addEventListener("click", newMessage);
+document.getElementById("btnRelease").addEventListener("click", releaseText);
+
+/* ===== NEW: Breathing Timer (30s / 60s / 2 min) =====
+   Visual orb keeps pulsing; we add phase text + countdown + start/stop. */
+const phaseEl = document.getElementById("breathPhaseText");
+const statusEl = document.getElementById("breathStatusText");
+const countdownEl = document.getElementById("breathCountdownText");
+const startBtn = document.getElementById("breathStart");
+const stopBtn = document.getElementById("breathStop");
+const durationBtns = Array.from(document.querySelectorAll("[data-breath-min]"));
+
+let selectedSeconds = 60;     // default if nothing selected
+let running = false;
+let timerId = null;
+let endAt = 0;
+let phaseId = null;
+
+// 4s inhale, 6s exhale (matches your parent reset)
+const INHALE_MS = 4000;
+const EXHALE_MS = 6000;
+
+function setSelectedDuration(sec){
+  selectedSeconds = sec;
+  durationBtns.forEach(b => b.setAttribute("aria-pressed", String((Number(b.dataset.breathMin) * 60) === sec)));
+  statusEl.textContent = `Selected: ${sec < 60 ? `${sec}s` : `${Math.round(sec/60)} min`}`;
+}
+
+function formatRemaining(ms){
+  const totalSec = Math.max(0, Math.ceil(ms / 1000));
+  const m = Math.floor(totalSec / 60);
+  const s = totalSec % 60;
+  if(m <= 0) return `${s}s`;
+  return `${m}:${String(s).padStart(2,"0")}`;
+}
+
+function startBreathing(){
+  if(running) return;
+  running = true;
+  startBtn.setAttribute("aria-pressed","true");
+  stopBtn.setAttribute("aria-pressed","false");
+
+  endAt = Date.now() + (selectedSeconds * 1000);
+  statusEl.textContent = "Breathing…";
+  countdownEl.textContent = `Time left: ${formatRemaining(endAt - Date.now())}`;
+
+  // phase loop
+  function runPhase(){
+    if(!running) return;
+    phaseEl.textContent = "Breathe in…";
+    phaseId = setTimeout(() => {
+      if(!running) return;
+      phaseEl.textContent = "Breathe out…";
+      phaseId = setTimeout(() => {
+        runPhase();
+      }, EXHALE_MS);
+    }, INHALE_MS);
+  }
+  runPhase();
+
+  // countdown loop
+  timerId = setInterval(() => {
+    const remaining = endAt - Date.now();
+    if(remaining <= 0){
+      stopBreathing(true);
+      return;
+    }
+    countdownEl.textContent = `Time left: ${formatRemaining(remaining)}`;
+  }, 250);
+}
+
+function stopBreathing(finished=false){
+  running = false;
+  startBtn.setAttribute("aria-pressed","false");
+  stopBtn.setAttribute("aria-pressed","true");
+
+  if(timerId){ clearInterval(timerId); timerId = null; }
+  if(phaseId){ clearTimeout(phaseId); phaseId = null; }
+
+  countdownEl.textContent = "";
+  phaseEl.textContent = "Breathe in… breathe out…";
+  statusEl.textContent = finished ? "Done. You can restart anytime." : "Paused.";
+}
+
+durationBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const sec = Math.round(Number(btn.dataset.breathMin) * 60);
+    setSelectedDuration(sec);
+  });
+});
+
+startBtn.addEventListener("click", startBreathing);
+stopBtn.addEventListener("click", () => stopBreathing(false));
+
+// set a default selected pill (60s)
+setSelectedDuration(60);
+
 /* ===== Popups keep ALL your original messages ===== */
 const MODALS = {
-  /* Parents — same content as before */
   p_reset: {
     title: "Right now: 30-second reset",
     html: `
@@ -506,7 +845,6 @@ const MODALS = {
     `
   },
 
-  /* Youth — same content as before */
   y_ground: {
     title: "When it hits suddenly",
     html: `
@@ -593,4 +931,3 @@ document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(
 
 </body>
 </html>
-
