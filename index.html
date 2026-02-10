@@ -782,11 +782,14 @@
       font-weight: 800;
       font-size: 12px;
     }
+
+    /* NOTE: metaphorSvg not needed anymore, but leaving it doesn't hurt */
     .metaphorSvg{
       display:block;
       width: 100%;
       height: auto;
     }
+
     .metaphorCaption{
       padding: 12px 12px 14px;
       color: rgba(246,242,255,.72);
@@ -890,7 +893,7 @@
       </section>
     </div>
 
-    <!-- FIXED metaphor anchor: looks like a real “visual” now -->
+    <!-- UPDATED metaphor anchor: uses your uploaded image + wave wording -->
     <section class="card metaphor" aria-label="Visual metaphor anchor">
       <div class="metaphorInner">
         <h2>A small picture to hold onto</h2>
@@ -899,86 +902,25 @@
           And it can be like a rock in a backpack: the rock doesn’t vanish, but life grows around it.
         </p>
 
-        <figure class="metaphorFigure" aria-label="Waves and rock metaphor illustration">
+        <figure class="metaphorFigure" aria-label="Waves metaphor illustration">
           <div class="metaphorTopBar">
-            Waves + Rock
+            Grief comes in waves
             <span>You can scroll slowly. This page will still be here.</span>
           </div>
 
-          <!-- Inline SVG: consistent on GitHub Pages, no “placeholder block” vibe -->
-          <svg class="metaphorSvg" viewBox="0 0 960 360" role="img" aria-label="Waves with a backpack and rock">
-            <defs>
-              <linearGradient id="bgG" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="rgba(255,111,145,0.22)"/>
-                <stop offset="1" stop-color="rgba(0,0,0,0)"/>
-              </linearGradient>
-              <linearGradient id="waveG" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="rgba(255,255,255,0.18)"/>
-                <stop offset="1" stop-color="rgba(255,255,255,0.06)"/>
-              </linearGradient>
-              <radialGradient id="orbG" cx="30%" cy="30%" r="70%">
-                <stop offset="0" stop-color="rgba(255,255,255,0.22)"/>
-                <stop offset="1" stop-color="rgba(0,0,0,0)"/>
-              </radialGradient>
-            </defs>
-
-            <!-- soft background -->
-            <rect x="0" y="0" width="960" height="360" fill="url(#bgG)"/>
-            <circle cx="180" cy="110" r="120" fill="url(#orbG)"/>
-            <circle cx="770" cy="90" r="140" fill="url(#orbG)"/>
-
-            <!-- waves -->
-            <g opacity="0.95">
-              <path d="M-20 140 C 80 110, 160 170, 260 140 C 360 110, 440 170, 540 140 C 640 110, 720 170, 820 140 C 900 120, 940 140, 980 130"
-                    fill="none" stroke="url(#waveG)" stroke-width="18" stroke-linecap="round"/>
-              <path d="M-20 190 C 90 160, 170 220, 280 190 C 390 160, 470 220, 580 190 C 690 160, 770 220, 880 190 C 930 175, 950 190, 980 182"
-                    fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="14" stroke-linecap="round"/>
-              <path d="M-20 235 C 100 210, 190 260, 310 235 C 430 210, 520 260, 640 235 C 760 210, 850 260, 970 235"
-                    fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="12" stroke-linecap="round"/>
-            </g>
-
-            <!-- backpack (left) -->
-            <g transform="translate(120,210)">
-              <rect x="0" y="-40" width="220" height="150" rx="26"
-                    fill="rgba(0,0,0,0.16)" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
-              <rect x="30" y="-10" width="160" height="90" rx="22"
-                    fill="rgba(255,111,145,0.10)" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="6 6"/>
-              <path d="M40 -40 C 55 -85, 165 -85, 180 -40"
-                    fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="8" stroke-linecap="round"/>
-            </g>
-
-            <!-- rock (middle-ish) -->
-            <g transform="translate(410,255)">
-              <ellipse cx="0" cy="0" rx="60" ry="42"
-                       fill="rgba(233,231,243,0.14)" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
-              <ellipse cx="-18" cy="-10" rx="18" ry="12" fill="rgba(255,255,255,0.10)"/>
-            </g>
-
-            <!-- text (right) -->
-            <g transform="translate(520,230)">
-              <text x="0" y="0" fill="rgba(246,242,255,0.80)" font-size="20" font-weight="700">
-                Some days the wave is big.
-              </text>
-              <text x="0" y="32" fill="rgba(246,242,255,0.80)" font-size="20" font-weight="700">
-                Some days the rock feels heavier.
-              </text>
-              <text x="0" y="72" fill="rgba(246,242,255,0.62)" font-size="18" font-weight="600">
-                Neither means you’re failing.
-              </text>
-              <text x="0" y="98" fill="rgba(246,242,255,0.62)" font-size="18" font-weight="600">
-                It means you’re carrying something real.
-              </text>
-            </g>
-
-            <!-- footer hint -->
-            <text x="480" y="332" text-anchor="middle"
-                  fill="rgba(246,242,255,0.52)" font-size="16" font-weight="600">
-              You can take breaks. This page will still be here.
-            </text>
-          </svg>
+          <!-- CHANGE THIS FILENAME ONLY if yours is different -->
+          <img
+            src="waves-anchor.png"
+            alt="Illustration of waves representing grief coming and going"
+            style="width:100%; height:auto; display:block;"
+          />
 
           <figcaption class="metaphorCaption">
-            This is a grounding anchor, not a lesson. Just a small image you can return to when your brain feels loud.
+            Grief can feel like waves.
+            Some days they are small and far away.
+            Some days they crash without warning.
+            The waves don’t mean you’re failing —
+            they mean you’re carrying something that mattered.
           </figcaption>
         </figure>
       </div>
@@ -1517,4 +1459,3 @@ document.querySelectorAll('[data-action="calm"]').forEach(btn => {
 
 </body>
 </html>
-
