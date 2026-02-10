@@ -211,63 +211,6 @@
       line-height: 1.5;
     }
 
-    /* ===== Resource finder ===== */
-    .finder{
-      margin-top: 14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .finderLeft{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      flex: 1 1 520px;
-    }
-    .finder input{
-      flex: 1 1 320px;
-      min-width: 240px;
-      background: var(--panel2);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,.14);
-      padding: 10px 12px;
-      border-radius: 999px;
-      outline:none;
-    }
-    .finder input::placeholder{ color: rgba(246,242,255,.60); }
-
-    .tagRow{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .tag{
-      font-size:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--tagbg);
-      border: 1px solid var(--tagborder);
-      color: rgba(246,242,255,.92);
-      cursor:pointer;
-      user-select:none;
-      font-weight: 900;
-    }
-    .tag[aria-pressed="true"]{
-      border-color: rgba(255,111,145,.45);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 18px rgba(255,111,145,.16);
-    }
-    .finderRight{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
-    }
-
     /* Tiny modal */
     .modalOverlay{
       position: fixed;
@@ -574,29 +517,53 @@
       color: rgba(246,242,255,.72);
     }
 
-    /* Calm-screen overlay */
+    /* =========================================================
+       Calm-screen overlay (FIXED: scroll + stacking + iOS)
+       ========================================================= */
+    body.calmOpen{
+      overflow: hidden;      /* stop background scroll */
+      touch-action: none;
+    }
+
     .calmOverlay{
       position: fixed;
       inset: 0;
-      display: none;
+      display: none;         /* toggled by .open */
       z-index: 9999;
       background: #0b0d12;
       color: #e9e7f3;
+
+      overflow-y: auto;      /* ✅ overlay scroll */
+      -webkit-overflow-scrolling: touch; /* ✅ iOS momentum */
     }
+    .calmOverlay.open{
+      display: block;
+    }
+
     .calmInner{
       max-width: 980px;
       margin: 0 auto;
-      padding: 22px 18px 28px;
+      padding: 22px 18px 90px; /* ✅ bottom space */
       display: grid;
       gap: 14px;
+      min-height: 100%;
     }
+
     .calmTop{
+      position: sticky;      /* ✅ stays visible while scrolling */
+      top: 0;
+      z-index: 2;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap: 12px;
       flex-wrap: wrap;
+
+      padding: 10px 0;
+      background: linear-gradient(180deg, rgba(11,13,18,.98), rgba(11,13,18,.70));
+      backdrop-filter: blur(8px);
     }
+
     .calmTitle{
       margin:0;
       font-size: 18px;
@@ -612,6 +579,7 @@
       cursor: pointer;
       font-weight: 900;
     }
+
     .calmGrid{
       display:grid;
       gap: 12px;
@@ -638,6 +606,15 @@
       color: rgba(233,231,243,.60);
       font-size: 12px;
       line-height: 1.5;
+    }
+
+    /* ✅ Keep the wave image from swallowing the whole overlay */
+    .calmWaveImg{
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 52vh;
+      object-fit: cover;
     }
 
     /* =========================================================
@@ -724,29 +701,6 @@
       color: rgba(246,242,255,.70);
       line-height: 1.35;
     }
-
-    /* Finder title */
-    .finderTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .finderTitle h2{
-      margin:0;
-      font-size: 18px;
-      letter-spacing:.2px;
-      color: rgba(246,242,255,.95);
-    }
-    .finderTitle p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.55;
-      font-size: 13px;
-      max-width: 70ch;
-    }
   </style>
 </head>
 
@@ -769,9 +723,7 @@
 
 <main class="wrap">
 
-  <!-- =========================================================
-       “You are here” + Pathways
-       ========================================================= -->
+  <!-- “You are here” + Pathways -->
   <section class="heroStack" aria-label="Orientation and gentle pathways">
     <div class="splitHero">
       <section class="card youHere" aria-label="You are here">
@@ -812,14 +764,6 @@
             </span>
           </button>
 
-          <button class="pathBtn" type="button" data-jump="#finderSection" role="listitem">
-            <span class="emoji"></span>
-            <span class="pathText">
-              <span class="pathTitle">Understanding grief</span>
-              <span class="pathSub">Find pages and explanations fast</span>
-            </span>
-          </button>
-
           <button class="pathBtn" type="button" data-jump="#youthSection" role="listitem">
             <span class="emoji"></span>
             <span class="pathText">
@@ -844,7 +788,7 @@
     </div>
   </section>
 
-  <!-- ===== Living Grief Space ===== -->
+  <!-- Living Grief Space -->
   <section class="livingGrief" id="livingSpace">
     <div class="lgInner">
       <h2 class="lgTitle">A quiet space to land</h2>
@@ -886,7 +830,7 @@
     </div>
   </section>
 
-  <!-- ===== Parents ===== -->
+  <!-- Parents -->
   <section class="card supportCard" id="parentsSection" style="margin-top:16px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
@@ -913,7 +857,7 @@
     </div>
   </section>
 
-  <!-- ===== Youth ===== -->
+  <!-- Youth -->
   <section class="card supportCard" id="youthSection" style="margin-top:14px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
@@ -939,9 +883,6 @@
       </p>
     </div>
   </section>
-
-  <!-- ===== Resource Finder ===== -->
-  
 
   <!-- Cards injected here -->
   <section id="grid" class="grid" aria-label="Resource cards"></section>
@@ -1003,12 +944,12 @@
 
     <div class="calmGrid">
 
-      <!-- NEW: Waves picture moved here -->
+      <!-- Waves picture (scroll-safe) -->
       <div class="calmCard" style="grid-column: 1 / -1; overflow:hidden;">
         <h3 style="margin:0 0 10px;">A small picture to hold onto</h3>
         <p style="margin:0 0 12px; color: rgba(233,231,243,.72); line-height:1.6;">
           Grief can come in waves. Some days the waves are small and far away. Some days they crash without warning.
-            The waves don’t mean you’re failing — they mean you’re carrying something that mattered.
+          The waves don’t mean you’re failing — they mean you’re carrying something that mattered.
         </p>
 
         <div style="
@@ -1037,9 +978,9 @@
           </div>
 
           <img
+            class="calmWaveImg"
             src="waves.png"
             alt="Illustration of waves representing grief coming and going"
-            style="width:100%; height:auto; display:block;"
             loading="lazy"
             onerror="this.style.display='none'; this.parentElement.querySelector('.calmImgFallback').style.display='block';"
           />
@@ -1228,54 +1169,6 @@ if(startBtn) startBtn.addEventListener("click", startBreathing);
 if(stopBtn) stopBtn.addEventListener("click", () => stopBreathing(false));
 setSelectedDuration(60);
 
-/* ===== Resource finder logic ===== */
-const searchInput = document.getElementById("searchInput");
-const filterBtns = Array.from(document.querySelectorAll(".tag[data-filter]"));
-const btnStartHere = document.getElementById("btnStartHere");
-const btnClearFilters = document.getElementById("btnClearFilters");
-
-let activeFilter = null;
-
-function applyFilters(){
-  const q = (searchInput?.value || "").toLowerCase().trim();
-
-  const filtered = resources.filter(r => {
-    const hay = `${r.title} ${r.note || ""} ${(r.tags||[]).join(" ")}`.toLowerCase();
-    const matchesText = !q || hay.includes(q);
-    const matchesTag = !activeFilter || (r.tags || []).includes(activeFilter);
-    return matchesText && matchesTag;
-  });
-
-  renderCards(filtered);
-}
-
-filterBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const key = btn.dataset.filter;
-    activeFilter = (activeFilter === key) ? null : key;
-    filterBtns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === activeFilter)));
-    applyFilters();
-  });
-});
-
-if(searchInput) searchInput.addEventListener("input", applyFilters);
-
-if(btnClearFilters) btnClearFilters.addEventListener("click", () => {
-  activeFilter = null;
-  if(searchInput) searchInput.value = "";
-  filterBtns.forEach(b => b.setAttribute("aria-pressed","false"));
-  renderCards(resources);
-});
-
-if(btnStartHere) btnStartHere.addEventListener("click", () => {
-  const pool = (activeFilter || (searchInput?.value || "").trim())
-    ? resources.filter(r => (activeFilter ? (r.tags||[]).includes(activeFilter) : true))
-    : resources;
-
-  const pick = pool[Math.floor(Math.random() * pool.length)] || resources[0];
-  window.location.href = pick.url;
-});
-
 /* ===== Modals ===== */
 const MODALS = {
   p_reset: { title: "Right now: 30-second reset", html: `
@@ -1319,7 +1212,6 @@ const MODALS = {
       <p>
         If you're feeling unsafe, unable to cope, or like you might hurt yourself or someone else, please reach out for immediate support.
         If you're in Canada, you can call or text <strong>988</strong> for suicide crisis support, or call <strong>911</strong> in an emergency.
-        For non-urgent support, consider talking with a trusted person, your family doctor, a counsellor, or a local community resource.
       </p>
     </details>` },
 
@@ -1343,22 +1235,7 @@ const MODALS = {
     <p>
       Pick one: drink water, eat something small, text a safe person "can you check in?", write one sentence in notes,
       or step outside for 2 minutes. Small steps matter.
-    </p>
-    <details class="softDetails">
-      <summary>Words you can use when you don’t know what to say</summary>
-      <p>
-        "I'm having a hard time." • "I don’t want advice, I just want someone around." • "Can we talk about something else but stay together?"
-        • "I’m not okay today." • "I don’t know what I feel."
-      </p>
-    </details>
-    <details class="softDetails">
-      <summary>If you feel unsafe or overwhelmed</summary>
-      <p>
-        If you're in danger or thinking about hurting yourself, tell an adult you trust right away.
-        In Canada, you can call or text <strong>988</strong> any time, or call <strong>911</strong> in an emergency.
-        You deserve help — even if you’re not sure how to explain it.
-      </p>
-    </details>` }
+    </p>` }
 };
 
 const modalOverlay = document.getElementById("modalOverlay");
@@ -1404,22 +1281,37 @@ updateTopButton();
 
 if(btnTop) btnTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-if(btnCalm) btnCalm.addEventListener("click", () => { if(calmOverlay) calmOverlay.style.display = "block"; });
-if(btnReturn) btnReturn.addEventListener("click", () => { if(calmOverlay) calmOverlay.style.display = "none"; });
+function openCalm(){
+  if(!calmOverlay) return;
+  calmOverlay.classList.add("open");
+  document.body.classList.add("calmOpen");
+  calmOverlay.scrollTop = 0;
+  if(btnReturn) btnReturn.focus({ preventScroll:true });
+}
 
-if(calmOverlay) calmOverlay.addEventListener("click", (e) => { if(e.target === calmOverlay) calmOverlay.style.display = "none"; });
+function closeCalm(){
+  if(!calmOverlay) return;
+  calmOverlay.classList.remove("open");
+  document.body.classList.remove("calmOpen");
+  if(btnCalm) btnCalm.focus({ preventScroll:true });
+}
+
+if(btnCalm) btnCalm.addEventListener("click", openCalm);
+if(btnReturn) btnReturn.addEventListener("click", closeCalm);
+
+if(calmOverlay) calmOverlay.addEventListener("click", (e) => { if(e.target === calmOverlay) closeCalm(); });
 
 document.addEventListener("keydown", (e) => {
   if(e.key === "Escape"){
-    if(calmOverlay && calmOverlay.style.display === "block"){
-      calmOverlay.style.display = "none";
+    if(calmOverlay && calmOverlay.classList.contains("open")){
+      closeCalm();
     } else {
       closeModal();
     }
   }
 });
 
-/* ===== Pathway buttons (scroll + calm action) ===== */
+/* ===== Pathway buttons ===== */
 function jumpTo(selector){
   const el = document.querySelector(selector);
   if(!el) return;
@@ -1429,12 +1321,9 @@ document.querySelectorAll("[data-jump]").forEach(btn => {
   btn.addEventListener("click", () => jumpTo(btn.getAttribute("data-jump")));
 });
 document.querySelectorAll('[data-action="calm"]').forEach(btn => {
-  btn.addEventListener("click", () => { if(calmOverlay) calmOverlay.style.display = "block"; });
+  btn.addEventListener("click", openCalm);
 });
 </script>
 
 </body>
 </html>
-
-
-
