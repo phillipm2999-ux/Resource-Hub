@@ -357,6 +357,7 @@
 
     @media (prefers-reduced-motion: reduce){
       .chipBtn, .card{ transition:none; }
+      .waves:before, .waves:after{ animation:none; }
     }
 
     /* ===== Living Grief Space ===== */
@@ -563,7 +564,7 @@
     .fab:hover{
       transform: translateY(-1px);
       filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 22px rgba(255,111,145,.10), 0 12px 30px rgba(0,0,0,.28);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 22px rgba(255,111,145,.10), 0 12px 30px rgba(0,0,0,0.28);
     }
     .fab.show{
       opacity: 1;
@@ -753,52 +754,64 @@
       font-size: 14px;
     }
 
-    /* Tiny “visual anchor” built in CSS */
+    /* =========================================================
+       FIXED: Tiny “visual anchor” (higher contrast) + Emoji header
+       ========================================================= */
     .miniArt{
       width: 100%;
       max-width: 520px;
       margin: 2px auto 0;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.16);
       padding: 14px;
       overflow:hidden;
     }
+
+    .miniArtHeader{
+      font-weight: 900;
+      color: rgba(246,242,255,.75);
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
     .waves{
-      height: 68px;
+      height: 72px;
       border-radius: 14px;
       position: relative;
       background:
-        radial-gradient(120px 60px at 15% 70%, rgba(255,111,145,.25), transparent 60%),
-        radial-gradient(140px 70px at 55% 80%, rgba(199,90,123,.20), transparent 65%),
-        radial-gradient(160px 80px at 85% 85%, rgba(255,79,109,.18), transparent 65%),
-        linear-gradient(180deg, rgba(255,111,145,.10), rgba(0,0,0,0));
-      border: 1px solid rgba(255,255,255,.10);
+        radial-gradient(140px 70px at 15% 75%, rgba(255,111,145,.35), transparent 65%),
+        radial-gradient(170px 85px at 55% 85%, rgba(199,90,123,.28), transparent 70%),
+        radial-gradient(190px 95px at 88% 90%, rgba(255,79,109,.24), transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,0));
+      border: 1px solid rgba(255,255,255,.14);
       overflow:hidden;
     }
+
+    /* Stronger wave lines */
     .waves:before,
     .waves:after{
       content:"";
       position:absolute;
-      left:-10%;
-      right:-10%;
+      left:-15%;
+      right:-15%;
       height: 22px;
       border-radius: 999px;
-      opacity:.8;
-      background: rgba(255,255,255,.12);
-      filter: blur(.2px);
-      animation: drift 9s ease-in-out infinite;
+      background: rgba(255,255,255,.18);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.10) inset;
+      animation: drift 18s ease-in-out infinite; /* OPTION B: calmer motion */
     }
-    .waves:before{ top: 18px; }
+    .waves:before{ top: 18px; opacity:.95; }
     .waves:after{
-      top: 40px;
-      opacity:.55;
-      animation-duration: 12s;
+      top: 42px;
+      opacity:.60;
+      animation-duration: 22s;
     }
+
     @keyframes drift{
-      0%{ transform: translateX(-8px); }
-      50%{ transform: translateX(10px); }
-      100%{ transform: translateX(-8px); }
+      0%{ transform: translateX(-10px); }
+      50%{ transform: translateX(12px); }
+      100%{ transform: translateX(-10px); }
     }
 
     .backpackRow{
@@ -809,16 +822,17 @@
       margin-top: 12px;
       flex-wrap: wrap;
     }
+
     .pack{
       width: 120px;
       height: 86px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.16);
       background:
-        radial-gradient(40px 30px at 35% 30%, rgba(255,255,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,111,145,.14), rgba(0,0,0,.08));
+        radial-gradient(50px 36px at 35% 30%, rgba(255,255,255,.14), transparent 65%),
+        linear-gradient(180deg, rgba(255,111,145,.20), rgba(0,0,0,.10));
       position: relative;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.14);
     }
     .pack:before{
       content:"";
@@ -828,19 +842,21 @@
       top: 18px;
       height: 36px;
       border-radius: 14px;
-      border: 1px dashed rgba(255,255,255,.18);
-      background: rgba(0,0,0,.10);
+      border: 1px dashed rgba(255,255,255,.26);
+      background: rgba(0,0,0,.12);
     }
+
     .rock{
-      width: 54px;
-      height: 38px;
+      width: 58px;
+      height: 40px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
       background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 55%),
-        linear-gradient(180deg, rgba(233,231,243,.16), rgba(0,0,0,.10));
-      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 58%),
+        linear-gradient(180deg, rgba(233,231,243,.22), rgba(0,0,0,.12));
+      box-shadow: 0 10px 22px rgba(0,0,0,.30);
     }
+
     .miniLabel{
       flex: 1 1 260px;
       color: rgba(246,242,255,.72);
@@ -855,7 +871,6 @@
       line-height: 1.45;
       text-align:center;
     }
-
   </style>
 </head>
 
@@ -961,7 +976,11 @@
         </p>
 
         <div class="miniArt" aria-hidden="true">
+          <!-- OPTION A: emoji header -->
+          <div class="miniArtHeader">🌊 Waves + 🎒 Rock</div>
+
           <div class="waves"></div>
+
           <div class="backpackRow">
             <div class="pack" title="Backpack"></div>
             <div class="rock" title="Rock"></div>
@@ -970,6 +989,7 @@
               Neither means you’re failing. It means you’re carrying something real.
             </div>
           </div>
+
           <div class="tinyNote">You can scroll slowly. You can take breaks. This page will still be here.</div>
         </div>
       </div>
@@ -1599,7 +1619,6 @@ document.querySelectorAll('[data-action="calm"]').forEach(btn => {
     calmOverlay.style.display = "block";
   });
 });
-
 </script>
 
 </body>
