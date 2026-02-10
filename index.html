@@ -639,6 +639,223 @@
       font-size: 12px;
       line-height: 1.5;
     }
+
+    /* =========================================================
+       NEW SECTION STYLES: Orientation + Pathways + Metaphor
+       ========================================================= */
+    .heroStack{
+      margin-top: 16px;
+      display:grid;
+      gap: 12px;
+    }
+
+    .splitHero{
+      display:grid;
+      gap: 12px;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: stretch;
+    }
+    @media (max-width: 860px){
+      .splitHero{ grid-template-columns: 1fr; }
+    }
+
+    .youHere h2,
+    .pathways h2,
+    .metaphor h2{
+      margin:0 0 8px;
+      font-size: 18px;
+      letter-spacing:.2px;
+      color: rgba(246,242,255,.95);
+    }
+
+    .youHereList{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .youHereList li{ margin:6px 0; }
+
+    .pathGrid{
+      display:grid;
+      gap:10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 10px;
+    }
+    @media (max-width: 640px){
+      .pathGrid{ grid-template-columns: 1fr; }
+    }
+
+    .pathBtn{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+      cursor:pointer;
+      text-align:left;
+      transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
+      color: rgba(246,242,255,.92);
+      font-weight: 900;
+    }
+    .pathBtn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 22px rgba(255,111,145,.10);
+    }
+    .pathBtn span.emoji{
+      font-size: 18px;
+      line-height: 1;
+      margin-top: 1px;
+    }
+    .pathBtn .pathText{
+      display:grid;
+      gap: 3px;
+    }
+    .pathBtn .pathTitle{
+      font-size: 13.5px;
+      line-height: 1.25;
+      letter-spacing:.1px;
+    }
+    .pathBtn .pathSub{
+      font-weight: 700;
+      font-size: 12px;
+      color: rgba(246,242,255,.70);
+      line-height: 1.35;
+    }
+
+    .metaphor{
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .metaphor:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 360px at 20% 20%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(700px 360px at 80% 30%, rgba(199,90,123,.16), transparent 60%),
+        linear-gradient(135deg, rgba(255,111,145,.06), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+    .metaphorInner{
+      position: relative;
+      display:grid;
+      gap: 12px;
+    }
+    .metaphorLead{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* Tiny “visual anchor” built in CSS */
+    .miniArt{
+      width: 100%;
+      max-width: 520px;
+      margin: 2px auto 0;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.10);
+      padding: 14px;
+      overflow:hidden;
+    }
+    .waves{
+      height: 68px;
+      border-radius: 14px;
+      position: relative;
+      background:
+        radial-gradient(120px 60px at 15% 70%, rgba(255,111,145,.25), transparent 60%),
+        radial-gradient(140px 70px at 55% 80%, rgba(199,90,123,.20), transparent 65%),
+        radial-gradient(160px 80px at 85% 85%, rgba(255,79,109,.18), transparent 65%),
+        linear-gradient(180deg, rgba(255,111,145,.10), rgba(0,0,0,0));
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .waves:before,
+    .waves:after{
+      content:"";
+      position:absolute;
+      left:-10%;
+      right:-10%;
+      height: 22px;
+      border-radius: 999px;
+      opacity:.8;
+      background: rgba(255,255,255,.12);
+      filter: blur(.2px);
+      animation: drift 9s ease-in-out infinite;
+    }
+    .waves:before{ top: 18px; }
+    .waves:after{
+      top: 40px;
+      opacity:.55;
+      animation-duration: 12s;
+    }
+    @keyframes drift{
+      0%{ transform: translateX(-8px); }
+      50%{ transform: translateX(10px); }
+      100%{ transform: translateX(-8px); }
+    }
+
+    .backpackRow{
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      justify-content:space-between;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .pack{
+      width: 120px;
+      height: 86px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(40px 30px at 35% 30%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,111,145,.14), rgba(0,0,0,.08));
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+    }
+    .pack:before{
+      content:"";
+      position:absolute;
+      left: 16px;
+      right: 16px;
+      top: 18px;
+      height: 36px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.10);
+    }
+    .rock{
+      width: 54px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 55%),
+        linear-gradient(180deg, rgba(233,231,243,.16), rgba(0,0,0,.10));
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+    }
+    .miniLabel{
+      flex: 1 1 260px;
+      color: rgba(246,242,255,.72);
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .tinyNote{
+      margin: 8px 0 0;
+      color: rgba(246,242,255,.62);
+      font-size: 12px;
+      line-height: 1.45;
+      text-align:center;
+    }
+
   </style>
 </head>
 
@@ -661,8 +878,106 @@
 
 <main class="wrap">
 
+  <!-- =========================================================
+       NEW: “You are here” + Pathways + Visual Metaphor Anchor
+       ========================================================= -->
+  <section class="heroStack" aria-label="Orientation and gentle pathways">
+    <div class="splitHero">
+      <section class="card youHere" aria-label="You are here">
+        <h2>You are here.</h2>
+        <p style="color:var(--muted); line-height:1.6;">
+          If you’re here, you might be asking: <em>Am I grieving?</em> <em>Is this normal?</em> <em>Is this for me?</em><br/>
+          You don’t need to be sure. You’re welcome anyway.
+        </p>
+
+        <div style="margin-top:10px; font-weight:900; color:rgba(246,242,255,.92);">
+          If you’re here, you might be…
+        </div>
+        <ul class="youHereList">
+          <li>Missing someone who died</li>
+          <li>Watching someone you love struggle</li>
+          <li>Going through a big life change</li>
+          <li>Feeling waves you can’t explain</li>
+          <li>Supporting a grieving child</li>
+        </ul>
+
+        <p style="margin-top:10px; color:rgba(246,242,255,.70); line-height:1.6; font-size:13px;">
+          Whatever brought you here — you’re not “doing it wrong.”
+        </p>
+      </section>
+
+      <section class="card pathways" aria-label="Where to begin">
+        <h2>Where would you like to begin?</h2>
+        <p style="color:var(--muted); line-height:1.6;">
+          You don’t have to choose perfectly. Pick one small door.
+        </p>
+
+        <div class="pathGrid" role="list">
+          <button class="pathBtn" type="button" data-jump="#parentsSection" role="listitem">
+            <span class="emoji">🌊</span>
+            <span class="pathText">
+              <span class="pathTitle">When grief comes in waves</span>
+              <span class="pathSub">Grounding + common wave moments</span>
+            </span>
+          </button>
+
+          <button class="pathBtn" type="button" data-jump="#finderSection" role="listitem">
+            <span class="emoji">🧠</span>
+            <span class="pathText">
+              <span class="pathTitle">Understanding grief</span>
+              <span class="pathSub">Find pages and explanations fast</span>
+            </span>
+          </button>
+
+          <button class="pathBtn" type="button" data-jump="#youthSection" role="listitem">
+            <span class="emoji">🧒</span>
+            <span class="pathText">
+              <span class="pathTitle">Supporting a child or youth</span>
+              <span class="pathSub">Youth section + caregiver support</span>
+            </span>
+          </button>
+
+          <button class="pathBtn" type="button" data-action="calm" role="listitem">
+            <span class="emoji">🫁</span>
+            <span class="pathText">
+              <span class="pathTitle">I just need a moment to breathe</span>
+              <span class="pathSub">Open the calm screen / quick exit</span>
+            </span>
+          </button>
+        </div>
+
+        <p style="margin-top:10px; color:rgba(246,242,255,.64); font-size:12.5px; line-height:1.5;">
+          Tip: You can always come back to this section. No catching up required.
+        </p>
+      </section>
+    </div>
+
+    <section class="card metaphor" aria-label="Visual metaphor anchor">
+      <div class="metaphorInner">
+        <h2>A small picture to hold onto</h2>
+        <p class="metaphorLead">
+          Grief can be like waves — sometimes quiet, sometimes sudden.
+          And it can be like a rock in a backpack: the rock doesn’t vanish, but life grows around it.
+        </p>
+
+        <div class="miniArt" aria-hidden="true">
+          <div class="waves"></div>
+          <div class="backpackRow">
+            <div class="pack" title="Backpack"></div>
+            <div class="rock" title="Rock"></div>
+            <div class="miniLabel">
+              Some days the wave is big. Some days the rock feels heavier.<br/>
+              Neither means you’re failing. It means you’re carrying something real.
+            </div>
+          </div>
+          <div class="tinyNote">You can scroll slowly. You can take breaks. This page will still be here.</div>
+        </div>
+      </div>
+    </section>
+  </section>
+
   <!-- ===== Living Grief Space ===== -->
-  <section class="livingGrief">
+  <section class="livingGrief" id="livingSpace">
     <div class="lgInner">
       <h2 class="lgTitle">A quiet space to land</h2>
       <p class="lgLead">
@@ -704,7 +1019,7 @@
   </section>
 
   <!-- ===== Parents ===== -->
-  <section class="card supportCard" style="margin-top:16px; margin-bottom:14px;">
+  <section class="card supportCard" id="parentsSection" style="margin-top:16px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
         <h2>For parents carrying something heavy</h2>
@@ -731,7 +1046,7 @@
   </section>
 
   <!-- ===== Youth ===== -->
-  <section class="card supportCard" style="margin-top:14px; margin-bottom:14px;">
+  <section class="card supportCard" id="youthSection" style="margin-top:14px; margin-bottom:14px;">
     <div class="supportInner">
       <div class="supportTitle">
         <h2>For youth going through grief</h2>
@@ -758,7 +1073,7 @@
   </section>
 
   <!-- ===== Resource finder ===== -->
-  <section class="card" style="margin-top:14px;">
+  <section class="card" id="finderSection" style="margin-top:14px;">
     <div style="font-weight:900; font-size:18px; margin-bottom:6px;">Find a page fast</div>
     <div style="color:var(--muted); line-height:1.55;">
       If you’re feeling overwhelmed, you don’t have to choose perfectly. Search, filter, or press “Start here.”
@@ -1083,7 +1398,7 @@ btnStartHere.addEventListener("click", () => {
   window.location.href = pick.url;
 });
 
-/* ===== Modals (FULL + CLOSED — this was the missing/broken part) ===== */
+/* ===== Modals ===== */
 const MODALS = {
   p_reset: {
     title: "Right now: 30-second reset",
@@ -1225,17 +1540,6 @@ document.querySelectorAll("[data-modal]").forEach(btn => {
 closeTop.addEventListener("click", closeModal);
 closeBottom.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
-document.addEventListener("keydown", (e) => {
-  if(e.key === "Escape"){
-    // If calm screen is open, close it; otherwise close modals
-    const calm = document.getElementById("calmOverlay");
-    if(calm && calm.style.display === "block"){
-      calm.style.display = "none";
-    } else {
-      closeModal();
-    }
-  }
-});
 
 /* ===== Floating helpers logic ===== */
 const btnTop = document.getElementById("btnTop");
@@ -1264,14 +1568,39 @@ btnReturn.addEventListener("click", () => {
 });
 
 calmOverlay.addEventListener("click", (e) => {
-  // allow click outside content to close
   if(e.target === calmOverlay) calmOverlay.style.display = "none";
 });
+
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape"){
+    if(calmOverlay && calmOverlay.style.display === "block"){
+      calmOverlay.style.display = "none";
+    } else {
+      closeModal();
+    }
+  }
+});
+
+/* =========================================================
+   NEW: Pathway buttons (scroll + calm action)
+   ========================================================= */
+function jumpTo(selector){
+  const el = document.querySelector(selector);
+  if(!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.querySelectorAll("[data-jump]").forEach(btn => {
+  btn.addEventListener("click", () => jumpTo(btn.getAttribute("data-jump")));
+});
+
+document.querySelectorAll('[data-action="calm"]').forEach(btn => {
+  btn.addEventListener("click", () => {
+    calmOverlay.style.display = "block";
+  });
+});
+
 </script>
 
 </body>
 </html>
-
-
-
-
