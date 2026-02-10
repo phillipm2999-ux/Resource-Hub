@@ -641,7 +641,7 @@
     }
 
     /* =========================================================
-       Orientation + Pathways + Metaphor
+       Orientation + Pathways (metaphor removed from main)
        ========================================================= */
     .heroStack{
       margin-top: 16px;
@@ -660,8 +660,7 @@
     }
 
     .youHere h2,
-    .pathways h2,
-    .metaphor h2{
+    .pathways h2{
       margin:0 0 8px;
       font-size: 18px;
       letter-spacing:.2px;
@@ -726,77 +725,6 @@
       line-height: 1.35;
     }
 
-    .metaphor{
-      padding: 18px;
-      position: relative;
-      overflow: hidden;
-    }
-    .metaphor:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(700px 360px at 20% 20%, rgba(255,111,145,.18), transparent 60%),
-        radial-gradient(700px 360px at 80% 30%, rgba(199,90,123,.16), transparent 60%),
-        linear-gradient(135deg, rgba(255,111,145,.06), rgba(0,0,0,0));
-      pointer-events:none;
-    }
-    .metaphorInner{
-      position: relative;
-      display:grid;
-      gap: 12px;
-    }
-    .metaphorLead{
-      margin:0;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-      max-width: 90ch;
-    }
-
-    .metaphorFigure{
-      margin: 6px auto 0;
-      width: min(820px, 100%);
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.12);
-      overflow:hidden;
-      box-shadow: 0 14px 40px rgba(0,0,0,.25);
-    }
-    .metaphorTopBar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(90deg, rgba(255,111,145,.10), rgba(0,0,0,0));
-      color: rgba(246,242,255,.86);
-      font-weight: 900;
-      font-size: 13px;
-      letter-spacing:.15px;
-    }
-    .metaphorTopBar span{
-      color: rgba(246,242,255,.65);
-      font-weight: 800;
-      font-size: 12px;
-    }
-
-    /* NEW: image anchor styling (replaces SVG) */
-    .metaphorImg{
-      width: 100%;
-      height: auto;
-      display:block;
-      background: rgba(0,0,0,.18);
-    }
-
-    .metaphorCaption{
-      padding: 12px 12px 14px;
-      color: rgba(246,242,255,.72);
-      font-size: 12.5px;
-      line-height: 1.55;
-    }
-
     /* Finder title */
     .finderTitle{
       display:flex;
@@ -842,7 +770,7 @@
 <main class="wrap">
 
   <!-- =========================================================
-       “You are here” + Pathways + Visual Metaphor Anchor
+       “You are here” + Pathways
        ========================================================= -->
   <section class="heroStack" aria-label="Orientation and gentle pathways">
     <div class="splitHero">
@@ -914,40 +842,6 @@
         </p>
       </section>
     </div>
-
-    <!-- Metaphor anchor (IMAGE version) -->
-    <section class="card metaphor" aria-label="Visual metaphor anchor">
-      <div class="metaphorInner">
-        <h2>A small picture to hold onto</h2>
-        <p class="metaphorLead">
-          Grief can be like waves; sometimes quiet, sometimes sudden.
-          And it can be like a rock in a backpack: the rock doesn’t vanish, but life grows around it.
-        </p>
-
-        <figure class="metaphorFigure" aria-label="Waves metaphor illustration">
-          <div class="metaphorTopBar">
-            Grief comes in waves
-            <span>You can scroll slowly. This page will still be here.</span>
-          </div>
-
-          <img
-            class="metaphorImg"
-            src="/waves.png"
-            alt="Illustration of waves representing grief coming and going"
-            loading="lazy"
-          />
-
-          <div class="metaphorFallback" style="display:none; padding:12px; color: rgba(246,242,255,.70);">
-           
-          </div>
-
-          <figcaption class="metaphorCaption">
-            Grief can feel like waves. Some days they are small and far away. Some days they crash without warning.
-            The waves don’t mean you’re failing — they mean you’re carrying something that mattered.
-          </figcaption>
-        </figure>
-      </div>
-    </section>
   </section>
 
   <!-- ===== Living Grief Space ===== -->
@@ -1046,7 +940,7 @@
     </div>
   </section>
 
-  <!-- ===== Resource Finder (THIS WAS MISSING — FIXED) ===== -->
+  <!-- ===== Resource Finder ===== -->
   <section class="card" id="finderSection" style="margin-top:14px;">
     <div class="finderTitle">
       <div>
@@ -1133,6 +1027,58 @@
     </div>
 
     <div class="calmGrid">
+
+      <!-- NEW: Waves picture moved here -->
+      <div class="calmCard" style="grid-column: 1 / -1; overflow:hidden;">
+        <h3 style="margin:0 0 10px;">A small picture to hold onto</h3>
+        <p style="margin:0 0 12px; color: rgba(233,231,243,.72); line-height:1.6;">
+          Grief can come in waves. This image is here as a quiet anchor.
+        </p>
+
+        <div style="
+          border: 1px solid rgba(255,255,255,.10);
+          border-radius: 16px;
+          overflow: hidden;
+          background: rgba(0,0,0,.18);
+        ">
+          <div style="
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:10px;
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            background: linear-gradient(90deg, rgba(255,111,145,.10), rgba(0,0,0,0));
+            color: rgba(233,231,243,.88);
+            font-weight: 900;
+            font-size: 13px;
+            letter-spacing:.15px;
+          ">
+            Grief comes in waves
+            <span style="color: rgba(233,231,243,.60); font-weight: 800; font-size: 12px;">
+              You can breathe here.
+            </span>
+          </div>
+
+          <img
+            src="waves.png"
+            alt="Illustration of waves representing grief coming and going"
+            style="width:100%; height:auto; display:block;"
+            loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.querySelector('.calmImgFallback').style.display='block';"
+          />
+
+          <div class="calmImgFallback" style="display:none; padding:12px; color: rgba(233,231,243,.70);">
+            Image not loading — double check the filename + that the PNG is in the same folder as this HTML.
+          </div>
+
+          <div style="padding: 12px; color: rgba(233,231,243,.72); font-size: 12.5px; line-height: 1.55;">
+            Some days the waves are small and far away. Some days they crash without warning.
+            The waves don’t mean you’re failing — they mean you’re carrying something that mattered.
+          </div>
+        </div>
+      </div>
+
       <div class="calmCard">
         <h3>Today’s weather</h3>
         <p id="calmWeather">Partly cloudy. High 8°C / Low 2°C.</p>
@@ -1306,7 +1252,7 @@ if(startBtn) startBtn.addEventListener("click", startBreathing);
 if(stopBtn) stopBtn.addEventListener("click", () => stopBreathing(false));
 setSelectedDuration(60);
 
-/* ===== Resource finder logic (FIXED: HTML now exists) ===== */
+/* ===== Resource finder logic ===== */
 const searchInput = document.getElementById("searchInput");
 const filterBtns = Array.from(document.querySelectorAll(".tag[data-filter]"));
 const btnStartHere = document.getElementById("btnStartHere");
@@ -1513,6 +1459,3 @@ document.querySelectorAll('[data-action="calm"]').forEach(btn => {
 
 </body>
 </html>
-
-
-
