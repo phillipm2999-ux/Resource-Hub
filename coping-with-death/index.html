@@ -3,51 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0a10" />
   <title>Relating to Grief</title>
 
   <style>
     /* =========================================================
-       Relating to Grief — "Twilight Rose" Premium Page
-       - polished hero + quick actions + TOC
-       - resource library w/ search + tag filters
-       - PDF viewer modal (no nested <a> issues)
-       - caregiver scripts + copy buttons
-       - kids prompts + feelings + grounding
-       - accessible + mobile-friendly
+       Twilight Rose (cohesive grief palette)
        ========================================================= */
-
     :root{
       --bg0:#0b0a10;
       --bg1:#15111f;
 
-      --panel: rgba(26, 20, 38, .72);
-      --panel2: rgba(32, 24, 46, .82);
-      --panel3: rgba(12, 10, 18, .55);
+      --panel: rgba(28, 20, 42, .74);
+      --panel2: rgba(34, 24, 52, .86);
+      --panel3: rgba(16, 12, 24, .55);
 
       --text:#f7f1ff;
       --muted: rgba(247,241,255,.78);
-      --faint: rgba(247,241,255,.62);
-      --border: rgba(255,255,255,.12);
+      --faint: rgba(247,241,255,.60);
+      --border: rgba(255,255,255,.11);
 
       --accent:#ff6f91;
-      --accent2:#c75a7b;
-      --accent3:#7f5cff;
-
-      --tagbg: rgba(255,111,145,.14);
-      --tagborder: rgba(255,111,145,.26);
+      --accent2:#d46a87;
+      --accent3:#a98bff;
 
       --shadow: 0 18px 55px rgba(0,0,0,.55);
       --shadow2: 0 28px 85px rgba(0,0,0,.70);
       --radius: 18px;
 
-      --ok: rgba(93, 255, 169, .95);
-      --warn: rgba(255, 209, 93, .95);
-      --danger: rgba(255, 107, 138, .95);
+      --tagbg: rgba(255,111,145,.10);
+      --tagborder: rgba(255,111,145,.18);
     }
 
     *{ box-sizing:border-box; }
-    html, body{ height:100%; }
+    html{ scroll-behavior:smooth; }
 
     body{
       margin:0;
@@ -56,27 +44,37 @@
       min-height:100vh;
 
       background:
-        radial-gradient(900px 650px at 18% 8%, rgba(255,111,145,.20), transparent 55%),
-        radial-gradient(900px 650px at 86% 12%, rgba(127,92,255,.14), transparent 60%),
-        radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.86), rgba(0,0,0,1) 55%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 65%, #07060a 100%);
+        radial-gradient(1000px 700px at 18% 6%, rgba(255,111,145,.18), transparent 58%),
+        radial-gradient(900px 650px at 84% 10%, rgba(169,139,255,.12), transparent 62%),
+        radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.82), rgba(0,0,0,1) 58%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 70%, #07060a 100%);
     }
 
-    /* ===== Layout ===== */
-    .wrap{ max-width: 1020px; margin: 0 auto; padding: 0 18px; }
-    main{ padding: 18px 0 32px; }
-    .stack{ display:grid; gap:14px; }
-
-    /* ===== Header / Hero ===== */
+    /* =========================================================
+       Layout
+       ========================================================= */
+    .wrap{ max-width: 1060px; margin: 0 auto; padding: 0 18px; }
     header{
       padding: 34px 0 18px;
       border-bottom: 1px solid rgba(255,255,255,.10);
-
       background:
-        radial-gradient(900px 520px at 18% 0%, rgba(255,111,145,.20), transparent 60%),
-        radial-gradient(900px 520px at 88% 8%, rgba(127,92,255,.12), transparent 60%),
+        radial-gradient(900px 520px at 18% 0%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(169,139,255,.10), transparent 60%),
         linear-gradient(180deg, rgba(14,12,20,.92), rgba(10,9,16,.95));
       backdrop-filter: blur(10px);
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size: 34px;
+      letter-spacing: .2px;
+      line-height: 1.1;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      max-width: 85ch;
+      line-height:1.55;
     }
 
     .topbar{
@@ -88,29 +86,13 @@
       flex-wrap: wrap;
     }
 
-    .crumb{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap: wrap;
+    .crumb a{
+      color: var(--accent);
+      text-decoration:none;
+      font-size: 14px;
+      opacity:.95;
     }
-
-    a{ color: var(--accent); text-decoration:none; }
-    a:hover{ text-decoration: underline; }
-
-    h1{
-      margin:0 0 10px;
-      font-size: 36px;
-      letter-spacing: .2px;
-      line-height:1.08;
-    }
-
-    .sub{
-      margin:0;
-      color: var(--muted);
-      max-width: 86ch;
-      line-height:1.6;
-    }
+    .crumb a:hover{ text-decoration: underline; }
 
     .pill{
       font-size:12px;
@@ -122,46 +104,21 @@
       white-space:nowrap;
     }
 
-    .heroGrid{
-      margin-top: 16px;
-      display:grid;
-      gap:12px;
-      grid-template-columns: 1.35fr .65fr;
-      align-items: stretch;
-    }
-    @media (max-width: 900px){
-      .heroGrid{ grid-template-columns: 1fr; }
-    }
+    main{ padding: 18px 0 24px; }
 
-    /* ===== Cards ===== */
     .card{
       background: var(--panel);
-      border:1px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
     }
 
-    .card.softGlow{
-      position: relative;
-      overflow:hidden;
-    }
-    .card.softGlow:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(520px 260px at 15% 10%, rgba(255,111,145,.22), transparent 60%),
-        radial-gradient(520px 260px at 85% 0%, rgba(127,92,255,.14), transparent 60%),
-        linear-gradient(135deg, rgba(255,111,145,.08), rgba(0,0,0,0));
-      pointer-events:none;
-      opacity:.9;
-    }
-    .card.softGlow > *{ position: relative; }
+    .stack{ display:grid; gap:14px; }
 
     h2{
-      margin: 0 0 10px;
+      margin:0 0 10px;
       font-size: 20px;
       letter-spacing:.15px;
     }
@@ -169,242 +126,156 @@
     .note{
       margin: 0;
       color: var(--muted);
-      line-height:1.65;
+      line-height:1.6;
     }
 
-    /* ===== Reflection band ===== */
+    /* =========================================================
+       Reflection band
+       ========================================================= */
     .reflection{
       border-radius: var(--radius);
-      padding: 14px 16px;
+      padding: 12px 14px;
       border: 1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(650px 240px at 15% 0%, rgba(255,111,145,.20), transparent 60%),
-        radial-gradient(650px 240px at 90% 20%, rgba(127,92,255,.12), transparent 60%),
+        radial-gradient(650px 240px at 15% 0%, rgba(255,111,145,.18), transparent 60%),
+        radial-gradient(650px 240px at 90% 20%, rgba(169,139,255,.10), transparent 60%),
         rgba(0,0,0,.12);
     }
     .reflection p{
       margin:0;
       color: rgba(247,241,255,.92);
-      line-height:1.65;
+      line-height:1.6;
       font-style: italic;
     }
 
-    /* ===== Quick actions ===== */
-    .quickActions{
-      display:flex;
-      flex-wrap: wrap;
-      gap:10px;
-      margin-top: 12px;
-      align-items:center;
-      justify-content:flex-start;
+    /* =========================================================
+       Start Here + Quick actions
+       ========================================================= */
+    .heroGrid{
+      display:grid;
+      gap: 14px;
+      grid-template-columns: 1.25fr .75fr;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .heroGrid{ grid-template-columns: 1fr; }
     }
 
-    .btn{
+    .startCard{
+      position: relative;
+      overflow:hidden;
+    }
+    .startCard:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 360px at 20% 15%, rgba(255,111,145,.16), transparent 60%),
+        radial-gradient(700px 360px at 85% 20%, rgba(169,139,255,.10), transparent 60%),
+        linear-gradient(135deg, rgba(255,111,145,.05), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+    .startInner{ position: relative; display:grid; gap:12px; }
+
+    .quickRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 4px;
+    }
+
+    .chipBtn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
       padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: var(--panel2);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 14px;
-      cursor:pointer;
-      user-select:none;
-      transition: filter .10s ease, transform .10s ease, box-shadow .10s ease, opacity .2s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.06);
-      box-shadow:
-        0 0 0 1px rgba(255,111,145,.16),
-        0 0 26px rgba(255,111,145,.14);
-    }
-    .btn:active{ transform: translateY(0px); }
-
-    .btn.secondary{
-      background: rgba(0,0,0,.18);
-    }
-    .btn.ghost{
-      background: rgba(0,0,0,.10);
-    }
-    .btn.small{
-      padding: 8px 10px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    /* ===== Sidebar "In a rush?" ===== */
-    .rushBox{
-      display:grid;
-      gap:10px;
-      height: 100%;
-    }
-
-    .rushRow{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      background: rgba(0,0,0,.12);
-      padding: 12px;
-      display:grid;
-      gap:8px;
-    }
-
-    .rushRow .kicker{
-      font-size: 12px;
-      letter-spacing:.14px;
-      font-weight: 900;
-      color: rgba(247,241,255,.86);
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .rushRow p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.6;
-      font-size: 13.5px;
-    }
-
-    .rushMini{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 2px;
-    }
-
-    /* ===== TOC ===== */
-    .toc{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 10px;
-    }
-    .toc a{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.10);
-      padding: 8px 10px;
       border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
       color: rgba(247,241,255,.92);
       text-decoration:none;
       font-weight: 900;
       font-size: 13px;
+      cursor:pointer;
+      user-select:none;
       transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
     }
-    .toc a:hover{
+    .chipBtn:hover{
       transform: translateY(-1px);
-      filter: brightness(1.06);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.14), 0 0 18px rgba(255,111,145,.10);
+      filter: brightness(1.05);
+      box-shadow:
+        0 0 0 1px rgba(255,111,145,.14),
+        0 0 22px rgba(255,111,145,.12);
+    }
+    .chipBtn:active{ transform: translateY(0px); }
+
+    .chipBtn.primary{
+      background: linear-gradient(180deg, rgba(255,111,145,.18), rgba(0,0,0,.14));
+      border-color: rgba(255,111,145,.22);
     }
 
-    /* ===== Collapsible guidance blocks ===== */
-    details.soft{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: rgba(0,0,0,.12);
-    }
-    details.soft summary{
-      cursor:pointer;
-      font-weight: 900;
-      color: rgba(247,241,255,.95);
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    details.soft summary::-webkit-details-marker{ display:none; }
-
-    details.soft summary .hint{
-      font-size: 12px;
-      color: rgba(247,241,255,.62);
-      font-weight: 800;
-      border:1px solid rgba(255,255,255,.10);
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.10);
-      white-space:nowrap;
-    }
-
-    details.soft .inside{
-      margin-top: 10px;
-      color: var(--muted);
-      line-height:1.7;
-      font-size: 14px;
-    }
-    .inside ul{
-      margin:10px 0 0;
-      padding-left: 18px;
-    }
-    .inside li{ margin:6px 0; }
-
-    /* ===== Prompt grid ===== */
-    .promptGrid{
+    /* =========================================================
+       Sidebar “tool shelf”
+       ========================================================= */
+    .toolShelf{
       display:grid;
       gap:12px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
-    .promptCard{
-      border: 1px solid rgba(255,255,255,.12);
+    .tool{
+      background: rgba(0,0,0,.12);
+      border: 1px solid rgba(255,255,255,.11);
       border-radius: 14px;
       padding: 12px;
-      background: rgba(0,0,0,.12);
-      position:relative;
-      overflow:hidden;
     }
-    .promptCard:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(420px 260px at 20% 20%, rgba(255,111,145,.12), transparent 60%),
-        radial-gradient(420px 260px at 80% 10%, rgba(127,92,255,.10), transparent 60%);
-      opacity:.7;
-      pointer-events:none;
-    }
-    .promptCard > *{ position:relative; }
-    .promptCard h3{
+    .tool h3{
       margin:0 0 8px;
       font-size: 14px;
-      letter-spacing:.15px;
-      color: rgba(247,241,255,.94);
+      letter-spacing:.12px;
+      color: rgba(247,241,255,.95);
     }
-    .promptCard p{
+    .tool p{
       margin:0;
       color: var(--muted);
-      line-height:1.65;
-      font-size: 14px;
+      line-height: 1.6;
+      font-size: 13.5px;
+    }
+    .toolActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
     }
 
-    /* ===== Resource library ===== */
-    .libraryHead{
+    /* =========================================================
+       Library (search + tags)
+       ========================================================= */
+    .sectionTitleRow{
       display:flex;
-      align-items:flex-start;
+      align-items:flex-end;
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
       margin-bottom: 10px;
     }
-    .libraryHead h2{ margin:0; }
-    .libraryHead p{ margin:0; color: var(--muted); line-height:1.6; max-width: 80ch; }
+    .sectionTitleRow p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.55;
+      max-width: 80ch;
+      font-size: 13.5px;
+    }
 
     .finder{
-      margin-top: 10px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       align-items:center;
       justify-content:space-between;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.10);
     }
     .finderLeft{
       display:flex;
@@ -418,7 +289,7 @@
       min-width: 240px;
       background: var(--panel2);
       color: var(--text);
-      border: 1px solid rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.12);
       padding: 10px 12px;
       border-radius: 999px;
       outline:none;
@@ -432,11 +303,11 @@
       align-items:center;
     }
     .tagBtn{
-      font-size:12px;
-      padding: 6px 10px;
+      font-size: 12px;
+      padding: 7px 10px;
       border-radius: 999px;
       background: var(--tagbg);
-      border: 1px solid var(--tagborder);
+      border:1px solid var(--tagborder);
       color: rgba(247,241,255,.92);
       cursor:pointer;
       user-select:none;
@@ -446,11 +317,10 @@
     .tagBtn:hover{
       transform: translateY(-1px);
       filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.14), 0 0 18px rgba(255,111,145,.10);
     }
     .tagBtn[aria-pressed="true"]{
-      border-color: rgba(255,111,145,.45);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.18), 0 0 22px rgba(255,111,145,.16);
+      border-color: rgba(255,111,145,.35);
+      box-shadow: 0 0 0 1px rgba(255,111,145,.14), 0 0 18px rgba(255,111,145,.14);
     }
 
     .finderRight{
@@ -461,180 +331,197 @@
       justify-content:flex-end;
     }
 
+    /* =========================================================
+       Resource cards
+       ========================================================= */
     .grid{
       display:grid;
       gap:12px;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       margin-top: 12px;
     }
 
     .resCard{
-      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.12);
+      border: 1px solid rgba(255,255,255,.11);
       border-radius: 16px;
       padding: 14px;
-      background: rgba(0,0,0,.12);
-      box-shadow: 0 10px 28px rgba(0,0,0,.22);
-      backdrop-filter: blur(10px);
-      position:relative;
-      overflow:hidden;
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
       transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
+      position: relative;
+      overflow:hidden;
     }
     .resCard:before{
       content:"";
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(520px 260px at 15% 10%, rgba(255,111,145,.16), transparent 60%),
-        radial-gradient(520px 260px at 85% 0%, rgba(127,92,255,.10), transparent 60%);
+        radial-gradient(520px 260px at 15% 10%, rgba(255,111,145,.12), transparent 60%),
+        radial-gradient(520px 260px at 85% 0%, rgba(169,139,255,.09), transparent 60%),
+        linear-gradient(135deg, rgba(255,111,145,.04), rgba(0,0,0,0));
       pointer-events:none;
-      opacity:.85;
+      opacity:.95;
     }
     .resCard:hover{
       transform: translateY(-1px);
       filter: brightness(1.03);
       box-shadow:
-        0 22px 60px rgba(0,0,0,.60),
-        0 0 0 1px rgba(255,111,145,.14),
-        0 0 26px rgba(255,111,145,.12);
+        0 26px 70px rgba(0,0,0,.55),
+        0 0 0 1px rgba(255,111,145,.12),
+        0 0 32px rgba(255,111,145,.12);
     }
-    .resCard > *{ position:relative; }
 
     .resTop{
       display:flex;
-      align-items:flex-start;
       justify-content:space-between;
+      align-items:flex-start;
       gap:10px;
       flex-wrap:wrap;
-      margin-bottom: 8px;
+      position:relative;
     }
-    .resTitle{
-      margin:0;
-      font-size: 16px;
-      letter-spacing:.1px;
-      line-height:1.25;
-    }
-    .resType{
+
+    .badge{
       font-size:12px;
-      padding: 5px 10px;
+      padding:4px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.10);
-      color: rgba(247,241,255,.84);
-      font-weight: 900;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      color: rgba(247,241,255,.86);
       white-space:nowrap;
     }
+
+    .resTitle{
+      margin:0;
+      font-size: 17px;
+      letter-spacing:.12px;
+      color: rgba(247,241,255,.96);
+      position:relative;
+    }
+
     .resNote{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 13.5px;
+      position:relative;
+    }
+
+    .chipRow{
+      margin-top: 10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      position:relative;
+    }
+    .chip{
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      background: rgba(255,111,145,.10);
+      border: 1px solid rgba(255,111,145,.18);
+      color: rgba(247,241,255,.90);
+      font-weight: 900;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+      position:relative;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(34,24,52,.92), rgba(22,16,34,.78));
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 900;
+      font-size: 13.5px;
+      cursor:pointer;
+      user-select:none;
+      transition: filter .10s ease, transform .10s ease, box-shadow .10s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+      box-shadow:
+        0 0 0 1px rgba(255,111,145,.14),
+        0 0 26px rgba(255,111,145,.12);
+    }
+    .btn:active{ transform: translateY(0px); }
+
+    .btn.secondary{
+      background: rgba(0,0,0,.14);
+    }
+
+    /* =========================================================
+       Details (accordion)
+       ========================================================= */
+    details.soft{
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.10);
+    }
+    details.soft summary{
+      cursor:pointer;
+      font-weight: 900;
+      color: rgba(247,241,255,.95);
+      list-style:none;
+    }
+    details.soft summary::-webkit-details-marker{ display:none; }
+    details.soft .inside{
+      margin-top: 10px;
+      color: var(--muted);
+      line-height:1.65;
+      font-size: 14px;
+    }
+    .inside ul{ margin:10px 0 0; padding-left: 18px; }
+    .inside li{ margin:6px 0; }
+
+    /* =========================================================
+       Prompt grid
+       ========================================================= */
+    .promptGrid{
+      display:grid;
+      gap:12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 10px;
+    }
+    .promptCard{
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.10);
+    }
+    .promptCard h3{
+      margin:0 0 8px;
+      font-size: 14px;
+      letter-spacing:.15px;
+      color: rgba(247,241,255,.95);
+    }
+    .promptCard p{
       margin:0;
       color: var(--muted);
       line-height:1.6;
       font-size: 14px;
     }
-    .resTags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 10px;
-    }
-    .chip{
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(255,111,145,.10);
-      border:1px solid rgba(255,111,145,.18);
-      color: rgba(247,241,255,.92);
-      font-weight: 900;
-    }
-    .resActions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 12px;
-    }
 
-    /* ===== Scripts (copyable) ===== */
-    .scriptBox{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      background: rgba(0,0,0,.12);
-      padding: 12px;
-      display:grid;
-      gap:10px;
-    }
-    .scriptTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .scriptTop h3{
-      margin:0;
-      font-size: 15px;
-      letter-spacing:.12px;
-    }
-    .scriptText{
-      margin:0;
-      color: rgba(247,241,255,.86);
-      line-height:1.7;
-      font-size: 14px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      white-space: pre-wrap;
-    }
-    .statusLine{
-      margin:0;
-      font-size: 12px;
-      color: rgba(247,241,255,.62);
-      min-height: 16px;
-    }
-
-    /* ===== Safety / Help box ===== */
-    .callout{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 14px;
-      background:
-        radial-gradient(680px 280px at 15% 20%, rgba(255,111,145,.14), transparent 60%),
-        radial-gradient(680px 280px at 85% 0%, rgba(127,92,255,.10), transparent 60%),
-        rgba(0,0,0,.12);
-    }
-    .calloutTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom: 8px;
-    }
-    .calloutTitle{
-      margin:0;
-      font-size: 16px;
-      letter-spacing:.12px;
-    }
-    .badge{
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.12);
-      color: rgba(247,241,255,.86);
-      font-weight: 900;
-      white-space:nowrap;
-    }
-    .callout p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.65;
-      font-size: 14px;
-    }
-
-    /* ===== Modal (PDF viewer) ===== */
+    /* =========================================================
+       Modal (PDF viewer)
+       ========================================================= */
     .modalOverlay{
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.72);
+      background: rgba(0,0,0,.66);
       display: none;
       align-items: center;
       justify-content: center;
@@ -644,61 +531,66 @@
     .modal{
       max-width: 980px;
       width: 100%;
-      background: rgba(18, 14, 28, .94);
-      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(18, 14, 28, .92);
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 18px;
-      padding: 14px;
       box-shadow: var(--shadow2);
-      backdrop-filter: blur(14px);
-      display:grid;
-      gap:10px;
+      backdrop-filter: blur(12px);
+      overflow:hidden;
     }
     .modalHead{
       display:flex;
       justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .modalHead h3{
-      margin:0;
-      font-size: 16px;
-      letter-spacing:.15px;
-    }
-    .modalHead p{
-      margin:0;
-      color: rgba(247,241,255,.70);
-      font-size: 13px;
-      line-height:1.5;
-      max-width: 80ch;
-    }
-    .modalTools{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
       align-items:center;
-      justify-content:flex-end;
+      gap:12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(90deg, rgba(255,111,145,.10), rgba(0,0,0,0));
     }
-    .modalBody{
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      overflow:hidden;
+    .modalTitle{
+      margin:0;
+      font-size: 14px;
+      letter-spacing:.12px;
+      font-weight: 900;
+      color: rgba(247,241,255,.95);
+    }
+    .modalClose{
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.18);
-      min-height: 56vh;
+      color: rgba(247,241,255,.92);
+      cursor:pointer;
+      font-weight: 900;
+    }
+    .viewerWrap{
+      padding: 12px;
       display:grid;
+      gap: 10px;
     }
-    .pdfFrame{
-      width:100%;
-      height: 60vh;
-      border:0;
-      display:block;
-      background: #0b0a10;
+    .viewerHint{
+      margin:0;
+      color: rgba(247,241,255,.72);
+      font-size: 12.5px;
+      line-height: 1.5;
     }
-    @media (max-width: 620px){
-      .pdfFrame{ height: 62vh; }
+    .viewerFrame{
+      width: 100%;
+      height: min(70vh, 720px);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+    .viewerFrame iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
-    /* ===== Floating helpers ===== */
+    /* =========================================================
+       Floating helpers
+       ========================================================= */
     .fabStack{
       position: fixed;
       right: 14px;
@@ -708,14 +600,14 @@
       z-index: 9998;
     }
     .fab{
-      border: 1px solid rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.22);
       color: rgba(247,241,255,.92);
       padding: 10px 12px;
       border-radius: 999px;
       font-weight: 900;
       cursor: pointer;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
       box-shadow: 0 10px 26px rgba(0,0,0,.25);
       transition: transform .08s ease, filter .08s ease, box-shadow .08s ease, opacity .2s ease;
       display: inline-flex;
@@ -724,28 +616,20 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      white-space:nowrap;
-    }
-    .fab:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-      box-shadow: 0 0 0 1px rgba(255,111,145,.16), 0 0 22px rgba(255,111,145,.12), 0 12px 30px rgba(0,0,0,.28);
     }
     .fab.show{
       opacity: 1;
       pointer-events: auto;
     }
-    .fab small{
-      font-weight: 800;
-      color: rgba(247,241,255,.72);
+    .fab:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow:
+        0 0 0 1px rgba(255,111,145,.14),
+        0 0 22px rgba(255,111,145,.12),
+        0 12px 30px rgba(0,0,0,.28);
     }
 
-    /* ===== Reduced motion ===== */
-    @media (prefers-reduced-motion: reduce){
-      .btn, .resCard, .tagBtn, .toc a, .fab{ transition:none; }
-    }
-
-    /* ===== Footer ===== */
     footer{
       padding: 22px 0 34px;
       color: rgba(247,241,255,.65);
@@ -753,14 +637,9 @@
       margin-top: 22px;
     }
 
-    /* ===== Tiny utility ===== */
-    .muted{ color: var(--muted); }
-    .faint{ color: var(--faint); }
-    .spacer{ height: 6px; }
-
-    /* Anchor offset for sticky vibes */
-    .anchor{
-      scroll-margin-top: 16px;
+    @media (prefers-reduced-motion: reduce){
+      .chipBtn, .btn, .resCard{ transition:none; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
@@ -771,90 +650,14 @@
       <h1>Relating to Grief</h1>
       <p class="sub">
         Stories and resources designed to help children understand death and navigate grief in a gentle, supportive way.
-        This page is built for <em>real moments</em>: bedtime questions, school mornings, first holidays, and waves that return.
+        Use this page like a small tool shelf: pick one thing, not everything.
       </p>
 
       <div class="topbar">
         <div class="crumb">
           <a href="../">← Back to Resource Hub</a>
-          <span class="pill">You’re not alone here.</span>
-          <span class="pill">Go slow. Pause often.</span>
         </div>
-
-        <button class="btn ghost small" type="button" id="btnQuickOpen" aria-label="Open the main story quickly">
-           Quick open story
-        </button>
-      </div>
-
-      <div class="heroGrid" aria-label="Top guidance and quick actions">
-        <!-- Left hero: reflection + quick actions + toc -->
-        <section class="card softGlow">
-          <div class="stack">
-            <div class="reflection">
-              <p>Sometimes, while carrying the heavy things, we don’t see how far we’ve come.</p>
-            </div>
-
-            <div>
-              <h2 style="margin:0 0 8px;">Start here</h2>
-              <p class="note">
-                You don’t need perfect words. Kids often do best with: <strong>clear truth</strong>, <strong>steady presence</strong>,
-                and <strong>permission to feel</strong>. You can use this page like a “tool shelf.”
-              </p>
-            </div>
-
-            <div class="quickActions" aria-label="Quick actions">
-              <button class="btn" type="button" data-jump="#library">🔎 Find a resource</button>
-              <button class="btn secondary" type="button" data-jump="#scripts">🗣️ Caregiver scripts</button>
-              <button class="btn secondary" type="button" data-jump="#prompts">💬 Gentle prompts</button>
-              <button class="btn secondary" type="button" data-jump="#faq">❓ FAQ</button>
-            </div>
-
-            <div class="toc" aria-label="Table of contents">
-              <a href="#library"> Resource Library</a>
-              <a href="#scripts"> Scripts</a>
-              <a href="#prompts"> Prompts</a>
-              <a href="#basics"> Grief basics</a>
-              <a href="#faq"> Questions kids ask</a>
-              <a href="#help"> Extra support</a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Right hero: in-a-rush box -->
-        <aside class="card rushBox" aria-label="In a rush: quick support">
-          <div class="rushRow">
-            <div class="kicker"> In a rush?</div>
-            <p>
-              Try this one-liner: <strong>“I’m here. We can talk about it a little at a time.”</strong>
-            </p>
-            <div class="rushMini">
-              <button class="btn small" type="button" data-open-script="script_here">Copy “I’m here”</button>
-              <button class="btn small secondary" type="button" data-jump="#scripts">Go to scripts</button>
-            </div>
-          </div>
-
-          <div class="rushRow">
-            <div class="kicker"> When it hits suddenly</div>
-            <p>
-              Name 3 things you see, feel your feet, and breathe out longer than you breathe in (twice).
-            </p>
-            <div class="rushMini">
-              <button class="btn small" type="button" data-jump="#prompts">Prompts</button>
-              <button class="btn small secondary" type="button" data-open-modal="modal_grounding">Open grounding</button>
-            </div>
-          </div>
-
-          <div class="rushRow">
-            <div class="kicker"> Read together tip</div>
-            <p>
-              Pause every page or two. Ask: “What part felt big?” or “Any questions?”
-            </p>
-            <div class="rushMini">
-              <button class="btn small" type="button" data-open-pdf="gus-grief-story.pdf" data-title="Gus’s Grief Adventure" data-desc="A child-friendly therapeutic grief story (PDF).">Open Gus PDF</button>
-              <a class="btn small secondary" href="gus-grief-story.pdf" download>Download</a>
-            </div>
-          </div>
-        </aside>
+        <span class="pill">You’re not alone here.</span>
       </div>
     </div>
   </header>
@@ -862,23 +665,97 @@
   <main class="wrap">
     <div class="stack">
 
+      <div class="reflection">
+        <p>Sometimes, while carrying the heavy things, we don’t see how far we’ve come.</p>
+      </div>
+
       <!-- =========================================================
-           Resource Library (Search + Tags + Cards)
+           Start here + tool shelf
            ========================================================= -->
-      <section class="card anchor" id="library" aria-label="Resource library">
-        <div class="libraryHead">
+      <section class="heroGrid" aria-label="Start here and quick tools">
+        <section class="card startCard" aria-label="Start here">
+          <div class="startInner">
+            <h2 style="margin:0;">Start here</h2>
+            <p class="note">
+              You don’t need perfect words. Kids often do best with:
+              <strong style="color:rgba(247,241,255,.92);">clear truth, steady presence,</strong>
+              and <strong style="color:rgba(247,241,255,.92);">permission to feel.</strong>
+              You can return to this page as often as you need.
+            </p>
+
+            <div class="quickRow" aria-label="Quick navigation">
+              <button class="chipBtn primary" type="button" data-jump="#library">🔎 Find a resource</button>
+              <button class="chipBtn" type="button" data-jump="#scripts">🗣️ Caregiver scripts</button>
+              <button class="chipBtn" type="button" data-jump="#prompts">💬 Gentle prompts</button>
+              <button class="chipBtn" type="button" data-jump="#faq">❓ FAQ</button>
+              <button class="chipBtn" type="button" data-jump="#extra">🧡 Extra support</button>
+            </div>
+
+            <div class="quickRow" aria-label="Fast tags">
+              <button class="tagBtn" type="button" data-tag-preset="kids">kids</button>
+              <button class="tagBtn" type="button" data-tag-preset="caregivers">caregivers</button>
+              <button class="tagBtn" type="button" data-tag-preset="waves">waves</button>
+              <button class="tagBtn" type="button" data-tag-preset="school">school</button>
+              <button class="tagBtn" type="button" data-tag-preset="teens">teens</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="card" aria-label="Quick tools">
+          <div class="toolShelf">
+            <div class="tool">
+              <h3>Right now (30 seconds)</h3>
+              <p>
+                Put a hand on chest or belly. Breathe in for 4, out for 6 (twice).
+                Name <strong>3 things you see</strong>. Tell yourself: “This is hard, and I’m here.”
+              </p>
+              <div class="toolActions">
+                <button class="btn" type="button" data-jump="#grounding">Open grounding</button>
+              </div>
+            </div>
+
+            <div class="tool">
+              <h3>When it hits suddenly</h3>
+              <p>
+                Name 3 things you see, feel your feet, and breathe out longer than you breathe in (twice).
+              </p>
+              <div class="toolActions">
+                <button class="btn" type="button" data-jump="#prompts">Prompts</button>
+                <button class="btn secondary" type="button" data-jump="#grounding">Open grounding</button>
+              </div>
+            </div>
+
+            <div class="tool">
+              <h3>Read-together tip</h3>
+              <p>
+                Pause every page or two. Ask: “What part felt big?” or “Any questions?”
+              </p>
+              <div class="toolActions">
+                <button class="btn" type="button" data-open="gus-grief-story.pdf" data-title="Gus’s Grief Adventure">Open Gus PDF</button>
+                <a class="btn secondary" href="gus-grief-story.pdf" download>Download</a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- =========================================================
+           Resource Library
+           ========================================================= -->
+      <section class="card" id="library" aria-label="Resource Library">
+        <div class="sectionTitleRow">
           <div>
-            <h2>Resource Library</h2>
+            <h2 style="margin:0 0 6px;">Resource Library</h2>
             <p>
-              Search by keyword or tap a tag. Open PDFs in a gentle viewer (or new tab if your browser prefers).
+              Search by keyword or tap a tag. Open PDFs in the gentle viewer (or in a new tab if your browser prefers).
             </p>
           </div>
           <span class="pill">Tip: use this like a menu</span>
         </div>
 
-        <div class="finder" aria-label="Resource finder controls">
+        <div class="finder" aria-label="Search and tags">
           <div class="finderLeft">
-            <input id="searchInput" type="search" placeholder="Search… (e.g., waves, funeral, school, guilt, anger, bedtime)" aria-label="Search resources" />
+            <input id="searchInput" type="search" placeholder="Search… (e.g., waves, funeral, school, guilt, anger, bedtime)" aria-label="Search resources">
             <div class="tagRow" aria-label="Tag filters">
               <button class="tagBtn" type="button" data-filter="storybook" aria-pressed="false">storybook</button>
               <button class="tagBtn" type="button" data-filter="caregivers" aria-pressed="false">caregivers</button>
@@ -890,100 +767,82 @@
           </div>
 
           <div class="finderRight">
-            <button class="btn small" type="button" id="btnStartHere">✨ Pick one for me</button>
-            <button class="btn small secondary" type="button" id="btnClear">Clear</button>
+            <button class="btn" type="button" id="btnPick">✨ Pick one for me</button>
+            <button class="btn secondary" type="button" id="btnClear">Clear</button>
           </div>
         </div>
 
-        <section id="resourceGrid" class="grid" aria-label="Resource cards"></section>
+        <div id="grid" class="grid" aria-label="Resource cards"></div>
 
-        <p class="note" style="margin-top:10px;">
+        <p class="note" style="margin-top:12px;">
           If a PDF doesn’t load inside the viewer, use <strong>Open in new tab</strong> — that’s normal on some devices (especially iOS/iPadOS).
         </p>
       </section>
 
       <!-- =========================================================
-           Scripts (copyable caregiver language)
+           Scripts
            ========================================================= -->
-      <section class="card anchor" id="scripts" aria-label="Caregiver scripts">
-        <div class="libraryHead">
-          <div>
-            <h2>Caregiver scripts</h2>
-            <p>
-              These are “ready-to-say” lines. You can copy them and use your own words.
-              Kids benefit from <strong>clear language</strong> (no confusing euphemisms) and <strong>steady reassurance</strong>.
-            </p>
-          </div>
-          <span class="pill">Copy + paste friendly</span>
-        </div>
+      <section class="card" id="scripts" aria-label="Caregiver scripts">
+        <h2>Caregiver scripts (copy/paste ready)</h2>
+        <p class="note">
+          Simple lines you can use when you don’t know what to say. Use your own voice — these are just scaffolding.
+        </p>
 
-        <div class="promptGrid">
-          <div class="scriptBox">
-            <div class="scriptTop">
-              <h3>When you don’t know what to say</h3>
-              <button class="btn small" type="button" data-copy="#t_script_unknown">Copy</button>
+        <div class="stack" style="margin-top:12px;">
+          <details class="soft">
+            <summary>Clear, gentle truth</summary>
+            <div class="inside">
+              <ul>
+                <li>“They died. That means their body stopped working and they can’t come back.”</li>
+                <li>“You didn’t cause this. Nothing you thought or said made it happen.”</li>
+                <li>“It’s okay to ask questions anytime. If I don’t know, we’ll find out together.”</li>
+              </ul>
             </div>
-            <div class="scriptText" id="t_script_unknown">“I don’t have perfect words, but I’m here with you. We can talk about it a little at a time.”</div>
-            <p class="statusLine" data-status-for="t_script_unknown"></p>
-          </div>
+          </details>
 
-          <div class="scriptBox">
-            <div class="scriptTop">
-              <h3>Clear death language (gentle + honest)</h3>
-              <button class="btn small" type="button" data-copy="#t_script_clear">Copy</button>
+          <details class="soft">
+            <summary>When kids worry you’ll die too</summary>
+            <div class="inside">
+              <ul>
+                <li>“I plan to be here for a long time. Right now, I’m okay.”</li>
+                <li>“If I ever get sick, we’ll talk about it and make a plan. You won’t be alone.”</li>
+                <li>“When your brain worries, come tell me. We can calm it together.”</li>
+              </ul>
             </div>
-            <div class="scriptText" id="t_script_clear">“They died. That means their body stopped working, and they can’t come back. We can still love them and remember them.”</div>
-            <p class="statusLine" data-status-for="t_script_clear"></p>
-          </div>
+          </details>
 
-          <div class="scriptBox">
-            <div class="scriptTop">
-              <h3>When a child feels responsible</h3>
-              <button class="btn small" type="button" data-copy="#t_script_guilt">Copy</button>
+          <details class="soft">
+            <summary>When grief comes in waves</summary>
+            <div class="inside">
+              <ul>
+                <li>“This might feel big right now, and later it might feel quieter. Both are normal.”</li>
+                <li>“Waves can show up at bedtime, school drop-off, holidays, birthdays, and ‘firsts.’”</li>
+                <li>“The wave doesn’t mean you’re going backward — it means love is still here.”</li>
+              </ul>
             </div>
-            <div class="scriptText" id="t_script_guilt">“This is not your fault. Nothing you did, said, or thought made this happen. Grown-up things caused this.”</div>
-            <p class="statusLine" data-status-for="t_script_guilt"></p>
-          </div>
+          </details>
 
-          <div class="scriptBox">
-            <div class="scriptTop">
-              <h3>When feelings come in waves</h3>
-              <button class="btn small" type="button" data-copy="#t_script_waves">Copy</button>
+          <details class="soft">
+            <summary>When kids don’t want to talk</summary>
+            <div class="inside">
+              <ul>
+                <li>“You don’t have to talk. We can draw, walk, game, or sit together.”</li>
+                <li>“If words are hard, you can show me with a number: 0–10, how big is it today?”</li>
+                <li>“I’ll check in sometimes. You can tell me ‘not now’ and I’ll still stay close.”</li>
+              </ul>
             </div>
-            <div class="scriptText" id="t_script_waves">“Big feelings can come back like waves. A wave doesn’t mean you’re failing. It means you miss someone who mattered.”</div>
-            <p class="statusLine" data-status-for="t_script_waves"></p>
-          </div>
-
-          <div class="scriptBox">
-            <div class="scriptTop">
-              <h3>Bedtime check-in</h3>
-              <button class="btn small" type="button" data-copy="#t_script_bedtime">Copy</button>
-            </div>
-            <div class="scriptText" id="t_script_bedtime">“Nights can feel bigger. We can do one small thing: water, cuddle, a story, or a quiet song. I’ll stay close.”</div>
-            <p class="statusLine" data-status-for="t_script_bedtime"></p>
-          </div>
-
-          <div class="scriptBox">
-            <div class="scriptTop">
-              <h3>“I’m here” (micro-script)</h3>
-              <button class="btn small" type="button" data-copy="#t_script_here">Copy</button>
-            </div>
-            <div class="scriptText" id="t_script_here">“I’m here. You’re safe with me. We’ll get through this moment together.”</div>
-            <p class="statusLine" data-status-for="t_script_here"></p>
-          </div>
+          </details>
         </div>
       </section>
 
       <!-- =========================================================
            Prompts
            ========================================================= -->
-      <section class="card anchor" id="prompts" aria-label="Gentle prompts">
+      <section class="card" id="prompts" aria-label="Gentle prompts">
         <h2>Gentle prompts you can use with kids</h2>
         <p class="note">
-          Choose one. You don’t need to do them all. Some kids talk with words, some talk with their bodies, play, art, or silence.
+          Prompts that invite feelings and memories without forcing a big conversation.
         </p>
-
-        <div class="spacer"></div>
 
         <div class="promptGrid">
           <div class="promptCard">
@@ -992,7 +851,7 @@
           </div>
           <div class="promptCard">
             <h3>Body clues</h3>
-            <p>“Where do you feel the big feeling; chest, throat, tummy, hands?”</p>
+            <p>“Where do you feel the big feeling in your body — chest, throat, tummy, hands?”</p>
           </div>
           <div class="promptCard">
             <h3>Memory & meaning</h3>
@@ -1000,159 +859,126 @@
           </div>
           <div class="promptCard">
             <h3>Permission</h3>
-            <p>“All feelings are allowed here, even the confusing ones.”</p>
+            <p>“All feelings are allowed here — even the confusing ones.”</p>
           </div>
           <div class="promptCard">
-            <h3>Choice</h3>
+            <h3>Connection</h3>
             <p>“Do you want to talk, draw, move, or just sit together?”</p>
           </div>
           <div class="promptCard">
-            <h3>One small step</h3>
-            <p>“What tiny thing could help right now; water, snack, hug, walk, or quiet?”</p>
+            <h3>One step</h3>
+            <p>“What’s one tiny thing that could help right now — water, snack, hug, walk, or quiet?”</p>
           </div>
         </div>
-
-        <div class="spacer"></div>
-
-        <details class="soft">
-          <summary>
-            Prompts for teens (less “kid-ish”)
-            <span class="hint">tap</span>
-          </summary>
-          <div class="inside">
-            <ul>
-              <li>“Do you want solutions, distraction, or someone to just sit with you?”</li>
-              <li>“On a scale of 1–10, how heavy is today?”</li>
-              <li>“What’s the hardest time of day for you right now?”</li>
-              <li>“What would feel supportive: space, food, a drive, a show, a walk, or talking?”</li>
-              <li>“You don’t have to perform being okay. I can handle the truth.”</li>
-            </ul>
-          </div>
-        </details>
       </section>
 
       <!-- =========================================================
-           Grief basics (short, practical, caregiver-friendly)
+           Grounding
            ========================================================= -->
-      <section class="card anchor" id="basics" aria-label="Grief basics">
-        <h2>Grief basics (simple + true)</h2>
+      <section class="card" id="grounding" aria-label="Grounding tool">
+        <h2>Grounding (5–4–3–2–1)</h2>
         <p class="note">
-          Grief doesn’t follow a straight line. It changes shape. It can return during milestones, seasons, school changes, birthdays, holidays, and “firsts.”
-          That doesn’t mean you’re back at the start.
+          A quick way to help the brain return to the present when feelings spike.
         </p>
 
-        <div class="spacer"></div>
-
-        <details class="soft">
-          <summary>
-            What kids often misunderstand about death
-            <span class="hint">tap</span>
-          </summary>
-          <div class="inside">
-            <ul>
-              <li><strong>Permanence:</strong> younger kids may think death is reversible.</li>
-              <li><strong>Cause:</strong> kids can believe thoughts/anger/wishes caused it (magical thinking).</li>
-              <li><strong>Blame:</strong> guilt shows up easily (“If I had…”).</li>
-              <li><strong>Safety:</strong> they may worry others will die soon too.</li>
-              <li><strong>Body questions:</strong> “What happens to the body?” is normal curiosity, not disrespect.</li>
-            </ul>
+        <div class="promptGrid" style="margin-top:12px;">
+          <div class="promptCard">
+            <h3>5 things you can see</h3>
+            <p>Look around slowly. Name them out loud if you can.</p>
           </div>
-        </details>
-
-        <details class="soft">
-          <summary>
-            What helps most (even when you feel helpless)
-            <span class="hint">tap</span>
-          </summary>
-          <div class="inside">
-            <ul>
-              <li><strong>Consistency:</strong> regular routines, predictable care, same bedtime steps.</li>
-              <li><strong>Clear language:</strong> “died” vs. “went to sleep” (sleep language can create fear).</li>
-              <li><strong>Permission:</strong> “Any feeling is allowed. You’re not in trouble.”</li>
-              <li><strong>Memory:</strong> stories, photos, rituals, a memory object, a small tradition.</li>
-              <li><strong>Connection:</strong> more presence, fewer lectures.</li>
-            </ul>
+          <div class="promptCard">
+            <h3>4 things you can touch</h3>
+            <p>Feet on floor, hands on fabric, chair under you.</p>
           </div>
-        </details>
+          <div class="promptCard">
+            <h3>3 things you can hear</h3>
+            <p>Near sounds, far sounds, tiny sounds.</p>
+          </div>
+          <div class="promptCard">
+            <h3>2 things you can smell</h3>
+            <p>If you can’t smell, name 2 smells you like.</p>
+          </div>
+          <div class="promptCard">
+            <h3>1 thing you can taste</h3>
+            <p>Water, gum, mint… or just notice your mouth.</p>
+          </div>
+          <div class="promptCard">
+            <h3>Finish with one line</h3>
+            <p>“This is hard, and I’m here.”</p>
+          </div>
+        </div>
       </section>
 
       <!-- =========================================================
-           FAQ: questions kids ask
+           FAQ
            ========================================================= -->
-      <section class="card anchor" id="faq" aria-label="FAQ questions kids ask">
-        <h2>Questions kids ask (and gentle ways to answer)</h2>
-        <p class="note">You can keep answers short. Follow their lead. If they ask again later, that’s normal.</p>
+      <section class="card" id="faq" aria-label="FAQ">
+        <h2>Grief basics + questions kids ask</h2>
+        <div class="stack" style="margin-top:12px;">
+          <details class="soft">
+            <summary>Is it normal that they seem “fine” sometimes?</summary>
+            <div class="inside">
+              Yes. Kids often move in and out of grief. They can cry, then play, then cry again.
+              That isn’t forgetting — it’s their nervous system taking breaks.
+            </div>
+          </details>
 
-        <div class="spacer"></div>
+          <details class="soft">
+            <summary>What if they keep asking the same questions?</summary>
+            <div class="inside">
+              Repetition is common. It helps them practice understanding.
+              You can answer briefly, the same way each time, and offer connection: “Do you want a hug or to draw?”
+            </div>
+          </details>
 
-        <details class="soft">
-          <summary>“Where are they now?” <span class="hint">tap</span></summary>
-          <div class="inside">
-            <p style="margin:0;">
-              Match your family’s beliefs. If you’re unsure, try:
-              <strong>“Different people believe different things. What do you think?”</strong>
-              You can always add: <strong>“What I know for sure is we can still love them and remember them.”</strong>
-            </p>
-          </div>
-        </details>
+          <details class="soft">
+            <summary>Should we bring them to a funeral?</summary>
+            <div class="inside">
+              Often yes, with preparation and choice. Explain what they will see, offer a support person, and give permission to leave.
+              If they don’t attend, consider a different ritual (letter, candle, memory box).
+            </div>
+          </details>
 
-        <details class="soft">
-          <summary>“Did I cause it?” <span class="hint">tap</span></summary>
-          <div class="inside">
-            <p style="margin:0;">
-              Be direct: <strong>“No. This is not your fault.”</strong> Repeat as many times as needed.
-              Kids often need to hear this more than once.
-            </p>
-          </div>
-        </details>
+          <details class="soft">
+            <summary>How do I explain death in a way kids understand?</summary>
+            <div class="inside">
+              Use clear words and avoid confusing metaphors.
+              “Died” means the body stopped working and can’t start again. Then stay close and invite questions.
+            </div>
+          </details>
 
-        <details class="soft">
-          <summary>“Are you going to die too?” <span class="hint">tap</span></summary>
-          <div class="inside">
-            <p style="margin:0;">
-              Offer safety without false promises:
-              <strong>“Most people live a long time. My plan is to be here with you. If anything changes, you will be cared for.”</strong>
-            </p>
-          </div>
-        </details>
-
-        <details class="soft">
-          <summary>“Why are we still sad?” <span class="hint">tap</span></summary>
-          <div class="inside">
-            <p style="margin:0;">
-              Normalize waves:
-              <strong>“Sadness can come back because love doesn’t disappear. We can have okay moments and sad moments.”</strong>
-            </p>
-          </div>
-        </details>
-
-        <details class="soft">
-          <summary>“Can we talk about something else?” <span class="hint">tap</span></summary>
-          <div class="inside">
-            <p style="margin:0;">
-              Yes. Avoid forcing processing:
-              <strong>“Absolutely. We can take a break. If you want to come back later, I’m here.”</strong>
-            </p>
-          </div>
-        </details>
+          <details class="soft">
+            <summary>When should I get extra help?</summary>
+            <div class="inside">
+              Consider extra support if you notice persistent sleep changes, frequent panic, extreme withdrawal, ongoing school refusal,
+              or if anyone feels unsafe. Trust your gut — support is allowed.
+            </div>
+          </details>
+        </div>
       </section>
 
       <!-- =========================================================
-           Extra support / crisis
+           Extra support
            ========================================================= -->
-      <section class="card anchor" id="help" aria-label="Extra support">
-        <div class="callout">
-          <div class="calloutTop">
-            <h3 class="calloutTitle">Extra support</h3>
-            <span class="badge">Canada</span>
+      <section class="card" id="extra" aria-label="Extra support">
+        <h2>Extra support</h2>
+        <p class="note">
+          If you or your child feels unsafe, overwhelmed, or like you might hurt yourself or someone else, please reach out for immediate support.
+        </p>
+
+        <div class="promptGrid" style="margin-top:12px;">
+          <div class="promptCard">
+            <h3>Canada</h3>
+            <p><strong>Call or text 988</strong> for suicide crisis support.</p>
           </div>
-          <p>
-            If you or your child/youth feels unsafe, overwhelmed, or at risk of harm,
-            reach out for immediate support. In Canada you can call or text <strong>988</strong> for suicide crisis support,
-            or call <strong>911</strong> in an emergency.
-            For non-urgent support, consider a trusted person, your family doctor, a school counsellor,
-            or local community grief supports.
-          </p>
+          <div class="promptCard">
+            <h3>Emergency</h3>
+            <p><strong>Call 911</strong> if there is immediate danger.</p>
+          </div>
+          <div class="promptCard">
+            <h3>Non-urgent</h3>
+            <p>Family doctor, school counsellor, local hospice/bereavement supports, or a trusted community provider.</p>
+          </div>
         </div>
       </section>
 
@@ -1161,161 +987,86 @@
 
   <footer>
     <div class="wrap">
-      <div class="muted">Add more resources by editing the <code>RESOURCES</code> list inside the script near the bottom.</div>
-      <div class="faint" style="margin-top:6px;">This page is designed to be gentle, practical, and easy to use on mobile.</div>
+      Tip: Add more resources by duplicating an item in the <code>RESOURCES</code> list in the script below.
     </div>
   </footer>
 
   <!-- =========================================================
        PDF Viewer Modal
        ========================================================= -->
-  <div class="modalOverlay" id="pdfModal" role="dialog" aria-modal="true" aria-labelledby="pdfTitle">
+  <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <div class="modalHead">
-        <div>
-          <h3 id="pdfTitle">Document</h3>
-          <p id="pdfDesc">Preview in-page. If it doesn’t load, open in a new tab.</p>
-        </div>
-        <div class="modalTools">
-          <a class="btn small" id="pdfOpenTab" href="#" target="_blank" rel="noopener noreferrer">↗ Open in new tab</a>
-          <a class="btn small secondary" id="pdfDownload" href="#" download>⬇ Download</a>
-          <button class="btn small ghost" type="button" id="pdfClose">Close</button>
-        </div>
+        <div class="modalTitle" id="modalTitle">Viewer</div>
+        <button class="modalClose" id="modalClose" type="button">Close</button>
       </div>
 
-      <div class="modalBody">
-        <iframe class="pdfFrame" id="pdfFrame" title="PDF preview" loading="lazy"></iframe>
-      </div>
+      <div class="viewerWrap">
+        <p class="viewerHint" id="viewerHint">
+          If the PDF doesn’t display here (common on iPad/iPhone), use “Open in new tab.”
+        </p>
 
-      <p class="note" style="margin:0;">
-        Tip: On iPad/iPhone, in-page PDF preview can be inconsistent. “Open in new tab” is often the smoothest.
-      </p>
-    </div>
-  </div>
-
-  <!-- =========================================================
-       Small Modal for grounding (simple, no extra dependencies)
-       ========================================================= -->
-  <div class="modalOverlay" id="simpleModal" role="dialog" aria-modal="true" aria-labelledby="simpleTitle">
-    <div class="modal">
-      <div class="modalHead">
-        <div>
-          <h3 id="simpleTitle">Grounding</h3>
-          <p id="simpleDesc">A quick reset for wave moments.</p>
+        <div class="viewerFrame">
+          <iframe id="viewerFrame" title="PDF viewer" src=""></iframe>
         </div>
-        <div class="modalTools">
-          <button class="btn small ghost" type="button" id="simpleClose">Close</button>
-        </div>
-      </div>
 
-      <div class="modalBody" style="padding:14px; min-height:auto;">
-        <div class="stack">
-          <div class="scriptText" style="margin:0;">
-1) Feel your feet on the floor.
-2) Name 3 things you can see.
-3) Put a hand on your chest or belly.
-4) Inhale 4… exhale 6 (twice).
-5) Say: “This is hard, and I’m here.”
-          </div>
-
-          <div class="quickActions">
-            <button class="btn small" type="button" data-copy-inline="1) Feel your feet on the floor.\n2) Name 3 things you can see.\n3) Hand on chest/belly.\n4) Inhale 4… exhale 6 (twice).\n5) “This is hard, and I’m here.”">Copy</button>
-            <button class="btn small secondary" type="button" data-jump="#scripts">Go to scripts</button>
-          </div>
+        <div class="actions">
+          <a class="btn" id="viewerNewTab" href="#" target="_blank" rel="noopener noreferrer">↗ Open in new tab</a>
+          <a class="btn secondary" id="viewerDownload" href="#" download>⬇ Download</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Floating helpers -->
+  <!-- Floating helper -->
   <div class="fabStack" aria-label="Quick helpers">
     <button class="fab" id="btnTop" type="button" aria-label="Back to top">↑ <span>Top</span></button>
-    <button class="fab show" id="btnLibrary" type="button" aria-label="Jump to library">📚 <span>Library</span> <small>resources</small></button>
   </div>
 
   <script>
     /* =========================================================
-       DATA: Add/edit resources here
-       - type: "PDF", "Link", etc.
-       - url: relative file path (pdf) or web link
-       - tags: keep lowercase for filtering
+       RESOURCES: edit/add here
+       - file must be in this folder (coping-with-death/)
        ========================================================= */
     const RESOURCES = [
       {
         title: "Gus’s Grief Adventure",
-        type: "Storybook (PDF)",
-        url: "gus-grief-story.pdf",
+        file: "gus-grief-story.pdf",
         note: "A child-friendly therapeutic story about death, big feelings (confusion, sadness, anger), and how grief can change over time while love remains.",
+        badge: "Storybook (PDF)",
         tags: ["storybook","kids","caregivers","grief","waves"]
-      },
-
-      /* Examples you can enable later by adding the files:
-      {
-        title: "Talking about death (caregiver guide)",
-        type: "Guide (PDF)",
-        url: "talking-about-death-guide.pdf",
-        note: "Short scripts + what to say when kids ask hard questions.",
-        tags: ["caregivers","grief","kids"]
-      },
-      {
-        title: "School support note template",
-        type: "Template (PDF)",
-        url: "school-support-template.pdf",
-        note: "A simple letter template to help schools support grief waves and firsts.",
-        tags: ["caregivers","school","teens","kids"]
       }
-      */
+      // Add more like:
+      // { title:"...", file:"your.pdf", note:"...", badge:"Worksheet (PDF)", tags:["kids","school"] }
     ];
 
-    /* =========================================================
-       Render resource cards
-       ========================================================= */
-    const grid = document.getElementById("resourceGrid");
+    const grid = document.getElementById("grid");
+    const searchInput = document.getElementById("searchInput");
+    const filterBtns = Array.from(document.querySelectorAll(".tagBtn[data-filter]"));
+    const btnPick = document.getElementById("btnPick");
+    const btnClear = document.getElementById("btnClear");
 
-    function tagChip(t){
-      return `<span class="chip">${t}</span>`;
-    }
+    let activeTag = null;
 
-    function resourceCard(r){
-      const safeUrl = String(r.url || "");
-      const isPdf = safeUrl.toLowerCase().endsWith(".pdf");
-
-      const openBtn = isPdf
-        ? `<button class="btn small" type="button"
-              data-open-pdf="${safeUrl}"
-              data-title="${escapeHtml(r.title)}"
-              data-desc="${escapeHtml(r.note || "")}">
-              📄 Open
-           </button>`
-        : `<a class="btn small" href="${safeUrl}" target="_blank" rel="noopener noreferrer">↗ Open</a>`;
-
-      const openTab = isPdf
-        ? `<a class="btn small secondary" href="${safeUrl}" target="_blank" rel="noopener noreferrer">↗ New tab</a>`
-        : ``;
-
-      const download = isPdf
-        ? `<a class="btn small secondary" href="${safeUrl}" download>⬇ Download</a>`
-        : ``;
-
+    function cardHTML(r){
+      const chips = (r.tags || []).map(t => `<span class="chip">${t}</span>`).join("");
       return `
-        <article class="resCard">
+        <article class="resCard" data-tags="${(r.tags||[]).join(" ")}">
           <div class="resTop">
-            <h3 class="resTitle">${escapeHtml(r.title)}</h3>
-            <span class="resType">${escapeHtml(r.type || "Resource")}</span>
+            <div>
+              <h3 class="resTitle">${r.title}</h3>
+            </div>
+            <span class="badge">${r.badge || "PDF"}</span>
           </div>
 
-          ${r.note ? `<p class="resNote">${escapeHtml(r.note)}</p>` : ""}
+          ${r.note ? `<p class="resNote">${r.note}</p>` : ""}
 
-          ${r.tags && r.tags.length ? `
-            <div class="resTags" aria-label="Tags">
-              ${r.tags.map(tagChip).join("")}
-            </div>
-          ` : ""}
+          ${chips ? `<div class="chipRow">${chips}</div>` : ""}
 
-          <div class="resActions" aria-label="Actions">
-            ${openBtn}
-            ${openTab}
-            ${download}
+          <div class="actions">
+            <button class="btn" type="button" data-open="${r.file}" data-title="${escapeHtml(r.title)}">📄 Open</button>
+            <a class="btn secondary" href="${r.file}" target="_blank" rel="noopener noreferrer">↗ New tab</a>
+            <a class="btn secondary" href="${r.file}" download>⬇ Download</a>
           </div>
         </article>
       `;
@@ -1323,28 +1074,18 @@
 
     function render(list){
       if(!grid) return;
-      grid.innerHTML = (list && list.length)
-        ? list.map(resourceCard).join("")
-        : `<div class="note">No matches. Try clearing filters.</div>`;
+      grid.innerHTML = list.map(cardHTML).join("");
+      // bind open buttons
+      document.querySelectorAll("[data-open]").forEach(btn => {
+        btn.addEventListener("click", () => openViewer(btn.getAttribute("data-open"), btn.getAttribute("data-title") || "Viewer"));
+      });
     }
-
-    render(RESOURCES);
-
-    /* =========================================================
-       Search + Tag filter
-       ========================================================= */
-    const searchInput = document.getElementById("searchInput");
-    const tagBtns = Array.from(document.querySelectorAll(".tagBtn[data-filter]"));
-    const btnStartHere = document.getElementById("btnStartHere");
-    const btnClear = document.getElementById("btnClear");
-
-    let activeTag = null;
 
     function applyFilters(){
       const q = (searchInput?.value || "").toLowerCase().trim();
 
       const filtered = RESOURCES.filter(r => {
-        const hay = `${r.title} ${r.note || ""} ${(r.tags||[]).join(" ")} ${(r.type||"")}`.toLowerCase();
+        const hay = `${r.title} ${r.note || ""} ${(r.tags||[]).join(" ")} ${(r.badge||"")}`.toLowerCase();
         const matchesText = !q || hay.includes(q);
         const matchesTag = !activeTag || (r.tags || []).includes(activeTag);
         return matchesText && matchesTag;
@@ -1353,12 +1094,16 @@
       render(filtered);
     }
 
-    tagBtns.forEach(btn => {
+    function setTag(tag){
+      activeTag = tag;
+      filterBtns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === activeTag)));
+      applyFilters();
+    }
+
+    filterBtns.forEach(btn => {
       btn.addEventListener("click", () => {
-        const key = btn.dataset.filter;
-        activeTag = (activeTag === key) ? null : key;
-        tagBtns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === activeTag)));
-        applyFilters();
+        const t = btn.dataset.filter;
+        setTag(activeTag === t ? null : t);
       });
     });
 
@@ -1367,231 +1112,117 @@
     if(btnClear) btnClear.addEventListener("click", () => {
       activeTag = null;
       if(searchInput) searchInput.value = "";
-      tagBtns.forEach(b => b.setAttribute("aria-pressed","false"));
+      filterBtns.forEach(b => b.setAttribute("aria-pressed","false"));
       render(RESOURCES);
     });
 
-    if(btnStartHere) btnStartHere.addEventListener("click", () => {
+    if(btnPick) btnPick.addEventListener("click", () => {
+      const q = (searchInput?.value || "").toLowerCase().trim();
       const pool = RESOURCES.filter(r => {
-        if(activeTag && !(r.tags||[]).includes(activeTag)) return false;
-        const q = (searchInput?.value || "").toLowerCase().trim();
-        if(!q) return true;
-        const hay = `${r.title} ${r.note || ""} ${(r.tags||[]).join(" ")} ${(r.type||"")}`.toLowerCase();
-        return hay.includes(q);
+        const hay = `${r.title} ${r.note || ""} ${(r.tags||[]).join(" ")}`.toLowerCase();
+        const matchesText = !q || hay.includes(q);
+        const matchesTag = !activeTag || (r.tags || []).includes(activeTag);
+        return matchesText && matchesTag;
       });
-
       const pick = pool[Math.floor(Math.random() * pool.length)] || RESOURCES[0];
-      if(!pick) return;
-
-      if(String(pick.url).toLowerCase().endsWith(".pdf")){
-        openPdfModal(pick.url, pick.title, pick.note || "");
-      }else{
-        window.open(pick.url, "_blank", "noopener");
-      }
+      openViewer(pick.file, pick.title);
     });
 
-    /* =========================================================
-       Smooth jump buttons
-       ========================================================= */
-    function jumpTo(selector){
-      const el = document.querySelector(selector);
-      if(!el) return;
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    document.querySelectorAll("[data-jump]").forEach(btn => {
-      btn.addEventListener("click", () => jumpTo(btn.getAttribute("data-jump")));
-    });
-
-    /* =========================================================
-       Copy helpers (scripts + inline copy)
-       ========================================================= */
-    function setStatus(idOrEl, text){
-      const id = typeof idOrEl === "string" ? idOrEl : (idOrEl?.id || "");
-      const line = document.querySelector(`[data-status-for="${id}"]`);
-      if(line) line.textContent = text || "";
-      if(line && text){
-        setTimeout(() => { line.textContent = ""; }, 1400);
-      }
-    }
-
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        return true;
-      }catch(e){
-        // fallback
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly","");
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        try{
-          document.execCommand("copy");
-          document.body.removeChild(ta);
-          return true;
-        }catch(err){
-          document.body.removeChild(ta);
-          return false;
-        }
-      }
-    }
-
-    document.querySelectorAll("[data-copy]").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const sel = btn.getAttribute("data-copy");
-        const el = document.querySelector(sel);
-        if(!el) return;
-        const ok = await copyText(el.textContent.trim());
-        setStatus(el, ok ? "Copied." : "Copy failed.");
-      });
-    });
-
-    document.querySelectorAll("[data-copy-inline]").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const txt = btn.getAttribute("data-copy-inline") || "";
-        await copyText(txt);
-      });
-    });
-
-    // Quick-open “I’m here” script from hero
-    document.querySelectorAll("[data-open-script]").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const key = btn.getAttribute("data-open-script");
-        if(key === "script_here"){
-          const el = document.getElementById("t_script_here");
-          if(!el) return;
-          const ok = await copyText(el.textContent.trim());
-          setStatus(el, ok ? "Copied." : "Copy failed.");
-          jumpTo("#scripts");
-        }
-      });
-    });
-
-    /* =========================================================
-       PDF Modal logic
-       ========================================================= */
-    const pdfModal = document.getElementById("pdfModal");
-    const pdfClose = document.getElementById("pdfClose");
-    const pdfFrame = document.getElementById("pdfFrame");
-    const pdfTitle = document.getElementById("pdfTitle");
-    const pdfDesc = document.getElementById("pdfDesc");
-    const pdfOpenTab = document.getElementById("pdfOpenTab");
-    const pdfDownload = document.getElementById("pdfDownload");
-
-    function openPdfModal(url, title, desc){
-      if(!pdfModal || !pdfFrame || !pdfTitle || !pdfDesc || !pdfOpenTab || !pdfDownload) return;
-
-      pdfTitle.textContent = title || "Document";
-      pdfDesc.textContent = desc || "Preview in-page. If it doesn’t load, open in a new tab.";
-
-      pdfOpenTab.href = url;
-      pdfDownload.href = url;
-
-      // Some browsers like a fragment for fit; harmless if ignored
-      pdfFrame.src = url + "#view=FitH";
-
-      pdfModal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }
-
-    function closePdfModal(){
-      if(!pdfModal || !pdfFrame) return;
-      pdfModal.style.display = "none";
-      pdfFrame.src = "";
-      document.body.style.overflow = "";
-    }
-
-    if(pdfClose) pdfClose.addEventListener("click", closePdfModal);
-    if(pdfModal) pdfModal.addEventListener("click", (e) => { if(e.target === pdfModal) closePdfModal(); });
-
-    // Buttons that open PDFs
-    document.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-open-pdf]");
-      if(!btn) return;
-      const url = btn.getAttribute("data-open-pdf");
-      const title = btn.getAttribute("data-title") || "Document";
-      const desc = btn.getAttribute("data-desc") || "";
-      if(url) openPdfModal(url, title, desc);
-    });
-
-    // Quick open story button
-    const btnQuickOpen = document.getElementById("btnQuickOpen");
-    if(btnQuickOpen){
-      btnQuickOpen.addEventListener("click", () => {
-        const gus = RESOURCES.find(r => String(r.url).toLowerCase() === "gus-grief-story.pdf");
-        if(gus) openPdfModal(gus.url, gus.title, gus.note || "");
-        else openPdfModal("gus-grief-story.pdf", "Gus’s Grief Adventure", "A child-friendly therapeutic grief story (PDF).");
-      });
-    }
-
-    /* =========================================================
-       Simple modal (grounding)
-       ========================================================= */
-    const simpleModal = document.getElementById("simpleModal");
-    const simpleClose = document.getElementById("simpleClose");
-
-    function openSimpleModal(){
-      if(!simpleModal) return;
-      simpleModal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }
-    function closeSimpleModal(){
-      if(!simpleModal) return;
-      simpleModal.style.display = "none";
-      document.body.style.overflow = "";
-    }
-
-    document.querySelectorAll("[data-open-modal]").forEach(btn => {
+    // Preset tag buttons in Start Here row
+    document.querySelectorAll("[data-tag-preset]").forEach(btn => {
       btn.addEventListener("click", () => {
-        const key = btn.getAttribute("data-open-modal");
-        if(key === "modal_grounding") openSimpleModal();
+        const t = btn.getAttribute("data-tag-preset");
+        // if this tag exists in filters, set it
+        const exists = filterBtns.some(b => b.dataset.filter === t);
+        if(exists){
+          setTag(t);
+          document.getElementById("library")?.scrollIntoView({ behavior:"smooth", block:"start" });
+        }else{
+          // fallback: just drop into search field
+          if(searchInput){
+            searchInput.value = t;
+            applyFilters();
+            document.getElementById("library")?.scrollIntoView({ behavior:"smooth", block:"start" });
+          }
+        }
       });
     });
 
-    if(simpleClose) simpleClose.addEventListener("click", closeSimpleModal);
-    if(simpleModal) simpleModal.addEventListener("click", (e) => { if(e.target === simpleModal) closeSimpleModal(); });
-
-    /* =========================================================
-       Esc key closes modals
-       ========================================================= */
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape"){
-        if(pdfModal && pdfModal.style.display === "flex") closePdfModal();
-        if(simpleModal && simpleModal.style.display === "flex") closeSimpleModal();
-      }
+    // Jump buttons
+    document.querySelectorAll("[data-jump]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const sel = btn.getAttribute("data-jump");
+        document.querySelector(sel)?.scrollIntoView({ behavior:"smooth", block:"start" });
+      });
     });
 
     /* =========================================================
-       Floating helpers: Top + jump to library
+       PDF Viewer modal
+       ========================================================= */
+    const overlay = document.getElementById("modalOverlay");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalClose = document.getElementById("modalClose");
+    const viewerFrame = document.getElementById("viewerFrame");
+    const viewerNewTab = document.getElementById("viewerNewTab");
+    const viewerDownload = document.getElementById("viewerDownload");
+
+    function openViewer(file, title){
+      if(!overlay || !viewerFrame || !viewerNewTab || !viewerDownload || !modalTitle) return;
+
+      modalTitle.textContent = title || "Viewer";
+
+      // Best effort: iframe PDF works on many browsers, but not always on iOS.
+      // Use direct file path relative to this folder.
+      viewerFrame.src = file;
+
+      viewerNewTab.href = file;
+      viewerDownload.href = file;
+
+      overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeViewer(){
+      if(!overlay || !viewerFrame) return;
+      overlay.style.display = "none";
+      viewerFrame.src = "";
+      document.body.style.overflow = "";
+    }
+
+    if(modalClose) modalClose.addEventListener("click", closeViewer);
+    if(overlay) overlay.addEventListener("click", (e) => { if(e.target === overlay) closeViewer(); });
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeViewer();
+    });
+
+    /* =========================================================
+       Back to top button
        ========================================================= */
     const btnTop = document.getElementById("btnTop");
-    const btnLibrary = document.getElementById("btnLibrary");
-
-    function updateTopFab(){
+    function updateTop(){
       if(!btnTop) return;
-      if(window.scrollY > 420) btnTop.classList.add("show");
+      if(window.scrollY > 500) btnTop.classList.add("show");
       else btnTop.classList.remove("show");
     }
-
-    window.addEventListener("scroll", updateTopFab);
-    updateTopFab();
-
+    window.addEventListener("scroll", updateTop);
+    updateTop();
     if(btnTop) btnTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-    if(btnLibrary) btnLibrary.addEventListener("click", () => jumpTo("#library"));
 
     /* =========================================================
        Helpers
        ========================================================= */
-    function escapeHtml(str){
-      return String(str || "")
+    function escapeHtml(s){
+      return String(s)
         .replaceAll("&","&amp;")
         .replaceAll("<","&lt;")
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
     }
+
+    // Initial render
+    render(RESOURCES);
   </script>
 </body>
 </html>
