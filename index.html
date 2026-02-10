@@ -754,7 +754,6 @@
       max-width: 90ch;
     }
 
-    /* FIXED: make the “visual anchor” look intentional (not placeholder blocks) */
     .metaphorFigure{
       margin: 6px auto 0;
       width: min(820px, 100%);
@@ -783,11 +782,12 @@
       font-size: 12px;
     }
 
-    /* NOTE: metaphorSvg not needed anymore, but leaving it doesn't hurt */
-    .metaphorSvg{
-      display:block;
+    /* NEW: image anchor styling (replaces SVG) */
+    .metaphorImg{
       width: 100%;
       height: auto;
+      display:block;
+      background: rgba(0,0,0,.18);
     }
 
     .metaphorCaption{
@@ -796,7 +796,6 @@
       font-size: 12.5px;
       line-height: 1.55;
     }
-
   </style>
 </head>
 
@@ -893,7 +892,7 @@
       </section>
     </div>
 
-    <!-- UPDATED metaphor anchor: uses your uploaded image + wave wording -->
+    <!-- Metaphor anchor (IMAGE version) -->
     <section class="card metaphor" aria-label="Visual metaphor anchor">
       <div class="metaphorInner">
         <h2>A small picture to hold onto</h2>
@@ -908,20 +907,20 @@
             <span>You can scroll slowly. This page will still be here.</span>
           </div>
 
-          <!-- CHANGE THIS FILENAME ONLY if yours is different -->
-        <img
-  src="waves-anchor.png"
-  alt="Illustration of waves representing grief coming and going"
-  style="width:100%; height:auto; display:block;"
->
+          <!-- IMPORTANT:
+               This src MUST match the exact filename in your repo (case-sensitive).
+               If your page is in a folder, you may need "/FILENAME.png" or "../FILENAME.png".
+          -->
+          <img
+            class="metaphorImg"
+            src="A_traditional_illustration_captures_a_beach_scene_.png"
+            alt="Illustration of waves representing grief coming and going"
+            loading="lazy"
           />
 
           <figcaption class="metaphorCaption">
-            Grief can feel like waves.
-            Some days they are small and far away.
-            Some days they crash without warning.
-            The waves don’t mean you’re failing —
-            they mean you’re carrying something that mattered.
+            Grief can feel like waves. Some days they are small and far away. Some days they crash without warning.
+            The waves don’t mean you’re failing — they mean you’re carrying something that mattered.
           </figcaption>
         </figure>
       </div>
@@ -1149,12 +1148,13 @@ const MESSAGES = [
 
 function newMessage(){
   const msg = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-  document.getElementById("dailyMessage").textContent = msg;
+  const el = document.getElementById("dailyMessage");
+  if(el) el.textContent = msg;
 }
 
 function releaseText(){
   const box = document.getElementById("releaseText");
-  if(!box.value.trim()) return;
+  if(!box || !box.value.trim()) return;
   box.style.transition = "opacity 1.5s ease";
   box.style.opacity = "0";
   setTimeout(()=>{
@@ -1163,8 +1163,10 @@ function releaseText(){
   }, 1600);
 }
 
-document.getElementById("btnNewWords").addEventListener("click", newMessage);
-document.getElementById("btnRelease").addEventListener("click", releaseText);
+const btnNewWords = document.getElementById("btnNewWords");
+const btnRelease = document.getElementById("btnRelease");
+if(btnNewWords) btnNewWords.addEventListener("click", newMessage);
+if(btnRelease) btnRelease.addEventListener("click", releaseText);
 
 /* ===== Breathing Timer ===== */
 const phaseEl = document.getElementById("breathPhaseText");
@@ -1186,7 +1188,7 @@ const EXHALE_MS = 6000;
 function setSelectedDuration(sec){
   selectedSeconds = sec;
   durationBtns.forEach(b => b.setAttribute("aria-pressed", String((Number(b.dataset.breathMin) * 60) === sec)));
-  statusEl.textContent = `Selected: ${sec < 60 ? `${sec}s` : `${Math.round(sec/60)} min`}`;
+  if(statusEl) statusEl.textContent = `Selected: ${sec < 60 ? `${sec}s` : `${Math.round(sec/60)} min`}`;
 }
 
 function formatRemaining(ms){
@@ -1198,10 +1200,10 @@ function formatRemaining(ms){
 }
 
 function startBreathing(){
-  if(running) return;
+  if(running || !phaseEl || !statusEl || !countdownEl) return;
   running = true;
-  startBtn.setAttribute("aria-pressed","true");
-  stopBtn.setAttribute("aria-pressed","false");
+  if(startBtn) startBtn.setAttribute("aria-pressed","true");
+  if(stopBtn) stopBtn.setAttribute("aria-pressed","false");
 
   endAt = Date.now() + (selectedSeconds * 1000);
   statusEl.textContent = "Breathing…";
@@ -1230,15 +1232,15 @@ function startBreathing(){
 
 function stopBreathing(finished=false){
   running = false;
-  startBtn.setAttribute("aria-pressed","false");
-  stopBtn.setAttribute("aria-pressed","true");
+  if(startBtn) startBtn.setAttribute("aria-pressed","false");
+  if(stopBtn) stopBtn.setAttribute("aria-pressed","true");
 
   if(timerId){ clearInterval(timerId); timerId = null; }
   if(phaseId){ clearTimeout(phaseId); phaseId = null; }
 
-  countdownEl.textContent = "";
-  phaseEl.textContent = "Breathe in… breathe out…";
-  statusEl.textContent = finished ? "Done. You can restart anytime." : "Paused.";
+  if(countdownEl) countdownEl.textContent = "";
+  if(phaseEl) phaseEl.textContent = "Breathe in… breathe out…";
+  if(statusEl) statusEl.textContent = finished ? "Done. You can restart anytime." : "Paused.";
 }
 
 durationBtns.forEach(btn => {
@@ -1248,57 +1250,9 @@ durationBtns.forEach(btn => {
   });
 });
 
-startBtn.addEventListener("click", startBreathing);
-stopBtn.addEventListener("click", () => stopBreathing(false));
+if(startBtn) startBtn.addEventListener("click", startBreathing);
+if(stopBtn) stopBtn.addEventListener("click", () => stopBreathing(false));
 setSelectedDuration(60);
-
-/* ===== Resource finder logic ===== */
-const searchInput = document.getElementById("searchInput");
-const filterBtns = Array.from(document.querySelectorAll(".tag[data-filter]"));
-const btnStartHere = document.getElementById("btnStartHere");
-const btnClearFilters = document.getElementById("btnClearFilters");
-
-let activeFilter = null;
-
-function applyFilters(){
-  const q = (searchInput.value || "").toLowerCase().trim();
-
-  const filtered = resources.filter(r => {
-    const hay = `${r.title} ${r.note || ""} ${(r.tags||[]).join(" ")}`.toLowerCase();
-    const matchesText = !q || hay.includes(q);
-    const matchesTag = !activeFilter || (r.tags || []).includes(activeFilter);
-    return matchesText && matchesTag;
-  });
-
-  renderCards(filtered);
-}
-
-filterBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const key = btn.dataset.filter;
-    activeFilter = (activeFilter === key) ? null : key;
-    filterBtns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === activeFilter)));
-    applyFilters();
-  });
-});
-
-searchInput.addEventListener("input", applyFilters);
-
-btnClearFilters.addEventListener("click", () => {
-  activeFilter = null;
-  searchInput.value = "";
-  filterBtns.forEach(b => b.setAttribute("aria-pressed","false"));
-  renderCards(resources);
-});
-
-btnStartHere.addEventListener("click", () => {
-  const pool = (activeFilter || (searchInput.value||"").trim())
-    ? resources.filter(r => (activeFilter ? (r.tags||[]).includes(activeFilter) : true))
-    : resources;
-
-  const pick = pool[Math.floor(Math.random() * pool.length)] || resources[0];
-  window.location.href = pick.url;
-});
 
 /* ===== Modals ===== */
 const MODALS = {
@@ -1385,7 +1339,6 @@ const MODALS = {
     </details>` }
 };
 
-/* ===== Modal logic ===== */
 const modalOverlay = document.getElementById("modalOverlay");
 const modalTitle = document.getElementById("modalTitle");
 const modalContent = document.getElementById("modalContent");
@@ -1394,22 +1347,21 @@ const closeBottom = document.getElementById("modalCloseBottom");
 
 function openModal(key){
   const m = MODALS[key];
-  if(!m) return;
+  if(!m || !modalOverlay || !modalTitle || !modalContent) return;
   modalTitle.textContent = m.title;
   modalContent.innerHTML = m.html;
   modalOverlay.style.display = "flex";
 }
 function closeModal(){
-  modalOverlay.style.display = "none";
+  if(modalOverlay) modalOverlay.style.display = "none";
 }
 
 document.querySelectorAll("[data-modal]").forEach(btn => {
   btn.addEventListener("click", () => openModal(btn.dataset.modal));
 });
-
-closeTop.addEventListener("click", closeModal);
-closeBottom.addEventListener("click", closeModal);
-modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
+if(closeTop) closeTop.addEventListener("click", closeModal);
+if(closeBottom) closeBottom.addEventListener("click", closeModal);
+if(modalOverlay) modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
 
 /* ===== Floating helpers logic ===== */
 const btnTop = document.getElementById("btnTop");
@@ -1418,6 +1370,7 @@ const calmOverlay = document.getElementById("calmOverlay");
 const btnReturn = document.getElementById("btnReturn");
 
 function updateTopButton(){
+  if(!btnTop) return;
   if(window.scrollY > 400){
     btnTop.classList.add("show");
   }else{
@@ -1427,12 +1380,12 @@ function updateTopButton(){
 window.addEventListener("scroll", updateTopButton);
 updateTopButton();
 
-btnTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+if(btnTop) btnTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-btnCalm.addEventListener("click", () => { calmOverlay.style.display = "block"; });
-btnReturn.addEventListener("click", () => { calmOverlay.style.display = "none"; });
+if(btnCalm) btnCalm.addEventListener("click", () => { if(calmOverlay) calmOverlay.style.display = "block"; });
+if(btnReturn) btnReturn.addEventListener("click", () => { if(calmOverlay) calmOverlay.style.display = "none"; });
 
-calmOverlay.addEventListener("click", (e) => { if(e.target === calmOverlay) calmOverlay.style.display = "none"; });
+if(calmOverlay) calmOverlay.addEventListener("click", (e) => { if(e.target === calmOverlay) calmOverlay.style.display = "none"; });
 
 document.addEventListener("keydown", (e) => {
   if(e.key === "Escape"){
@@ -1454,10 +1407,9 @@ document.querySelectorAll("[data-jump]").forEach(btn => {
   btn.addEventListener("click", () => jumpTo(btn.getAttribute("data-jump")));
 });
 document.querySelectorAll('[data-action="calm"]').forEach(btn => {
-  btn.addEventListener("click", () => { calmOverlay.style.display = "block"; });
+  btn.addEventListener("click", () => { if(calmOverlay) calmOverlay.style.display = "block"; });
 });
 </script>
 
 </body>
 </html>
-
