@@ -30,6 +30,8 @@
     }
 
     *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
     body{
       margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -339,43 +341,48 @@
       line-height:1.5;
     }
 
-    /* Resource placeholders */
-    .resourceList{
-      display:grid;
+    /* Action row for copy/print buttons */
+    .actionsRow{
+      display:flex;
       gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
       margin-top: 12px;
     }
-    .resourceItem{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      padding: 12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.16);
-    }
-    .resourceItem .left{
-      min-width: 220px;
-    }
-    .resourceItem .title{
-      font-weight: 900;
+    .btn{
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
       color: rgba(238,251,255,.92);
-      margin:0 0 4px;
-    }
-    .resourceItem .desc{
-      margin:0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height:1.45;
-    }
-    .resourceItem a{
-      color: var(--accent);
-      text-decoration:none;
+      cursor:pointer;
       font-weight: 900;
-      white-space:nowrap;
+      font-size: 13px;
+      transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
     }
-    .resourceItem a:hover{ text-decoration: underline; }
+    .btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+      box-shadow: 0 0 0 1px rgba(82,214,201,.18), 0 0 24px rgba(47,180,255,.12);
+    }
+    .btn:active{ transform: translateY(0px); }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(82,214,201,.18), rgba(0,0,0,.18));
+      border-color: rgba(82,214,201,.24);
+    }
+
+    /* Print helpers */
+    .printOnly{ display:none; }
+    .noPrint{}
+    @media print{
+      body{ background:#fff !important; color:#000 !important; }
+      header, .stickyNav, .noPrint, .modalOverlay{ display:none !important; }
+      main.wrap{ max-width:none; padding: 0; }
+      .card{ box-shadow:none !important; background:#fff !important; border:1px solid #ddd !important; }
+      .printOnly{ display:block !important; }
+      a{ color:#000 !important; text-decoration: underline; }
+      .list{ color:#000 !important; }
+    }
 
     /* Footer */
     footer{
@@ -437,8 +444,9 @@
     }
 
     @media (prefers-reduced-motion: reduce){
-      .chipBtn, .choice{ transition:none; }
+      .chipBtn, .choice, .btn{ transition:none; }
       .orb{ animation:none; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
@@ -471,11 +479,13 @@
       <div class="heroInner">
         <div class="heroGrid">
           <div>
-            <div class="quickTools" aria-label="Quick tools">
+            <div class="quickTools noPrint" aria-label="Quick tools">
               <button class="chipBtn" type="button" data-modal="script_kids">What to say to kids</button>
               <button class="chipBtn" type="button" data-modal="script_teens">What to say to teens</button>
-              <button class="chipBtn" type="button" data-modal="conflict">When conflict is high</button>
+              <button class="chipBtn" type="button" data-modal="conflict_protocol">When conflict is high</button>
               <button class="chipBtn" type="button" data-modal="do_dont">Helpful do’s & don’ts</button>
+              <button class="chipBtn" type="button" data-jump="#schoolkit">School kit</button>
+              <button class="chipBtn" type="button" data-jump="#transition">Before / during / after</button>
             </div>
 
             <div class="callout" style="margin-top:12px;">
@@ -496,11 +506,11 @@
           </div>
         </div>
 
-        <div class="tabs" role="tablist" aria-label="Divorce & Separation tabs">
+        <div class="tabs noPrint" role="tablist" aria-label="Divorce & Separation tabs">
           <button class="tabBtn" type="button" role="tab" aria-selected="true" data-tab="basics">The basics</button>
           <button class="tabBtn" type="button" role="tab" aria-selected="false" data-tab="age">By age</button>
           <button class="tabBtn" type="button" role="tab" aria-selected="false" data-tab="routines">Transitions & routines</button>
-          <button class="tabBtn" type="button" role="tab" aria-selected="false" data-tab="resources">Resources (add yours)</button>
+          <button class="tabBtn" type="button" role="tab" aria-selected="false" data-tab="school">School kit</button>
         </div>
 
         <div class="tabPanel" data-open="true" data-panel="basics">
@@ -511,13 +521,22 @@
           <ul class="list">
             <li>Keep adult details away from children (money, blame, infidelity, court).</li>
             <li>Try one predictable routine that stays the same in both homes (bedtime phrase, calendar, check-in text).</li>
-            <li>Expect “waves”, regression, mood swings, clinginess, anger, acting-out, stomach aches.</li>
-            <li>If you mess up, it's ok: try to repair quickly (“I’m sorry. That wasn’t about you.”).</li>
+            <li>Expect “waves”: regression, mood swings, clinginess, anger, acting-out, stomach aches.</li>
+            <li>If you mess up, it’s okay: repair quickly (“I’m sorry. That wasn’t about you.”).</li>
           </ul>
+
+          <div class="callout">
+            <strong>Loyalty binds are common:</strong> kids may feel like loving one parent hurts the other.
+            Keep repeating: <strong>“You don’t have to pick. You can love both homes.”</strong>
+          </div>
         </div>
 
         <div class="tabPanel" data-open="false" data-panel="age">
-          <div class="chooser" aria-label="Choose a situation">
+          <p style="color:var(--muted); margin:0;">
+            Quick lane-picking: choose the age band and steal the script. If your child is between ages, mix and match.
+          </p>
+
+          <div class="chooser noPrint" aria-label="Choose a situation">
             <div class="choice" data-modal="age_little">
               <h3> Little kids (approx. 3–7)</h3>
               <p>Short, concrete words. Reassurance. Repetition. Routine.</p>
@@ -530,22 +549,36 @@
               <h3> Teens (approx. 13–18)</h3>
               <p>Privacy + autonomy. Strong opinions. Hidden sadness.</p>
             </div>
-            <div class="choice" data-modal="age_all">
-              <h3> All ages</h3>
-              <p>Signs it may help to add extra support.</p>
+            <div class="choice" data-modal="hard_questions">
+              <h3> The “11pm questions”</h3>
+              <p>Copy/paste scripts for the hard ones.</p>
             </div>
+          </div>
+
+          <div class="callout">
+            <strong>Universal line:</strong> “This is not your fault. You are loved. The adults will handle adult stuff.”
           </div>
         </div>
 
         <div class="tabPanel" data-open="false" data-panel="routines">
           <p style="color:var(--muted); margin:0;">
-            Transitions between homes can be the hardest part; not because kids don’t love both parents, but because switching can spike stress. Just remember, everyfamily is different, you can tailor all of these to your situation.
+            Transitions between homes can be the hardest part; not because kids don’t love both parents,
+            but because switching can spike stress. Every family is different — tailor this to your situation.
           </p>
+
+          <div class="callout" id="transition">
+            <strong>Before / during / after (a simple handoff protocol):</strong>
+            <ul class="list">
+              <li><strong>Before:</strong> preview the plan + show the calendar. “Tonight is Dad’s night. Tomorrow is Mom’s night.”</li>
+              <li><strong>During:</strong> neutral script, adult-only. “Hey. Here’s the backpack. Have a good night.”</li>
+              <li><strong>After:</strong> snack + water + 10 minutes of quiet decompression before homework/talk.</li>
+            </ul>
+          </div>
+
           <ul class="list">
-            <li><strong>Preview:</strong> “Tonight is Dad’s night. Tomorrow is Mom’s night.”</li>
             <li><strong>Bridge object:</strong> a small item that travels (stuffie, photo, keychain).</li>
-            <li><strong>Neutral handoff:</strong> keep it brief, kind, and adult-only.</li>
-            <li><strong>After-drop reset:</strong> snack, water and quiet time before homework/talk.</li>
+            <li><strong>Backpack checklist:</strong> build a “home-to-home” list (charger, meds, comfort item).</li>
+            <li><strong>Reset cue:</strong> same bedtime phrase or “goodnight script” in both homes.</li>
           </ul>
           <div class="callout">
             <strong>Small but powerful:</strong> Make a shared calendar visible to the child/teen (even a simple one on the fridge).
@@ -553,17 +586,52 @@
           </div>
         </div>
 
-        <div class="tabPanel" data-open="false" data-panel="resources">
+        <div class="tabPanel" data-open="false" data-panel="school">
           <p style="color:var(--muted); margin:0;">
-            This is where we can add links, PDFs, storybooks, handouts, and community supports later.
-            For now, these are placeholders you can edit.
+            This is meant to reduce the back-and-forth. One short message to school + a simple plan for swap days.
           </p>
+          <div class="actionsRow noPrint">
+            <button class="btn primary" type="button" id="btnCopySchool">📋 Copy email</button>
+            <button class="btn" type="button" id="btnPrintSchool">🖨 Print note</button>
+            <button class="btn" type="button" data-modal="school_signs">What teachers might see</button>
+          </div>
 
-          <div class="resourceList" id="resourceList"></div>
+          <div class="callout" style="margin-top:12px;">
+            <strong>Email draft:</strong>
+            <div id="schoolEmailText" style="white-space:pre-wrap; margin-top:10px; color: var(--muted);">
+Subject: Support request for [Student Name]
 
-          <div class="callout">
-            <strong>How to add:</strong> In this file, find <code>DIVORCE_RESOURCES</code> and add new items.
-            You can link to PDFs in this folder or to external websites.
+Hi [Teacher/School Team],
+
+I’m reaching out to let you know our family is going through a separation/divorce. We’re supporting [Student Name] as best we can, but there may be days where focus is harder or emotions spike (especially around transition/swap days).
+
+What would help at school:
+• A safe person they can check in with (or a quiet space if needed)
+• A short break pass (5 minutes) without making it a big deal
+• Gentle flexibility with deadlines/participation short-term
+• A quick heads-up if you notice major changes (withdrawal, panic, tears, anger, school refusal)
+
+We’re aiming to keep adult conflict away from them and keep routines steady. Thank you for supporting them — it matters.
+
+[Your Name]
+[Phone/Email]
+            </div>
+          </div>
+
+          <div class="printOnly">
+            <h2 style="margin:0 0 8px;">School Support Note</h2>
+            <p style="margin:0 0 10px;">Student: ______________________  Date: ______________________</p>
+            <p style="margin:0 0 10px;">
+              This student is experiencing family separation/divorce. Please support with:
+            </p>
+            <ul style="margin:0; padding-left: 18px;">
+              <li>Safe person / quiet space option</li>
+              <li>Short break pass (5 minutes) as needed</li>
+              <li>Gentle flexibility with workload/participation short-term</li>
+              <li>Low-key check-ins; no forced disclosure</li>
+              <li>Notify caregiver if there are major changes in mood, attendance, panic, or withdrawal</li>
+            </ul>
+            <p style="margin:10px 0 0;">Caregiver contact: ______________________</p>
           </div>
         </div>
 
@@ -597,6 +665,10 @@
         <li>Write the message, wait 10 minutes, then edit it.</li>
         <li>Choose “child-focused” language over “winning.”</li>
       </ul>
+      <div class="callout">
+        <strong>Messenger rule:</strong> If a child brings a message, you can say:
+        “Thanks. I’m not going to put you in the middle. I’ll talk to your parent directly.”
+      </div>
     </section>
 
     <section class="card">
@@ -611,6 +683,15 @@
       </div>
     </section>
   </div>
+
+  <!-- Standalone anchors for jump buttons -->
+  <section class="card" id="schoolkit" style="margin-top:16px;">
+    <h2 style="margin-bottom:8px;">School kit</h2>
+    <p style="color:var(--muted); margin:0;">
+      This is the same content as the School tab above — it’s here as a direct link/anchor for quick scrolling.
+      Use the “School kit” tab in the header if you want the buttons.
+    </p>
+  </section>
 
   <section class="card" style="margin-top:16px;">
     <h2 style="margin-bottom:8px;">Discussion & Suggestions</h2>
@@ -649,25 +730,6 @@
 </div>
 
 <script>
-  const DIVORCE_RESOURCES = [
-    { title: "Placeholder: Kid-friendly storybook", desc: "Add a PDF or external link here.", url: "#" },
-    { title: "Placeholder: Co-parenting communication tool", desc: "Add your classmates’ handout/toolkit link here.", url: "#" },
-    { title: "Placeholder: Local support (Nanaimo / VIU area)", desc: "Add local community resources later.", url: "#" }
-  ];
-
-  const list = document.getElementById("resourceList");
-  list.innerHTML = DIVORCE_RESOURCES.map(r => `
-    <div class="resourceItem">
-      <div class="left">
-        <div class="title">${r.title}</div>
-        <p class="desc">${r.desc}</p>
-      </div>
-      <div>
-        <a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.url === "#" ? "Add link later" : "Open ↗"}</a>
-      </div>
-    </div>
-  `).join("");
-
   const tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
   const panels = Array.from(document.querySelectorAll("[data-panel]"));
 
@@ -677,7 +739,16 @@
   }
   tabButtons.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
 
-  const MODALS = { /* unchanged from your version */ 
+  /* Jump buttons */
+  document.querySelectorAll("[data-jump]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const sel = btn.getAttribute("data-jump");
+      document.querySelector(sel)?.scrollIntoView({ behavior:"smooth", block:"start" });
+    });
+  });
+
+  /* Modals: expanded + more practical */
+  const MODALS = {
     script_kids: {
       title: "What to say to kids (simple + steady)",
       html: `
@@ -686,10 +757,12 @@
           <li>“It’s okay to feel sad, mad, confused, or relieved.”</li>
           <li>“You can love both of us. You never have to choose.”</li>
           <li>“Adult problems are for adults. Your job is being a kid.”</li>
+          <li>“The plan is: you’ll have two homes, and you’ll know the schedule.”</li>
         </ul>
         <p><strong>Repeat often.</strong> Kids ask the same questions because their nervous system needs reassurance.</p>
       `
     },
+
     script_teens: {
       title: "What to say to teens (respect + honesty)",
       html: `
@@ -697,24 +770,41 @@
         <ul>
           <li>“You can tell us what you need: space, routine, clarity, rides, privacy.”</li>
           <li>“We’ll do our best to keep conflict away from you.”</li>
+          <li>“You’re not the mediator. You don’t have to carry messages.”</li>
           <li>“If you want someone else to talk to, we can help find that.”</li>
         </ul>
-        <p><strong>Teens often look ‘fine’ while feeling a lot.</strong> Keep checking in without forcing the talk.</p>
+        <p><strong>Teens can look ‘fine’ while feeling a lot.</strong> Keep checking in without forcing the talk.</p>
       `
     },
-    conflict: {
-      title: "When conflict is high",
+
+    conflict_protocol: {
+      title: "When conflict is high (a mini-protocol)",
       html: `
-        <p>If communication is tense, aim for <strong>predictable + child-focused</strong> messages.</p>
+        <p><strong>Goal:</strong> reduce kid exposure, reduce kid “middle” roles, and keep communication predictable.</p>
+
+        <p><strong>1) If your child sees tension:</strong></p>
         <ul>
-          <li>Use short texts/emails. Stick to logistics.</li>
-          <li>Avoid blame, history, or “gotcha” language.</li>
-          <li>Never use kids as messengers or therapists.</li>
-          <li>Build a neutral transition routine (same time, same place, same script).</li>
+          <li>“You’re not in trouble. This isn’t about you.”</li>
+          <li>“Adults are handling it. Your job is to be a kid and be cared for.”</li>
+          <li>“I’m going to take a breath and lower my voice.”</li>
         </ul>
-        <p><strong>Helpful phrase:</strong> “Let’s keep this about the child’s needs and the schedule.”</p>
+
+        <p><strong>2) If a child is used as a messenger:</strong></p>
+        <ul>
+          <li><em>To the child:</em> “Thanks. I’m not going to put you in the middle. I’ll talk to your parent directly.”</li>
+          <li><em>To the other parent (short):</em> “Please send logistics to me directly — I won’t use [Child] for messages.”</li>
+        </ul>
+
+        <p><strong>3) If they say: “Dad says you…” / “Mom says you…”</strong></p>
+        <ul>
+          <li>“I’m not going to talk about your other parent with you.”</li>
+          <li>“I will listen to how <em>you</em> feel, and I will keep you out of adult conflict.”</li>
+        </ul>
+
+        <p><strong>4) Communication rule for adults:</strong> keep it <strong>logistics-only</strong> (time/place/health/school). No history, no blame, no “winning.”</p>
       `
     },
+
     do_dont: {
       title: "Helpful do’s & don’ts",
       html: `
@@ -722,6 +812,7 @@
           <li><strong>Do:</strong> Name the change, give the plan, and reassure safety.</li>
           <li><strong>Do:</strong> Let kids love both parents without guilt.</li>
           <li><strong>Do:</strong> Expect waves (behavior can be communication).</li>
+          <li><strong>Do:</strong> Keep handoffs neutral and short.</li>
           <li><strong>Don’t:</strong> Share adult details (court, money, betrayal).</li>
           <li><strong>Don’t:</strong> Ask kids to choose, judge, or report.</li>
           <li><strong>Don’t:</strong> Use kids to carry messages.</li>
@@ -729,53 +820,72 @@
         <p><strong>Repair matters:</strong> “I’m sorry you heard that. That was our stress, and it was not about you.”</p>
       `
     },
+
+    hard_questions: {
+      title: "The hard questions (copy/paste scripts)",
+      html: `
+        <p>Short answers land best. You can always add: “We can talk more later.”</p>
+        <ul>
+          <li><strong>“Why can’t you live together?”</strong><br/>“We tried, but we can’t do it in a healthy way. Two calmer homes is safer than one tense home.”</li>
+          <li><strong>“Is it because of me?”</strong><br/>“No. This is an adult problem. Kids do not cause divorce.”</li>
+          <li><strong>“Do you still love Mom/Dad?”</strong><br/>“My feelings about your parent are adult feelings. What matters for you is: we both love you.”</li>
+          <li><strong>“Can we be a family again?”</strong><br/>“We are still a family — it just looks different now. You still belong.”</li>
+          <li><strong>“Who will I live with / can I choose?”</strong><br/>“Adults are working out the plan. We will tell you the schedule clearly. You will be cared for.”</li>
+          <li><strong>“Why are you crying/angry?”</strong><br/>“I’m having big feelings, but it’s not because of you. I’m the adult and I can handle it.”</li>
+        </ul>
+      `
+    },
+
     age_little: {
       title: "Little kids (3–7): what helps",
       html: `
-        <p>Keep it short. Kids at this age need repetition and routine.</p>
+        <p><strong>Goal:</strong> simple truth + repetition + routine.</p>
         <ul>
-          <li>Use concrete language: “Two homes.” “Two beds.” “Two routines.”</li>
-          <li>Reassure: “You are safe. We love you. This isn’t your fault.”</li>
-          <li>Expect: clinginess, tantrums, bedtime worries, toileting regression.</li>
+          <li><strong>What they need:</strong> “Two homes. Two beds. Still loved.”</li>
+          <li><strong>Common reactions:</strong> clinginess, tantrums, sleep/toileting changes, “can you stay?”</li>
+          <li><strong>What helps:</strong> predictable transitions, comfort object, short answers, lots of reassurance.</li>
+          <li><strong>Script:</strong> “Grown-ups decided to live in different homes. You didn’t cause it. We will both take care of you.”</li>
         </ul>
-        <p><strong>Script:</strong> “Grown-ups decided to live in different homes. You didn’t cause it. We will both take care of you.”</p>
       `
     },
+
     age_middle: {
       title: "School age (8–12): what helps",
       html: `
-        <p>Kids may worry about fairness, loyalty, and where they belong.</p>
+        <p><strong>Goal:</strong> answer questions without adult details + reduce loyalty binds.</p>
         <ul>
-          <li>Invite questions, but avoid adult details.</li>
-          <li>Normalize feelings: “Lots of feelings can show up.”</li>
-          <li>Help with planning: calendar, backpack checklist, transition rituals.</li>
+          <li><strong>Common worries:</strong> fairness, belonging, “who’s right,” “who started it,” schedule changes.</li>
+          <li><strong>Loyalty line:</strong> “You don’t have to pick. You can love both homes.”</li>
+          <li><strong>Transition help:</strong> calendar + backpack checklist + a 10-minute decompression rule after handoffs.</li>
+          <li><strong>Watch for:</strong> stomach aches/headaches, school changes, irritability, “I don’t care” energy.</li>
         </ul>
-        <p><strong>Watch for:</strong> stomach aches, headaches, school changes, irritability.</p>
       `
     },
+
     age_teens: {
       title: "Teens (13–18): what helps",
       html: `
-        <p>Teens often want autonomy and honesty without being pulled into adult conflict.</p>
+        <p><strong>Goal:</strong> respect autonomy + keep them out of adult roles.</p>
         <ul>
-          <li>Ask what they need (rides, privacy, routine, space).</li>
-          <li>Offer a trusted adult/counsellor option.</li>
-          <li>Keep boundaries: they are not the mediator.</li>
+          <li><strong>What helps:</strong> choice, privacy, honest-but-safe information, predictable expectations in each home.</li>
+          <li><strong>Boundary line:</strong> “You’re not the mediator. I won’t ask you to carry messages.”</li>
+          <li><strong>Connection:</strong> low-pressure time (drive, walk, gaming). Not a forced talk.</li>
+          <li><strong>Watch for:</strong> isolation, risk behavior, substance use, sleep shifts, sharp mood changes.</li>
         </ul>
-        <p><strong>Check-in line:</strong> “You don’t have to talk now. I’m here when you want to.”</p>
       `
     },
-    age_all: {
-      title: "All ages: when extra support may help",
+
+    school_signs: {
+      title: "What school might notice (especially around swap days)",
       html: `
-        <p>It can be useful to reach for extra support if you notice:</p>
         <ul>
-          <li>Persistent sleep problems, panic, or school refusal</li>
-          <li>Ongoing aggression/withdrawal that doesn’t ease over time</li>
-          <li>Self-harm talk or signs of being unsafe</li>
-          <li>Substance use, risky behaviour, or severe isolation (teens)</li>
+          <li>Focus and memory issues (they may look like “not trying”)</li>
+          <li>Fatigue, irritability, emotional swings</li>
+          <li>Somatic complaints (headaches/stomach aches)</li>
+          <li>Friend conflicts or withdrawal</li>
+          <li>More dysregulation on transition days</li>
         </ul>
-        <p><strong>Canada:</strong> If someone is in immediate danger, call <strong>911</strong>. For crisis support, call/text <strong>988</strong>.</p>
+        <p><strong>Support that helps:</strong> quiet space option, short break pass, low-key check-ins, predictable expectations.</p>
       `
     }
   };
@@ -792,9 +902,11 @@
     modalTitle.textContent = m.title;
     modalContent.innerHTML = m.html;
     overlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
   }
   function closeModal(){
     overlay.style.display = "none";
+    document.body.style.overflow = "";
   }
 
   document.querySelectorAll("[data-modal]").forEach(el => {
@@ -805,6 +917,39 @@
   closeBottom.addEventListener("click", closeModal);
   overlay.addEventListener("click", (e) => { if(e.target === overlay) closeModal(); });
   document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+  /* School kit actions */
+  const btnCopySchool = document.getElementById("btnCopySchool");
+  const btnPrintSchool = document.getElementById("btnPrintSchool");
+  const schoolEmailText = document.getElementById("schoolEmailText");
+
+  if(btnCopySchool && schoolEmailText){
+    btnCopySchool.addEventListener("click", async () => {
+      const text = (schoolEmailText.textContent || "").trim();
+      try{
+        await navigator.clipboard.writeText(text);
+        btnCopySchool.textContent = "✅ Copied";
+        setTimeout(() => (btnCopySchool.textContent = "📋 Copy email"), 1400);
+      }catch(err){
+        // fallback
+        const range = document.createRange();
+        range.selectNodeContents(schoolEmailText);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand("copy");
+        sel.removeAllRanges();
+        btnCopySchool.textContent = "✅ Copied";
+        setTimeout(() => (btnCopySchool.textContent = "📋 Copy email"), 1400);
+      }
+    });
+  }
+
+  if(btnPrintSchool){
+    btnPrintSchool.addEventListener("click", () => {
+      setTimeout(() => window.print(), 150);
+    });
+  }
 </script>
 
 </body>
