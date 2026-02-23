@@ -32,6 +32,9 @@
 
       --tagbg: rgba(255,111,145,.10);
       --tagborder: rgba(255,111,145,.18);
+
+      --warnbg: rgba(255, 215, 111, .10);
+      --warnborder: rgba(255, 215, 111, .18);
     }
 
     *{ box-sizing:border-box; }
@@ -102,6 +105,11 @@
       border:1px solid rgba(255,111,145,.18);
       color: rgba(247,241,255,.92);
       white-space:nowrap;
+    }
+    .pill.warn{
+      background: var(--warnbg);
+      border-color: var(--warnborder);
+      color: rgba(247,241,255,.90);
     }
 
     main{ padding: 18px 0 24px; }
@@ -461,6 +469,10 @@
     .btn.secondary{
       background: rgba(0,0,0,.14);
     }
+    .btn.warn{
+      background: rgba(255, 215, 111, .10);
+      border-color: rgba(255, 215, 111, .20);
+    }
 
     /* =========================================================
        Details (accordion)
@@ -513,6 +525,32 @@
       color: var(--muted);
       line-height:1.6;
       font-size: 14px;
+    }
+
+    /* =========================================================
+       Mini divider (soft)
+       ========================================================= */
+    .softLine{
+      height: 1px;
+      background: rgba(255,255,255,.10);
+      margin: 12px 0;
+      border-radius: 99px;
+    }
+
+    /* =========================================================
+       School kit printable
+       ========================================================= */
+    .printOnly{ display:none; }
+    .noPrint{}
+
+    @media print{
+      body{ background:#fff !important; color:#000 !important; }
+      header, .fabStack, .modalOverlay, .noPrint{ display:none !important; }
+      main.wrap{ max-width: none; padding: 0; }
+      .card{ box-shadow:none !important; background:#fff !important; border: 1px solid #ddd !important; }
+      .promptCard, details.soft{ background:#fff !important; }
+      .printOnly{ display:block !important; }
+      a{ color:#000 !important; text-decoration: underline; }
     }
 
     /* =========================================================
@@ -672,7 +710,7 @@
       <!-- =========================================================
            Start here + tool shelf
            ========================================================= -->
-      <section class="heroGrid" aria-label="Start here and quick tools">
+      <section class="heroGrid noPrint" aria-label="Start here and quick tools">
         <section class="card startCard" aria-label="Start here">
           <div class="startInner">
             <h2 style="margin:0;">Start here</h2>
@@ -685,9 +723,14 @@
 
             <div class="quickRow" aria-label="Quick navigation">
               <button class="chipBtn primary" type="button" data-jump="#library"> Find a resource</button>
+              <button class="chipBtn" type="button" data-jump="#age"> Age guide</button>
+              <button class="chipBtn" type="button" data-jump="#type"> Type of death</button>
+              <button class="chipBtn" type="button" data-jump="#checklists"> First week plan</button>
+              <button class="chipBtn" type="button" data-jump="#schoolkit"> School kit</button>
               <button class="chipBtn" type="button" data-jump="#scripts"> Caregiver scripts</button>
               <button class="chipBtn" type="button" data-jump="#prompts"> Gentle prompts</button>
               <button class="chipBtn" type="button" data-jump="#faq"> FAQ</button>
+              <button class="chipBtn" type="button" data-jump="#about"> About</button>
               <button class="chipBtn" type="button" data-jump="#extra"> Extra support</button>
             </div>
 
@@ -715,13 +758,12 @@
             </div>
 
             <div class="tool">
-              <h3>When it hits suddenly</h3>
+              <h3>First 24 hours</h3>
               <p>
-                Name 3 things you see, feel your feet, and breathe out longer than you breathe in (twice).
+                If you feel scrambled, that’s normal. Use a tiny plan: safety, basics, and one trusted person.
               </p>
               <div class="toolActions">
-                <button class="btn" type="button" data-jump="#prompts">Prompts</button>
-                <button class="btn secondary" type="button" data-jump="#grounding">Open grounding</button>
+                <button class="btn" type="button" data-jump="#checklists">Open checklist</button>
               </div>
             </div>
 
@@ -735,14 +777,305 @@
                 <a class="btn secondary" href="gus-grief-story.pdf" download>Download</a>
               </div>
             </div>
+
+            <div class="tool">
+              <h3>School note (copy/paste)</h3>
+              <p>
+                If school is coming fast, use the “School kit” section — it has a ready email and what teachers should know.
+              </p>
+              <div class="toolActions">
+                <button class="btn" type="button" data-jump="#schoolkit">Open school kit</button>
+              </div>
+            </div>
           </div>
         </aside>
       </section>
 
       <!-- =========================================================
+           Age guide
+           ========================================================= -->
+      <section class="card" id="age" aria-label="Age guide">
+        <h2>Age guide (pick the lane that fits)</h2>
+        <p class="note">
+          Kids grieve in bursts. This isn’t a “right way” — it’s just a shortcut to language that usually lands.
+        </p>
+
+        <div class="stack" style="margin-top:12px;">
+          <details class="soft">
+            <summary>Ages 3–6 (simple + concrete)</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>What they understand:</strong> death can feel confusing; they may think it’s temporary or caused by something they did.</li>
+                <li><strong>What helps:</strong> short sentences, repetition, routines, and lots of reassurance.</li>
+                <li><strong>Try saying:</strong> “They died. Their body stopped working. They can’t come back.”</li>
+                <li><strong>Watch for:</strong> clinginess, toilet/sleep changes, “play grief” (repeating scenes). Normal.</li>
+                <li><strong>One tiny support:</strong> a comfort object + a predictable bedtime check-in (“I’ll come back in 5 minutes.”)</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Ages 7–12 (questions + fairness)</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>What they understand:</strong> death is permanent — but they may ask <em>why</em> a lot and look for reasons.</li>
+                <li><strong>What helps:</strong> honest answers, choices (funeral, rituals), and “two-track” permission (sad + still have fun).</li>
+                <li><strong>Try saying:</strong> “We can talk now, later, or in tiny pieces. All versions are okay.”</li>
+                <li><strong>Watch for:</strong> anger, guilt, “I don’t care” masking, stomach aches, school focus issues.</li>
+                <li><strong>One tiny support:</strong> a “question parking lot” list — write questions down so they don’t have to hold them alone.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Teens (privacy + big meaning)</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>What they understand:</strong> the facts — but the meaning can hit hard (identity, purpose, “what’s the point?”).</li>
+                <li><strong>What helps:</strong> respectful space, choice, and low-pressure connection (drive, walk, gaming, music).</li>
+                <li><strong>Try saying:</strong> “You don’t have to talk. I’ll check in. I’m here even if you’re quiet.”</li>
+                <li><strong>Watch for:</strong> risk-taking, shutting down, irritability, sleep changes, substance use, isolation.</li>
+                <li><strong>One tiny support:</strong> agree on a signal — emoji/text that means “I’m not okay” without needing a long talk.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           Type of death guidance
+           ========================================================= -->
+      <section class="card" id="type" aria-label="Type of death guidance">
+        <h2>Type of death (the words change depending on what happened)</h2>
+        <p class="note">
+          You can keep it truthful without giving details that feel too big. If a child asks for details you’re not ready for,
+          you can say: “That’s a real question. I’m going to answer it in a safe way.”
+        </p>
+
+        <div class="stack" style="margin-top:12px;">
+          <details class="soft">
+            <summary>Sudden / unexpected death</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Core line:</strong> “It happened suddenly. We didn’t get to prepare. That can feel shocking.”</li>
+                <li><strong>If they ask ‘why?’:</strong> “Sometimes bodies stop working very fast. It’s not because of anything you did.”</li>
+                <li><strong>Support move:</strong> name the normal reactions: “Your brain may keep replaying it. That’s a shock response.”</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Expected / medical death (illness)</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Core line:</strong> “Their body was very sick, and the doctors couldn’t fix it.”</li>
+                <li><strong>What helps:</strong> explain the care: “They were cared for and not alone.”</li>
+                <li><strong>Support move:</strong> invite mixed feelings: relief + sadness can both be true.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Suicide</summary>
+            <div class="inside">
+              <span class="pill warn">Gentle note</span>
+              <div class="softLine"></div>
+              <ul>
+                <li><strong>Core line:</strong> “They died because of an illness in their brain that affected how they felt and thought.”</li>
+                <li><strong>Important:</strong> avoid “they chose to leave us” language. Keep it health-based and compassionate.</li>
+                <li><strong>Safety line:</strong> “When people feel trapped, they need help. If you ever feel like that, tell me — we get help.”</li>
+                <li><strong>If asked ‘was it my fault?’:</strong> “No. This was not caused by you. Adults are responsible for getting help.”</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Overdose / substance-related death</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Core line:</strong> “They died because their body was affected by drugs/alcohol in a way that stopped it from working.”</li>
+                <li><strong>Optional frame:</strong> “Addiction can be an illness that makes it hard to stop, even when people want to.”</li>
+                <li><strong>If asked for details:</strong> “I’m going to keep it simple and safe. The important part is: they died, and we’re here.”</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Violence / homicide</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Core line:</strong> “Someone hurt them, and they died. It’s not okay, and it’s not your fault.”</li>
+                <li><strong>Safety focus:</strong> “Right now, the adults are working on safety. Your job is to be a kid and be cared for.”</li>
+                <li><strong>Limit details:</strong> give only what they need for safety, not graphic information.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>When families have different beliefs (heaven, spirit, afterlife)</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Two-track approach:</strong> “Their body died — and different people believe different things about what happens to the spirit.”</li>
+                <li><strong>Invite the child:</strong> “What do you think? What feels comforting to you?”</li>
+                <li><strong>Permission:</strong> it’s okay to say “I don’t know.” That’s honest and safe.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           Checklists
+           ========================================================= -->
+      <section class="card" id="checklists" aria-label="First day and first week checklists">
+        <h2>What to do next (tiny plans when your brain is overloaded)</h2>
+        <p class="note">
+          You’re allowed to go into “minimum viable caregiving.” Basics count.
+        </p>
+
+        <div class="stack" style="margin-top:12px;">
+          <details class="soft" open>
+            <summary>First 24 hours</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Safety:</strong> If anyone feels unsafe, use <strong>988</strong> or <strong>911</strong> (Canada).</li>
+                <li><strong>Basics:</strong> water + food + sleep attempt (even just “rest in bed”).</li>
+                <li><strong>One trusted person:</strong> text/call someone who can anchor you (family, friend, elder, neighbour).</li>
+                <li><strong>Keep language simple:</strong> “They died. Their body stopped working.”</li>
+                <li><strong>Routines:</strong> keep one normal thing (breakfast, bedtime story, walk).</li>
+                <li><strong>School/work:</strong> notify the school (you can use the School Kit below).</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>First week</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Predictable check-in:</strong> “Each day we’ll do one small check-in. You can say ‘pass.’”</li>
+                <li><strong>Choices:</strong> for rituals/funeral/memorial: attend / not attend / leave early / support person.</li>
+                <li><strong>Firsts:</strong> name what’s coming (first bedtime, first school day, first weekend). “Waves may show up.”</li>
+                <li><strong>Body stuff:</strong> appetite and sleep changes are common. Aim for “good enough.”</li>
+                <li><strong>Connection:</strong> low-pressure time together (walk, movie, game). Not a deep talk.</li>
+                <li><strong>Ask for help:</strong> meals, rides, childcare, dog walk — people want something concrete to do.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>When grief spikes (bedtime, holidays, birthdays, school drop-off)</summary>
+            <div class="inside">
+              <ul>
+                <li><strong>Name it:</strong> “This feels like a wave.”</li>
+                <li><strong>Do a 60-second body reset:</strong> breathe out longer than in (twice) + feet on floor.</li>
+                <li><strong>Offer 2 choices:</strong> “Do you want a hug or space? Do you want to talk or do something beside each other?”</li>
+                <li><strong>Anchor line:</strong> “This is hard, and we’re safe right now.”</li>
+                <li><strong>After:</strong> when it eases, do basics (water/snack) and return to routine.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           School Kit
+           ========================================================= -->
+      <section class="card" id="schoolkit" aria-label="School kit">
+        <div class="sectionTitleRow">
+          <div>
+            <h2 style="margin:0 0 6px;">School kit (copy/paste + printable)</h2>
+            <p>
+              This is meant to reduce the back-and-forth. You can send one message and be done for now.
+            </p>
+          </div>
+          <span class="pill">Low effort, high impact</span>
+        </div>
+
+        <div class="actions noPrint" style="margin-top:0;">
+          <button class="btn" type="button" id="btnCopySchool">📋 Copy email draft</button>
+          <button class="btn secondary" type="button" id="btnPrintSchool">🖨 Print school note</button>
+          <button class="btn secondary" type="button" data-jump="#extra">Need crisis support?</button>
+        </div>
+
+        <div class="stack" style="margin-top:12px;">
+          <details class="soft" open>
+            <summary>Email to school (draft)</summary>
+            <div class="inside">
+              <p class="note" style="margin:0 0 10px;">
+                You can edit the brackets. Keep it short. You don’t owe a lot of details.
+              </p>
+              <div class="promptCard" style="margin-top:10px;">
+                <h3 style="margin-bottom:8px;">Copy/paste</h3>
+                <p id="schoolEmailText" style="white-space:pre-wrap;">
+Subject: Support request for [Child’s Name]
+
+Hi [Teacher/School Team],
+
+I’m reaching out to let you know that [Child’s Name] is grieving a death in our family/community. We’re doing our best to keep routine, but there may be days where emotions spike, focus is harder, or they need a break.
+
+What would help at school:
+• A safe person they can check in with (or a quiet space if needed)
+• Permission for a short break pass (5 minutes) without making it a big deal
+• Gentle flexibility with deadlines/participation for the next little while
+• A quick heads-up if you notice major changes (withdrawal, panic, frequent tears, anger, or school refusal)
+
+If classmates ask questions, we’d prefer simple, respectful language and privacy.
+
+Thank you for supporting them — it really matters.
+[Your Name]
+[Phone/Email]
+                </p>
+              </div>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>What teachers should know (quick list)</summary>
+            <div class="inside">
+              <ul>
+                <li>Grief comes in <strong>bursts</strong>. A child can be okay in math and fall apart at recess.</li>
+                <li>Common impacts: focus issues, irritability, fatigue, stomach aches, withdrawal, “acting younger,” or wanting control.</li>
+                <li>Support that works: predictable check-ins, private break options, and not forcing disclosure.</li>
+                <li>Helpful language: “I’m here. Do you want a break or to stay?”</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>One-page printable (for a folder / office / teacher)</summary>
+            <div class="inside">
+              <p class="note">
+                Click “Print school note” above. It will hide the rest of the page and print clean.
+              </p>
+
+              <div class="printOnly">
+                <h2 style="margin:0 0 8px;">School Support Note</h2>
+                <p style="margin:0 0 10px;">
+                  Student: ______________________  Date: ______________________
+                </p>
+                <p style="margin:0 0 10px;">
+                  This student is grieving a death. Please support with:
+                </p>
+                <ul style="margin:0; padding-left: 18px;">
+                  <li>Safe person / quiet space option</li>
+                  <li>Short break pass (5 minutes) as needed</li>
+                  <li>Gentle flexibility with workload/participation short-term</li>
+                  <li>Low-key check-ins; no forced disclosure</li>
+                  <li>Notify caregiver if there are major changes in mood, attendance, panic, or withdrawal</li>
+                </ul>
+                <p style="margin:10px 0 0;">
+                  Caregiver contact: ______________________
+                </p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- =========================================================
            Resource Library
            ========================================================= -->
-      <section class="card" id="library" aria-label="Resource Library">
+      <section class="card noPrint" id="library" aria-label="Resource Library">
         <div class="sectionTitleRow">
           <div>
             <h2 style="margin:0 0 6px;">Resource Library</h2>
@@ -801,6 +1134,28 @@
           </details>
 
           <details class="soft">
+            <summary>“Why did they die?” (when you don’t have all the answers)</summary>
+            <div class="inside">
+              <ul>
+                <li>That’s a real question. Sometimes bodies stop working because of sickness, accidents, or things we can’t control.</li>
+                <li>If I don’t know the full answer yet, I’ll tell you what I know — and I’ll tell you when I learn more.</li>
+                <li>What I do know is: you are safe right now, and you are not alone.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>“Where are they now?” (different beliefs)</summary>
+            <div class="inside">
+              <ul>
+                <li>Their body died. Different people believe different things about what happens after.</li>
+                <li>In our family, we believe _______. Some people believe _______. It’s okay if you’re not sure.</li>
+                <li>Sometimes “where they are” feels like memories, love, stories, and the ways they shaped us.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
             <summary>When kids worry you’ll die too</summary>
             <div class="inside">
               <ul>
@@ -829,6 +1184,17 @@
                 <li>You don’t have to talk. We can draw, walk, game, or sit together.</li>
                 <li>If words are hard, you can show me with a number: 0–10, how big is it today?</li>
                 <li>I’ll check in sometimes. You can tell me ‘not now’ and I’ll still stay close.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>When you’re crying (and you don’t want to scare them)</summary>
+            <div class="inside">
+              <ul>
+                <li>My feelings are big because I loved them. Tears are one way my body lets feelings out.</li>
+                <li>You didn’t cause this, and you don’t need to fix it. I’m still here with you.</li>
+                <li>We can take a breath together. Want a hug, space, or a snack break?</li>
               </ul>
             </div>
           </details>
@@ -958,6 +1324,46 @@
       </section>
 
       <!-- =========================================================
+           About / boundaries / sources placeholder
+           ========================================================= -->
+      <section class="card" id="about" aria-label="About this page">
+        <h2>About this page</h2>
+        <p class="note">
+          This page is meant to be a <strong>support + education tool</strong> — not a replacement for therapy, medical care, or crisis services.
+          If you’re in a high-intensity moment, start with <strong>Grounding</strong>, then use one script or one checklist.
+        </p>
+
+        <div class="stack" style="margin-top:12px;">
+          <details class="soft">
+            <summary>How to use this page (the “one thing” rule)</summary>
+            <div class="inside">
+              <ul>
+                <li>Pick <strong>one</strong> section: Age guide, Type of death, or Checklists.</li>
+                <li>Choose <strong>one</strong> script line that feels natural in your mouth.</li>
+                <li>Come back later. You don’t have to do grief “all at once.”</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Privacy + details</summary>
+            <div class="inside">
+              You don’t owe people the full story. With kids, you can be truthful and still protect them from graphic detail.
+              A safe boundary is: “I’m going to answer in a safe way.”
+            </div>
+          </details>
+
+          <details class="soft">
+            <summary>Sources (placeholder)</summary>
+            <div class="inside">
+              Add a short list here later if you want (clinical reports, bereavement orgs, child development grief research).
+              Even 5–8 bullets helps readers trust what they’re reading.
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- =========================================================
            Extra support
            ========================================================= -->
       <section class="card" id="extra" aria-label="Extra support">
@@ -969,7 +1375,7 @@
         <div class="promptGrid" style="margin-top:12px;">
           <div class="promptCard">
             <h3>Canada</h3>
-            <p><strong>Call or text 988</strong> for suicide crisis support.</p>
+            <p><strong>Call or text 988</strong> for crisis support.</p>
           </div>
           <div class="promptCard">
             <h3>Emergency</h3>
@@ -985,7 +1391,7 @@
     </div>
   </main>
 
-  <footer>
+  <footer class="noPrint">
     <div class="wrap">
       Tip: Add more resources by duplicating an item in the <code>RESOURCES</code> list in the script below.
     </div>
@@ -1019,7 +1425,7 @@
   </div>
 
   <!-- Floating helper -->
-  <div class="fabStack" aria-label="Quick helpers">
+  <div class="fabStack noPrint" aria-label="Quick helpers">
     <button class="fab" id="btnTop" type="button" aria-label="Back to top">↑ <span>Top</span></button>
   </div>
 
@@ -1155,6 +1561,43 @@
         document.querySelector(sel)?.scrollIntoView({ behavior:"smooth", block:"start" });
       });
     });
+
+    /* =========================================================
+       School kit actions
+       ========================================================= */
+    const btnCopySchool = document.getElementById("btnCopySchool");
+    const btnPrintSchool = document.getElementById("btnPrintSchool");
+    const schoolEmailText = document.getElementById("schoolEmailText");
+
+    if(btnCopySchool && schoolEmailText){
+      btnCopySchool.addEventListener("click", async () => {
+        const text = (schoolEmailText.textContent || "").trim();
+        try{
+          await navigator.clipboard.writeText(text);
+          btnCopySchool.textContent = "✅ Copied";
+          setTimeout(() => (btnCopySchool.textContent = "📋 Copy email draft"), 1400);
+        }catch(err){
+          // fallback
+          const range = document.createRange();
+          range.selectNodeContents(schoolEmailText);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          document.execCommand("copy");
+          sel.removeAllRanges();
+          btnCopySchool.textContent = "✅ Copied";
+          setTimeout(() => (btnCopySchool.textContent = "📋 Copy email draft"), 1400);
+        }
+      });
+    }
+
+    if(btnPrintSchool){
+      btnPrintSchool.addEventListener("click", () => {
+        // scroll to kit so print preview starts in a sensible spot
+        document.getElementById("schoolkit")?.scrollIntoView({ behavior:"smooth", block:"start" });
+        setTimeout(() => window.print(), 250);
+      });
+    }
 
     /* =========================================================
        PDF Viewer modal
