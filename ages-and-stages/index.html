@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,6 +39,8 @@
     }
 
     *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
     body{
       margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -381,6 +384,59 @@
     }
     .resourceItem a:hover{ text-decoration: underline; }
 
+    /* Mindfulness preview */
+    .miniGrid{
+      display:grid;
+      gap:12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 12px;
+    }
+    .miniCard{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .miniCard:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 220px at 15% 0%, rgba(255,75,75,.12), transparent 60%),
+        radial-gradient(700px 220px at 88% 10%, rgba(255,184,92,.08), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .miniCard h3{
+      position:relative;
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.2px;
+      color: rgba(246,246,241,.95);
+    }
+    .miniCard p{
+      position:relative;
+      margin:0;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .actionRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 12px;
+    }
+    .noteLine{
+      margin-top: 10px;
+      color: var(--faint);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
     /* Callout */
     .callout{
       margin-top: 12px;
@@ -453,6 +509,7 @@
 
     @media (prefers-reduced-motion: reduce){
       .chipBtn, .ageCard{ transition:none; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
@@ -589,6 +646,50 @@
       </div>
     </section>
   </div>
+
+  <section class="card" style="margin-top:16px;">
+    <h2>Mindfulness Activities for School-Age Children</h2>
+    <p>
+      Some children connect best through movement, imagination, drawing, or quiet noticing. These school-age mindfulness activities can help children slow down, notice feelings in their body, and feel a little more grounded in the moment.
+    </p>
+
+    <div class="miniGrid">
+      <div class="miniCard">
+        <h3>Breathing Hands</h3>
+        <p>A simple body-based activity that helps children notice their breathing and slow things down when feelings feel big.</p>
+      </div>
+
+      <div class="miniCard">
+        <h3>Happy Space</h3>
+        <p>A guided imagination activity that helps children picture a safe or calming place and return to it when they need comfort.</p>
+      </div>
+
+      <div class="miniCard">
+        <h3>Mindful Drawing</h3>
+        <p>A creative option for children who would rather draw than talk, and who may need another way to show how feelings feel inside.</p>
+      </div>
+    </div>
+
+    <div class="actionRow">
+      <a class="chipBtn" href="mindfulness-for-grief-workshop.pdf" target="_blank" rel="noopener noreferrer">
+        Open mindfulness activity guide
+      </a>
+      <a class="chipBtn" href="mindfulness-for-grief-workshop.pdf" download>
+        Download PDF
+      </a>
+      <button class="chipBtn" type="button" data-modal="mindfulness_preview">
+        Why this section is here
+      </button>
+    </div>
+
+    <div class="callout">
+      <strong>Caregiver note:</strong> These activities are not about making grief or stress disappear. They can help children settle, notice what is happening inside, and feel a little more steady before, during, or after hard moments.
+    </div>
+
+    <p class="noteLine">
+      These are best suited to school-age children and can be used gently at home, in groups, or alongside other supports. If a child does not want to close their eyes, sit still, or continue, that is okay — keep it low-pressure and follow their lead.
+    </p>
+  </section>
 
   <section class="card" style="margin-top:16px;">
     <h2 style="margin-bottom:8px;">Discussion & Suggestions</h2>
@@ -766,6 +867,20 @@
         </ul>
         <p><strong>Script:</strong> “You deserve honesty and you deserve to not carry adult burdens.”</p>
       `
+    },
+
+    mindfulness_preview: {
+      title: "Why this section is here",
+      html: `
+        <p>Some school-age children connect best through movement, imagination, drawing, or quiet noticing rather than direct conversation.</p>
+        <p>These activities give caregivers another way to support children when words feel hard, feelings feel big, or a child needs something gentle and low-pressure.</p>
+        <ul>
+          <li><strong>Breathing Hands:</strong> helps children notice and slow their breathing.</li>
+          <li><strong>Happy Space:</strong> uses imagination to build a sense of calm and safety.</li>
+          <li><strong>Mindful Drawing:</strong> gives children a creative, nonverbal way to express what is happening inside.</li>
+        </ul>
+        <p>The full PDF includes more school-age mindfulness activities if you want a deeper guide.</p>
+      `
     }
   };
 
@@ -860,3 +975,4 @@
 
 </body>
 </html>
+```
